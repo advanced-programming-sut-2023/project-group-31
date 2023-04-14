@@ -2,7 +2,7 @@ package controller.game_menu;
 
 import view.user_system.messages.Messages;
 
-public class MarketController {
+public class MarketController extends KingdomController{
     public static Messages showPriceList(){
         return null;
     }

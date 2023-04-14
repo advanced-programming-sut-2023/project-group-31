@@ -4,8 +4,8 @@ import model.User;
 import model.game_stuff.Troop;
 import model.game_stuff.types.Troops;
 
-public class Slinger extends Troop {
-    public Slinger(User owner, Troops type) {
+public class FireTowers extends Troop {
+    public FireTowers(User owner, Troops type) {
         super(owner, type);
     }
 
