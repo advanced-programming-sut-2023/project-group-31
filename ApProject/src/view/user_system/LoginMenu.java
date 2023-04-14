@@ -1,11 +1,11 @@
 package view.user_system;
 
-import view.user_system.messages.MenuSwitchMessages;
+import view.user_system.messages.MenuSwitcherMessages;
 
 import java.util.Scanner;
 
 public class LoginMenu {
-    public static MenuSwitchMessages run(Scanner scanner){
+    public static MenuSwitcherMessages run(Scanner scanner){
         return null;
     }
 
@@ -14,9 +14,8 @@ public class LoginMenu {
     }
     private static void user(){
 
-    }    private static void userCreate(){
-
-    }    private static void userCreate(){
+    }
+    private static void userCreate(){
 
     }
 

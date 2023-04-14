@@ -1,13 +1,13 @@
 package view.user_system;
 
-import view.user_system.commands.MenuSwitcherCommands;
+import view.user_system.messages.MenuSwitcherMessages;
 
 import java.util.Scanner;
 
 public class MenuSwitcher {
     public static void run() {
         Scanner scanner = new Scanner(System.in);
-        MenuSwitcherCommands command = MenuSwitcherCommands.LOGIN;
+        MenuSwitcherMessages command = MenuSwitcherMessages.LOGIN;
         while (true) {
             switch (command) {
                 case EXIT:
@@ -21,6 +21,7 @@ public class MenuSwitcher {
                 case PROFILE:
                     command = ProfieMenu.run(scanner);
                     break;
+                // TODO :
             }
         }
     }
