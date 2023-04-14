@@ -1,5 +1,9 @@
 package controller;
 
-public abstract class ControllerUtils {
+import view.user_system.messages.Messages;
 
+public abstract class ControllerUtils {
+    public static Messages captcha(){
+        return null;
+    }
 }
