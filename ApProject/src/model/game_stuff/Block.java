@@ -1,6 +1,9 @@
 package model.game_stuff;
 
 
+import model.game_stuff.types.PermeabilityType;
+import model.game_stuff.types.Textures;
+
 import java.util.ArrayList;
 
 public class Block {

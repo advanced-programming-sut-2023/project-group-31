@@ -1,4 +1,5 @@
-package model.game_stuff;
+package model.game_stuff.types;
 
 public enum PermeabilityType {
+
 }
