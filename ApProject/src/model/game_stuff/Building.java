@@ -1,6 +1,10 @@
 package model.game_stuff;
 
-public class Building {
+public abstract class Building {
     private int hp;
-    
+
+
+    public void getDamaged(){
+
+    }
 }

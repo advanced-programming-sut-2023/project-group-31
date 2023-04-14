@@ -7,6 +7,7 @@ public class Kingdom {
     private int popularity;
     private int fear;
     private HashMap<Food, Double> foods;
+    private HashMap<Good,Double> goods;
     private int taxRate;
 
 
