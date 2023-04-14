@@ -5,7 +5,7 @@ import view.user_system.messages.MenuSwitcherMessages;
 import java.util.Scanner;
 
 public class LoginMenu {
-    public static MenuSwitchrtMessages run(Scanner scanner){
+    public static MenuSwitcherMessages run(Scanner scanner){
         return null;
     }
 
@@ -13,8 +13,6 @@ public class LoginMenu {
         return false;
     }
     private static void user(){
-
-    }    private static void userCreate(){
 
     }    private static void userCreate(){
 
