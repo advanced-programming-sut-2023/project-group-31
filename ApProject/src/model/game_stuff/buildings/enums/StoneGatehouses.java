@@ -1,8 +1,10 @@
 package model.game_stuff.buildings.enums;
 
-public class StoneGatehouses {
+import model.game_stuff.Building;
+
+public class StoneGatehouses extends Building {
     ;
-    private double hp;
+
 
     public StoneGatehouses(double hp) {
         this.hp = hp;
