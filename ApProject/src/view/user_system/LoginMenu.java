@@ -14,9 +14,11 @@ public class LoginMenu {
     }
     private static void user(){
 
-    }    private static void userCreate(){
+    }
+    private static void forgotPassword(){
 
-    }    private static void userCreate(){
+    }
+    private static void userLogout(){
 
     }
 

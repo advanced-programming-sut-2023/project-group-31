@@ -8,4 +8,13 @@ public class ProfieMenu {
     public static MenuSwitchMessages run(Scanner scanner){
         return null;
     }
+
+    private static void profileChange(){
+
+    }
+
+    private static void profileDisplaySlogan(){
+
+    }
+
 }
