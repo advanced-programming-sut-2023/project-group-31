@@ -1,8 +1,9 @@
 package model.game_stuff.buildings;
 
+import model.game_stuff.Building;
 import model.game_stuff.buildings.enums.Towers;
 
-public class Tower {
+public class Tower extends Building {
         private Towers type;
         private double hp;
 
