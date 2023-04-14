@@ -1,6 +1,7 @@
 package model.game_stuff;
 
 
+
 import java.util.ArrayList;
 
 public class Map {
@@ -18,7 +19,7 @@ public class Map {
         for(int i = 0; i < width; i++) {
             blocks.add(new ArrayList<>());
             for(int j = 0; j < length; j++) {
-                blocks.get(i).add(new Block());
+                blocks.get(i).add(new Block(Textures.GROUND));
             }
         }
     }
