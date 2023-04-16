@@ -1,10 +1,15 @@
 package controller.user_menu;
 
 
+import controller.ControllerUtils;
 import model.User;
 import view.user_system.messages.Messages;
 
-public class ProfileController {
+import java.util.HashMap;
+
+public class ProfileController extends ControllerUtils {
+
+
 
     private static User currentUser;
     //change user fields
