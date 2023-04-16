@@ -1,20 +1,20 @@
 package controller.game_menu;
 
-import view.user_system.messages.Messages;
+import view.user_system.messages.UserMessages;
 
 public class TradeController extends KingdomController{
-    public static Messages trade(String resourceType,int resourceAmount,int price,String message){
+    public static UserMessages trade(String resourceType, int resourceAmount, int price, String message){
         return null;
     }
 
-    public static Messages tradeList(){
+    public static UserMessages tradeList(){
         return null;
     }
-    public static Messages tradeAccept(int id){
+    public static UserMessages tradeAccept(int id){
         return null;
     }
 
-    public static Messages tradeHistory(){
+    public static UserMessages tradeHistory(){
         return null;
     }
 }

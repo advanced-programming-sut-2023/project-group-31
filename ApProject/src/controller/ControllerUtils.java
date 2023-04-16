@@ -1,15 +1,15 @@
 package controller;
 
 import model.User;
-import view.user_system.messages.Messages;
+import view.user_system.messages.UserMessages;
 
 import java.util.HashMap;
 
 public abstract class ControllerUtils {
 
-    protected HashMap<String,String> inputs;
+    protected static HashMap<String,String> inputs;
     public static User currentUser;
-    public static Messages captcha(){
+    public static UserMessages captcha(){
         return null;
     }
 
@@ -19,5 +19,11 @@ public abstract class ControllerUtils {
 
     public static void setCurrentUser(User currentUser) {
         ControllerUtils.currentUser = currentUser;
+    }
+
+
+
+    public static void setInputs(HashMap<String, String> inputs) {
+        inputs = inputs;
     }
 }

@@ -19,7 +19,7 @@ public class MenuSwitcher {
                     command = RegisterMenu.run(scanner);
                     break;
                 case PROFILE:
-                    command = ProfieMenu.run(scanner);
+                    command = ProfileMenu.run(scanner);
                     break;
                 // TODO :
             }

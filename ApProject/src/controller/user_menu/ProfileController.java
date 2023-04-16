@@ -3,9 +3,7 @@ package controller.user_menu;
 
 import controller.ControllerUtils;
 import model.User;
-import view.user_system.messages.Messages;
-
-import java.util.HashMap;
+import view.user_system.messages.UserMessages;
 
 public class ProfileController extends ControllerUtils {
 
@@ -13,31 +11,31 @@ public class ProfileController extends ControllerUtils {
 
     private static User currentUser;
     //change user fields
-    public static Messages profileChangeUsername(String newUsername){
+    public static UserMessages profileChangeUsername(String newUsername){
         return null;
     }
-    public static Messages profileChangeNickname(String newNickname){
+    public static UserMessages profileChangeNickname(String newNickname){
         return null;
     }
-    public static Messages profileChangePassword(String oldPassword,String newPassword){
+    public static UserMessages profileChangePassword(String oldPassword, String newPassword){
         return null;
     }
-    public static Messages profileChangeSlogan(String newSlogan){
+    public static UserMessages profileChangeSlogan(String newSlogan){
         return null;
     }
 
     //display user fields
 
-    public static Messages profileDisplayHighScore(){
+    public static UserMessages profileDisplayHighScore(){
         return null;
     }
-    public static Messages profileDisplayRank(){
+    public static UserMessages profileDisplayRank(){
         return null;
     }
-    public static Messages profileDisplaySlogan(){
+    public static UserMessages profileDisplaySlogan(){
         return null;
     }
-    public static Messages profileDisplay(){
+    public static UserMessages profileDisplay(){
         return null;
     }
 

@@ -1,11 +1,11 @@
 package controller.game_menu;
 
 import model.User;
-import view.user_system.messages.Messages;
+import view.user_system.messages.UserMessages;
 
 public class KingdomController {
     protected User owner;
-    public Messages showPopularityFactors(){
+    public UserMessages showPopularityFactors(){
         return null;
     }
 

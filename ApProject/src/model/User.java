@@ -19,16 +19,12 @@ public class User {
 
     public User(String username, String password,
                 String nickname,
-                String email, String slogan,
-                String passwordRecoveryQuestion,
-                String passwordRecoveryAnswer) {
+                String email, String slogan) {
         this.username = username;
         this.password = password;
         this.nickname = nickname;
         this.email = email;
         this.slogan = slogan;
-        this.passwordRecoveryQuestion = passwordRecoveryQuestion;
-        this.passwordRecoveryAnswer = passwordRecoveryAnswer;
         this.scores = new ArrayList<Score>();
         this.highScore = 0;
     }
