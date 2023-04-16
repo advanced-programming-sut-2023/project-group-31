@@ -1,6 +1,8 @@
 package view.user_system;
 
+import controller.user_menu.RegisterController;
 import view.ViewUtils;
+import view.user_system.commands.InputFormats;
 import view.user_system.commands.RegisterCommands;
 import view.user_system.messages.MenuSwitcherMessages;
 
@@ -24,7 +26,8 @@ public class RegisterMenu extends ViewUtils{
     }
 
     private static void userCreate(Matcher matcher){
-        isFormatCurrent(matcher,RegisterCommands.REGISTER.getRegex());
+        putInHashmap(matcher,RegisterCommands.REGISTER.getRegex());
+        RegisterController.userCreate();
     }
 
 }
