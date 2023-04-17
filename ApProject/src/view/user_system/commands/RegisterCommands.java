@@ -5,9 +5,9 @@ import java.util.regex.Pattern;
 
 public enum RegisterCommands {
     REGISTER("user create(( -u (?<username>I))|( -p (?<password>I) (?<passwordConfirmation>I))|( -p (?<password>random))|( –email (?<email>I))|( -s (?<slogan>I))))+"),
-    PICK_QUESTION("question pick -q <question-number> -a <answer> -c <answerConfirm>")
+    PICK_QUESTION("question pick(( -q (?<questionNumber>I))|( -a (?<answer>I))|( -c (?<answerConfirm>I)))+")
     ;
-    private String regex;
+    private final String regex;
 
     RegisterCommands(String regex) {
         this.regex = editRegex(regex);

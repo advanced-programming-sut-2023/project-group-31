@@ -12,7 +12,9 @@ import java.util.regex.Matcher;
 
 public class RegisterMenu extends ViewUtils{
     private static UserMessages result;
+
     public static MenuSwitcherMessages run(Scanner scanner){
+
         String input;
         Matcher matcher;
         while(true) {
@@ -27,15 +29,58 @@ public class RegisterMenu extends ViewUtils{
     }
 
     private static void userCreate(Matcher matcher){
-
+        UserMessages result;
         ControllerUtils.setInputs(putInHashmap(matcher,RegisterCommands.REGISTER.getRegex()));
         result=RegisterController.userCreate();
         if(result.equals(UserMessages.SUCCESS)){
-            System.out.println("User register: "+result.getTxt());
-        }else if(result.equals(UserMessages.CONFIRM)){
-            pickQuestion();
+            System.out.println("user register: "+result.getTxt());
+        }else if(result.equals(UserMessages.CONFIRM)) {
+            pickQuestionMenu();
+        }else if(result.equals(UserMessages.USER_EXITS_BEFORE)){
+            confirmUsernameMenu();
         }else{
             System.out.println("create user failed: "+result.getTxt());
+        }
+    }
+
+    private static void confirmUsernameMenu() {
+        Matcher matcher;
+        String input;
+        while(true){
+            input=scanner.nextLine();
+            if((matcher= RegisterCommands.getMatcher(input,RegisterCommands.REGISTER))!=null){
+                confirmUsername(matcher);
+            }else{
+                System.out.println("Invalid command!");
+            }
+        }
+    }
+
+    private static void confirmUsername(Matcher matcher) {
+
+    }
+
+    private static void pickQuestionMenu(){
+        String input;
+        Matcher matcher;
+        while(true){
+            input=scanner.nextLine();
+            if((matcher= RegisterCommands.getMatcher(input,RegisterCommands.REGISTER))!=null){
+                pickQuestion(matcher);
+            }else{
+                System.out.println("Invalid command!");
+            }
+        }
+    }
+
+    private static void pickQuestion(Matcher matcher){
+
+        ControllerUtils.setInputs(putInHashmap(matcher,RegisterCommands.PICK_QUESTION.getRegex()));
+        result=RegisterController.pickQuestion();
+        if(result.equals(UserMessages.SUCCESS)){
+            System.out.println("question pick: "+result.getTxt());
+        }else{
+            System.out.println("question pick failed: "+result.getTxt());
         }
     }
 

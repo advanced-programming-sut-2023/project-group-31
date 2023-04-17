@@ -6,7 +6,9 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 
 public class MainMenu {
-    public static MenuSwitcherMessages run(Scanner scanner) {
+    private static Scanner scanner;
+    public static MenuSwitcherMessages run(Scanner newscanner) {
+        scanner=newscanner;
         //TODO:
         return null;
     }
@@ -18,5 +20,9 @@ public class MainMenu {
     private static boolean logout(Matcher matcher) {
         //TODO:
         return false;
+    }
+
+    public static Scanner getScanner() {
+        return scanner;
     }
 }

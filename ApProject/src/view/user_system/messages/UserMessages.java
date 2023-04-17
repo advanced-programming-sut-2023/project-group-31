@@ -2,9 +2,12 @@ package view.user_system.messages;
 
 public enum UserMessages {
     SUCCESS("success!"),
-    INVALID_USERNAME_FORMAT("Invalid username format!"),
+    INVALID_FORMAT("Invalid format!"),
     NOT_ENOUGH_MESSAGES("Not enough messages!"),
     PASSWORD_NOT_MATCH("Password not match!"),
+    SYSTEM_ERROR("System error!"),
+    ANSWER_NOT_MATCH("Answer and answer confirm does not match!"),
+    USER_EXITS_BEFORE("User have exited before!"),
     CONFIRM("")
     //TODO: add enums
     ;

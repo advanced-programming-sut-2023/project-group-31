@@ -1,6 +1,8 @@
 package controller.user_menu;
 
+import com.sun.net.httpserver.Authenticator;
 import controller.ControllerUtils;
+import model.Resource;
 import model.User;
 import view.ViewUtils;
 import view.user_system.messages.UserMessages;
@@ -9,8 +11,8 @@ public class RegisterController extends ControllerUtils {
 
     public static UserMessages userCreate() {
 
-        if (ViewUtils.checkFormatErrors(inputs) != null) {
-            return UserMessages.getMessage(ViewUtils.checkFormatErrors(inputs));
+        if (checkFormatErrors(inputs) != null) {
+            return checkFormatErrors(inputs);
         }
 
         if(inputs.get("password").equals("random")){
@@ -32,9 +34,22 @@ public class RegisterController extends ControllerUtils {
         return UserMessages.SUCCESS;
     }
 
-    public static UserMessages getForgotPasswordQuestion(){
+    public static UserMessages pickQuestion() {
+        if (checkFormatErrors(inputs) != null) {
+            return checkFormatErrors(inputs);
+        }
 
-        return null;
+        if(inputs.get("answer").equals(inputs.get("answerConfirm"))){
+            return UserMessages.ANSWER_NOT_MATCH;
+        }
+
+        currentUser.setPasswordRecoveryQuestion(Resource.getSlogans().get(Integer.parseInt(inputs.get("questionNumber"))));
+        currentUser.setPasswordRecoveryAnswer(inputs.get("answer"));
+
+        return UserMessages.SUCCESS;
     }
 
+    public static UserMessages confirmRandomPassword(){
+        return null;
+    }
 }

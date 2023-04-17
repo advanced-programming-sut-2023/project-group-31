@@ -1,8 +1,10 @@
 package view.user_system.commands;
 
 public enum InputFormats {
-    USERNAME("username",true),
-    PASSWORD("password",true);
+    USERNAME("username","[\\w]+",true),
+    PASSWORD("password",true),
+    ;
+    ;
     private String name;
     private String format;
     private boolean isCompulsory=true;
