@@ -2,11 +2,12 @@ package model.game_stuff;
 
 
 
-import model.game_stuff.types.Textures;
+import model.game_stuff.enums.Textures;
 
 import java.util.ArrayList;
 
 public class Map {
+    private String name;
     private int length;
     private int width;
     private ArrayList<ArrayList<Block>> blocks;
@@ -15,7 +16,8 @@ public class Map {
         blocks = new ArrayList<>();
     }
 
-    public Map(int length, int width) {
+    public Map(String name, int length, int width) {
+        this.name = name;
         this.length = length;
         this.width = width;
         for(int i = 0; i < width; i++) {

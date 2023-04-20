@@ -139,6 +139,17 @@ public class Player {
     public void addWeaponry(Block block) {
         stockpilePositions.add(block);
     }
+    public void removeStockpile(Block block) {
+        stockpilePositions.remove(block);
+    }
+
+    public void removeGranary(Block block) {
+        stockpilePositions.remove(block);
+    }
+
+    public void removeWeaponry(Block block) {
+        stockpilePositions.remove(block);
+    }
 
     public Block getLordsHouse() {
         return LordsHouse;
