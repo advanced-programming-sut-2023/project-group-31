@@ -1,10 +1,12 @@
 package view.game_system;
 
+import view.game_system.messages.GameSwitcherMessages;
+
 import java.util.Scanner;
 import java.util.regex.Matcher;
 
 public class MarketMenu {
-    public static GameSwitcher run(Scanner scanner){
+    public static GameSwitcherMessages run(Scanner scanner){
         return null;
     }
 
