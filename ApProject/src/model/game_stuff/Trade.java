@@ -1,14 +1,78 @@
 package model.game_stuff;
 
-import model.User;
+import model.game_stuff.enums.Items;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 
 public class Trade {
     private String id;
-    private ArrayList<Good> providedGoods;//hashmap beshe
-    private ArrayList<Good> askedGoods;
-    private User owner;
-    private User asked;
+    private HashMap<Items, Integer> providedItems;
+    private HashMap<Items, Integer> askedItems;
+    private Player owner;
+    private HashSet<Player> audiences; //TODO: find a better name
     private String message;
+
+    {
+        providedItems = new HashMap<>();
+        askedItems = new HashMap<>();
+        audiences = new HashSet<>();
+    }
+
+    public Trade(Player owner) {
+        this.owner = owner;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public HashMap<Items, Integer> getProvidedItems() {
+        return providedItems;
+    }
+
+    public HashMap<Items, Integer> getAskedItems() {
+        return askedItems;
+    }
+
+    public Player getOwner() {
+        return owner;
+    }
+
+    public HashSet<Player> getAudiences() {
+        return audiences;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    // faghat inja logic be kar rafte:
+    public void changeProvidedItems(Items item, int amount) {
+        if(providedItems.keySet().contains(item)) {
+            providedItems.replace(item,providedItems.get(item) + amount);
+            return;
+        }
+        providedItems.put(item, amount);
+    }
+
+    public void changeAskedItems(Items item, int amount) {
+        if(askedItems.keySet().contains(item)) {
+            askedItems.replace(item,askedItems.get(item) + amount);
+            return;
+        }
+        askedItems.put(item, amount);
+    }
+
+    public void addAudience(Player player) {
+        audiences.add(player);
+    }
+
+    public void removeAudiences(Player player) {
+        audiences.remove(player);
+    }
 }
