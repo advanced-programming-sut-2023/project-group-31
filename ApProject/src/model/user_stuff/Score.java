@@ -1,6 +1,6 @@
 package model.user_stuff;
 
-import model.Game;
+import model.game_stuff.Game;
 import model.User;
 
 public class Score {
