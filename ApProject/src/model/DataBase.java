@@ -3,9 +3,13 @@ package model;
 import java.util.*;
 
 public class DataBase {
+
+
     private static ArrayList<String> slogans;
     private static HashSet<String> recoveryQuestions;
     private static ArrayList<User> users;
+
+    private static User loggedInUser;
 
     static {
         slogans = new ArrayList<String>(List.of(
@@ -50,4 +54,11 @@ public class DataBase {
         return slogans.get(random.nextInt(slogans.size()));
     }
 
+    public static User getLoggedInUser() {
+        return loggedInUser;
+    }
+
+    public static void setLoggedInUser(User loggedInUser) {
+        DataBase.loggedInUser = loggedInUser;
+    }
 }

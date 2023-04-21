@@ -106,17 +106,28 @@ public class User {
     public static void removeUser(User user){
         users.remove(user.username);
     }
-    public static boolean DoesUserExit(String username){
+    public static boolean doesUserExit(String username){
         return users.containsKey(username);
     }
     public static User getUserByUsername(String username){
         return users.get(username);
     }
 
+    public static User getUserByEmail(String email){
+        for(String username:users.keySet()){
+            if(users.get(username).getEmail().equals(email)){
+                return users.get("username");
+            }
+        }
+        return null;
+    }
 
+    public static boolean doesEmailExits(String email){
+        return getUserByEmail(email)!=null;
+    }
 
     //instance methods
-    public boolean IsPasswordCurrent(String password){
+    public boolean isPasswordCurrent(String password){
         return this.password.equals(password);
     }
 

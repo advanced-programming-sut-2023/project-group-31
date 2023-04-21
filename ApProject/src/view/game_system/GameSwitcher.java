@@ -2,10 +2,6 @@ package view.game_system;
 
 
 import view.game_system.messages.GameSwitcherMessages;
-import view.user_system.LoginMenu;
-import view.user_system.ProfileMenu;
-import view.user_system.RegisterMenu;
-import view.user_system.messages.MenuSwitcherMessages;
 
 import java.util.Scanner;
 

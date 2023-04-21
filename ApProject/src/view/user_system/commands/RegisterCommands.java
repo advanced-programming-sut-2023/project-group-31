@@ -4,13 +4,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public enum RegisterCommands {
-    REGISTER("user create(( -u (?<username>I))|( -p (?<password>I) (?<passwordConfirmation>I))|( -p (?<password>random))|( –email (?<email>I))|( -s (?<slogan>I))))+"),
-    PICK_QUESTION("question pick -q <question-number> -a <answer> -c <answerConfirm>")
+    REGISTER("user create(( -u (?<username>IN))|( -p (?<password>IN) (?<passwordConfirmation>IN))|( -p (?<password>random))|( –email (?<email>IN))|( -s (?<slogan>IN))))+"),
+    PICK_QUESTION("question pick(( -q (?<questionNumber>IN))|( -a (?<answer>IN))|( -c (?<answerConfirm>IN)))+")
     ;
-    private String regex;
+    private final String regex;
 
     RegisterCommands(String regex) {
-        this.regex = editRegex(regex);
+        this.regex = CommandsUtils.editRegex(regex);
     }
 
     public String getRegex() {
@@ -19,13 +19,7 @@ public enum RegisterCommands {
 
 
 
-    private String editRegex(String regex){
-        String result;
-        result=regex.replaceAll("[\\s]+","[\\s]+");
-        result=regex.replaceAll("I","([\\S]*)|(\"[^*]*\")");
 
-        return result;
-    }
 
     public static Matcher getMatcher(String input, RegisterCommands command){
         Matcher matcher=Pattern.compile(command.regex).matcher(input);

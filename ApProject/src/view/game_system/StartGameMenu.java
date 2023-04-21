@@ -1,10 +1,7 @@
 package view.game_system;
 
-import model.User;
 import view.game_system.messages.GameSwitcherMessages;
-import view.user_system.messages.MenuSwitcherMessages;
 
-import java.util.Map;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 

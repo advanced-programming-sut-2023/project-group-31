@@ -5,4 +5,7 @@ public enum MenuSwitcherMessages {
     LOGIN,
     REGISTER,
     PROFILE,
+
+    MAIN
+    ;
 }
