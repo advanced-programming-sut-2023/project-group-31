@@ -26,6 +26,9 @@ public abstract class ControllerUtils {
         inputs = inputs;
     }
 
+    public static HashMap<String, String> getInputs(){
+        return inputs;
+    }
 
     private static boolean isFormatCurrent(String input, InputFormats inputFormat) {
         if (inputFormat.getFormat() == null) {

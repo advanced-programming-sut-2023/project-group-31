@@ -1,12 +1,13 @@
 package view.user_system;
 
+import view.ViewUtils;
 import view.user_system.messages.MenuSwitcherMessages;
 
 import java.util.Scanner;
 
-public class MenuSwitcher {
+public class MenuSwitcher extends ViewUtils {
     public static void run() {
-        Scanner scanner = new Scanner(System.in);
+        scanner = new Scanner(System.in);
         MenuSwitcherMessages command = MenuSwitcherMessages.LOGIN;
         while (true) {
             switch (command) {

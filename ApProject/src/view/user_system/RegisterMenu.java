@@ -37,6 +37,7 @@ public class RegisterMenu extends ViewUtils{
         }else if(result.equals(UserMessages.CONFIRM)) {
             pickQuestionMenu();
         }else if(result.equals(UserMessages.USER_EXITS_BEFORE)){
+            System.out.println("create user failed: "+result.getTxt());
             confirmUsernameMenu();
         }else{
             System.out.println("create user failed: "+result.getTxt());
@@ -48,17 +49,19 @@ public class RegisterMenu extends ViewUtils{
         String input;
         while(true){
             input=scanner.nextLine();
-            if((matcher= RegisterCommands.getMatcher(input,RegisterCommands.REGISTER))!=null){
-                confirmUsername(matcher);
+            if(input.equals("YES")){
+                result=RegisterController.userCreate();
+                System.out.println("user register: "+result.getTxt());
+                return;
+            }else if(input.equals("NO")){
+                System.out.println("OK! Returned to register menu.");
+                return;
             }else{
                 System.out.println("Invalid command!");
             }
         }
     }
 
-    private static void confirmUsername(Matcher matcher) {
-
-    }
 
     private static void pickQuestionMenu(){
         String input;

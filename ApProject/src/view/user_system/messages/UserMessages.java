@@ -7,7 +7,9 @@ public enum UserMessages {
     PASSWORD_NOT_MATCH("Password not match!"),
     SYSTEM_ERROR("System error!"),
     ANSWER_NOT_MATCH("Answer and answer confirm does not match!"),
-    USER_EXITS_BEFORE("User have exited before!"),
+
+    PASSWORD_IS_WEAK("Password is weak: "),
+    USER_EXITS_BEFORE("User have exited before do use want username- "),
     CONFIRM("")
     //TODO: add enums
     ;
@@ -22,10 +24,16 @@ public enum UserMessages {
         this.txt = txt;
     }
 
+    public UserMessages setAndPrintMessage(String txt){
+        this.txt+=txt;
+        return this;
+    }
 
     public String getTxt() {
         return txt;
     }
+
+
 
     public static UserMessages getMessage(String txt){
         for(UserMessages message:values()){
