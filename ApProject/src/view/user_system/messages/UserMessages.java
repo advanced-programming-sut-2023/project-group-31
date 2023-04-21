@@ -10,7 +10,7 @@ public enum UserMessages {
 
     PASSWORD_IS_WEAK("Password is weak: "),
     USER_EXITS_BEFORE("User have exited before do use want username- "),
-    CONFIRM("")
+    RANDOM_PASSWORD("")
     //TODO: add enums
     ;
     private String txt;

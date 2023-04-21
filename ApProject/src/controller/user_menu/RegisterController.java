@@ -1,10 +1,8 @@
 package controller.user_menu;
 
-import com.sun.net.httpserver.Authenticator;
 import controller.ControllerUtils;
 import model.Resource;
 import model.User;
-import view.ViewUtils;
 import view.user_system.messages.UserMessages;
 
 public class RegisterController extends ControllerUtils {
@@ -16,7 +14,7 @@ public class RegisterController extends ControllerUtils {
         }
 
         if (inputs.get("password").equals("random")) {
-            return UserMessages.CONFIRM;
+            return UserMessages.RANDOM_PASSWORD;
         }
 
         if (inputs.get("password").equals(inputs.get("password confirmation"))) {
