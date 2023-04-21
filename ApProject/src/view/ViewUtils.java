@@ -21,12 +21,20 @@ public class ViewUtils {
         HashMap<String, String> inputs = new HashMap<String, String>();
         while (groups.find()) {
             groupName = groups.group("groupName");
-            inputs.put(groupName, matcher.group(groupName).replaceFirst("\"","").replaceFirst("(?s)"+"\""+"(?!.*?"+"\""+")", ""));
+            //agar groupName tekrari bood ehtemalan error khahad dad!
+            //be nazaram inputs ro static bezar ba'd tooye putInHashmap message return kon agar success bood tooye menu inputs ro bede be setInput
+            if(inputs.keySet().contains(groupName)) {
+                //error bede
+                continue;
+            }
+            //what!?
+            inputs.put(groupName, matcher.group(groupName).trim().replaceFirst("\"","").replaceFirst("(?s)"+"\""+"(?!.*?"+"\""+")", ""));
 
         }
         return inputs;
     }
 
+    //bere tooye controller
     public static String checkFormatErrors(HashMap<String, String> inputs) {
 
         for (String groupName : inputs.keySet()) {

@@ -20,11 +20,9 @@ public enum RegisterCommands {
 
 
     private String editRegex(String regex){
-        String result;
-        result=regex.replaceAll("[\\s]+","[\\s]+");
-        result=regex.replaceAll("I","([\\S]*)|(\"[^*]*\")");
-
-        return result;
+        regex=regex.replaceAll("[\\s]+","[\\s]+");
+        regex=regex.replaceAll("I","([\\S]*)|(\"[^\"]+\")");
+        return regex;
     }
 
     public static Matcher getMatcher(String input, RegisterCommands command){

@@ -6,24 +6,30 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 public class Trade {
-    private String id;
+    private static int idCounter = 1001;
+    private int id; //mahdoodiat tedad e trade darim
     private HashMap<Items, Integer> providedItems;
     private HashMap<Items, Integer> askedItems;
     private Player owner;
-    private HashSet<Player> audiences; //TODO: find a better name
-    private String message;
+    private Player askedPlayer;
+    private String ownersMessage;
+    private String othersMessage;
+    private boolean isWatched;
 
     {
         providedItems = new HashMap<>();
         askedItems = new HashMap<>();
-        audiences = new HashSet<>();
+        isWatched = false;
     }
 
-    public Trade(Player owner) {
+    public Trade(Player owner, Player askedPlayer) {
         this.owner = owner;
+        this.askedPlayer = askedPlayer;
+        this.id = idCounter;
+        idCounter++;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
@@ -39,19 +45,24 @@ public class Trade {
         return owner;
     }
 
-    public HashSet<Player> getAudiences() {
-        return audiences;
+
+    public String getOwnersMessage() {
+        return ownersMessage;
     }
 
-    public String getMessage() {
-        return message;
+    public void setOwnersMessage(String message) {
+        this.ownersMessage = message;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public String getOthersMessage() {
+        return othersMessage;
     }
 
-    // faghat inja logic be kar rafte:
+    public void setOthersMessage(String othersMessage) {
+        this.othersMessage = othersMessage;
+    }
+
+    // faghat inja ye kam logic be kar rafte:
     public void changeProvidedItems(Items item, int amount) {
         if(providedItems.keySet().contains(item)) {
             providedItems.replace(item,providedItems.get(item) + amount);
@@ -68,11 +79,21 @@ public class Trade {
         askedItems.put(item, amount);
     }
 
-    public void addAudience(Player player) {
-        audiences.add(player);
+    public void setWatched(boolean watched) {
+        isWatched = watched;
     }
 
-    public void removeAudiences(Player player) {
-        audiences.remove(player);
+    public Player getAskedPlayer() {
+        return askedPlayer;
+    }
+
+    @Override
+    public String toString() {
+        return "Trade :" + id + "{\n" +
+                owner.getName() + " " + owner.getColor().getName() + (ownersMessage == null ? "" : (": " + ownersMessage)) + "\n" +
+                "providedItems=" + providedItems + "\n" +
+                "askedItems=" + askedItems + "\n" +
+                askedPlayer.getName() + " " + askedPlayer.getColor().getName() + (othersMessage == null ? "" : (": " + othersMessage)) + "\n" +
+                "}\n";
     }
 }

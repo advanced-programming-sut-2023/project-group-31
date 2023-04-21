@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 public class Player {
     private final User owner;
+    private String name;
     private final ArrayList<Block> stockpilePositions;
     private final ArrayList<Block> granaryPositions;
     private final ArrayList<Block> weaponryPositions;
@@ -37,6 +38,7 @@ public class Player {
 
     public Player(User owner, Colors color) {
         this.owner = owner;
+        this.name = owner.getNickname();
         this.color = color;
     }
 
@@ -157,5 +159,9 @@ public class Player {
 
     public void setLordsHouse(Block lordsHouse) {
         LordsHouse = lordsHouse;
+    }
+
+    public String getName() {
+        return name;
     }
 }
