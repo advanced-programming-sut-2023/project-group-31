@@ -21,7 +21,7 @@ public class RegisterController extends ControllerUtils {
             return UserMessages.RANDOM_PASSWORD;
         }
 
-        if (inputs.get("password").equals(inputs.get("password confirmation"))) {
+        if (inputs.get("password").equalsIgnoreCase(inputs.get("password confirmation"))) {
             return UserMessages.getMessage("Password not match!");
         }
 

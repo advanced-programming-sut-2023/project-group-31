@@ -10,7 +10,7 @@ public enum RegisterCommands {
     private final String regex;
 
     RegisterCommands(String regex) {
-        this.regex = editRegex(regex);
+        this.regex = CommandsUtils.editRegex(regex);
     }
 
     public String getRegex() {
@@ -19,13 +19,7 @@ public enum RegisterCommands {
 
 
 
-    private String editRegex(String regex){
-        String result;
-        result=regex.replaceAll("[\\s]+","[\\s]+");
-        result=regex.replaceAll("IN","([\\S]*)|(\"[^*]*\")");
 
-        return result;
-    }
 
     public static Matcher getMatcher(String input, RegisterCommands command){
         Matcher matcher=Pattern.compile(command.regex).matcher(input);

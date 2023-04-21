@@ -1,6 +1,6 @@
 package view.user_system.messages;
 
-public enum MenuSwitcherMessages {
+public enum menuSwitcherMessages {
     EXIT,
     LOGIN,
     REGISTER,

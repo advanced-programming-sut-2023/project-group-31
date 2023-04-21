@@ -43,7 +43,9 @@ public abstract class ControllerUtils {
             if (inputs.get(groupName) == null && (InputFormats.getInputFormat(groupName).isCompulsory())) {
                 UserMessages.NOT_ENOUGH_MESSAGES.setTxt(groupName+"can't be null!");
                 return UserMessages.NOT_ENOUGH_MESSAGES;
-            } else if (inputs.get(groupName) != null && !isFormatCurrent(inputs.get(groupName), InputFormats.getInputFormat(groupName))) {
+            }if(inputs.get(groupName).equals("")){
+                return UserMessages.NOT_ENOUGH_MESSAGES;
+            }else if (inputs.get(groupName) != null && !isFormatCurrent(inputs.get(groupName), InputFormats.getInputFormat(groupName))) {
                 UserMessages.INVALID_FORMAT.setTxt("Inavlid"+groupName+"format!");
                 return UserMessages.INVALID_FORMAT;
             }
