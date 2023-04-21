@@ -113,7 +113,18 @@ public class User {
         return users.get(username);
     }
 
+    public static User getUserByEmail(String email){
+        for(String username:users.keySet()){
+            if(users.get(username).getEmail().equals(email)){
+                return users.get("username");
+            }
+        }
+        return null;
+    }
 
+    public static boolean doesEmailExits(String email){
+        return getUserByEmail(email)!=null;
+    }
 
     //instance methods
     public boolean IsPasswordCurrent(String password){

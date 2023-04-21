@@ -3,7 +3,9 @@ package view.user_system.commands;
 public enum InputFormats {
     USERNAME("username","[\\w]+",true),
     PASSWORD("password",true),
-    ;
+    EMAIL("email","([\\w]|\\.)+@([\\w]|\\.)+.([\\w]|\\.)+",true),
+    QUESTION_NUMBER("question-number","([\\w]|\\.)+@([\\w]|\\.)+.([\\w]|\\.)+",true)
+
     ;
     private String name;
     private String format;

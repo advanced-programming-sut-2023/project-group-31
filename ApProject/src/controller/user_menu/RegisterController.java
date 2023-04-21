@@ -1,9 +1,12 @@
 package controller.user_menu;
 
 import controller.ControllerUtils;
-import model.Resource;
+import model.DataBase;
+
 import model.User;
 import view.user_system.messages.UserMessages;
+
+import java.util.regex.Matcher;
 
 public class RegisterController extends ControllerUtils {
 
@@ -14,12 +17,20 @@ public class RegisterController extends ControllerUtils {
         }
 
         if (inputs.get("password").equals("random")) {
+            inputs.put("password",generateNewPassword());
             return UserMessages.RANDOM_PASSWORD;
         }
 
         if (inputs.get("password").equals(inputs.get("password confirmation"))) {
             return UserMessages.getMessage("Password not match!");
         }
+
+        if(User.doesEmailExits(inputs.get("email"))){
+            return UserMessages.EMAIL_EXITS;
+        }
+
+
+
         if (!inputs.containsKey("slogan")) {
             inputs.put("slogan", null);
         }
@@ -29,7 +40,7 @@ public class RegisterController extends ControllerUtils {
         }
         String newUsername;
         if (User.DoesUserExit(inputs.get("username"))) {
-            newUsername = createNewUsername(inputs.get("username"));
+            newUsername = generateNewUsername(inputs.get("username"));
             inputs.put("username",newUsername);
             return UserMessages.USER_EXITS_BEFORE.setAndPrintMessage(newUsername);
         }
@@ -43,7 +54,7 @@ public class RegisterController extends ControllerUtils {
     }
 
 
-    public static String createNewUsername(String previousUsername) {
+    public static String generateNewUsername(String previousUsername) {
         String newUsername;
         int number = 0;
         do {
@@ -52,6 +63,22 @@ public class RegisterController extends ControllerUtils {
 
         } while (User.DoesUserExit(newUsername));
         return newUsername;
+    }
+
+    public static String generateNewPassword() {
+        String newPassword;
+
+        String alphaNumeric = "0123456789003433" + "abcdefghijklmnopqrstuvxyz" + "ABCDEFGHIJKLMNOPQRSTUVXYZ" +"**&&##@@!$^^*^^%%)_&*^";
+        int length=alphaNumeric.length(),passwordLength= (int)Math.floor(Math.random()*10)+6;
+        do {
+            newPassword="";
+            for(int i=0;i<passwordLength;i++){
+                newPassword+=alphaNumeric.charAt((int)Math.floor(Math.random()*length));
+            }
+
+        } while (checkPasswordWeakness(newPassword)!=null);
+
+        return newPassword;
     }
 
     private static UserMessages checkPasswordWeakness(String password) {
@@ -82,13 +109,11 @@ public class RegisterController extends ControllerUtils {
             return UserMessages.ANSWER_NOT_MATCH;
         }
 
-        currentUser.setPasswordRecoveryQuestion(Resource.getSlogans().get(Integer.parseInt(inputs.get("questionNumber"))));
+        currentUser.setPasswordRecoveryQuestion(DataBase.getSlogans().get(Integer.parseInt(inputs.get("questionNumber"))));
         currentUser.setPasswordRecoveryAnswer(inputs.get("answer"));
 
         return UserMessages.SUCCESS;
     }
 
-    public static UserMessages confirmRandomPassword() {
-        return null;
-    }
+
 }

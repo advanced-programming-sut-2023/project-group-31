@@ -10,6 +10,8 @@ public enum UserMessages {
 
     PASSWORD_IS_WEAK("Password is weak: "),
     USER_EXITS_BEFORE("User have exited before do use want username- "),
+
+    EMAIL_EXITS("Email Exits."),
     RANDOM_PASSWORD("")
     //TODO: add enums
     ;

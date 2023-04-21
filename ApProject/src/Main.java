@@ -1,3 +1,5 @@
+import controller.user_menu.RegisterController;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Collections;
@@ -7,8 +9,9 @@ import java.util.regex.Pattern;
 
 public class Main {
     public static void main(String[] args) {
-
+        System.out.println();
     }
+
 }
 
 
