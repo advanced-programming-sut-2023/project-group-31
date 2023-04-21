@@ -12,9 +12,10 @@ public enum UserMessages {
     USER_EXITS_BEFORE("User have exited before do use want username- "),
 
     EMAIL_EXITS("Email Exits."),
-    RANDOM_PASSWORD("")
+    RANDOM_PASSWORD(""),
     //TODO: add enums
-    ;
+    USER_NOT_EXITS("user does not exits"),
+    PASSWORD_IS_NOT_CORRECT("your password is not correct.");
     private String txt;
 
 

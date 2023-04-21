@@ -1,13 +1,13 @@
 package view.user_system;
 
-import view.user_system.messages.menuSwitcherMessages;
+import view.user_system.messages.MenuSwitcherMessages;
 
 import java.util.Scanner;
 import java.util.regex.Matcher;
 
 public class MainMenu {
     private static Scanner scanner;
-    public static menuSwitcherMessages run(Scanner newscanner) {
+    public static MenuSwitcherMessages run(Scanner newscanner) {
         scanner=newscanner;
         //TODO:
         return null;

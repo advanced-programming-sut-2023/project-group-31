@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 
 public class ViewUtils {
     protected static Scanner scanner;
-
+    protected static UserMessages result;
 
     public static HashMap<String, String> putInHashmap(Matcher matcher, String regex) {
         Matcher groups = Pattern.compile("\\(\\?\\<(?<groupName>[\\S]+)\\>.+\\)").matcher(regex);

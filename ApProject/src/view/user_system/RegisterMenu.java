@@ -5,16 +5,16 @@ import controller.user_menu.RegisterController;
 import model.DataBase;
 import view.ViewUtils;
 import view.user_system.commands.RegisterCommands;
-import view.user_system.messages.menuSwitcherMessages;
+import view.user_system.messages.MenuSwitcherMessages;
 import view.user_system.messages.UserMessages;
 
 import java.util.Scanner;
 import java.util.regex.Matcher;
 
 public class RegisterMenu extends ViewUtils {
-    private static UserMessages result;
 
-    public static menuSwitcherMessages run(Scanner scanner) {
+
+    public static MenuSwitcherMessages run(Scanner scanner) {
 
         String input;
         Matcher matcher;
@@ -23,7 +23,9 @@ public class RegisterMenu extends ViewUtils {
             if ((matcher = RegisterCommands.getMatcher(input, RegisterCommands.REGISTER)) != null) {
                 ControllerUtils.setInputs(putInHashmap(matcher, RegisterCommands.REGISTER.getRegex()));
                 userCreate();
-            } else {
+            }else if(input.matches("goto[\\s]+login[\\s]+menu")){
+                return MenuSwitcherMessages.LOGIN;
+            }else {
                 System.out.println("Invalid command!");
             }
         }

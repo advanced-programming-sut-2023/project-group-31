@@ -1,12 +1,12 @@
 package view.user_system;
 
 import view.ViewUtils;
-import view.user_system.messages.menuSwitcherMessages;
+import view.user_system.messages.MenuSwitcherMessages;
 
 import java.util.Scanner;
 
 public class ProfileMenu extends ViewUtils {
-    public static menuSwitcherMessages run(Scanner scanner){
+    public static MenuSwitcherMessages run(Scanner scanner){
         return null;
     }
 

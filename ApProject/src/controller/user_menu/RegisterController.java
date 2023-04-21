@@ -39,7 +39,7 @@ public class RegisterController extends ControllerUtils {
             return message;
         }
         String newUsername;
-        if (User.DoesUserExit(inputs.get("username"))) {
+        if (User.doesUserExit(inputs.get("username"))) {
             newUsername = generateNewUsername(inputs.get("username"));
             inputs.put("username",newUsername);
             return UserMessages.USER_EXITS_BEFORE.setAndPrintMessage(newUsername);
@@ -61,7 +61,7 @@ public class RegisterController extends ControllerUtils {
             newUsername = (previousUsername + number);
             number++;
 
-        } while (User.DoesUserExit(newUsername));
+        } while (User.doesUserExit(newUsername));
         return newUsername;
     }
 
