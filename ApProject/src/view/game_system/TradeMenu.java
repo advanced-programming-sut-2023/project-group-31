@@ -6,7 +6,7 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 
 public class TradeMenu {
-    public GameSwitcherMessages run (Scanner scanner) {
+    public static GameSwitcherMessages run(Scanner scanner) {
         return null;
     }
 

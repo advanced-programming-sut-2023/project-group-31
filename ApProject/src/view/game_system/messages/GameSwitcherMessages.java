@@ -1,4 +1,8 @@
 package view.game_system.messages;
 
-public class GameSwitcherMessages {
+public enum GameSwitcherMessages {
+    MARKET,
+    TRADE,
+    BACK,
+    GAME;
 }
