@@ -6,21 +6,28 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 public class Trade {
+    private Game game;
     private String id;
     private HashMap<Items, Integer> providedItems;
-    private HashMap<Items, Integer> askedItems;
     private Player owner;
     private HashSet<Player> audiences; //TODO: find a better name
     private String message;
 
     {
         providedItems = new HashMap<>();
-        askedItems = new HashMap<>();
         audiences = new HashSet<>();
     }
 
+    public void setGame(Game game) {
+        this.game = game;
+    }
+
+    public Game getGame() {
+        return game;
+    }
+
     public Trade(Player owner) {
-        this.owner = owner;
+        this.owner=owner;
     }
 
     public String getId() {
@@ -31,9 +38,6 @@ public class Trade {
         return providedItems;
     }
 
-    public HashMap<Items, Integer> getAskedItems() {
-        return askedItems;
-    }
 
     public Player getOwner() {
         return owner;
@@ -60,13 +64,7 @@ public class Trade {
         providedItems.put(item, amount);
     }
 
-    public void changeAskedItems(Items item, int amount) {
-        if(askedItems.keySet().contains(item)) {
-            askedItems.replace(item,askedItems.get(item) + amount);
-            return;
-        }
-        askedItems.put(item, amount);
-    }
+
 
     public void addAudience(Player player) {
         audiences.add(player);
