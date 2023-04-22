@@ -2,11 +2,13 @@ package model.game_stuff;
 
 import model.game_stuff.enums.Items;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 
 public class Trade {
     private static int idCounter = 1001;
+    //dar kol hame trade ha yek ja nistan va agar accept shan faghat dar history melat mimoonan
+    private static ArrayList<Trade> liveTrades;
     private int id; //mahdoodiat tedad e trade darim
     private HashMap<Items, Integer> providedItems;
     private HashMap<Items, Integer> askedItems;
@@ -16,19 +18,29 @@ public class Trade {
     private String othersMessage;
     private boolean isWatched;
 
+    //TODO: hazf tavabe be dard nakhor
+
+    static {
+        liveTrades = new ArrayList<>();
+    }
     {
         providedItems = new HashMap<>();
         askedItems = new HashMap<>();
         isWatched = false;
     }
 
+    //kami logic
     public Trade(Player owner, Player askedPlayer) {
         this.owner = owner;
         this.askedPlayer = askedPlayer;
         this.id = idCounter;
         idCounter++;
+        liveTrades.add(this);
     }
 
+    public void removeTrade() {
+        liveTrades.remove(this);
+    }
     public int getId() {
         return id;
     }
@@ -85,6 +97,14 @@ public class Trade {
 
     public Player getAskedPlayer() {
         return askedPlayer;
+    }
+
+    public void setProvidedItems(HashMap<Items, Integer> providedItems) {
+        this.providedItems = providedItems;
+    }
+
+    public void setAskedItems(HashMap<Items, Integer> askedItems) {
+        this.askedItems = askedItems;
     }
 
     @Override

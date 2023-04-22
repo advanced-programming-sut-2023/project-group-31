@@ -50,4 +50,11 @@ public enum Items {
     public ItemTypes getType() {
         return type;
     }
+    public static Items getItemByName(String name) {
+        for (Items item : values()) {
+            if(item.name.equals(name))
+                return item;
+        }
+        return null;
+    }
 }

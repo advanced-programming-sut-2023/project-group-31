@@ -3,6 +3,7 @@ package view.user_system.messages;
 public enum UserMessages {
     SUCCESS("success!"),
     INVALID_USERNAME_FORMAT("Invalid username format!"),
+    //what!?
     NOT_ENOUGH_MESSAGES("Not enough messages!"),
     PASSWORD_NOT_MATCH("Password not match!"),
     CONFIRM("")

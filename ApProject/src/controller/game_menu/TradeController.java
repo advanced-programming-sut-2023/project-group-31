@@ -1,20 +1,79 @@
 package controller.game_menu;
 
-import view.user_system.messages.UserMessages;
+import controller.ControllerUtils;
+import model.game_stuff.Player;
+import model.game_stuff.Trade;
+import model.game_stuff.enums.Items;
+import view.game_system.messages.TradeMessages;
 
-public class TradeController extends KingdomController{
-    public static UserMessages trade(String resourceType, int resourceAmount, int price, String message){
-        return null;
-    }
+import java.util.HashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-    public static UserMessages tradeList(){
-        return null;
+public class TradeController extends ControllerUtils {
+    public static TradeMessages addRequest() {
+        if(inputs.get("give") == null || inputs.get("get") == null) {
+            return TradeMessages.INVALID_COMMAND;
+        }
+        if(inputs.get("player") == null) {
+            return TradeMessages.CHOOSE_YOUR_AUDIENCE;
+        }
+        Player audience = currentGame.getPlayerByNickname(inputs.get("player"));
+        if(audience == null) {
+            return TradeMessages.NO_SUCH_PLAYER;
+        }
+        if(audience.equals(currentPlayer)) {
+            return TradeMessages.YOU_CAN_NOT_TRADE_WITH_YOURSELF;
+        }
+        HashMap<String, Integer> stringResourcesToGet = takeItemsOutFromString(inputs.get("get"));
+        HashMap<String, Integer> stringResourcesToGive = takeItemsOutFromString(inputs.get("give"));
+        if(stringResourcesToGive.isEmpty() && stringResourcesToGet.isEmpty()) {
+            return TradeMessages.INVALID_TRADE;
+        }
+        HashMap<Items, Integer> resourcesToGet = new HashMap<>();
+        HashMap<Items, Integer> resourcesToGive = new HashMap<>();
+        if(stringHashmapToItemHashmapFailed(stringResourcesToGet, resourcesToGet)) {
+            return TradeMessages.INVALID_RESOURCE_TYPE;
+        }
+        if(stringHashmapToItemHashmapFailed(stringResourcesToGive, resourcesToGive)) {
+            return TradeMessages.INVALID_RESOURCE_TYPE;
+        }
+        Trade trade = new Trade(currentPlayer,audience);
+        trade.setProvidedItems(resourcesToGet);
+        trade.setAskedItems(resourcesToGive);
+        if(inputs.get("message") != null) {
+            trade.setOwnersMessage(inputs.get("message"));
+        }
+        currentPlayer.addTrade(trade);
+        audience.addTrade(trade);
+        return TradeMessages.SUCCESS;
     }
-    public static UserMessages tradeAccept(int id){
-        return null;
+    private static boolean stringHashmapToItemHashmapFailed(HashMap<String, Integer> stringResources, HashMap<Items, Integer> resources) {
+        Items item;
+        for (String string : stringResources.keySet()) {
+            if((item = Items.getItemByName(string)) == null) {
+                TradeMessages.INVALID_RESOURCE_TYPE.setInput(string);
+                return false;
+            }
+            resources.put(item, stringResources.get(string));
+        }
+        return true;
     }
+    public static HashMap<String, Integer> takeItemsOutFromString(String input) {
+        HashMap<String, Integer> output = new HashMap<>();
+        Matcher matcher = Pattern.compile(input.trim()).matcher("-t\\s+(?<resourceType>I)\\s+-a\\s+(?<resourceAmount>\\d+)");
+        String resource;
+        int amount;
+        while(matcher.find()) {
+            resource = matcher.group("resourceType").trim();
+            if(resource.matches("\"[^\"]*\"")) {
+                resource = resource.replaceAll("\"","");
+            }
+            amount = Integer.parseInt(matcher.group("resourceAmount"));
+            output.put(resource, amount);
+        }
+        return output;
+    }
+    /////////////////////////////////////////////////
 
-    public static UserMessages tradeHistory(){
-        return null;
-    }
 }

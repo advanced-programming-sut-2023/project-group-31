@@ -1,10 +1,11 @@
 package controller.game_menu;
 
+import controller.ControllerUtils;
 import model.game_stuff.Troop;
 import model.game_stuff.types.Direction;
 import view.user_system.messages.UserMessages;
 
-public class UnitController extends KingdomController {
+public class UnitController extends ControllerUtils {
 
     public static UserMessages createUnit(int x, int y, String type){
         return null;

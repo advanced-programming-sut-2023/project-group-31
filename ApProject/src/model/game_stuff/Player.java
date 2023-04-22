@@ -20,6 +20,7 @@ public class Player {
     private int popularityGrowthRate;
     private int fearRate;
     private int efficiency;
+    private ArrayList<Trade> tradeHistory;
 
     {
         gold = 0;
@@ -34,6 +35,7 @@ public class Player {
         stockpilePositions = new ArrayList<>();
         granaryPositions = new ArrayList<>();
         weaponryPositions = new ArrayList<>();
+        tradeHistory = new ArrayList<>();
     }
 
     public Player(User owner, Colors color) {
@@ -159,6 +161,9 @@ public class Player {
 
     public void setLordsHouse(Block lordsHouse) {
         LordsHouse = lordsHouse;
+    }
+    public void addTrade(Trade trade) {
+        tradeHistory.add(trade);
     }
 
     public String getName() {
