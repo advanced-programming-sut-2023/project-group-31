@@ -19,11 +19,6 @@ public class Block {
         this.type = type;
     }
 
-    public boolean isEmpty() {
-        if(building == null) return true;
-        return false;
-    }
-
     public void addPerson(Person person) {
         people.add(person);
     }
@@ -51,6 +46,7 @@ public class Block {
     public void setBuilding(Building building) {
         this.building = building;
     }
-
-
+    public boolean isEmpty() {
+        return (building == null && people.isEmpty());
+    }
 }

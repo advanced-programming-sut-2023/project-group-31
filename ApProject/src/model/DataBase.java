@@ -4,7 +4,6 @@ import java.util.*;
 
 public class DataBase {
 
-
     private static ArrayList<String> slogans;
     private static HashSet<String> recoveryQuestions;
     private static ArrayList<User> users;
@@ -23,7 +22,6 @@ public class DataBase {
         ));
 
         users = new ArrayList<>();
-
     }
 
     static class CompareByHighScore implements Comparator<User> {

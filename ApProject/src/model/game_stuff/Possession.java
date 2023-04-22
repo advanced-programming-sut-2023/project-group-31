@@ -1,4 +1,4 @@
-package controller.game_menu;
+package model.game_stuff;
 
 import model.game_stuff.enums.Items;
 

@@ -1,6 +1,5 @@
 package model.game_stuff;
 
-import controller.game_menu.Possession;
 import model.User;
 import model.game_stuff.enums.Items;
 
