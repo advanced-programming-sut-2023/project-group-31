@@ -11,7 +11,7 @@ public enum TradeMessages {
     CHOOSE_YOUR_AUDIENCE("choose your audience!"),
     NO_SUCH_PLAYER("no such player in the game!"),
     NO_SUCH_TRADE_ID("no such trade id found!"),
-    ;
+    OTHER_ONE_RESOURCE_SHORTAGE("the other side doesn't have enough resources!");
     private String txt;
     private String input;
 

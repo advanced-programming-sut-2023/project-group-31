@@ -114,7 +114,21 @@ public class TradeController extends ControllerUtils {
         if(trade == null) {
             return TradeMessages.NO_SUCH_TRADE_ID;
         }
-        //TODO:
-        return null;
+        for (Items item : trade.getAskedItems().keySet()) {
+            if(currentPlayer.getNumberOfAnItem(item) < trade.getAskedItems().get(item)) {
+                TradeMessages.NOT_ENOUGH_RESOURCE.setInput(item.getName());
+                return TradeMessages.NOT_ENOUGH_RESOURCE;
+            }
+        }
+        for (Items item : trade.getProvidedItems().keySet()) {
+            if(currentPlayer.getNumberOfAnItem(item) < trade.getProvidedItems().get(item)) {
+                return TradeMessages.OTHER_ONE_RESOURCE_SHORTAGE;
+            }
+        }
+        if(inputs.get("message") != null) {
+            trade.setOthersMessage(inputs.get("message"));
+        }
+        //TODO: hazf kardan item ha az storage ha !!!!!
+        return TradeMessages.SUCCESS;
     }
 }
