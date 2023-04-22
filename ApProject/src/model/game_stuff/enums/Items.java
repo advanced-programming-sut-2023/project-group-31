@@ -11,8 +11,8 @@ public enum Items {
     FLOUR("flour", ItemTypes.RAW_MATERIAL),
 
     WOOD("wood", ItemTypes.RAW_MATERIAL),
-    STONE("wood", ItemTypes.RAW_MATERIAL),
-    IRON("wood", ItemTypes.RAW_MATERIAL),
+    STONE("stone", ItemTypes.RAW_MATERIAL),
+    IRON("iron", ItemTypes.RAW_MATERIAL),
     PITCH("pitch", ItemTypes.RAW_MATERIAL),
 
     BOW("bow", ItemTypes.WEAPON),

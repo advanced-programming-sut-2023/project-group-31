@@ -1,21 +1,22 @@
 package model.game_stuff;
 
+import controller.game_menu.Possession;
 import model.User;
 import model.game_stuff.enums.Items;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Player {
     private final User owner;
     private String name;
+    private Possession possession;
     private final ArrayList<Block> stockpilePositions;
     private final ArrayList<Block> granaryPositions;
     private final ArrayList<Block> weaponryPositions;
     private Block LordsHouse;
     private Colors color;
-    private int gold;
-    private int numberOfPeasants;
+    //private int gold;
+    //private int numberOfPeasants;
     private int population;
     private int populationGrowthRate;
     private int popularity;
@@ -25,8 +26,9 @@ public class Player {
     private ArrayList<Trade> tradeHistory;
 
     {
-        gold = 0;
-        numberOfPeasants = 8;
+        possession = new Possession();
+        //gold = 0;
+        //numberOfPeasants = 8;
         population = 8;
         populationGrowthRate = 2; //TODO: sakhtan e formul
         popularity = 100;
@@ -70,7 +72,7 @@ public class Player {
         return weaponryPositions;
     }
 
-    public int getGold() {
+    /*public int getGold() {
         return gold;
     }
 
@@ -84,7 +86,7 @@ public class Player {
 
     public void setNumberOfPeasants(int numberOfPeasants) {
         this.numberOfPeasants = numberOfPeasants;
-    }
+    }*/
 
     public int getPopulation() {
         return population;
@@ -174,5 +176,8 @@ public class Player {
 
     public String getName() {
         return name;
+    }
+    public int getNumberOfAnItem(Items item) {
+        return possession.getItem(item);
     }
 }
