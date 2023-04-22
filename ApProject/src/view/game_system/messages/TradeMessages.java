@@ -1,4 +1,5 @@
 package view.game_system.messages;
 
-public class TradeMessages {
+public enum TradeMessages {
+    BACK;
 }

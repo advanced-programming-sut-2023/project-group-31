@@ -6,12 +6,15 @@ import java.util.ArrayList;
 
 public class Player {
     private final User owner;
+    private  Game game;
     private final ArrayList<Block> stockpilePositions;
     private final ArrayList<Block> granaryPositions;
     private final ArrayList<Block> weaponryPositions;
     private Block LordsHouse;
     private Colors color;
     private int gold;
+    private ArrayList<Trade> toShowInHistoryOfTrades;
+    private ArrayList<Trade> acceptedDonation;
     private int numberOfPeasants;
     private int population;
     private int populationGrowthRate;
@@ -33,11 +36,32 @@ public class Player {
         stockpilePositions = new ArrayList<>();
         granaryPositions = new ArrayList<>();
         weaponryPositions = new ArrayList<>();
+        acceptedDonation=new ArrayList<>();
+        toShowInHistoryOfTrades=new ArrayList<>();
     }
 
     public Player(User owner, Colors color) {
         this.owner = owner;
         this.color = color;
+    }
+
+    public ArrayList<Trade> getToShowInHistoryOfTrades() {
+        return toShowInHistoryOfTrades;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
+    }
+
+    public Game getGame() {
+        return game;
+    }
+     public void addToAcceptedTrades(Trade trade){
+        acceptedDonation.add(trade);
+     }
+
+    public ArrayList<Trade> getAcceptedDonation() {
+        return acceptedDonation;
     }
 
     public User getOwner() {
