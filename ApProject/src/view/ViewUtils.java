@@ -1,19 +1,17 @@
 package view;
 
+import model.User;
 import view.user_system.commands.InputFormats;
+import view.user_system.messages.UserMessages;
 
 import java.util.HashMap;
+import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ViewUtils {
-
-    public static boolean isFormatCurrent(String input, InputFormats inputFormat) {
-        if (inputFormat.getFormat() == null) {
-            return true;
-        }
-        return input.matches(inputFormat.getFormat());
-    }
+    protected static Scanner scanner;
+    protected static UserMessages result;
 
     public static HashMap<String, String> putInHashmap(Matcher matcher, String regex) {
         // ^\\< baray e ine ke group hay e dakheli ro nagire
@@ -32,6 +30,7 @@ public class ViewUtils {
             inputs.put(groupName, matcher.group(groupName).trim().replaceFirst("\"","").replaceFirst("(?s)"+"\""+"(?!.*?"+"\""+")", ""));
 
         }
+        inputs.put("command",regex.substring(0,regex.indexOf("(")));
         return inputs;
     }
 

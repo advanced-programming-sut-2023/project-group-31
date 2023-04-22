@@ -2,21 +2,41 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5cc986fd-8e94-460a-a526-6315ae3dfd93" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/ApProject/src/controller/user_menu/LoginController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ApProject/src/controller/user_menu/ProfileController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ApProject/src/controller/user_menu/RegisterController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ApProject/src/controller/ControllerUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/ApProject/src/controller/ControllerUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ApProject/src/controller/LoginController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ApProject/src/controller/ProfileController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ApProject/src/controller/RegisterController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ApProject/src/controller/game_menu/TradeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ApProject/src/controller/game_menu/TradeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ApProject/src/model/game_stuff/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/ApProject/src/model/game_stuff/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ApProject/src/model/game_stuff/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/ApProject/src/model/game_stuff/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ApProject/src/model/game_stuff/Trade.java" beforeDir="false" afterPath="$PROJECT_DIR$/ApProject/src/model/game_stuff/Trade.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ApProject/src/view/game_system/TradeMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/ApProject/src/view/game_system/TradeMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ApProject/src/view/game_system/commands/MarketCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/ApProject/src/view/game_system/commands/MarketCommands.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ApProject/src/view/game_system/commands/StartGameCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/ApProject/src/view/game_system/commands/StartGameCommands.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ApProject/src/view/game_system/commands/TradeCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/ApProject/src/view/game_system/commands/TradeCommands.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ApProject/src/view/game_system/messages/MarketMessages.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ApProject/src/view/game_system/messages/TradeMessages.java" beforeDir="false" afterPath="$PROJECT_DIR$/ApProject/src/view/game_system/messages/TradeMessages.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -26,14 +46,10 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/sharif/AP/project/ApProject"
-  }
-}]]></component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="D:/telegram" />
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -43,6 +59,9 @@
       <option name="presentableId" value="Default" />
       <updated>1681482713908</updated>
       <workItem from="1681482715530" duration="18000" />
+      <workItem from="1682016708894" duration="97000" />
+      <workItem from="1682023825087" duration="9027000" />
+      <workItem from="1682113722960" duration="1162000" />
     </task>
     <servers />
   </component>

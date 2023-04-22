@@ -5,6 +5,7 @@ import model.game_stuff.enums.Items;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 
 public class Trade {
     private static int idCounter = 1001;
