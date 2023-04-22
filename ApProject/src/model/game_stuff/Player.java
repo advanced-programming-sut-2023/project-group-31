@@ -1,8 +1,10 @@
 package model.game_stuff;
 
 import model.User;
+import model.game_stuff.enums.Items;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Player {
     private final User owner;
@@ -164,6 +166,10 @@ public class Player {
     }
     public void addTrade(Trade trade) {
         tradeHistory.add(trade);
+    }
+
+    public ArrayList<Trade> getTradeHistory() {
+        return tradeHistory;
     }
 
     public String getName() {

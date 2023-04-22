@@ -1,5 +1,6 @@
 package model.game_stuff;
 
+import controller.game_menu.TradeController;
 import model.game_stuff.enums.Items;
 
 import java.util.ArrayList;
@@ -95,6 +96,10 @@ public class Trade {
         isWatched = watched;
     }
 
+    public boolean isWatched() {
+        return isWatched;
+    }
+
     public Player getAskedPlayer() {
         return askedPlayer;
     }
@@ -105,6 +110,18 @@ public class Trade {
 
     public void setAskedItems(HashMap<Items, Integer> askedItems) {
         this.askedItems = askedItems;
+    }
+
+    public static ArrayList<Trade> getLiveTrades() {
+        return liveTrades;
+    }
+    public static Trade getTradeById(int id) {
+        for (Trade liveTrade : liveTrades) {
+            if(liveTrade.id == id) {
+                return liveTrade;
+            }
+        }
+        return null;
     }
 
     @Override

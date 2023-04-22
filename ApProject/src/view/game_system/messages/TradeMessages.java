@@ -10,6 +10,7 @@ public enum TradeMessages {
     YOU_CAN_NOT_TRADE_WITH_YOURSELF("can't trade with yourself!"),
     CHOOSE_YOUR_AUDIENCE("choose your audience!"),
     NO_SUCH_PLAYER("no such player in the game!"),
+    NO_SUCH_TRADE_ID("no such trade id found!"),
     ;
     private String txt;
     private String input;
@@ -32,7 +33,7 @@ public enum TradeMessages {
     }
 
     public String getTxt() {
-        return txt;
+        return txt + input;
     }
 
     public static TradeMessages getMessageByTxt(String txt) {

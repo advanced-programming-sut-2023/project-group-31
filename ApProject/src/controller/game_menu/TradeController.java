@@ -74,6 +74,47 @@ public class TradeController extends ControllerUtils {
         }
         return output;
     }
-    /////////////////////////////////////////////////
 
+    public static String showMyTradeHistory() {
+        /*if(currentPlayer.getTradeHistory().isEmpty()) {
+            return "You have not any trade yet!";
+        }*/
+        String output = "TRADE HISTORY:";
+        for (Trade trade : currentPlayer.getTradeHistory()) {
+            output += "\n" + trade;
+        }
+        return output;
+    }
+
+    public static String showMyTradeList() {
+        String output = "TRADES:";
+        for (Trade liveTrade : Trade.getLiveTrades()) {
+            if(liveTrade.getAskedPlayer().equals(currentPlayer)) {
+                output += "\n" + liveTrade;
+            }
+        }
+        return output;
+    }
+
+    public static String showNewTrades() {
+        String output = "NEW TRADES:";
+        for (Trade liveTrade : Trade.getLiveTrades()) {
+            if(liveTrade.getAskedPlayer().equals(currentPlayer) && !liveTrade.isWatched()) {
+                output += "\n" + liveTrade;
+            }
+        }
+        return output;
+    }
+
+    public static TradeMessages acceptRequest() {
+        if(inputs.get("id") == null) {
+            return TradeMessages.INVALID_COMMAND;
+        }
+        Trade trade = Trade.getTradeById(Integer.parseInt(inputs.get("id")));
+        if(trade == null) {
+            return TradeMessages.NO_SUCH_TRADE_ID;
+        }
+        //TODO:
+        return null;
+    }
 }
