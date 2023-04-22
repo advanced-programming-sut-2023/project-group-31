@@ -37,15 +37,26 @@ public abstract class ControllerUtils {
         return input.matches(inputFormat.getFormat());
     }
 
-    protected static UserMessages checkFormatErrors(HashMap<String, String> inputs) {
 
+    protected static UserMessages checkEmptyError(HashMap<String,String> inputs){
         for (String groupName : inputs.keySet()) {
             if (inputs.get(groupName) == null && (InputFormats.getInputFormat(groupName).isCompulsory())) {
                 UserMessages.NOT_ENOUGH_MESSAGES.setTxt(groupName+"can't be null!");
                 return UserMessages.NOT_ENOUGH_MESSAGES;
             }if(inputs.get(groupName).equals("")){
                 return UserMessages.NOT_ENOUGH_MESSAGES;
-            }else if (inputs.get(groupName) != null && !isFormatCurrent(inputs.get(groupName), InputFormats.getInputFormat(groupName))) {
+            }
+        }
+        return null;
+    }
+
+    protected static UserMessages checkFormatErrors(HashMap<String, String> inputs) {
+        UserMessages result;
+        if((result=checkEmptyError(inputs))!=null){
+            return result;
+        }
+        for (String groupName : inputs.keySet()) {
+            if (inputs.get(groupName) != null && !isFormatCurrent(inputs.get(groupName), InputFormats.getInputFormat(groupName))) {
                 UserMessages.INVALID_FORMAT.setTxt("Inavlid"+groupName+"format!");
                 return UserMessages.INVALID_FORMAT;
             }

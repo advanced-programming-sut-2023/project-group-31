@@ -22,6 +22,7 @@ public class ViewUtils {
             inputs.put(groupName, matcher.group(groupName).replaceFirst("\"","").replaceFirst("(?s)"+"\""+"(?!.*?"+"\""+")", ""));
 
         }
+        inputs.put("command",regex.substring(0,regex.indexOf("(")));
         return inputs;
     }
 

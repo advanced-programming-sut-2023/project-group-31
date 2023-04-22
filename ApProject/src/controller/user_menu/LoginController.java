@@ -9,6 +9,11 @@ public class LoginController extends ControllerUtils {
 
     //username password
     public static UserMessages loginUser(){
+        UserMessages message;
+        if((message=checkEmptyError(inputs))!=null){
+            return UserMessages.NOT_ENOUGH_MESSAGES;
+        }
+
         if(!User.doesUserExit(inputs.get("username"))){
             UserMessages.USER_NOT_EXITS.setTxt("user "+ inputs.get("username")+" does not exits!");
             return UserMessages.USER_NOT_EXITS;
@@ -19,10 +24,13 @@ public class LoginController extends ControllerUtils {
         }
 
         if(inputs.get("stayLoggedIn")!=null){
-            ;
+            //TODO
         }
 
-        return null;
+        currentUser=User.getUserByUsername(inputs.get("username"));
+
+
+        return UserMessages.SUCCESS;
     }
 
     public static UserMessages forgotMyPassword(String username){

@@ -4,8 +4,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public enum LoginCommands{
-    LOGIN("user login -u (?<username>IN) -p (?<password>IN)(?<stayLoggedIn> --stay-logged-in)?")
-    ;
+    LOGIN("user login(( -u (?<username>IN))|( -p (?<password>IN))|(?<stayLoggedIn> --stay-logged-in))+"),
+    ENTER_PASSWORD("-p (?<password>IN)");
     private String regex;
 
     LoginCommands(String regex) {

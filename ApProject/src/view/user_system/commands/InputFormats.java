@@ -24,7 +24,11 @@ public enum InputFormats {
 
     }
 
-
+    InputFormats(String name, String format) {
+        this.name = name;
+        this.format = format;
+        this.isCompulsory=true;
+    }
 
 
     public String getFormat() {
