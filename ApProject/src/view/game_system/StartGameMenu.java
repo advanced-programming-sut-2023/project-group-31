@@ -3,7 +3,6 @@ package view.game_system;
 import controller.ControllerUtils;
 import controller.game_menu.StartGameController;
 import view.game_system.commands.StartGameCommands;
-import view.game_system.commands.TradeCommands;
 import view.game_system.messages.StartGameMessages;
 import view.user_system.messages.MenuSwitcherMessages;
 import view.ViewUtils;
@@ -30,9 +29,39 @@ public class StartGameMenu {
             } else if ((matcher = StartGameCommands.getMatcher(command, StartGameCommands.SET_A_BLOCK_TEXTURE)) != null) {
                 setABlocksTexture(matcher);
             } else if ((matcher = StartGameCommands.getMatcher(command, StartGameCommands.SET_TEXTURE)) != null) {
-
+                setTextureForARectangle(matcher);
+            } else if ((matcher = StartGameCommands.getMatcher(command, StartGameCommands.SHOW_DETAILS)) != null) {
+                showDetails(matcher);
             }
         }
+    }
+
+    private static void showDetails(Matcher matcher) {
+        ControllerUtils.setInputs(ViewUtils.putInHashmap(matcher, StartGameCommands.SET_A_BLOCK_TEXTURE.getRegex()));
+        StartGameMessages message = StartGameController.showDetails();
+        if(message == StartGameMessages.SUCCESS) {
+            System.out.println(StartGameMessages.SUCCESS.getTxt());
+            return;
+        }
+        if(message == StartGameMessages.INVALID_COMMAND) {
+            System.out.println("invalid command!");
+            return;
+        }
+        System.out.println("show details failed: " + message.getTxt());
+    }
+
+    private static void setTextureForARectangle(Matcher matcher) {
+        ControllerUtils.setInputs(ViewUtils.putInHashmap(matcher, StartGameCommands.SET_A_BLOCK_TEXTURE.getRegex()));
+        StartGameMessages message = StartGameController.setARectanglesTexture();
+        if(message == StartGameMessages.SUCCESS) {
+            System.out.println("set texture successful!");
+            return;
+        }
+        if(message == StartGameMessages.INVALID_COMMAND) {
+            System.out.println("invalid command!");
+            return;
+        }
+        System.out.println("set texture for rectangle failed: " + message.getTxt());
     }
 
     private static void setABlocksTexture(Matcher matcher) {
@@ -42,7 +71,11 @@ public class StartGameMenu {
             System.out.println("set texture successful!");
             return;
         }
-        System.out.println(message.getTxt());
+        if(message == StartGameMessages.INVALID_COMMAND) {
+            System.out.println("invalid command!");
+            return;
+        }
+        System.out.println("set texture for a block failed: " + message.getTxt());
     }
 
     private static void chooseMap(Matcher matcher) {
@@ -52,7 +85,11 @@ public class StartGameMenu {
             System.out.println("choose map successful!");
             return;
         }
-        System.out.println(message.getTxt());
+        if(message == StartGameMessages.INVALID_COMMAND) {
+            System.out.println("invalid command!");
+            return;
+        }
+        System.out.println("choose map failed: " + message.getTxt());
     }
 
     private void addPlayer(Matcher matcher) {

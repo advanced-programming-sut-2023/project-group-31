@@ -40,6 +40,10 @@ public class TradeMenu extends ViewUtils {
             System.out.println("accept request successful!");
             return;
         }
+        if(message == TradeMessages.INVALID_COMMAND) {
+            System.out.println("invalid command!");
+            return;
+        }
         System.out.println("accept request failed: " + message.getTxt());
     }
 
@@ -48,6 +52,10 @@ public class TradeMenu extends ViewUtils {
         TradeMessages message = TradeController.addRequest();
         if(message == TradeMessages.SUCCESS) {
             System.out.println("add trade successful!");
+            return;
+        }
+        if(message == TradeMessages.INVALID_COMMAND) {
+            System.out.println("invalid command!");
             return;
         }
         System.out.println("add trade failed: " + message.getTxt());
