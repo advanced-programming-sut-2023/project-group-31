@@ -4,6 +4,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public enum StartGameCommands {
+    EXIT("exit"),
+    SHOW_MAPS("show maps"),
+    SHOW_PLAYERS("show players"),
     CHOOSE_MAP("select map -name (?<name>I)"),
     SHOW_MAP("show map (( -x (?<x>\\d+) )|( -y (?<y>\\d+) ))+"),
     SHOW_DETAILS("show details (( -x (?<x>\\d+) )|( -y (?<y>\\d+) ))+"),
@@ -12,7 +15,8 @@ public enum StartGameCommands {
     SET_TEXTURE("set texture (( -x1 (?<x>\\d+) )|( -y1 (?<y>\\d+) )|( -x2 (?<x>\\d+) )|( -y2 (?<y>\\d+) )|( -type (?<type>I))+"),
     CLEAR_BLOCK("clear block (( -x (?<x>\\d+) )|( -y (?<y>\\d+) ))+"),
     DROP_TREE("drop tree (( -x (?<x>\\d+) )|( -y (?<y>\\d+) ))+"),
-    DROP_LORD_HOUSE("drop lord house (( -x (?<x>\\d+) )|( -y (?<y>\\d+) ))+")
+    DROP_LORD_HOUSE("drop lord house (( -x (?<x>\\d+) )|( -y (?<y>\\d+) ))+"),
+    SHOW_CHOSEN_PLAYERS("show chosen players"),
     ;
     private String regex;
     StartGameCommands(String regex) {

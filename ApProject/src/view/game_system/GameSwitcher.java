@@ -2,21 +2,23 @@ package view.game_system;
 
 
 import view.game_system.messages.GameSwitcherMessages;
+import view.user_system.MenuSwitcher;
+import view.user_system.commands.MenuSwitcherCommands;
+import view.user_system.messages.MenuSwitcherMessages;
 
 import java.util.Scanner;
 
 public class GameSwitcher {
-    public static void run() {
+    public static MenuSwitcherMessages run() {
         Scanner scanner = new Scanner(System.in);
         GameSwitcherMessages command = GameSwitcherMessages.GAME;
         while (true) {
             switch (command) {
                 case GAME:
-                    command = StartGameMenu.run(scanner);
+
                     break;
                 case BACK:
-                    command=StartGameMenu.run(scanner);
-                    break;
+                    return MenuSwitcherMessages.MAIN;
                 case MARKET:
                     command=MarketMenu.run(scanner);
                     break;

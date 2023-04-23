@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Kingdom {
+    //HAVASAM NABOOD KINGDOM DARIM RAFTAM JASH PLAYER SAKHTAM!
     private int popularity;
     private int fear;
     private HashMap<Food, Double> foods;

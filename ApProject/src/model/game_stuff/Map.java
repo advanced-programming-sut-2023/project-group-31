@@ -13,6 +13,7 @@ public class Map {
     //TODO: fire va stockpile ham payin va chapesh miran;
     private boolean saved;
     private ArrayList<ArrayList<Block>> blocks;
+    private String description;
 
     {
         blocks = new ArrayList<>();
@@ -48,5 +49,25 @@ public class Map {
 
     public void setSaved(boolean saved) {
         this.saved = saved;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public static ArrayList<Map> getMaps() {
+        return maps;
+    }
+
+    @Override
+    public String toString() {
+        return "Map " + name +
+                "\t\tlength=" + length +
+                ", width=" + width +
+                "\n\t" + description;
     }
 }

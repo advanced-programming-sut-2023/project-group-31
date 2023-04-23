@@ -136,6 +136,10 @@ public class User {
         return 0;
     }
 
-
-
+    @Override
+    public String toString() {
+        return "User" + nickname +
+                ", highScore=" + highScore +
+                ", slogan:'" + slogan;
+    }
 }
