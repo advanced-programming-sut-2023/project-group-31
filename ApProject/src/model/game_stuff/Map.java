@@ -9,7 +9,7 @@ public class Map {
     private String name;
     private int length;
     private int width;
-    private ArrayList<Building> lordHouses;
+    private ArrayList<Block> lordHouses;
     //TODO: fire va stockpile ham payin va chapesh miran;
     private boolean saved;
     private ArrayList<ArrayList<Block>> blocks;
@@ -27,9 +27,19 @@ public class Map {
         for(int i = 0; i < width; i++) {
             blocks.add(new ArrayList<>());
             for(int j = 0; j < length; j++) {
-                blocks.get(i).add(new Block(Textures.GROUND));
+                blocks.get(i).add(new Block(Textures.GROUND, j, i));
             }
         }
+    }
+
+    public ArrayList<Block> getLordHouses() {
+        return lordHouses;
+    }
+    public void addLordHouse(Block block) {
+        lordHouses.add(block);
+    }
+    public void removeLordHouse(Block block) {
+        lordHouses.remove(block);
     }
 
     public String getName() {
@@ -61,6 +71,14 @@ public class Map {
 
     public static ArrayList<Map> getMaps() {
         return maps;
+    }
+
+    public int getLength() {
+        return length;
+    }
+
+    public int getWidth() {
+        return width;
     }
 
     @Override

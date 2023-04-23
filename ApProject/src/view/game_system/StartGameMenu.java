@@ -1,10 +1,12 @@
 package view.game_system;
 
+import controller.ControllerUtils;
 import controller.game_menu.StartGameController;
 import view.game_system.commands.StartGameCommands;
-import view.game_system.messages.GameSwitcherMessages;
+import view.game_system.commands.TradeCommands;
 import view.game_system.messages.StartGameMessages;
 import view.user_system.messages.MenuSwitcherMessages;
+import view.ViewUtils;
 
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -25,14 +27,22 @@ public class StartGameMenu {
                 System.out.println(StartGameController.showPlayersInTheGame());
             } else if ((matcher = StartGameCommands.getMatcher(command, StartGameCommands.CHOOSE_MAP)) != null) {
                 chooseMap(matcher);
-            } else if (StartGameCommands.getMatcher(command, StartGameCommands.SET_A_BLOCK_TEXTURE) != null) {
+            } else if ((matcher = StartGameCommands.getMatcher(command, StartGameCommands.SET_A_BLOCK_TEXTURE)) != null) {
                 setABlocksTexture(matcher);
+            } else if ((matcher = StartGameCommands.getMatcher(command, StartGameCommands.SET_TEXTURE)) != null) {
+
             }
         }
     }
 
     private static void setABlocksTexture(Matcher matcher) {
-        //TODO
+        ControllerUtils.setInputs(ViewUtils.putInHashmap(matcher, StartGameCommands.SET_A_BLOCK_TEXTURE.getRegex()));
+        StartGameMessages message = StartGameController.setABlockTexture();
+        if(message == StartGameMessages.SUCCESS) {
+            System.out.println("set texture successful!");
+            return;
+        }
+        System.out.println(message.getTxt());
     }
 
     private static void chooseMap(Matcher matcher) {
@@ -40,6 +50,7 @@ public class StartGameMenu {
         StartGameMessages message = StartGameController.chooseMap(name);
         if(message == StartGameMessages.SUCCESS) {
             System.out.println("choose map successful!");
+            return;
         }
         System.out.println(message.getTxt());
     }

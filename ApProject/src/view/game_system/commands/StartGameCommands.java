@@ -30,6 +30,7 @@ public enum StartGameCommands {
     private String editRegex(String regex) {
         regex = regex.replaceAll("[\\s]+", "[\\s]+");
         regex = regex.replaceAll("I", "([\\S]*)|(\"[^*]*\")");
+        regex = regex.replaceAll("\\d+", "-?\\d+");
         return regex;
     }
 
