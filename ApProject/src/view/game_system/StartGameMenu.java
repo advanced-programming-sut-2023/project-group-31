@@ -32,8 +32,24 @@ public class StartGameMenu {
                 setTextureForARectangle(matcher);
             } else if ((matcher = StartGameCommands.getMatcher(command, StartGameCommands.SHOW_DETAILS)) != null) {
                 showDetails(matcher);
+            } else if ((matcher = StartGameCommands.getMatcher(command, StartGameCommands.DROP_LORD_HOUSE)) != null) {
+                dropLordHouse(matcher);
             }
         }
+    }
+
+    private static void dropLordHouse(Matcher matcher) {
+        ControllerUtils.setInputs(ViewUtils.putInHashmap(matcher, StartGameCommands.DROP_LORD_HOUSE.getRegex()));
+        StartGameMessages message = StartGameController.dropLordHouse();
+        if(message == StartGameMessages.SUCCESS) {
+            System.out.println("drop lord house successful!");
+            return;
+        }
+        if(message == StartGameMessages.INVALID_COMMAND) {
+            System.out.println("invalid command!");
+            return;
+        }
+        System.out.println("drop lord house failed: " + message.getTxt());
     }
 
     private static void showDetails(Matcher matcher) {
@@ -112,10 +128,6 @@ public class StartGameMenu {
     }
 
     private void dropTree(Matcher matcher) {
-
-    }
-
-    private void dropLordHouse(Matcher matcher) {
 
     }
 

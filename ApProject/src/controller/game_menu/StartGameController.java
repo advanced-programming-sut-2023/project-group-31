@@ -2,8 +2,12 @@ package controller.game_menu;
 
 import controller.ControllerUtils;
 import model.User;
+import model.game_stuff.Building;
 import model.game_stuff.Colors;
 import model.game_stuff.Map;
+import model.game_stuff.buildings.FoodStockpile;
+import model.game_stuff.buildings.LordHouse;
+import model.game_stuff.buildings.Stockpile;
 import model.game_stuff.enums.Textures;
 import view.game_system.messages.StartGameMessages;
 import view.user_system.messages.MenuSwitcherMessages;
@@ -131,6 +135,26 @@ public class StartGameController extends ControllerUtils {
             return StartGameMessages.COORDINATE_OUT_OF_BOUND;
         }
         StartGameMessages.SUCCESS.setTxt(chosenMap.getBlock(x, y).toString());
+        return StartGameMessages.SUCCESS;
+    }
+
+    public static StartGameMessages dropLordHouse() {
+        if(!inputs.containsKey("x") || !inputs.containsKey("y")) {
+            return StartGameMessages.INVALID_COMMAND;
+        }
+        int x = Integer.parseInt(inputs.get("x").trim());
+        int y = Integer.parseInt(inputs.get("y").trim());
+        if(x > chosenMap.getLength() || x < 2 || y > chosenMap.getWidth() - 1 || y < 1) {
+            return StartGameMessages.COORDINATE_OUT_OF_BOUND;
+        }
+        if(!chosenMap.getBlock(x, y).isEmpty() || !chosenMap.getBlock(x - 1, y).isEmpty() || !chosenMap.getBlock(x, y + 1).isEmpty()) {
+            return StartGameMessages.BLOCK_IS_NOT_EMPTY;
+            // eslah
+        }
+        chosenMap.getBlock(x, y).setBuilding(new LordHouse());
+        /// niaz be eslah bad az building
+        chosenMap.getBlock(x - 1, y).setBuilding(new LordHouse());
+        chosenMap.getBlock(x, y + 1).setBuilding(new Stockpile());
         return StartGameMessages.SUCCESS;
     }
 }
