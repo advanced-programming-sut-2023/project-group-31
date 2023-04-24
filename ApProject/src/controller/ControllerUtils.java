@@ -9,7 +9,7 @@ import java.util.HashMap;
 public abstract class ControllerUtils {
 
     protected static HashMap<String,String> inputs;
-    public static User currentUser;
+    public static User currentUser=null;
     public static UserMessages captcha(){
         return null;
     }

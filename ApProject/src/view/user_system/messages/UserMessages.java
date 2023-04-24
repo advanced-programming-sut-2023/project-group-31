@@ -15,7 +15,12 @@ public enum UserMessages {
     RANDOM_PASSWORD(""),
     //TODO: add enums
     USER_NOT_EXITS("user does not exits"),
-    PASSWORD_IS_NOT_CORRECT("your password is not correct.");
+    PASSWORD_IS_NOT_CORRECT("your password is not correct."),
+
+    MenuMessage("login message"),
+    MESSAGES(""),
+    CORRECT_ANSWER("correct answer!") ,
+    WRONG_ANSWER("wrong answer!");
     private String txt;
 
 
@@ -47,5 +52,8 @@ public enum UserMessages {
         return null;
     }
 
-
+    @Override
+    public String toString() {
+        return txt;
+    }
 }

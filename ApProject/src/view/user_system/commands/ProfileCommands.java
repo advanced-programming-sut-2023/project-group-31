@@ -4,15 +4,23 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public enum ProfileCommands {
+    DISPLAY_PROFILE("display profile (?<field>[\\S]*)")
     ;
-    private String regex;
+    private final String regex;
 
     ProfileCommands(String regex) {
-        this.regex = regex;
+        this.regex = CommandsUtils.editRegex(regex);
     }
 
-    public static Matcher getMatcher(String input, ProfileCommands commands){
-        Matcher matcher= Pattern.compile(commands.regex).matcher(input);
-        return matcher;
+    public String getRegex() {
+        return regex;
+    }
+
+    public static Matcher getMatcher(String input, ProfileCommands command){
+        Matcher matcher = Pattern.compile(command.regex).matcher(input);
+        if(matcher.matches()) {
+            return matcher;
+        }
+        return null;
     }
 }

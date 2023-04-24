@@ -5,11 +5,11 @@ import java.util.regex.Pattern;
 
 public enum MainMenuCommands {
 
-    ;
-    private String regex;
+    LOGOUT("user logout"), GOTO_PROFILE_MENU("profile menu");
+    private final String regex;
 
     MainMenuCommands(String regex) {
-        this.regex = regex;
+        this.regex = CommandsUtils.editRegex(regex);
     }
 
     public static Matcher getMatcher(String input, MainMenuCommands command) {

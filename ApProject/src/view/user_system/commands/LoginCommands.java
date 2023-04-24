@@ -6,8 +6,10 @@ import java.util.regex.Pattern;
 public enum LoginCommands{
     LOGIN("user login(( -u (?<username>IN))|( -p (?<password>IN))|(?<stayLoggedIn> --stay-logged-in))+"),
     ENTER_PASSWORD("-p (?<password>IN)"),
-    FORGOT_PASSWORD("forgot my password");
-    private String regex;
+    FORGOT_PASSWORD("forgot my password"),
+    ENTER_NEW_PASSWORD("-p (?<password>IN) (?<passwordConfirmation>IN)"),
+    ;
+    private final String regex;
 
     LoginCommands(String regex) {
         this.regex = CommandsUtils.editRegex(regex);

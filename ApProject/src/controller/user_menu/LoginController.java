@@ -41,4 +41,33 @@ public class LoginController extends ControllerUtils {
         return null;
     }
 
+    public static UserMessages getForgotPasswordQuestion() {
+        UserMessages.MenuMessage.setTxt(currentUser.getPasswordRecoveryQuestion());
+        return UserMessages.MenuMessage;
+    }
+
+    public static UserMessages checkForgotQuestionAnswerCorrectness(String input) {
+        if(input.equals(currentUser.getPasswordRecoveryAnswer())){
+            return UserMessages.CORRECT_ANSWER;
+        }else{
+            return UserMessages.WRONG_ANSWER;
+        }
+    }
+
+    public static UserMessages changePassword() {
+        if(!inputs.get("password").equals(inputs.get("passwordConfirmation"))){
+            return UserMessages.PASSWORD_NOT_MATCH;
+        }
+        currentUser.setPassword(inputs.get("password"));
+        return UserMessages.SUCCESS;
+    }
+
+    public static boolean isUserLoggedIN(){
+        return currentUser!=null;
+    }
+
+    public static void userLogout(){
+        currentUser=null;
+    }
+
 }
