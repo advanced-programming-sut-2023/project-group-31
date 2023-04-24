@@ -2,13 +2,20 @@ package view.user_system.messages;
 
 public enum UserMessages {
     SUCCESS("success!"),
-    INVALID_USERNAME_FORMAT("Invalid username format!"),
-    //what!?
+    INVALID_FORMAT("Invalid format!"),
     NOT_ENOUGH_MESSAGES("Not enough messages!"),
     PASSWORD_NOT_MATCH("Password not match!"),
-    CONFIRM("")
+    SYSTEM_ERROR("System error!"),
+    ANSWER_NOT_MATCH("Answer and answer confirm does not match!"),
+
+    PASSWORD_IS_WEAK("Password is weak: "),
+    USER_EXITS_BEFORE("User have exited before do use want username- "),
+
+    EMAIL_EXITS("Email Exits."),
+    RANDOM_PASSWORD(""),
     //TODO: add enums
-    ;
+    USER_NOT_EXITS("user does not exits"),
+    PASSWORD_IS_NOT_CORRECT("your password is not correct.");
     private String txt;
 
 
@@ -20,10 +27,16 @@ public enum UserMessages {
         this.txt = txt;
     }
 
+    public UserMessages setAndPrintMessage(String txt){
+        this.txt+=txt;
+        return this;
+    }
 
     public String getTxt() {
         return txt;
     }
+
+
 
     public static UserMessages getMessage(String txt){
         for(UserMessages message:values()){
