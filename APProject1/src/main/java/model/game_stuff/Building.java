@@ -1,29 +1,39 @@
 package model.game_stuff;
 
+import java.util.ArrayList;
+
 public abstract class Building {
-    protected double hp;
-    protected String name;
+    protected int hp;
+    protected Government owner;
+    protected ArrayList<Block> blocks;
 
-    public Building() {
+    {
+        blocks = new ArrayList<>();
+    }
+    public Building(Government government) {
+        this.owner = government;
     }
 
-    public void getDamaged(){
-
+    public void setBlocks(ArrayList<Block> blocks) {
+        this.blocks = blocks;
     }
 
-    public double getHp() {
+    public void getDamaged(int damage){
+        this.hp -= damage;
+        if(hp < 0) {
+            terminate();
+        }
+    }
+
+    public int getHp() {
         return hp;
     }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setHp(double hp) {
+    public void setHp(int hp) {
         this.hp = hp;
     }
-
-    public void setName(String name) {
-        this.name = name;
+    public void terminate() {
+        for (Block block : blocks) {
+            block.setBuilding(null);
+        }
     }
 }

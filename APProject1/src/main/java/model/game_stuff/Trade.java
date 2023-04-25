@@ -1,11 +1,9 @@
 package model.game_stuff;
 
-import controller.game_menu.TradeController;
 import model.game_stuff.enums.Items;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 
 public class Trade {
     private static int idCounter = 1001;
@@ -14,8 +12,8 @@ public class Trade {
     private int id; //mahdoodiat tedad e trade darim
     private HashMap<Items, Integer> providedItems;
     private HashMap<Items, Integer> askedItems;
-    private Player owner;
-    private Player askedPlayer;
+    private Government owner;
+    private Government askedGovernment;
     private String ownersMessage;
     private String othersMessage;
     private boolean isWatched;
@@ -32,9 +30,9 @@ public class Trade {
     }
 
     //kami logic
-    public Trade(Player owner, Player askedPlayer) {
+    public Trade(Government owner, Government askedGovernment) {
         this.owner = owner;
-        this.askedPlayer = askedPlayer;
+        this.askedGovernment = askedGovernment;
         this.id = idCounter;
         idCounter++;
         liveTrades.add(this);
@@ -55,7 +53,7 @@ public class Trade {
         return askedItems;
     }
 
-    public Player getOwner() {
+    public Government getOwner() {
         return owner;
     }
 
@@ -101,8 +99,8 @@ public class Trade {
         return isWatched;
     }
 
-    public Player getAskedPlayer() {
-        return askedPlayer;
+    public Government getAskedPlayer() {
+        return askedGovernment;
     }
 
     public void setProvidedItems(HashMap<Items, Integer> providedItems) {
@@ -131,7 +129,7 @@ public class Trade {
                 owner.getName() + " " + owner.getColor().getName() + (ownersMessage == null ? "" : (": " + ownersMessage)) + "\n" +
                 "providedItems=" + providedItems + "\n" +
                 "askedItems=" + askedItems + "\n" +
-                askedPlayer.getName() + " " + askedPlayer.getColor().getName() + (othersMessage == null ? "" : (": " + othersMessage)) + "\n" +
+                askedGovernment.getName() + " " + askedGovernment.getColor().getName() + (othersMessage == null ? "" : (": " + othersMessage)) + "\n" +
                 "}\n";
     }
 }

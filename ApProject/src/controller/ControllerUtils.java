@@ -1,6 +1,8 @@
 package controller;
 
 import model.User;
+import model.game_stuff.Game;
+import model.game_stuff.Government;
 import view.user_system.commands.InputFormats;
 import view.user_system.messages.UserMessages;
 
@@ -9,7 +11,25 @@ import java.util.HashMap;
 public abstract class ControllerUtils {
 
     protected static HashMap<String,String> inputs;
-    public static User currentUser=null;
+    public static User currentUser;
+    protected static Government currentPlayer;
+    protected static Game currentGame;
+
+    public static Government getCurrentPlayer() {
+        return currentPlayer;
+    }
+
+    public static Game getCurrentGame() {
+        return currentGame;
+    }
+
+    public static void setCurrentPlayer(Government currentPlayer) {
+        ControllerUtils.currentPlayer = currentPlayer;
+    }
+
+    public static void setCurrentGame(Game currentGame) {
+        ControllerUtils.currentGame = currentGame;
+    }
     public static UserMessages captcha(){
         return null;
     }

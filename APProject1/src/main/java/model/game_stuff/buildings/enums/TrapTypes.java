@@ -1,11 +1,11 @@
 package model.game_stuff.buildings.enums;
 
-import model.game_stuff.Good;
-
 public enum TrapTypes {
     ;
-    int damage;
-    TrapTypes (int damage) {
+    private int damage;
+    private String name;
+    TrapTypes (int damage, String name) {
         this.damage = damage;
+        this.name = name;
     }
 }

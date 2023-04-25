@@ -5,7 +5,7 @@ import model.game_stuff.enums.Items;
 
 import java.util.ArrayList;
 
-public class Player {
+public class Government {
     private final User owner;
     private String name;
     private Possession possession;
@@ -41,7 +41,7 @@ public class Player {
         tradeHistory = new ArrayList<>();
     }
 
-    public Player(User owner, Colors color) {
+    public Government(User owner, Colors color) {
         this.owner = owner;
         this.name = owner.getNickname();
         this.color = color;
