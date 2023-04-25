@@ -2,6 +2,8 @@ package model;
 
 import java.io.File;
 import java.util.*;
+
+import controller.ControllerUtils;
 import org.json.simple.JSONObject;
 
 public class DataBase {
@@ -34,9 +36,16 @@ public class DataBase {
             dataBase = new DataBase(new ArrayList<User>(), null);
         } else {
             JSONObject obj = new JSONObject();
-            databaseFile = new DataBase()
+            databaseFile = new DataBase();
         }
     }
+
+    public static void loadingApp(){
+        connectToDatabase();
+        ControllerUtils.setCurrentUser(dataBase.loggedInUser);
+    }
+
+
 
     static class CompareByHighScore implements Comparator<User> {
         public int compare(User a, User b) {

@@ -1,4 +1,5 @@
 import controller.user_menu.RegisterController;
+import model.DataBase;
 import view.user_system.MenuSwitcher;
 
 import java.lang.reflect.InvocationTargetException;
@@ -13,6 +14,7 @@ import static java.util.regex.Pattern.compile;
 
 public class Main {
     public static void main(String[] args) {
+        DataBase.loadingApp();
         MenuSwitcher.run();
 
     }
