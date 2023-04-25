@@ -30,7 +30,6 @@ public abstract class ControllerUtils {
     public static void setCurrentGame(Game currentGame) {
         ControllerUtils.currentGame = currentGame;
     }
-
     public static UserMessages captcha(){
         return null;
     }
