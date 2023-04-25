@@ -1,23 +1,33 @@
 package model.game_stuff.buildings;
 
 import model.game_stuff.Building;
-import model.game_stuff.buildings.enums.Towers;
+import model.game_stuff.Government;
+import model.game_stuff.buildings.enums.TowerTypes;
 
 public class Tower extends Building {
-        private Towers type;
-        private double hp;
-
-
-        public Tower(Towers type) {
+        private TowerTypes type;
+        private boolean hasStairs;
+        public Tower(TowerTypes type, Government government) {
+                super(government);
                 this.type = type;
                 this.hp = type.getHp();
         }
 
-        public Towers getType() {
-                return type;
+        public boolean hasStairs() {
+                return hasStairs;
         }
 
-        public double getHp() {
-                return hp;
+        public void setStairs(boolean hasStairs) {
+                this.hasStairs = hasStairs;
+        }
+
+        public TowerTypes getType() {
+                return type;
+        }
+        public int getFireRange() {
+                return type.getFireRange();
+        }
+        public int getDefendRange() {
+                return type.getDefendRange();
         }
 }
