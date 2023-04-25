@@ -12,9 +12,15 @@ public enum Troops{//assassins - fire towers - horseArchers,ladder man, ordinary
     TUNNELER("Tunneler",Nationality.EUROPEAN,4,2,4,10),
     LADDERMEN("Laddermen",Nationality.EUROPEAN,1,2,4,10),
     ENGINEER("Engineer",Nationality.EUROPEAN,1,2,3,10),
-    BLACKMONK("Black Monk",Nationality.EUROPEAN,4,4,2,10);
-
-
+    BLACKMONK("Black Monk",Nationality.EUROPEAN,4,4,2,10),
+    ARCHERBOW("Archer Bow",Nationality.ARAB,3,3,4,10),
+    SLAVES("Slaves",Nationality.ARAB,2,1,4,10),
+    SLINGERS("Slingers",Nationality.ARAB,3,2,4,),
+    ASSASSINS("Assassins",Nationality.ARAB,4,4,3,10),
+    HORSEARCHERS("Horse Archers",Nationality.ARAB,3,4,5,10),
+    ARABIANSWORDSMEN("Arabian Swordsmen",Nationality.ARAB,5,5,5,10),
+    FIRETHROWERS("Fire Throwers",Nationality.ARAB,5,3,5,10);
+    // hes mikonam ke sarbazaye arab bayad barashoon tedad moshakhas beshe vali nemidoonam
 
     private double damage;// very high 6 high 5 average 4 low 3 very low 2 no damage 1
     private double defence;//very high 6 high 5 average 4 low 3 very low 2 very very low 1
@@ -32,6 +38,14 @@ public enum Troops{//assassins - fire towers - horseArchers,ladder man, ordinary
 
     public String getName() {
         return name;
+    }
+
+    public int getCost() {
+        return cost;
+    }
+
+    public Nationality getNationality() {
+        return nationality;
     }
 
     public double getDefence() {
