@@ -1,7 +1,5 @@
 package model.game_stuff.buildings.enums;
 
-import model.game_stuff.Food;
-
 public enum FarmType {
     ;
     private Food food;

@@ -3,9 +3,9 @@ package model.game_stuff;
 import java.util.HashMap;
 
 public class Game {
-    private HashMap<String, Player> players;
+    private HashMap<String, Government> players;
 
-    public Player getPlayerByNickname(String nickname) {
+    public Government getPlayerByNickname(String nickname) {
         return players.get(nickname);
     }
 }
