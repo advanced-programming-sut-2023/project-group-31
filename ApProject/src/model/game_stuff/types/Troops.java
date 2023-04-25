@@ -15,7 +15,7 @@ public enum Troops{//assassins - fire towers - horseArchers,ladder man, ordinary
     BLACKMONK("Black Monk",Nationality.EUROPEAN,4,4,2,10),
     ARCHERBOW("Archer Bow",Nationality.ARAB,3,3,4,10),
     SLAVES("Slaves",Nationality.ARAB,2,1,4,10),
-    SLINGERS("Slingers",Nationality.ARAB,3,2,4,),
+    SLINGERS("Slingers",Nationality.ARAB,3,2,4,10),
     ASSASSINS("Assassins",Nationality.ARAB,4,4,3,10),
     HORSEARCHERS("Horse Archers",Nationality.ARAB,3,4,5,10),
     ARABIANSWORDSMEN("Arabian Swordsmen",Nationality.ARAB,5,5,5,10),
