@@ -1,7 +1,7 @@
 package controller.game_menu;
 
 import controller.ControllerUtils;
-import model.game_stuff.Player;
+import model.game_stuff.Government;
 import model.game_stuff.Trade;
 import model.game_stuff.enums.Items;
 import view.game_system.messages.TradeMessages;
@@ -18,7 +18,7 @@ public class TradeController extends ControllerUtils {
         if(inputs.get("player") == null) {
             return TradeMessages.CHOOSE_YOUR_AUDIENCE;
         }
-        Player audience = currentGame.getPlayerByNickname(inputs.get("player"));
+        Government audience = currentGame.getPlayerByNickname(inputs.get("player"));
         if(audience == null) {
             return TradeMessages.NO_SUCH_PLAYER;
         }

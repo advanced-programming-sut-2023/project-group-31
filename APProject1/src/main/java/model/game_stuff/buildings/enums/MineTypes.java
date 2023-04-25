@@ -1,8 +1,5 @@
 package model.game_stuff.buildings.enums;
 
-import model.game_stuff.Food;
-import model.game_stuff.Good;
-
 public enum MineTypes {
     ;
     private Good good;
