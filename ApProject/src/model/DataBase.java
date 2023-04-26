@@ -32,7 +32,7 @@ public class DataBase {
         if (databaseFile.length() == 0) {
             dataBase = new DataBase(new ArrayList<User>(), null);
         } else {
-            JSONObject obj = new JSONObject();
+
             databaseFile = new DataBase()
         }
     }
