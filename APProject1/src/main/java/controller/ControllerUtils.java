@@ -11,7 +11,7 @@ import java.util.HashMap;
 public abstract class ControllerUtils {
 
     protected static HashMap<String,String> inputs;
-    public static User currentUser = null;
+    protected static User currentUser = null;
     protected static Government currentPlayer;
     protected static Game currentGame;
 
@@ -31,12 +31,12 @@ public abstract class ControllerUtils {
         this.currentGame = currentGame;
     }
 
-    public static UserMessages captcha(){
-        return null;
-    }
-
     public static User getCurrentUser() {
         return currentUser;
+    }
+
+    public static boolean isUserLoggedIn(){
+        return currentUser!=null;
     }
 
     public static void setCurrentUser(User currentUser) {
@@ -49,6 +49,29 @@ public abstract class ControllerUtils {
 
     public static HashMap<String, String> getInputs(){
         return inputs;
+    }
+
+    public static void putInput(String key,String value){
+        inputs.put(key,value);
+    }
+
+    public static UserMessages getCaptchaCode(){
+        String captchaCode="";
+        int[] random = new int[4];
+        for (int i = 0; i < 4; i++) {
+            random[i] = (int) Math.floor(Math.random() * 10);
+            captchaCode += random[i];
+        }
+        inputs.put("captchaCode",captchaCode);
+        UserMessages.MESSAGES.setTxt(captchaCode);
+        return UserMessages.MESSAGE;
+    }
+
+    public static UserMessages checkCaptchaMatching(){
+        if(inputs.get("input").equals(inputs.get("captchaCode"))){
+            return UserMessages.SUCCESS;
+        }
+        return UserMessages.FAIL;
     }
 
     private static boolean isFormatCurrent(String input, InputFormats inputFormat) {

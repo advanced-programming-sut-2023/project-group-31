@@ -14,7 +14,9 @@ public class LoginMenu extends ViewUtils {
 
 
     public static MenuSwitcherMessages run(Scanner scanner) {
-
+        if(ControllerUtils.isUserLoggedIn()){
+            return MenuSwitcherMessages.MAIN;
+        }
         String input;
         Matcher matcher;
         while (true) {

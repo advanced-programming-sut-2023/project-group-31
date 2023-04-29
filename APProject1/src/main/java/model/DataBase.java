@@ -36,7 +36,7 @@ public class DataBase {
 
     }
 
-    private static String readResource(String filename)
+    public static String readResource(String filename)
     {
         filename = new File("").getAbsolutePath()+"\\src\\main\\resources\\"+filename;
         // Declaring object of StringBuilder class
@@ -78,9 +78,12 @@ public class DataBase {
         }
     }
 
-    public static void loadingApp(){
+    public static void loadApp(){
         connectToDatabase();
         ControllerUtils.setCurrentUser(dataBase.loggedInUser);
+        if(dataBase.isUserLoggedInBefore()){
+            ControllerUtils.setCurrentUser(dataBase.loggedInUser);
+        }
     }
 
 
@@ -115,12 +118,16 @@ public class DataBase {
         return DataBase.dataBase.slogans.get(random.nextInt(DataBase.dataBase.slogans.size()));
     }
 
-    public static User getLoggedInUser() {
-        return DataBase.dataBase.loggedInUser;
+    public User getLoggedInUser() {
+        return loggedInUser;
     }
 
-    public static void setLoggedInUser(User loggedInUser) {
-        DataBase.dataBase.loggedInUser = loggedInUser;
+    public void setLoggedInUser(User loggedInUser) {
+        this.loggedInUser = loggedInUser;
+    }
+
+    public boolean isUserLoggedInBefore(){
+        return loggedInUser!=null;
     }
 
 

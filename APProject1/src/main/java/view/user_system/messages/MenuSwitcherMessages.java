@@ -7,5 +7,7 @@ public enum MenuSwitcherMessages {
     PROFILE,
 
     MAIN
+
+
     ;
 }
