@@ -4,8 +4,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public enum ProfileCommands {
-    DISPLAY_PROFILE("display profile (?<field>[\\S]*)")
-    ;
+    DISPLAY_PROFILE("display profile (?<field>[\\S]*)"),
+    CHANGE_USERNAME("profile change( -u (?<username>IN))"),
+    CHANGE_NICKNAME("profile change( -n (?<nickname>IN))"),
+    CHANGE_PASSWORD("profile change password( -o (?<oldPassword>IN))( -n (?<newPassword>IN))"),
+    CHANGE_EMAIL("profile change( -e (?<email>IN))"),
+    CHANGE_SLOGAN("profile change slogan( -s (?<slogan>IN))"),
+    PROFILE_DISPLAY_RANK("profile display rank");
     private final String regex;
 
     ProfileCommands(String regex) {

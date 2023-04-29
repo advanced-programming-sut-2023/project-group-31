@@ -1,10 +1,13 @@
 package model;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.*;
 
 import controller.ControllerUtils;
-import org.json.simple.JSONObject;
+
 
 public class DataBase {
 
@@ -12,6 +15,8 @@ public class DataBase {
     private ArrayList<String> slogans;
     private ArrayList<String> recoveryQuestions;
     private ArrayList<User> users;
+
+    private final static String path=new File("").getAbsolutePath()+"\\src\\main\\resources\\";;
 
     private User loggedInUser;
 
@@ -28,15 +33,48 @@ public class DataBase {
                 "Chips mikhori?"));
         this.users = users;
         this.loggedInUser = loggedInUser;
+
+    }
+
+    private static String readResource(String filename)
+    {
+        filename = new File("").getAbsolutePath()+"\\src\\main\\resources\\"+filename;
+        // Declaring object of StringBuilder class
+        StringBuilder builder = new StringBuilder();
+
+        // try block to check for exceptions where
+        // object of BufferedReader class us created
+        // to read filepath
+        try (BufferedReader buffer = new BufferedReader(
+                new FileReader(filename))) {
+
+            String str;
+
+            // Condition check via buffer.readLine() method
+            // holding true upto that the while loop runs
+            while ((str = buffer.readLine()) != null) {
+                builder.append(str).append("\n");
+            }
+        }
+
+        // Catch block to handle the exceptions
+        catch (IOException e) {
+
+            // Print the line number here exception occurred
+            // using printStackTrace() method
+            e.printStackTrace();
+        }
+
+        // Returning a string
+        return builder.toString();
     }
 
     public static void connectToDatabase() {
-        File databaseFile = new File("dataBase.txt");
+        File databaseFile = new File(path+"dataBase.txt");
         if (databaseFile.length() == 0) {
             dataBase = new DataBase(new ArrayList<User>(), null);
         } else {
-            Gson obj = new Gson();
-            databaseFile = new DataBase();
+            //TODO
         }
     }
 

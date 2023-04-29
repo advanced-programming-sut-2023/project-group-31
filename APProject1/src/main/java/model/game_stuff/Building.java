@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public abstract class Building {
     protected int hp;
     protected Government owner;
+    protected String name;
     protected ArrayList<Block> blocks;
 
     {
@@ -35,5 +36,9 @@ public abstract class Building {
         for (Block block : blocks) {
             block.setBuilding(null);
         }
+    }
+
+    public String getName() {
+        return name;
     }
 }

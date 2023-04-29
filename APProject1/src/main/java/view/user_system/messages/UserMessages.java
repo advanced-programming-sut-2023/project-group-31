@@ -20,7 +20,10 @@ public enum UserMessages {
     MenuMessage("login message"),
     MESSAGES(""),
     CORRECT_ANSWER("correct answer!") ,
-    WRONG_ANSWER("wrong answer!");
+    WRONG_ANSWER("wrong answer!"),
+    OLD_PASSWORD_IS_WRONG("old password is not correct!"),
+    OLD_PASSWORD_MATCHES_NEW_PASSWORD("old password equals new password!"),
+    NO_CHANGE("nothing changed!");
     private String txt;
 
 

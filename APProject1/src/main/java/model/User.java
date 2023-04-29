@@ -132,8 +132,14 @@ public class User {
     }
 
     public int getRank(){
-        //TODO
-        return 0;
+        highScore=getHighScore();
+        int rank=1;
+        for(String username:users.keySet()){
+            if(users.get(username).getHighScore()>highScore){
+                rank++;
+            }
+        }
+        return rank;
     }
 
     @Override
