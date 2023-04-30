@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="3d20b1f4-b911-407f-b099-cf880ce4c5f5" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../APProject1/src/main/java/captcha.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../APProject1/src/main/java/view/user_system/Captcha.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../APProject1/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../APProject1/src/main/java/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../APProject1/src/main/java/controller/ControllerUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/../APProject1/src/main/java/controller/ControllerUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../APProject1/src/main/java/controller/user_menu/ProfileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../APProject1/src/main/java/controller/user_menu/ProfileController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../APProject1/src/main/java/controller/user_menu/RegisterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../APProject1/src/main/java/controller/user_menu/RegisterController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../APProject1/src/main/java/model/DataBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/../APProject1/src/main/java/model/DataBase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../APProject1/src/main/java/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/../APProject1/src/main/java/model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../APProject1/src/main/java/model/game_stuff/Block.java" beforeDir="false" afterPath="$PROJECT_DIR$/../APProject1/src/main/java/model/game_stuff/Block.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../APProject1/src/main/java/model/game_stuff/Building.java" beforeDir="false" afterPath="$PROJECT_DIR$/../APProject1/src/main/java/model/game_stuff/Building.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../APProject1/src/main/java/model/game_stuff/types/Buildings.java" beforeDir="false" afterPath="$PROJECT_DIR$/../APProject1/src/main/java/model/game_stuff/types/Buildings.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../APProject1/src/main/java/view/user_system/ProfileMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/../APProject1/src/main/java/view/user_system/ProfileMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../APProject1/src/main/java/view/user_system/commands/ProfileCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/../APProject1/src/main/java/view/user_system/commands/ProfileCommands.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../APProject1/src/main/java/view/user_system/messages/UserMessages.java" beforeDir="false" afterPath="$PROJECT_DIR$/../APProject1/src/main/java/view/user_system/messages/UserMessages.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="2P6TxPOXXxLGiZN1oR9vW3ddSwa" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3d20b1f4-b911-407f-b099-cf880ce4c5f5" name="Changes" comment="" />
+      <created>1682776780186</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1682776780186</updated>
+      <workItem from="1682776781480" duration="49000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
