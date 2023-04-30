@@ -25,7 +25,7 @@ public class LoginController extends ControllerUtils {
         }
 
         if(inputs.get("stayLoggedIn")!=null){
-            DataBase.
+            DataBase.getDataBase().setLoggedInUser(User.getUserByUsername(inputs.get("username")));
         }
 
         currentUser=User.getUserByUsername(inputs.get("username"));
