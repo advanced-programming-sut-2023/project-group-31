@@ -109,8 +109,13 @@ public class DataBase {
         return -1;
     }
 
-    public static ArrayList<String> getSlogans() {
-        return DataBase.dataBase.slogans;
+
+
+    public static DataBase getDataBase(){
+        return dataBase;
+    }
+    public ArrayList<String> getSlogans() {
+        return slogans;
     }
 
     public static String getRandomSlogan() {

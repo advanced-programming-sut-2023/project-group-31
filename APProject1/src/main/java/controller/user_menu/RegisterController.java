@@ -90,7 +90,7 @@ public class RegisterController extends ControllerUtils {
             return UserMessages.ANSWER_NOT_MATCH;
         }
 
-        currentUser.setPasswordRecoveryQuestion(DataBase.getSlogans().get(Integer.parseInt(inputs.get("questionNumber"))));
+        currentUser.setPasswordRecoveryQuestion(DataBase.getDataBase().getSlogans().get(Integer.parseInt(inputs.get("questionNumber"))));
         currentUser.setPasswordRecoveryAnswer(inputs.get("answer"));
 
         return UserMessages.SUCCESS;

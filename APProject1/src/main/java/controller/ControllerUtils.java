@@ -68,7 +68,7 @@ public abstract class ControllerUtils {
     }
 
     public static UserMessages checkCaptchaMatching(){
-        if(inputs.get("input").equals(inputs.get("captchaCode"))){
+        if(inputs.get("inputCaptcha").equals(inputs.get("captchaCode"))){
             return UserMessages.SUCCESS;
         }
         return UserMessages.FAIL;
