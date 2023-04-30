@@ -60,7 +60,7 @@ public class CaptchaMenu extends ViewUtils {
 
     private String generateCaptchaCode() {
         captchaCode=ControllerUtils.getCaptchaCode().getTxt();
-        ArrayList<String>[] digitLines = new ArrayList<>[4];
+        ArrayList<String>[] digitLines =new ArrayList[4];
         for (int i = 0; i < 4; i++) {
             digitLines[i] = new ArrayList<>(Arrays.asList(captchaDigits.get(captchaCode.charAt(i)).trim().split("\n")));
         }

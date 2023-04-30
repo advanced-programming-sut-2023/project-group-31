@@ -11,7 +11,7 @@ public enum MarketCommands {
     private MarketCommands (String regex){
         this.regex=regex;
     }
-    public static Matcher getMatch(String input,MarketCommands command){
+    public static Matcher getMatcher(String input,MarketCommands command){
         Matcher matcher= Pattern.compile(command.regex).matcher(input);
         return matcher.matches()? matcher: null;
     }

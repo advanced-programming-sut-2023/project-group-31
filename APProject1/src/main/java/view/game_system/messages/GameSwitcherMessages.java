@@ -4,5 +4,6 @@ public enum GameSwitcherMessages {
     MARKET,
     TRADE,
     BACK,
-    GAME;
+    GAME,
+    MAP;
 }
