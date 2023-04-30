@@ -14,19 +14,48 @@ public class MarketMenu extends ViewUtils {
             if(command.matches("exit")){
                 return GameSwitcherMessages.GAME;
             }
-            else if( (matcher=TradeCommands.get))
+            else if( (matcher==MarketCommads.getMatch(command,MarketCommands.SELL))!=null){
+                sell(matcher);
+            }
+            else if((matcher==MarketCommands.getMatch(command,MarketCommands.BUY))!=null){
+                buy(matcher);
+            }
+            else if (MarketCommands.getMatch(command,MarketCommands.SHOWPRICELIST)!=null){
+                System.out.println(MarketController.showPriceList());
+            }
+            else {
+                System.out.println("Invalid commands!");
+            }
         }
     }
 
-    private static void showPriceList(Matcher matcher){
 
-    }
 
     private static void buy(Matcher matcher){
-
+       ControllerUtils.setInputs(putInHashmap(matcher,MarketCommands.BUY.getRegex()));
+       MarketMessages message = MarketController.buy();
+       if(message==MarketMessages.SUCCESS){
+           System.out.println("you buy good successfully!");
+       }
+       else if(message=MarketMessages.INVALIDCOMMAND){
+           System.out.println("Invalid commands!");
+       }
+       else {
+           System.out.println("buy good failed "+message.getTxt());
+       }
     }
 
     private static void sell(Matcher matcher){
-
+        ControllerUtils.setInputs(putInHashmap(matcher,MarketCommands.BUY.getRegex()));
+        MarketMessages message = MarketController.buy();
+        if(message==MarketMessages.SUCCESS){
+            System.out.println("you buy good successfully!");
+        }
+        else if(message=MarketMessages.INVALIDCOMMAND){
+            System.out.println("Invalid commands!");
+        }
+        else {
+            System.out.println("sell good failed "+message.getTxt());
+        }
     }
 }

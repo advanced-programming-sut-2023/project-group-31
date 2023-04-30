@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5cc986fd-8e94-460a-a526-6315ae3dfd93" name="Changes" comment="add MarketMenu.java" />
+    <list default="true" id="5cc986fd-8e94-460a-a526-6315ae3dfd93" name="Changes" comment="add MarketMessages">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APProject1/src/main/java/view/game_system/MarketMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/APProject1/src/main/java/view/game_system/MarketMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APProject1/src/main/java/view/game_system/commands/MarketCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/APProject1/src/main/java/view/game_system/commands/MarketCommands.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -39,6 +43,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="D:/telegram" />
+    <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -52,7 +57,15 @@
       <workItem from="1682016708894" duration="97000" />
       <workItem from="1682023825087" duration="9027000" />
       <workItem from="1682113722960" duration="1162000" />
+      <workItem from="1682886335779" duration="2840000" />
     </task>
+    <task id="LOCAL‎۰۰۰۰۱" summary="add MarketMessages">
+      <created>1682886629999</created>
+      <option name="number" value="LOCAL‎۰۰۰۰۱" />
+      <option name="presentableId" value="LOCAL‎۰۰۰۰۱" />
+      <updated>1682886629999</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -80,5 +93,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="add MarketMessages" />
+    <option name="LAST_COMMIT_MESSAGE" value="add MarketMessages" />
   </component>
 </project>

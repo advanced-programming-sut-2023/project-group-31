@@ -15,4 +15,8 @@ public enum MarketCommands {
         Matcher matcher= Pattern.compile(command.regex).matcher(input);
         return matcher.matches()? matcher: null;
     }
+
+    public String getRegex() {
+        return regex;
+    }
 }
