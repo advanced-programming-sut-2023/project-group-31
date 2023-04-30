@@ -1,20 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5cc986fd-8e94-460a-a526-6315ae3dfd93" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ApProject/src/controller/game_menu/TradeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ApProject/src/controller/game_menu/TradeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ApProject/src/model/game_stuff/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/ApProject/src/model/game_stuff/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ApProject/src/model/game_stuff/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/ApProject/src/model/game_stuff/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ApProject/src/model/game_stuff/Trade.java" beforeDir="false" afterPath="$PROJECT_DIR$/ApProject/src/model/game_stuff/Trade.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ApProject/src/view/game_system/TradeMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/ApProject/src/view/game_system/TradeMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ApProject/src/view/game_system/commands/MarketCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/ApProject/src/view/game_system/commands/MarketCommands.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ApProject/src/view/game_system/commands/StartGameCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/ApProject/src/view/game_system/commands/StartGameCommands.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ApProject/src/view/game_system/commands/TradeCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/ApProject/src/view/game_system/commands/TradeCommands.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ApProject/src/view/game_system/messages/MarketMessages.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ApProject/src/view/game_system/messages/TradeMessages.java" beforeDir="false" afterPath="$PROJECT_DIR$/ApProject/src/view/game_system/messages/TradeMessages.java" afterDir="false" />
-    </list>
+    <list default="true" id="5cc986fd-8e94-460a-a526-6315ae3dfd93" name="Changes" comment="add MarketMenu.java" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -26,6 +13,9 @@
         <option value="Class" />
       </list>
     </option>
+  </component>
+  <component name="Git.Merge.Settings">
+    <option name="BRANCH" value="origin/main" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -73,7 +63,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/main" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
