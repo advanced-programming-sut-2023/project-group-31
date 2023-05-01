@@ -3,7 +3,8 @@ package model.game_stuff;
 import model.User;
 import model.game_stuff.types.Persons;
 
-public abstract class Person {
+public abstract class Person implements HasHp{
+    ///TODO: chiz hay invisible dar jadval zakhire nemishavand va serfan dar government zakhire mishan
     protected Government owner;
     protected String name;
     protected int hp;

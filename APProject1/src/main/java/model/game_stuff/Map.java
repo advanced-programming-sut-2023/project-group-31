@@ -1,14 +1,15 @@
 package model.game_stuff;
 
+import model.game_stuff.enums.Direction;
 import model.game_stuff.enums.Textures;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Map {
     private static ArrayList<Map> maps;
     private String name;
-    private int length;
-    private int width;
+    private int size;
     private ArrayList<Tree> trees;
     private ArrayList<Block> lordHouses;
     //TODO: fire va stockpile ham payin va chapesh miran;
@@ -21,13 +22,12 @@ public class Map {
         saved = false;
     }
 
-    public Map(String name, int length, int width) {
+    public Map(String name, int size) {
         this.name = name;
-        this.length = length;
-        this.width = width;
-        for(int i = 0; i < width; i++) {
+        this.size = size;
+        for(int i = 0; i < size; i++) {
             blocks.add(new ArrayList<>());
-            for(int j = 0; j < length; j++) {
+            for(int j = 0; j < size; j++) {
                 blocks.get(i).add(new Block(Textures.GROUND, j, i));
             }
         }
@@ -74,12 +74,8 @@ public class Map {
         return maps;
     }
 
-    public int getLength() {
-        return length;
-    }
-
-    public int getWidth() {
-        return width;
+    public int getSize() {
+        return size;
     }
 
     public ArrayList<Tree> getTrees() {
@@ -93,12 +89,33 @@ public class Map {
     public ArrayList<ArrayList<Block>> getBlocks() {
         return blocks;
     }
+    private Block getNeighbour(Direction direction, Block block) {
+        int x = block.getX() + direction.getX();
+        int y = block.getY() + direction.getY();
+        if(!isInMap(x, y)){
+            return null;
+        }
+        return getBlock(x, y);
+    }
+    public HashMap<Direction, Block> getNeighbours(Block block) {
+        HashMap<Direction, Block> neighbours = new HashMap<>();
+        Block neighbour;
+        for (Direction direction : Direction.values()) {
+            if((neighbour = getNeighbour(direction, block)) != null) {
+                neighbours.put(direction, neighbour);
+            }
+        }
+        return neighbours;
+    }
+    public boolean isInMap(int x, int y) {
+        return x >= 0 &&  y >= 0 && x < size && y < size;
+    }
 
     @Override
     public String toString() {
         return "Map " + name +
-                "\t\tlength=" + length +
-                ", width=" + width +
+                "\t\t" + size +
+                " * " + size +
                 "\n\t" + description;
     }
 }

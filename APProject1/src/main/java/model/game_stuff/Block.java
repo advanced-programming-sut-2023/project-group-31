@@ -1,8 +1,8 @@
 package model.game_stuff;
 
 
-import model.game_stuff.enums.Items;
 import model.game_stuff.enums.Textures;
+import model.game_stuff.people.Fighter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -86,6 +86,19 @@ public class Block {
     public int getDistanceTo(Block anotherBlock) {
         return Math.abs(x - anotherBlock.getX()) + Math.abs(y - anotherBlock.getY());
     }
+    public boolean containsEnemyTroop(Colors color) {
+        for (Person person : people) {
+            if((person instanceof Fighter) && person.getOwner().getColor() != color)
+                return true;
+        }
+        return false;
+    }
+    public boolean containsEnemyBuilding(Colors color) {
+        if(building != null && building.getOwner().getColor() != color)
+            return true;
+        return false;
+    }
+
 
     @Override
     public String toString() {

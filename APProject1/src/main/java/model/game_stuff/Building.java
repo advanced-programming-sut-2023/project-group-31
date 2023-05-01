@@ -2,7 +2,7 @@ package model.game_stuff;
 
 import java.util.ArrayList;
 
-public abstract class Building {
+public abstract class Building implements HasHp{
     protected int hp;
     protected Government owner;
     protected String name;
