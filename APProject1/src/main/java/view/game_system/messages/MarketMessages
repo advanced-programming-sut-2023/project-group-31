@@ -6,7 +6,7 @@ public enum MarketMessages {
     NOT_ENOUGH_GOOD("not enough good from this type!"),
     NOT_ENOUGH_GOLD("not enough gold my lord!"),
     INVALID_COMMAND("invalid command!"),
-    YOUR_STOCKPILE_IS_FULL("your stockpile is full my lord!")
+    YOUR_STOCKPILE_IS_FULL("your stockpile is full my lord!");
     private String txt;
     private String input;
 
@@ -18,7 +18,7 @@ public enum MarketMessages {
         return input;
     }
 
-    TradeMessages(String txt) {
+    MarketMessages(String txt) {
         this.txt = txt;
         this.input = "";
     }
@@ -31,8 +31,8 @@ public enum MarketMessages {
         return txt + input;
     }
 
-    public static TradeMessages getMessageByTxt(String txt) {
-        for (TradeMessages tradeMessage : values()) {
+    public static MarketMessages getMessageByTxt(String txt) {
+        for (MarketMessages tradeMessage : values()) {
             if(tradeMessage.txt.equals(txt)) {
                 return tradeMessage;
             }

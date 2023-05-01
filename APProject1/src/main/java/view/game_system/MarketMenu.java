@@ -1,6 +1,11 @@
 package view.game_system;
 
+import controller.ControllerUtils;
+import controller.game_menu.MarketController;
+import view.ViewUtils;
+import view.game_system.commands.MarketCommands;
 import view.game_system.messages.GameSwitcherMessages;
+import view.game_system.messages.MarketMessages;
 
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -8,19 +13,19 @@ import java.util.regex.Matcher;
 public class MarketMenu extends ViewUtils {
     public static GameSwitcherMessages run(Scanner scanner){
         String command ;
-        Matcher matcher;
+        Matcher matcher=null;
         while (true){
             command=scanner.nextLine().trim();
             if(command.matches("exit")){
                 return GameSwitcherMessages.GAME;
             }
-            else if( (matcher==MarketCommads.getMatch(command,MarketCommands.SELL))!=null){
+            else if((matcher=MarketCommands.getMatcher(command,MarketCommands.SELL))!=null){
                 sell(matcher);
             }
-            else if((matcher==MarketCommands.getMatch(command,MarketCommands.BUY))!=null){
+            else if((matcher=MarketCommands.getMatcher(command,MarketCommands.BUY))!=null){
                 buy(matcher);
             }
-            else if (MarketCommands.getMatch(command,MarketCommands.SHOWPRICELIST)!=null){
+            else if (MarketCommands.getMatcher(command,MarketCommands.SHOWPRICELIST)!=null){
                 System.out.println(MarketController.showPriceList());
             }
             else {
@@ -37,7 +42,7 @@ public class MarketMenu extends ViewUtils {
        if(message==MarketMessages.SUCCESS){
            System.out.println("you buy good successfully!");
        }
-       else if(message=MarketMessages.INVALIDCOMMAND){
+       else if(message==MarketMessages.INVALID_COMMAND){
            System.out.println("Invalid commands!");
        }
        else {
@@ -51,7 +56,7 @@ public class MarketMenu extends ViewUtils {
         if(message==MarketMessages.SUCCESS){
             System.out.println("you buy good successfully!");
         }
-        else if(message=MarketMessages.INVALIDCOMMAND){
+        else if(message==MarketMessages.INVALID_COMMAND){
             System.out.println("Invalid commands!");
         }
         else {
