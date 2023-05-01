@@ -1,6 +1,7 @@
 package controller.user_menu;
 
 import controller.ControllerUtils;
+import model.DataBase;
 import model.User;
 import view.user_system.messages.UserMessages;
 
@@ -24,7 +25,7 @@ public class LoginController extends ControllerUtils {
         }
 
         if(inputs.get("stayLoggedIn")!=null){
-            //TODO
+            DataBase.getDataBase().setLoggedInUser(User.getUserByUsername(inputs.get("username")));
         }
 
         currentUser=User.getUserByUsername(inputs.get("username"));

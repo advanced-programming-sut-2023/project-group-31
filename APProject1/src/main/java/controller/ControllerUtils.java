@@ -3,7 +3,6 @@ package controller;
 import model.User;
 import model.game_stuff.Game;
 import model.game_stuff.Government;
-import view.user_system.commands.InputFormats;
 import view.user_system.messages.UserMessages;
 
 import java.util.HashMap;
@@ -68,7 +67,7 @@ public abstract class ControllerUtils {
     }
 
     public static UserMessages checkCaptchaMatching(){
-        if(inputs.get("input").equals(inputs.get("captchaCode"))){
+        if(inputs.get("inputCaptcha").equals(inputs.get("captchaCode"))){
             return UserMessages.SUCCESS;
         }
         return UserMessages.FAIL;

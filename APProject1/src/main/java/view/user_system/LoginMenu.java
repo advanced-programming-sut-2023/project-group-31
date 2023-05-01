@@ -37,6 +37,10 @@ public class LoginMenu extends ViewUtils {
     }
 
     private static void userLogin() {
+        if(!CaptchaMenu.object.run()){
+            System.out.println("login failed: wrong captcha");
+            return;
+        }
         result = LoginController.loginUser();
         if (result.equals(UserMessages.SUCCESS)) {
             System.out.println("user login: " + UserMessages.SUCCESS.getTxt());

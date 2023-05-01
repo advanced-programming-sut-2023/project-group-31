@@ -1,5 +1,6 @@
 package view.user_system;
 
+import controller.ControllerUtils;
 import controller.user_menu.ProfileController;
 import view.ViewUtils;
 import view.user_system.commands.ProfileCommands;
@@ -11,6 +12,10 @@ import java.util.regex.Matcher;
 
 public class ProfileMenu extends ViewUtils {
     public static MenuSwitcherMessages run(Scanner scanner) {
+        if(!ControllerUtils.isUserLoggedIn()){
+            return MenuSwitcherMessages.LOGIN;
+        }
+        System.out.println("_________Profile Menu_______");
         String input;
         Matcher matcher;
         while (true) {
@@ -55,6 +60,10 @@ public class ProfileMenu extends ViewUtils {
     }
 
     private static void changePassword() {
+        if(!CaptchaMenu.object.run()){
+            System.out.println("change password failed: wrong captcha.");
+            return;
+        }
         result = ProfileController.profileChangePassword();
         System.out.println(changeProfileMessage("password"));
     }

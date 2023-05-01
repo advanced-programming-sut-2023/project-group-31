@@ -1,5 +1,7 @@
 package view.user_system.commands;
 
+import view.ViewUtils;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -10,7 +12,7 @@ public enum RegisterCommands {
     private final String regex;
 
     RegisterCommands(String regex) {
-        this.regex = CommandsUtils.editRegex(regex);
+        this.regex = ViewUtils.editRegex(regex);
     }
 
     public String getRegex() {
