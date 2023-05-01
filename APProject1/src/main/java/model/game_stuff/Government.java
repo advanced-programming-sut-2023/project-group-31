@@ -49,6 +49,10 @@ public class Government {
         this.color = color;
     }
 
+    public model.game_stuff.Possession getPossession() {
+        return possession;
+    }
+
     public User getOwner() {
         return owner;
     }

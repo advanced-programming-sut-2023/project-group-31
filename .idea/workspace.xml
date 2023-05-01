@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5cc986fd-8e94-460a-a526-6315ae3dfd93" name="Changes" comment="MarketController but possession need to some changes">
-      <change afterPath="$PROJECT_DIR$/APProject1/src/main/java/view/game_system/MercenaryPostMenu.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/APProject1/src/main/java/view/game_system/commands/BarracksCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/APProject1/src/main/java/view/game_system/messages/BarracksMessages.java" afterDir="false" />
+    <list default="true" id="5cc986fd-8e94-460a-a526-6315ae3dfd93" name="Changes" comment="create MercenaryPostMenu and its Commands and messages">
+      <change afterPath="$PROJECT_DIR$/APProject1/src/main/java/controller/game_menu/MercenaryController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/APProject1/src/main/java/view/game_system/GameSwitcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/APProject1/src/main/java/view/game_system/GameSwitcher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/APProject1/src/main/java/view/game_system/messages/GameSwitcherMessages.java" beforeDir="false" afterPath="$PROJECT_DIR$/APProject1/src/main/java/view/game_system/messages/GameSwitcherMessages.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APProject1/src/main/java/controller/game_menu/MarketController.java" beforeDir="false" afterPath="$PROJECT_DIR$/APProject1/src/main/java/controller/game_menu/MarketController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APProject1/src/main/java/model/game_stuff/Government.java" beforeDir="false" afterPath="$PROJECT_DIR$/APProject1/src/main/java/model/game_stuff/Government.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APProject1/src/main/java/model/game_stuff/types/Troops.java" beforeDir="false" afterPath="$PROJECT_DIR$/APProject1/src/main/java/model/game_stuff/types/Troops.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APProject1/src/main/java/view/game_system/MarketMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/APProject1/src/main/java/view/game_system/MarketMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APProject1/src/main/java/view/game_system/messages/BarracksMessages.java" beforeDir="false" afterPath="$PROJECT_DIR$/APProject1/src/main/java/view/game_system/messages/BarracksMessages.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,7 +63,7 @@
       <workItem from="1682113722960" duration="1162000" />
       <workItem from="1682886335779" duration="2840000" />
       <workItem from="1682904478654" duration="3741000" />
-      <workItem from="1682938812096" duration="1788000" />
+      <workItem from="1682938812096" duration="4810000" />
     </task>
     <task id="LOCAL‎۰۰۰۰۱" summary="add MarketMessages">
       <created>1682886629999</created>
@@ -76,7 +77,13 @@
       <option name="presentableId" value="LOCAL‎۰۰۰۰۲" />
       <updated>1682908219135</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL‎۰۰۰۰۳" summary="create MercenaryPostMenu and its Commands and messages">
+      <created>1682940906101</created>
+      <option name="number" value="LOCAL‎۰۰۰۰۳" />
+      <option name="presentableId" value="LOCAL‎۰۰۰۰۳" />
+      <updated>1682940906101</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -108,6 +115,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="add MarketMessages" />
     <MESSAGE value="MarketController but possession need to some changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="MarketController but possession need to some changes" />
+    <MESSAGE value="create MercenaryPostMenu and its Commands and messages" />
+    <option name="LAST_COMMIT_MESSAGE" value="create MercenaryPostMenu and its Commands and messages" />
   </component>
 </project>

@@ -1,5 +1,6 @@
 package main.java.view.game_system;
 
+import main.java.controller.game_menu.MercenaryController;
 import main.java.view.game_system.commands.BarracksCommand;
 import main.java.view.game_system.messages.BarracksMessages;
 import view.game_system.messages.GameSwitcherMessages;
@@ -26,7 +27,7 @@ public class MercenaryPostMenu {
 
     private static void createUnit(Matcher matcher) {
         controller.ControllerUtils.setInputs(putInHashmap(matcher,BarracksCommand.CREATE_UNIT.getRegex()));
-        BarracksMessages message=MercenaryController.createUnit();
+        BarracksMessages message= MercenaryController.createUnit();
         if(message==BarracksMessages.INVALID_COMMAND){
             System.out.println("Invalid command!");
             return;

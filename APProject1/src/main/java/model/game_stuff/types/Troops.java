@@ -1,5 +1,7 @@
 package model.game_stuff.types;
 
+import java.util.ArrayList;
+
 public enum Troops{//assassins - fire towers - horseArchers,ladder man, ordinary - slinger , spear man
     NULL("Null",null,0,0,0,10),
     ARCHER("Archer",Nationality.EUROPEAN,3,3,4,10),
@@ -35,7 +37,7 @@ public enum Troops{//assassins - fire towers - horseArchers,ladder man, ordinary
         this.name=name;
         this.nationality=nationality;
     }
-
+    
     public String getName() {
         return name;
     }
