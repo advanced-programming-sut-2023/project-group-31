@@ -3,6 +3,7 @@ package model.game_stuff.people.enums;
 import model.game_stuff.enums.Items;
 
 public enum WorkerTypes {
+    WOOD_CUTTER(10, 1, 3, Items.WOOD, "wood cutter", 3,2)
     ;
     private String name;
     private int hp;

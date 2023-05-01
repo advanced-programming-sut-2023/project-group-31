@@ -9,6 +9,7 @@ public class Map {
     private String name;
     private int length;
     private int width;
+    private ArrayList<Tree> trees;
     private ArrayList<Block> lordHouses;
     //TODO: fire va stockpile ham payin va chapesh miran;
     private boolean saved;
@@ -81,6 +82,13 @@ public class Map {
         return width;
     }
 
+    public ArrayList<Tree> getTrees() {
+        return trees;
+    }
+
+    public void setTrees(ArrayList<Tree> trees) {
+        this.trees = trees;
+    }
 
     public ArrayList<ArrayList<Block>> getBlocks() {
         return blocks;

@@ -7,6 +7,7 @@ import model.game_stuff.enums.Items;
 import java.util.ArrayList;
 
 public class Government {
+    private Game game;
     private final User owner;
     private String name;
     private Possession possession;
@@ -172,6 +173,14 @@ public class Government {
 
     public ArrayList<Trade> getTradeHistory() {
         return tradeHistory;
+    }
+
+    public Game getGame() {
+        return game;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
     }
 
     public String getName() {

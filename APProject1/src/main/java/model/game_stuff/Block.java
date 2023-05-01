@@ -10,6 +10,7 @@ import java.util.HashMap;
 public class Block {
     private Textures type;
     private ArrayList<Person> people;
+    private ArrayList<Tree> trees;
     private HashMap<String, Integer> numberOfPeople;
     private Building building;
     private int x;
@@ -17,6 +18,7 @@ public class Block {
 
     {
         people = new ArrayList<>();
+        trees = new ArrayList<>();
         numberOfPeople = new HashMap<>();
         building = null;
     }
@@ -51,6 +53,12 @@ public class Block {
         if(numberOfPeople.get(person.getName()) == 0) {
             numberOfPeople.remove(person.getName());
         }
+    }
+    public void addTree(Tree tree) {
+        trees.add(tree);
+    }
+    public void removeTree(Tree tree) {
+        trees.remove(tree);
     }
 
     public Textures getType() {

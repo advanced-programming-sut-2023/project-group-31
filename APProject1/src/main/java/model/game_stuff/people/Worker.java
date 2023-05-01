@@ -11,13 +11,13 @@ import model.game_stuff.people.enums.WorkerTypes;
 import java.util.ArrayList;
 
 public class Worker extends Person {
-    private Producer workHouse;
+    protected Producer workHouse;
     //tabe add product ro dar government mi sazim
-    private WorkerTypes type;
-    private WorkerStates state;
-    private Waiter producingWaiter;
-    private Waiter transportingWaiter;
-    private Block destination;
+    protected WorkerTypes type;
+    protected WorkerStates state;
+    protected Waiter producingWaiter;
+    protected Waiter transportingWaiter;
+    protected Block destination;
     private int numberOfProductsCarrying;
 
     public Worker(Producer workHouse, WorkerTypes type) {
@@ -32,7 +32,7 @@ public class Worker extends Person {
     }
     //agar storage az bein raft bayad notify kone
     //notifier ha zakhire beshan vaqti nobatesh shod neshoon dade beshan
-    private void deliver() {
+    protected void deliver() {
         Storage storage = (Storage) destination.getBuilding();
         if(storage.getCapacityLeft() >= numberOfProductsCarrying) {
             storage.addProduct(type.getProduct(), numberOfProductsCarrying);
@@ -46,7 +46,7 @@ public class Worker extends Person {
             setAppropriateStorage();
         }
     }
-    private void produce() {
+    protected void produce() {
         workHouse.addProduct(type.getAmountOfProductToProduce());
         if(workHouse.getNumberOfProductsAvailable() >= type.getNumberOfProductsToCarry()) {
             workHouse.addProduct(-1 * type.getAmountOfProductToProduce());
@@ -61,24 +61,21 @@ public class Worker extends Person {
                 if(transportingWaiter.isTheTurn()) {
                     state = WorkerStates.PRODUCING;
                     move(workHouse.getPosition());
-                    work();
                 }
                 break;
             case HEADING_STORAGE:
-                if(destination != null && transportingWaiter.isTheTurn()) {
-                    if(destination == null) {
-                        setAppropriateStorage();
-                        return;
-                    }
+                if(destination == null) {
+                    setAppropriateStorage();
+                    return;
+                } else if(transportingWaiter.isTheTurn()) {
+
                     move(destination);
                     deliver();
-                    work();
                 }
                 break;
             case PRODUCING:
                 if(!workHouse.isFull() && producingWaiter.isTheTurn()) {
                     produce();
-                    work();
                 }
                 break;
         }
