@@ -21,4 +21,16 @@ public class Trap extends Building {
             }
         }
     }
+
+    @Override
+    public String toString() {
+        return "Trap{" +
+                "type=" + type +
+                ", hp=" + hp +
+                ", maxHp=" + maxHp +
+                ", owner=" + owner +
+                ", name='" + name + '\'' +
+                ", blocks=" + blocks +
+                '}';
+    }
 }

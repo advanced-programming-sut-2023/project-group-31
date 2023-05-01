@@ -34,4 +34,18 @@ public class Producer extends Building {
             numberOfProductsAvailable = type.getCapacity();
         }
     }
+
+    @Override
+    public String toString() {
+        return "Producer{" +
+                "type=" + type +
+                ", workers=" + workers +
+                ", numberOfProductsAvailable=" + numberOfProductsAvailable +
+                ", hp=" + hp +
+                ", maxHp=" + maxHp +
+                ", owner=" + owner +
+                ", name='" + name + '\'' +
+                ", blocks=" + blocks +
+                '}';
+    }
 }

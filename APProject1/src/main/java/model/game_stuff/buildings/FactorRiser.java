@@ -15,4 +15,16 @@ public class FactorRiser extends Building {
     public FactorRiserTypes getType() {
         return type;
     }
+
+    @Override
+    public String toString() {
+        return "FactorRiser{" +
+                "type=" + type +
+                ", hp=" + hp +
+                ", maxHp=" + maxHp +
+                ", owner=" + owner +
+                ", name='" + name + '\'' +
+                ", blocks=" + blocks +
+                '}';
+    }
 }

@@ -37,4 +37,18 @@ public class GateHouse extends Building {
     public GateHouseTypes getType() {
         return type;
     }
+
+    @Override
+    public String toString() {
+        return "GateHouse{" +
+                "type=" + type +
+                ", isHorizontal=" + isHorizontal +
+                ", isOpen=" + isOpen +
+                ", hp=" + hp +
+                ", maxHp=" + maxHp +
+                ", owner=" + owner +
+                ", name='" + name + '\'' +
+                ", blocks=" + blocks +
+                '}';
+    }
 }

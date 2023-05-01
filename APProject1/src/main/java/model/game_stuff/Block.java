@@ -81,7 +81,7 @@ public class Block {
         this.building = building;
     }
     public boolean isEmpty() {
-        return (building == null && people.isEmpty());
+        return (building == null && people.isEmpty() && trees.isEmpty());
     }
     public int getDistanceTo(Block anotherBlock) {
         return Math.abs(x - anotherBlock.getX()) + Math.abs(y - anotherBlock.getY());

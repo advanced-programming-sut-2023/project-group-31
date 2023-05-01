@@ -30,4 +30,17 @@ public class Tower extends Building {
         public int getDefendRange() {
                 return type.getDefendRange();
         }
+
+        @Override
+        public String toString() {
+                return "Tower{" +
+                        "type=" + type +
+                        ", hasStairs=" + hasStairs +
+                        ", hp=" + hp +
+                        ", maxHp=" + maxHp +
+                        ", owner=" + owner +
+                        ", name='" + name + '\'' +
+                        ", blocks=" + blocks +
+                        '}';
+        }
 }

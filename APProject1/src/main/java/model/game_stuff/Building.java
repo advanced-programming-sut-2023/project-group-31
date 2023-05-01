@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public abstract class Building implements HasHp{
     protected int hp;
+    protected int maxHp;
     protected Government owner;
     protected String name;
     private boolean isUnderAttack;
@@ -14,6 +15,12 @@ public abstract class Building implements HasHp{
     }
     public Building(Government government) {
         this.owner = government;
+    }
+    public void getRepaired() {
+        hp = maxHp;
+    }
+    public double hpLost() {
+        return (double)(maxHp - hp) / ((double) maxHp);
     }
 
     public void setBlocks(ArrayList<Block> blocks) {
@@ -26,6 +33,7 @@ public abstract class Building implements HasHp{
             terminate();
         }
     }
+    public abstract String toString();
 
     public Government getOwner() {
         return owner;
@@ -57,5 +65,13 @@ public abstract class Building implements HasHp{
 
     public String getName() {
         return name;
+    }
+
+    public int getMaxHp() {
+        return maxHp;
+    }
+
+    public void setMaxHp(int maxHp) {
+        this.maxHp = maxHp;
     }
 }

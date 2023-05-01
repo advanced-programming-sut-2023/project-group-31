@@ -10,4 +10,16 @@ public class MenuBuildings extends Building {
         super(government);
         this.menu = menu;
     }
+
+    @Override
+    public String toString() {
+        return "MenuBuildings{" +
+                "menu=" + menu +
+                ", hp=" + hp +
+                ", maxHp=" + maxHp +
+                ", owner=" + owner +
+                ", name='" + name + '\'' +
+                ", blocks=" + blocks +
+                '}';
+    }
 }

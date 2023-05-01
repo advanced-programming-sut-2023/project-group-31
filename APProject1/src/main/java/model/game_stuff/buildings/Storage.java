@@ -48,4 +48,18 @@ public class Storage extends Building {
         }
         amountOfProducts -= amount;
     }
+
+    @Override
+    public String toString() {
+        return "Storage{" +
+                "type=" + type +
+                ", properties=" + properties +
+                ", amountOfProducts=" + amountOfProducts +
+                ", hp=" + hp +
+                ", maxHp=" + maxHp +
+                ", owner=" + owner +
+                ", name='" + name + '\'' +
+                ", blocks=" + blocks +
+                '}';
+    }
 }
