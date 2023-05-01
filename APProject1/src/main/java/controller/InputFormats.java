@@ -1,10 +1,13 @@
-package view.user_system.commands;
+package controller;
 
 public enum InputFormats {
     USERNAME("username","[\\w]+",true),
     PASSWORD("password",true),
     EMAIL("email","([\\w]|\\.)+@([\\w]|\\.)+.([\\w]|\\.)+",true),
-    QUESTION_NUMBER("question-number","([\\w]|\\.)+@([\\w]|\\.)+.([\\w]|\\.)+",true)
+    QUESTION_NUMBER("question-number","([\\w]|\\.)+@([\\w]|\\.)+.([\\w]|\\.)+",true),
+    X("[\\d]+",true),
+    Y("[\\d]+",true)
+
 
     ;
     private String name;
@@ -17,6 +20,7 @@ public enum InputFormats {
         this.format = format;
         this.isCompulsory=isCompulsory;
     }
+
 
     InputFormats(String name,boolean isCompulsory) {
         this.name = name;

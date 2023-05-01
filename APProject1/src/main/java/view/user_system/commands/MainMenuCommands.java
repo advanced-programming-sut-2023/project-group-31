@@ -1,5 +1,7 @@
 package view.user_system.commands;
 
+import view.ViewUtils;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -9,7 +11,7 @@ public enum MainMenuCommands {
     private final String regex;
 
     MainMenuCommands(String regex) {
-        this.regex = CommandsUtils.editRegex(regex);
+        this.regex = ViewUtils.editRegex(regex);
     }
 
     public static Matcher getMatcher(String input, MainMenuCommands command) {

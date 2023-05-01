@@ -81,6 +81,11 @@ public class Map {
         return width;
     }
 
+
+    public ArrayList<ArrayList<Block>> getBlocks() {
+        return blocks;
+    }
+
     @Override
     public String toString() {
         return "Map " + name +

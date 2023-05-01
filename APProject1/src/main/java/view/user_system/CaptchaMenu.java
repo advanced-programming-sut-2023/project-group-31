@@ -35,17 +35,22 @@ public class CaptchaMenu extends ViewUtils {
         System.out.println(obscureCaptchaCode(generateCaptchaCode()));
         String input;
         Matcher matcher;
-        int enterCaptchaCounter = 0;
+        int wrongAnswers = 0;
         while (true) {
             input = scanner.nextLine().trim();
             if (input.matches("[\\d]")) {
-
+                ControllerUtils.putInput("inputCaptcha",input);
                 result = ControllerUtils.checkCaptchaMatching();
                 if (result.equals(UserMessages.SUCCESS)) {
+                    object=null;
                     return true;
                 } else if(result.equals(UserMessages.FAIL)){
-                    System.out.println("Wrong captcha code!");
-                    return false;
+                    System.out.println("Wrong captcha code! (you have only "+(3-wrongAnswers)+ "chance left!)");
+                    wrongAnswers++;
+                    if(wrongAnswers >=2) {
+                        object=null;
+                        return false;
+                    }
                 }
             } else {
                 System.out.println("Invalid command!");
@@ -55,7 +60,7 @@ public class CaptchaMenu extends ViewUtils {
 
     private String generateCaptchaCode() {
         captchaCode=ControllerUtils.getCaptchaCode().getTxt();
-        ArrayList<String>[] digitLines = new ArrayList<>[4];
+        ArrayList<String>[] digitLines =new ArrayList[4];
         for (int i = 0; i < 4; i++) {
             digitLines[i] = new ArrayList<>(Arrays.asList(captchaDigits.get(captchaCode.charAt(i)).trim().split("\n")));
         }

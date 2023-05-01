@@ -18,6 +18,7 @@ public class RegisterMenu extends ViewUtils {
         if(ControllerUtils.isUserLoggedIn()){
             return MenuSwitcherMessages.MAIN;
         }
+        System.out.println("_________Register Menu_______");
         String input;
         Matcher matcher;
         while (true) {
@@ -35,10 +36,17 @@ public class RegisterMenu extends ViewUtils {
     }
 
     private static void userCreate() {
+        if(!CaptchaMenu.getObject().run()){
+            System.out.println("register failed: wrong captcha.");
+            return;
+        }
         UserMessages result;
         result = RegisterController.userCreate();
         if (result.equals(UserMessages.SUCCESS)) {
             System.out.println("user register: " + result.getTxt());
+            if(!CaptchaMenu.getObject().run()){
+                return;
+            }
             pickQuestionMenu();
         } else if (result.equals(UserMessages.RANDOM_PASSWORD)) {
             confirmUsernameOrPasswordMenu();
@@ -75,7 +83,7 @@ public class RegisterMenu extends ViewUtils {
         Matcher matcher;
         System.out.println("pick one of these questions.");
         int index=0;
-        for(String question: DataBase.getSlogans()){
+        for(String question: DataBase.getDataBase().getSlogans()){
             index++;
             System.out.println(index+". "+question);
         }
