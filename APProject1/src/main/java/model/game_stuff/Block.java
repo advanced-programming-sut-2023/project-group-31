@@ -111,4 +111,12 @@ public class Block {
         }
         return output;
     }
+
+    public boolean containsEnemyPerson(Colors color) {
+        for (Person person : people) {
+            if(person.getOwner().getColor() != color)
+                return true;
+        }
+        return false;
+    }
 }
