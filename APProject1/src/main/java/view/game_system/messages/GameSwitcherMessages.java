@@ -5,5 +5,8 @@ public enum GameSwitcherMessages {
     TRADE,
     BACK,
     GAME,
-    MAP;
+    MAP,
+    BARRACKS,
+    MERCENARY_POST;
+
 }

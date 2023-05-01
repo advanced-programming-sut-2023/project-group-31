@@ -18,10 +18,10 @@ public class GameSwitcher {
                 case BACK:
                     return MenuSwitcherMessages.MAIN;
                 case MARKET:
-                    command=MarketMenu.run(scanner);
+                    command= view.game_system.MarketMenu.run(scanner);
                     break;
                 case TRADE:
-                    command=TradeMenu.run(scanner);
+                    command= view.game_system.TradeMenu.run(scanner);
                 // TODO :
             }
         }
