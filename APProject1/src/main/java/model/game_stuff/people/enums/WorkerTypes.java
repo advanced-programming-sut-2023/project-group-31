@@ -1,23 +1,25 @@
-package model.game_stuff.buildings.enums;
+package model.game_stuff.people.enums;
 
 import model.game_stuff.enums.Items;
 
-public enum ProducerTypes {
+public enum WorkerTypes {
     ;
     private String name;
     private int hp;
     private int turnsToWait;
     private int amountOfProductToProduce;
     private Items product;
-    private int capacity;
+    private int speed;
+    private int numberOfProductsToCarry;
 
-    ProducerTypes(int hp, int turnsToWait, int amountOfProductToProduce, Items product, int capacity, String name) {
+    WorkerTypes(int hp, int turnsToWait, int amountOfProductToProduce, Items product, String name, int speed, int numberOfProductsToCarry) {
         this.name = name;
         this.hp = hp;
         this.turnsToWait = turnsToWait;
         this.amountOfProductToProduce = amountOfProductToProduce;
         this.product = product;
-        this.capacity = capacity;
+        this.speed = speed;
+        this.numberOfProductsToCarry = numberOfProductsToCarry;
     }
 
     public int getHp() {
@@ -40,7 +42,11 @@ public enum ProducerTypes {
         return product;
     }
 
-    public int getCapacity() {
-        return capacity;
+    public int getSpeed() {
+        return speed;
+    }
+
+    public int getNumberOfProductsToCarry() {
+        return numberOfProductsToCarry;
     }
 }

@@ -75,6 +75,9 @@ public class Block {
     public boolean isEmpty() {
         return (building == null && people.isEmpty());
     }
+    public int getDistanceTo(Block anotherBlock) {
+        return Math.abs(x - anotherBlock.getX()) + Math.abs(y - anotherBlock.getY());
+    }
 
     @Override
     public String toString() {

@@ -6,9 +6,9 @@ import model.game_stuff.Government;
 import model.game_stuff.Person;
 import model.game_stuff.buildings.enums.TrapTypes;
 
-public class Traps extends Building {
+public class Trap extends Building {
     private TrapTypes type;
-    public Traps(TrapTypes type, Government government) {
+    public Trap(TrapTypes type, Government government) {
         super(government);
         this.type = type;
     }

@@ -1,6 +1,7 @@
 package model.game_stuff;
 
 import model.User;
+import model.game_stuff.buildings.Storage;
 import model.game_stuff.enums.Items;
 
 import java.util.ArrayList;
@@ -9,9 +10,9 @@ public class Government {
     private final User owner;
     private String name;
     private Possession possession;
-    private final ArrayList<Block> stockpilePositions;
-    private final ArrayList<Block> granaryPositions;
-    private final ArrayList<Block> weaponryPositions;
+    private final ArrayList<Storage> stockpiles;
+    private final ArrayList<Storage > granaries;
+    private final ArrayList<Storage> weaponries;
     private Block LordsHouse;
     private Colors color;
     //private int gold;
@@ -35,9 +36,9 @@ public class Government {
         fearRate = 0;
         efficiency = 8; //TODO: rabete
 
-        stockpilePositions = new ArrayList<>();
-        granaryPositions = new ArrayList<>();
-        weaponryPositions = new ArrayList<>();
+        stockpiles = new ArrayList<>();
+        granaries = new ArrayList<>();
+        weaponries = new ArrayList<>();
         tradeHistory = new ArrayList<>();
     }
 
@@ -59,16 +60,16 @@ public class Government {
         this.color = color;
     }
 
-    public ArrayList<Block> getStockpilePositions() {
-        return stockpilePositions;
+    public ArrayList<Storage> getStockpiles() {
+        return stockpiles;
     }
 
-    public ArrayList<Block> getGranaryPositions() {
-        return granaryPositions;
+    public ArrayList<Storage> getGranaries() {
+        return granaries;
     }
 
-    public ArrayList<Block> getWeaponryPositions() {
-        return weaponryPositions;
+    public ArrayList<Storage> getWeaponries() {
+        return weaponries;
     }
 
     /*public int getGold() {
@@ -135,27 +136,27 @@ public class Government {
         this.fearRate = fearRate;
     }
 
-    public void addStockpile(Block block) {
-        stockpilePositions.add(block);
+    public void addStockpile(Storage storage) {
+        stockpiles.add(storage);
     }
 
-    public void addGranary(Block block) {
-        stockpilePositions.add(block);
+    public void addGranary(Storage storage) {
+        stockpiles.add(storage);
     }
 
-    public void addWeaponry(Block block) {
-        stockpilePositions.add(block);
+    public void addWeaponry(Storage storage) {
+        stockpiles.add(storage);
     }
-    public void removeStockpile(Block block) {
-        stockpilePositions.remove(block);
-    }
-
-    public void removeGranary(Block block) {
-        stockpilePositions.remove(block);
+    public void removeStockpile(Storage storage) {
+        stockpiles.remove(storage);
     }
 
-    public void removeWeaponry(Block block) {
-        stockpilePositions.remove(block);
+    public void removeGranary(Storage storage) {
+        stockpiles.remove(storage);
+    }
+
+    public void removeWeaponry(Storage storage) {
+        stockpiles.remove(storage);
     }
 
     public Block getLordsHouse() {

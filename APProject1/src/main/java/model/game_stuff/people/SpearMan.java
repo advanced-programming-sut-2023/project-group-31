@@ -1,4 +1,4 @@
-package model.game_stuff.troops;
+package model.game_stuff.people;
 
 public class SpearMan {
     public void diggingDitch(){

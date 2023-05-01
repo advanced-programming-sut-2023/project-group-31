@@ -3,11 +3,26 @@ package model.game_stuff;
 import model.User;
 import model.game_stuff.types.Persons;
 
-public class Person {
-    private Government owner;
-    private String name;
-    private Persons type;
-    private Building habitat;
+public abstract class Person {
+    protected Government owner;
+    protected String name;
+    protected int hp;
+    protected Block position;
+
+    public Person(Government owner) {
+        this.owner = owner;
+    }
+
+    public void setHp(int hp) {
+        this.hp = hp;
+    }
+    public void getDamaged(int damage) {
+        this.hp -= damage;
+    }
+
+    public int getHp() {
+        return hp;
+    }
 
     public Government getOwner() {
         return owner;
@@ -15,5 +30,17 @@ public class Person {
 
     public String getName() {
         return name;
+    }
+
+    public Block getPosition() {
+        return position;
+    }
+
+    public void setPosition(Block position) {
+        this.position = position;
+    }
+    public void move(Block destination) {
+        position.removePerson(this);
+        destination.addPerson(this);
     }
 }

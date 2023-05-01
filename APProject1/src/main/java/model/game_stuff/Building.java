@@ -6,6 +6,7 @@ public abstract class Building {
     protected int hp;
     protected Government owner;
     protected String name;
+    private boolean isUnderAttack;
     protected ArrayList<Block> blocks;
 
     {
@@ -26,6 +27,14 @@ public abstract class Building {
         }
     }
 
+    public Government getOwner() {
+        return owner;
+    }
+
+    public Block getPosition() {
+        return blocks.get(0);
+    }
+
     public int getHp() {
         return hp;
     }
@@ -36,6 +45,14 @@ public abstract class Building {
         for (Block block : blocks) {
             block.setBuilding(null);
         }
+    }
+
+    public void setUnderAttack(boolean underAttack) {
+        isUnderAttack = underAttack;
+    }
+
+    public boolean isUnderAttack() {
+        return isUnderAttack;
     }
 
     public String getName() {

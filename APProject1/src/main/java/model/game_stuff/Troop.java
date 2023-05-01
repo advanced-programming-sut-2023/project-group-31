@@ -4,7 +4,7 @@ import model.User;
 import model.game_stuff.types.Nationality;
 import model.game_stuff.types.Troops;
 
-public class Troop extends Person{
+public class Troop{
     private User owner;
     private double hp;
     private double salary;

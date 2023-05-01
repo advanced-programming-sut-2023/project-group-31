@@ -23,7 +23,7 @@ public enum Troops{//assassins - fire towers - horseArchers,ladder man, ordinary
     // hes mikonam ke sarbazaye arab bayad barashoon tedad moshakhas beshe vali nemidoonam
 
     private double damage;// very high 6 high 5 average 4 low 3 very low 2 no damage 1
-    private double defence;//very high 6 high 5 average 4 low 3 very low 2 very very low 1
+    private double defence;//very high 6 high 5 average 4 low 3 very low 2 very, very low 1
     private double speed;//very high 5 high 4 average 3 slow 2 very slow 1
     private  String name;
     private Nationality nationality;

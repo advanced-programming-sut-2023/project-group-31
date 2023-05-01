@@ -1,4 +1,4 @@
-package model.game_stuff.troops;
+package model.game_stuff.people;
 
 import model.User;
 import model.game_stuff.Troop;
