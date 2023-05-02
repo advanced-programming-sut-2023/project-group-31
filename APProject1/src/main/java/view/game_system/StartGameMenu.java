@@ -14,13 +14,13 @@ public class StartGameMenu {
     public static MenuSwitcherMessages run(Scanner scanner) {
         Matcher matcher;
         String command;
-        while(true) {
+        while (true) {
             command = scanner.nextLine().trim();
-            if(StartGameCommands.getMatcher(command, StartGameCommands.EXIT) != null) {
+            if (StartGameCommands.getMatcher(command, StartGameCommands.EXIT) != null) {
                 return MenuSwitcherMessages.MAIN;
-            } else if(StartGameCommands.getMatcher(command, StartGameCommands.SHOW_MAPS) != null) {
-                System.out.println(StartGameController.showMaps());
-            } else if(StartGameCommands.getMatcher(command, StartGameCommands.SHOW_PLAYERS) != null) {
+            } else if (StartGameCommands.getMatcher(command, StartGameCommands.GOTO_MAP_MENU) != null) {
+                gotoMapMenu();
+            } else if (StartGameCommands.getMatcher(command, StartGameCommands.SHOW_PLAYERS) != null) {
                 System.out.println(StartGameController.showAllPlayers());
             } else if (StartGameCommands.getMatcher(command, StartGameCommands.SHOW_CHOSEN_PLAYERS) != null) {
                 System.out.println(StartGameController.showPlayersInTheGame());
@@ -36,14 +36,19 @@ public class StartGameMenu {
         }
     }
 
+    private static void gotoMapMenu() {
+        MapMenu mapMenu=new MapMenu();
+        mapMenu.run();
+    }
+
     private static void showDetails(Matcher matcher) {
         ControllerUtils.setInputs(ViewUtils.putInHashmap(matcher, StartGameCommands.SET_A_BLOCK_TEXTURE.getRegex()));
         StartGameMessages message = StartGameController.showDetails();
-        if(message == StartGameMessages.SUCCESS) {
+        if (message == StartGameMessages.SUCCESS) {
             System.out.println(StartGameMessages.SUCCESS.getTxt());
             return;
         }
-        if(message == StartGameMessages.INVALID_COMMAND) {
+        if (message == StartGameMessages.INVALID_COMMAND) {
             System.out.println("invalid command!");
             return;
         }
@@ -53,11 +58,11 @@ public class StartGameMenu {
     private static void setTextureForARectangle(Matcher matcher) {
         ControllerUtils.setInputs(ViewUtils.putInHashmap(matcher, StartGameCommands.SET_A_BLOCK_TEXTURE.getRegex()));
         StartGameMessages message = StartGameController.setARectanglesTexture();
-        if(message == StartGameMessages.SUCCESS) {
+        if (message == StartGameMessages.SUCCESS) {
             System.out.println("set texture successful!");
             return;
         }
-        if(message == StartGameMessages.INVALID_COMMAND) {
+        if (message == StartGameMessages.INVALID_COMMAND) {
             System.out.println("invalid command!");
             return;
         }
@@ -67,11 +72,11 @@ public class StartGameMenu {
     private static void setABlocksTexture(Matcher matcher) {
         ControllerUtils.setInputs(ViewUtils.putInHashmap(matcher, StartGameCommands.SET_A_BLOCK_TEXTURE.getRegex()));
         StartGameMessages message = StartGameController.setABlockTexture();
-        if(message == StartGameMessages.SUCCESS) {
+        if (message == StartGameMessages.SUCCESS) {
             System.out.println("set texture successful!");
             return;
         }
-        if(message == StartGameMessages.INVALID_COMMAND) {
+        if (message == StartGameMessages.INVALID_COMMAND) {
             System.out.println("invalid command!");
             return;
         }
@@ -79,13 +84,13 @@ public class StartGameMenu {
     }
 
     private static void chooseMap(Matcher matcher) {
-        String name = matcher.group("name").trim().replaceAll("\"","");
+        String name = matcher.group("name").trim().replaceAll("\"", "");
         StartGameMessages message = StartGameController.chooseMap(name);
-        if(message == StartGameMessages.SUCCESS) {
+        if (message == StartGameMessages.SUCCESS) {
             System.out.println("choose map successful!");
             return;
         }
-        if(message == StartGameMessages.INVALID_COMMAND) {
+        if (message == StartGameMessages.INVALID_COMMAND) {
             System.out.println("invalid command!");
             return;
         }
@@ -94,6 +99,7 @@ public class StartGameMenu {
 
     private void addPlayer(Matcher matcher) {
     }
+
     private void removePlayer(Matcher matcher) {
     }
 
@@ -101,12 +107,15 @@ public class StartGameMenu {
 
         return false;
     }
+
     private void setTexture(Matcher matcher) {
 
     }
+
     private void clear(Matcher matcher) {
 
     }
+
     private void dropRock(Matcher matcher) {
 
     }

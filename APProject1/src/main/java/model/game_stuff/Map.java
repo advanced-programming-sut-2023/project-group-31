@@ -77,6 +77,12 @@ public class Map {
     public int getSize() {
         return size;
     }
+    public int getLength() {
+        return size;
+    }
+    public int getWidth() {
+        return size;
+    }
 
     public ArrayList<Tree> getTrees() {
         return trees;
@@ -110,6 +116,10 @@ public class Map {
     public boolean isInMap(int x, int y) {
         return x >= 0 &&  y >= 0 && x < size && y < size;
     }
+
+
+
+
 
     @Override
     public String toString() {

@@ -17,7 +17,7 @@ public enum StartGameCommands {
     DROP_TREE("drop tree (( -x (?<x>\\d+) )|( -y (?<y>\\d+) ))+"),
     DROP_LORD_HOUSE("drop lord house (( -x (?<x>\\d+) )|( -y (?<y>\\d+) ))+"),
     SHOW_CHOSEN_PLAYERS("show chosen players"),
-    ;
+    GOTO_MAP_MENU("goto map menu!");
     private String regex;
     StartGameCommands(String regex) {
         this.regex = editRegex(regex);

@@ -4,7 +4,7 @@ import view.game_system.messages.MarketMessages;
 import view.user_system.messages.UserMessages;
 
 public class MarketController extends controller.ControllerUtils {
-    public static UserMessages showPriceList(){
+    public static String showPriceList(){
         //TODO   KINGDOM CONTROLLER
         // StringBuilder result
         //getCurrentGovernment.getPossession().for

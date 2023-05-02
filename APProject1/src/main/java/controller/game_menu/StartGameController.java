@@ -24,6 +24,11 @@ public class StartGameController extends ControllerUtils {
         }
         return output;
     }
+
+    public static Map getChosenMap() {
+        return chosenMap;
+    }
+
     public static UserMessages setTexture(int x, int y, String type){
         return null;
     }

@@ -27,4 +27,7 @@ public class FactorRiser extends Building {
                 ", blocks=" + blocks +
                 '}';
     }
+    public String getName() {
+        return type.getName();
+    }
 }

@@ -52,7 +52,7 @@ public class MarketMenu extends ViewUtils {
 
     private static void sell(Matcher matcher){
         ControllerUtils.setInputs(putInHashmap(matcher,MarketCommands.BUY.getRegex()));
-        MarketMessages message = MarketController.buy();
+        MarketMessages message = MarketController.sell();
         if(message==MarketMessages.SUCCESS){
             System.out.println("you buy good successfully!");
         }
