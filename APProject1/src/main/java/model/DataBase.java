@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
+import com.google.gson.Gson;
 import controller.ControllerUtils;
 
 
@@ -74,7 +75,8 @@ public class DataBase {
         if (databaseFile.length() == 0) {
             dataBase = new DataBase(new ArrayList<User>(), null);
         } else {
-            //TODO
+            Gson gson = new Gson();
+           // gson.fromJson(readResource("dataBase.txt"),);
         }
     }
 
