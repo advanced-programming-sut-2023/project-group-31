@@ -21,4 +21,8 @@ public class Trap extends Building {
             }
         }
     }
+
+    public String getName() {
+        return type.getName();
+    }
 }

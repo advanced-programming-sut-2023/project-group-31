@@ -16,7 +16,6 @@ public class Tower extends Building {
         public boolean hasStairs() {
                 return hasStairs;
         }
-
         public void setStairs(boolean hasStairs) {
                 this.hasStairs = hasStairs;
         }
@@ -29,5 +28,10 @@ public class Tower extends Building {
         }
         public int getDefendRange() {
                 return type.getDefendRange();
+        }
+
+        @Override
+        public String getName() {
+                return type.getName();
         }
 }

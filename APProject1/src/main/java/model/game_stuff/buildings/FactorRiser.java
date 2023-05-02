@@ -15,4 +15,7 @@ public class FactorRiser extends Building {
     public FactorRiserTypes getType() {
         return type;
     }
+    public String getName() {
+        return type.getName();
+    }
 }

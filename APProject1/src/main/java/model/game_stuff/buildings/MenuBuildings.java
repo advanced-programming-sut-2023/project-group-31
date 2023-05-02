@@ -10,4 +10,7 @@ public class MenuBuildings extends Building {
         super(government);
         this.menu = menu;
     }
+    public String getName() {
+        return "main building";
+    }
 }

@@ -48,4 +48,8 @@ public class Storage extends Building {
         }
         amountOfProducts -= amount;
     }
+
+    public String getName() {
+        return type.getName();
+    }
 }

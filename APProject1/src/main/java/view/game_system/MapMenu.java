@@ -1,81 +1,89 @@
 package view.game_system;
 
+import controller.game_menu.MapController;
+import model.game_stuff.Block;
 import model.game_stuff.Map;
 import model.game_stuff.enums.Textures;
 import view.ViewUtils;
 import view.game_system.commands.MapCommands;
 import view.viewStyle.Colors;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.regex.Matcher;
 
 public class MapMenu extends ViewUtils {
-    private Map map;
-    private int length;
-    private int width;
 
-    private int x;
-    private int y;
+    MapController mapController;
 
-    public MapMenu(Map map) {
-        this.map = map;
-        length = 14;
-        width = 4;
+    public MapMenu() {
+        mapController=new MapController();
     }
 
     public void run() {
         String input;
         Matcher matcher;
+
         while (true) {
             input = scanner.nextLine().trim();
             if ((matcher = MapCommands.getMatcher(input, MapCommands.SHOW_MAP)) != null) {
-                x=Integer.parseInt(matcher.group("x"));
-                y=Integer.parseInt(matcher.group("y"));
-                showMapByXY();
+
+                showMapByXY(matcher);
             } else if ((matcher = MapCommands.getMatcher(input, MapCommands.MOVE)) != null) {
-                moveOnMap();
+                moveOnMap(matcher.group("directions"));
+            } else if ((matcher = MapCommands.getMatcher(input, MapCommands.SHOW_DETAILS)) != null) {
+                showDetails(Integer.parseInt(matcher.group("x")),(Integer.parseInt(matcher.group("y"))));
+            } else if(input.equals("exit")){
+                return;
+            }else {
+                System.out.println("Invalid command!");
             }
         }
     }
 
-    private void moveOnMap() {
-
+    private void showMapByXY(Matcher matcher){
+        mapController.setXy(Integer.parseInt(matcher.group("x")),Integer.parseInt(matcher.group("y")));
+        System.out.println(mapController.showMapByXY());
     }
 
-    private void showMapByXY() {
-        showLine();
-        for (int i = y; i < y + width; i++) {
-            for (int j = 0; j < 3; j++) {
-                showRow(x,i);
-            }
-            showLine();
-        }
+    private void showDetails(int x,int y){
+        System.out.println(mapController.showDetails(x,y));
     }
 
-    private void showLine() {
-        System.out.print("-");
-        for (int i = 0; i < 6 * length;i++) {
-            System.out.println("-");
-        }
-        System.out.print("-");
-        System.out.println();
+
+
+
+
+    private enum Directions {
+        RIGHT, UP;
     }
 
-    private void showRow(int x, int y) {
-        String output;
-        for (int i = x-(length/2); i < x +(length/2); i++) {
-            System.out.println("|");
-            if (map.getBlocks().get(i).get(y).getType().equals(Textures.GROUND)) {
-                output = "#";
-            } else {
-                output = map.getBlocks().get(i).get(y).getType().getColor().getBackgroundColorCode()
-                        + map.getBlocks().get(i).get(y).getType().getName().substring(0, 1)
-                        + Colors.RESET.getBackgroundColorCode();
-            }
-            for (int j = 0; j < 6; j++) {
-                System.out.println(output);
+    private HashMap<Directions, Integer> setDirections(String directionsString) {
+        int rights=0,ups=0;
+        String[] directionsArray = directionsString.trim().split(" ");
+        for (String direction : directionsArray) {
+            switch (direction) {
+                case "right": rights++;
+                    break;
+                case "left": rights--;
+                    break;
+                case "up":  ups++;
+                    break;
+                case "down": ups--;
+                    break;
             }
         }
-        System.out.println("|");
+        HashMap<Directions, Integer> enumDirections = new HashMap<Directions, Integer>();
+        enumDirections.put(Directions.RIGHT,rights);
+        enumDirections.put(Directions.UP,ups);
+        return enumDirections;
+    }
+
+    private void moveOnMap(String directionString) {
+        int rights=setDirections(directionString).get(Directions.RIGHT);
+        int ups=setDirections(directionString).get(Directions.UP);
+        mapController.moveOnMap(rights,ups);
+        System.out.println(mapController.showMapByXY());
     }
 }
 

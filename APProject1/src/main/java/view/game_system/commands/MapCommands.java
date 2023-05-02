@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 
 public enum MapCommands {
     SHOW_MAP("show map(( -x (?<x>[\\d]+))|( -y (?<y>[\\d]+)))+"),
-    MOVE("map up(( (?<direction1>(left|right|up|down)))|( (?<direction1>(left|right|up|down))))+"),
+    MOVE("map up(?<directions>(( (left|right|up|down))|( (left|right|up|down)))+)"),
     SHOW_DETAILS("show details(( -x (?<x>[\\d]+))|( -y (?<y>[\\d]+)))+");
     String regex;
 

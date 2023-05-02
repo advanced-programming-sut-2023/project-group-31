@@ -34,4 +34,7 @@ public class Producer extends Building {
             numberOfProductsAvailable = type.getCapacity();
         }
     }
+    public String getName() {
+        return type.getName();
+    }
 }

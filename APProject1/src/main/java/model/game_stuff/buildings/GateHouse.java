@@ -37,4 +37,8 @@ public class GateHouse extends Building {
     public GateHouseTypes getType() {
         return type;
     }
+
+    public String getName() {
+        return type.getName();
+    }
 }

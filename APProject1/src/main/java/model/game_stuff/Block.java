@@ -77,6 +77,10 @@ public class Block {
         this.type = type;
     }
 
+    public HashMap<String, Integer> getNumberOfPeople() {
+        return numberOfPeople;
+    }
+
     public void setBuilding(Building building) {
         this.building = building;
     }
