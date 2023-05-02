@@ -14,7 +14,7 @@ import java.util.regex.Matcher;
 public class RegisterMenu extends ViewUtils {
 
 
-    public static MenuSwitcherMessages run(Scanner scanner) {
+    public static MenuSwitcherMessages run() {
         if(ControllerUtils.isUserLoggedIn()){
             return MenuSwitcherMessages.MAIN;
         }
@@ -23,14 +23,16 @@ public class RegisterMenu extends ViewUtils {
         Matcher matcher;
         while (true) {
             input = scanner.nextLine().trim();
+
             if ((matcher = RegisterCommands.getMatcher(input, RegisterCommands.REGISTER)) != null) {
-                ControllerUtils.setInputs(putInHashmap(matcher, RegisterCommands.REGISTER.getRegex()));
+                putInHashmap(matcher, RegisterCommands.REGISTER.getRegex());
                 userCreate();
             }else if(input.matches("goto[\\s]+login[\\s]+menu")){
                 return MenuSwitcherMessages.LOGIN;
             }else {
                 System.out.println("Invalid command!");
             }
+
         }
 
     }

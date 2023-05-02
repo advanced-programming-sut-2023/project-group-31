@@ -25,7 +25,7 @@ public enum UserMessages {
     WRONG_ANSWER("wrong answer!"),
     OLD_PASSWORD_IS_WRONG("old password is not correct!"),
     OLD_PASSWORD_MATCHES_NEW_PASSWORD("old password equals new password!"),
-    NO_CHANGE("nothing changed!");
+    NO_CHANGE("nothing changed!"), CONTINUE("CONTINUE");
     private String txt;
 
 

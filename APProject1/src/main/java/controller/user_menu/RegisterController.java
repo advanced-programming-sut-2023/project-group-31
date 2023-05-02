@@ -12,16 +12,20 @@ public class RegisterController extends ControllerUtils {
 
     public static UserMessages userCreate() {
         UserMessages message;
+
+        if(checkEmptyError(inputs)!=null){
+            return checkEmptyError(inputs);
+        }
         if (checkFormatErrors(inputs) != null) {
             return checkFormatErrors(inputs);
         }
 
-        if (inputs.get("password").equals("random")) {
+        if (inputs.get("randomPassword")!=null) {
             inputs.put("password",generateNewPassword());
             return UserMessages.RANDOM_PASSWORD;
         }
 
-        if (inputs.get("password").equalsIgnoreCase(inputs.get("password confirmation"))) {
+        if (!inputs.get("password").equals(inputs.get("passwordConfirmation"))) {
             return UserMessages.getMessage("Password not match!");
         }
 

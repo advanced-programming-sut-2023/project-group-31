@@ -1,5 +1,6 @@
 
 import model.DataBase;
+import model.game_stuff.people.Assassins;
 import view.user_system.MenuSwitcher;
 
 public class Main {

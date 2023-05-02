@@ -1,5 +1,6 @@
 package view;
 
+import controller.ControllerUtils;
 import view.user_system.messages.UserMessages;
 
 import java.util.HashMap;
@@ -14,20 +15,24 @@ public class ViewUtils {
     public static String editRegex(String regex){
         String result;
         result=regex.replaceAll("[\\s]+","[\\s]+");
-        result=regex.replaceAll("IN","([\\S]*)|(\"[^*]*\")");
-
+        result=regex.replaceAll("IN","([\\\\S]*)|(\"[^*]*\")");
         return result;
     }
 
     public static HashMap<String, String> putInHashmap(Matcher matcher, String regex) {
-        Matcher groups = Pattern.compile("\\(\\?\\<(?<groupName>[\\S]+)\\>.+\\)").matcher(regex);
+        Matcher groups = Pattern.compile("\\(\\?\\<(?<groupName>[\\S]+)\\>").matcher(regex);
         String groupName;
         HashMap<String, String> inputs = new HashMap<String, String>();
+
         while (groups.find()) {
             groupName = groups.group("groupName");
-            inputs.put(groupName, matcher.group(groupName).replaceFirst("\"","").replaceFirst("(?s)"+"\""+"(?!.*?"+"\""+")", ""));
-
+            if(matcher.group(groupName)!=null) {
+                inputs.put(groupName, matcher.group(groupName).replaceFirst("\"", "").replaceFirst("(?s)" + "\"" + "(?!.*?" + "\"" + ")", ""));
+            }
         }
+
+        ControllerUtils.setInputs(inputs);
+
         inputs.put("command",regex.substring(0,regex.indexOf("(")));
         return inputs;
     }

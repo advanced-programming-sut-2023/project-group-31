@@ -6,7 +6,8 @@ public enum InputFormats {
     EMAIL("email","([\\w]|\\.)+@([\\w]|\\.)+.([\\w]|\\.)+",true),
     QUESTION_NUMBER("question-number","([\\w]|\\.)+@([\\w]|\\.)+.([\\w]|\\.)+",true),
     X("[\\d]+",true),
-    Y("[\\d]+",true)
+    Y("[\\d]+",true),
+    DEFAULT(".*",true)
 
 
     ;
@@ -57,6 +58,6 @@ public enum InputFormats {
                 return inputFormat;
             }
         }
-        return null;
+        return DEFAULT;
     }
 }

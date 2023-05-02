@@ -17,7 +17,7 @@ public class MenuSwitcher extends ViewUtils {
                     command = LoginMenu.run(scanner);
                     break;
                 case REGISTER:
-                    command = RegisterMenu.run(scanner);
+                    command = RegisterMenu.run();
                     break;
                 case PROFILE:
                     command = ProfileMenu.run(scanner);

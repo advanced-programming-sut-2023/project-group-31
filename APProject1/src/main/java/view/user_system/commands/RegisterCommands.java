@@ -6,13 +6,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public enum RegisterCommands {
-    REGISTER("user create(( -u (?<username>I))|( -p (?<password>I) (?<passwordConfirmation>I))|( -p (?<password>random))|( –email (?<email>I))|( -s (?<slogan>I))))+"),
+    REGISTER("user create(( -u (?<username>IN))|( -p (?<password>IN) (?<passwordConfirmation>IN))|( -p (?<randomPassword>random))|( –email (?<email>IN))|( -s (?<slogan>IN)))+"),
     PICK_QUESTION("question pick -q <question-number> -a <answer> -c <answerConfirm>")
     ;
     private final String regex;
 
     RegisterCommands(String regex) {
         this.regex = ViewUtils.editRegex(regex);
+
     }
 
     public String getRegex() {

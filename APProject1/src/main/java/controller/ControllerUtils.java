@@ -43,7 +43,7 @@ public abstract class ControllerUtils {
     }
 
     public static void setInputs(HashMap<String, String> inputs) {
-        inputs = inputs;
+        ControllerUtils.inputs = inputs;
     }
 
     public static HashMap<String, String> getInputs(){
@@ -73,7 +73,7 @@ public abstract class ControllerUtils {
         return UserMessages.FAIL;
     }
 
-    private static boolean isFormatCurrent(String input, InputFormats inputFormat) {
+    private static boolean isFormatCorrect(String input, InputFormats inputFormat) {
         if (inputFormat.getFormat() == null) {
             return true;
         }
@@ -99,7 +99,8 @@ public abstract class ControllerUtils {
             return result;
         }
         for (String groupName : inputs.keySet()) {
-            if (inputs.get(groupName) != null && !isFormatCurrent(inputs.get(groupName), InputFormats.getInputFormat(groupName))) {
+            if (inputs.get(groupName) != null && !isFormatCorrect(inputs.get(groupName), InputFormats.getInputFormat(groupName))) {
+                
                 UserMessages.INVALID_FORMAT.setTxt("Inavlid"+groupName+"format!");
                 return UserMessages.INVALID_FORMAT;
             }

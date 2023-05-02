@@ -12,6 +12,7 @@ public class MarketController extends controller.ControllerUtils {
         //result.append('\n');
         /*ya mishe ye tabe static az ye possession tarif ke
         hame kala haro dashte bashe*/
+        return null;
     }
     public static MarketMessages buy(){
         if(inputs.get("item")==null){
@@ -27,7 +28,7 @@ public class MarketController extends controller.ControllerUtils {
         //if(User.getGold<amount*good.getPrice() return NOT_ENOUGH_GOLD
         //if(government.isStockpilesFull) return YOUR_STOCKPILE_IS_FULL
         //else user.setgold(user.getgold-amount*goodPrice()) stockpile add good and return SUCCESS
-
+        return null;
     }
     public static MarketMessages sell(){
         if(inputs.get("item")==null){
@@ -44,5 +45,6 @@ public class MarketController extends controller.ControllerUtils {
         // currentUser.getPossession.get(item).setNumber(getNumber-amount)
         //currentUser.setgold(getgold+amount*good.getPrice())
         //return SUCCESS
+        return null;
     }
 }
