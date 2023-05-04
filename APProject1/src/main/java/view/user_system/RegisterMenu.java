@@ -91,7 +91,7 @@ public class RegisterMenu extends ViewUtils {
         }
         while (true) {
             input = scanner.nextLine();
-            if ((matcher = RegisterCommands.getMatcher(input, RegisterCommands.REGISTER)) != null) {
+            if ((matcher = RegisterCommands.getMatcher(input, RegisterCommands.PICK_QUESTION)) != null) {
                 ControllerUtils.setInputs(putInHashmap(matcher, RegisterCommands.PICK_QUESTION.getRegex()));
                 pickQuestion();
                 if(result.equals(UserMessages.SUCCESS)) return;

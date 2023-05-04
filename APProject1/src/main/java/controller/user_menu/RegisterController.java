@@ -90,7 +90,7 @@ public class RegisterController extends ControllerUtils {
             return checkFormatErrors(inputs);
         }
 
-        if (inputs.get("answer").equals(inputs.get("answerConfirm"))) {
+        if (!inputs.get("answer").equals(inputs.get("answerConfirm"))) {
             return UserMessages.ANSWER_NOT_MATCH;
         }
 

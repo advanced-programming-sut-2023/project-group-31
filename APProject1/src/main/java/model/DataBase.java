@@ -75,8 +75,7 @@ public class DataBase {
         if (databaseFile.length() == 0) {
             dataBase = new DataBase(new ArrayList<User>(), null);
         } else {
-            Gson gson = new Gson();
-           // gson.fromJson(readResource("dataBase.txt"),);
+
         }
     }
 
@@ -114,6 +113,9 @@ public class DataBase {
 
 
     public static DataBase getDataBase(){
+        if(dataBase==null){
+            connectToDatabase();
+        }
         return dataBase;
     }
     public ArrayList<String> getSlogans() {

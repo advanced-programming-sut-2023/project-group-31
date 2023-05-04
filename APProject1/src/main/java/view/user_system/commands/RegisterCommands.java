@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 
 public enum RegisterCommands {
     REGISTER("user create(( -u (?<username>IN))|( -p (?<password>IN) (?<passwordConfirmation>IN))|( -p (?<randomPassword>random))|( –email (?<email>IN))|( -s (?<slogan>IN)))+"),
-    PICK_QUESTION("question pick -q <question-number> -a <answer> -c <answerConfirm>")
+    PICK_QUESTION("question pick(( -q (?<questionNumber>[\\d]+))|( -a (?<answer>[\\S]+))|( -c (?<answerConfirm>[\\S]+)))+")
     ;
     private final String regex;
 

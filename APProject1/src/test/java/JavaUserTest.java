@@ -38,5 +38,12 @@ public class JavaUserTest {
         matcher = RegisterCommands.getMatcher("user create -u mamad -p random –email fdf@gamil.com -s \"we do it\"", RegisterCommands.REGISTER);
         ViewUtils.putInHashmap(matcher,RegisterCommands.REGISTER.getRegex());
         Assertions.assertEquals(UserMessages.RANDOM_PASSWORD,RegisterController.userCreate());
+        matcher = RegisterCommands.getMatcher("user create -u mamadi -p mamadA34 mamadA34 –email fdf@gamil.com -s \"we do it\"", RegisterCommands.REGISTER);
+        ViewUtils.putInHashmap(matcher,RegisterCommands.REGISTER.getRegex());
+        Assertions.assertEquals(UserMessages.PASSWORD_IS_WEAK,RegisterController.userCreate());
+
+        matcher = RegisterCommands.getMatcher("question pick -q 2 -a yes -c yes", RegisterCommands.PICK_QUESTION);
+        ViewUtils.putInHashmap(matcher,RegisterCommands.PICK_QUESTION.getRegex());
+        Assertions.assertEquals(UserMessages.SUCCESS,RegisterController.pickQuestion());
     }
 }

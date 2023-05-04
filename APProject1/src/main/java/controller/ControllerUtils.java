@@ -121,7 +121,7 @@ public abstract class ControllerUtils {
         if (!password.matches(".*[\\d].*")) {
             return UserMessages.PASSWORD_IS_WEAK.setAndPrintMessage("password should have at least one digit!");
         }
-        if (!password.matches(".*^([\\d]|[a-zA-Z]).*")) {
+        if (!password.matches(".*([^\\da-zA-Z]).*")) {
             return UserMessages.PASSWORD_IS_WEAK.setAndPrintMessage("password should have one not letter nad numeric character!");
         }
         return null;
