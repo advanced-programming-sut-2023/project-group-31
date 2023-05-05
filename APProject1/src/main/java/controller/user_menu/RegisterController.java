@@ -51,7 +51,7 @@ public class RegisterController extends ControllerUtils {
         User user = new User(inputs.get("username"), inputs.get("password"), inputs.get("nickname"), inputs.get("email"), inputs.get("slogan"));
 
         User.addUser(user);
-
+        DataBase.saveDataBase();
         return UserMessages.SUCCESS;
     }
 
@@ -85,18 +85,22 @@ public class RegisterController extends ControllerUtils {
 
 
 
-    public static UserMessages pickQuestion() {
+    public static UserMessages pickQuestion(String username) {
         if (checkFormatErrors(inputs) != null) {
             return checkFormatErrors(inputs);
+        }
+
+        if(Integer.parseInt(inputs.get("questionNumber"))-1>DataBase.getDataBase().getRecoveryQuestions().size()){
+            return UserMessages.INVALID_FORMAT.setAndPrintMessage("Question number is invalid");
         }
 
         if (!inputs.get("answer").equals(inputs.get("answerConfirm"))) {
             return UserMessages.ANSWER_NOT_MATCH;
         }
 
-        currentUser.setPasswordRecoveryQuestion(DataBase.getDataBase().getSlogans().get(Integer.parseInt(inputs.get("questionNumber"))));
-        currentUser.setPasswordRecoveryAnswer(inputs.get("answer"));
-
+        User.getUserByUsername(username).setPasswordRecoveryQuestion(DataBase.getDataBase().getSlogans().get(Integer.parseInt(inputs.get("questionNumber"))-1));
+        User.getUserByUsername(username).setPasswordRecoveryAnswer(inputs.get("answer"));
+        DataBase.saveDataBase();
         return UserMessages.SUCCESS;
     }
 

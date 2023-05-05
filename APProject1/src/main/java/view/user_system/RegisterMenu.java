@@ -46,9 +46,6 @@ public class RegisterMenu extends ViewUtils {
         result = RegisterController.userCreate();
         if (result.equals(UserMessages.SUCCESS)) {
             System.out.println("user register: " + result.getTxt());
-            if(!CaptchaMenu.getObject().run()){
-                return;
-            }
             pickQuestionMenu();
         } else if (result.equals(UserMessages.RANDOM_PASSWORD)) {
             confirmUsernameOrPasswordMenu();
@@ -64,7 +61,7 @@ public class RegisterMenu extends ViewUtils {
 
         String input;
         while (true) {
-            input = scanner.nextLine();
+            input = scanner.nextLine().trim();
             if (input.equals("YES")) {
                 userCreate();
                 return;
@@ -90,10 +87,11 @@ public class RegisterMenu extends ViewUtils {
             System.out.println(index+". "+question);
         }
         while (true) {
-            input = scanner.nextLine();
+            input = scanner.nextLine().trim();
             if ((matcher = RegisterCommands.getMatcher(input, RegisterCommands.PICK_QUESTION)) != null) {
+                String username=ControllerUtils.getInputs().get("username");
                 ControllerUtils.setInputs(putInHashmap(matcher, RegisterCommands.PICK_QUESTION.getRegex()));
-                pickQuestion();
+                pickQuestion(username);
                 if(result.equals(UserMessages.SUCCESS)) return;
             } else {
                 System.out.println("Invalid command!");
@@ -101,9 +99,9 @@ public class RegisterMenu extends ViewUtils {
         }
     }
 
-    private static void pickQuestion() {
+    private static void pickQuestion(String username) {
 
-        result = RegisterController.pickQuestion();
+        result = RegisterController.pickQuestion(username);
         if (result.equals(UserMessages.SUCCESS)) {
             System.out.println("question pick: " + result.getTxt());
         } else {

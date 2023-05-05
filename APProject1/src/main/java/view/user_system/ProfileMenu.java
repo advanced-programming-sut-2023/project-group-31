@@ -60,7 +60,7 @@ public class ProfileMenu extends ViewUtils {
     }
 
     private static void changePassword() {
-        if(!CaptchaMenu.object.run()){
+        if(!CaptchaMenu.getObject().run()){
             System.out.println("change password failed: wrong captcha.");
             return;
         }

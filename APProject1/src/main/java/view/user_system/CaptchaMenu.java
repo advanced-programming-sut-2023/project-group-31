@@ -14,7 +14,7 @@ import java.util.regex.Matcher;
 
 public class CaptchaMenu extends ViewUtils {
 
-    public static CaptchaMenu object = null;
+    private static CaptchaMenu object = null;
     ArrayList<String> captchaDigits;
 
     private String captchaCode;
@@ -33,12 +33,13 @@ public class CaptchaMenu extends ViewUtils {
     public boolean run() {
         System.out.println("Enter captcha code.");
         System.out.println(obscureCaptchaCode(generateCaptchaCode()));
+        ControllerUtils.putInput("captchaCode",captchaCode);
         String input;
         Matcher matcher;
         int wrongAnswers = 0;
         while (true) {
             input = scanner.nextLine().trim();
-            if (input.matches("[\\d]")) {
+            if (input.matches("[\\d]+")) {
                 ControllerUtils.putInput("inputCaptcha",input);
                 result = ControllerUtils.checkCaptchaMatching();
                 if (result.equals(UserMessages.SUCCESS)) {
@@ -62,7 +63,7 @@ public class CaptchaMenu extends ViewUtils {
         captchaCode=ControllerUtils.getCaptchaCode().getTxt();
         ArrayList<String>[] digitLines =new ArrayList[4];
         for (int i = 0; i < 4; i++) {
-            digitLines[i] = new ArrayList<>(Arrays.asList(captchaDigits.get(captchaCode.charAt(i)).trim().split("\n")));
+            digitLines[i] = new ArrayList<>(Arrays.asList(captchaDigits.get(Integer.parseInt(captchaCode.substring(i,i+1))).trim().split("\n")));
         }
         String createdCaptchaCode = "";
         for (int i = 0; i < digitLines[0].size(); i++) {

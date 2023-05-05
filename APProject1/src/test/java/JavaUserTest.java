@@ -1,9 +1,13 @@
 import controller.ControllerUtils;
+import controller.user_menu.LoginController;
 import controller.user_menu.RegisterController;
+import model.DataBase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import view.ViewUtils;
 import view.user_system.RegisterMenu;
+import view.user_system.commands.LoginCommands;
 import view.user_system.commands.RegisterCommands;
 import view.user_system.messages.UserMessages;
 
@@ -12,7 +16,10 @@ import java.util.regex.Matcher;
 
 public class JavaUserTest {
     @Test
-    public void RegisterMenuTest(){
+    public void RegisterControllerTest(){
+        DataBase.setDataBase(Mockito.mock(DataBase.class));
+        DataBase.getDataBase().setSlogans();
+        DataBase.getDataBase().setRecoveryQuestions();
         Matcher matcher;
         matcher = RegisterCommands.getMatcher("user create -u userna11111me -p 123456Aa$ 123456Aa$ –email momirzadi200@gamil.com -s \"we do it\"", RegisterCommands.REGISTER);
         ViewUtils.putInHashmap(matcher,RegisterCommands.REGISTER.getRegex());
@@ -42,8 +49,28 @@ public class JavaUserTest {
         ViewUtils.putInHashmap(matcher,RegisterCommands.REGISTER.getRegex());
         Assertions.assertEquals(UserMessages.PASSWORD_IS_WEAK,RegisterController.userCreate());
 
-        matcher = RegisterCommands.getMatcher("question pick -q 2 -a yes -c yes", RegisterCommands.PICK_QUESTION);
-        ViewUtils.putInHashmap(matcher,RegisterCommands.PICK_QUESTION.getRegex());
-        Assertions.assertEquals(UserMessages.SUCCESS,RegisterController.pickQuestion());
+
+
+        matcher = LoginCommands.getMatcher("user login -u mamad -p 123456Aa$", LoginCommands.LOGIN);
+        ViewUtils.putInHashmap(matcher,LoginCommands.LOGIN.getRegex());
+        Assertions.assertEquals(UserMessages.SUCCESS, LoginController.loginUser());
+
+        matcher = LoginCommands.getMatcher("user login -u mamad -p 123456A$", LoginCommands.LOGIN);
+        ViewUtils.putInHashmap(matcher,LoginCommands.LOGIN.getRegex());
+        Assertions.assertEquals(UserMessages.PASSWORD_IS_NOT_CORRECT,LoginController.loginUser());
+
+    }
+
+    public void loginControllerTest(){
+
+        Matcher matcher;
+        matcher = RegisterCommands.getMatcher("user login -u mamad -p 123456Aa$", RegisterCommands.REGISTER);
+        ViewUtils.putInHashmap(matcher,RegisterCommands.REGISTER.getRegex());
+        Assertions.assertEquals(UserMessages.SUCCESS,RegisterController.userCreate());
+
+        matcher = RegisterCommands.getMatcher("user login -u mamad -p 123456A$", RegisterCommands.REGISTER);
+        ViewUtils.putInHashmap(matcher,RegisterCommands.REGISTER.getRegex());
+        Assertions.assertEquals(UserMessages.SUCCESS,RegisterController.userCreate());
+
     }
 }

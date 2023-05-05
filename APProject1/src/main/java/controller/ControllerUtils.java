@@ -62,7 +62,7 @@ public abstract class ControllerUtils {
             captchaCode += random[i];
         }
         inputs.put("captchaCode",captchaCode);
-        UserMessages.MESSAGES.setTxt(captchaCode);
+        UserMessages.MESSAGE.setTxt(captchaCode);
         return UserMessages.MESSAGE;
     }
 

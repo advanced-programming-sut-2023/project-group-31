@@ -17,6 +17,7 @@ public class LoginMenu extends ViewUtils {
         if(ControllerUtils.isUserLoggedIn()){
             return MenuSwitcherMessages.MAIN;
         }
+        System.out.println("--------login menu-------");
         String input;
         Matcher matcher;
         while (true) {
@@ -37,7 +38,7 @@ public class LoginMenu extends ViewUtils {
     }
 
     private static void userLogin() {
-        if(!CaptchaMenu.object.run()){
+        if(!CaptchaMenu.getObject().run()){
             System.out.println("login failed: wrong captcha");
             return;
         }

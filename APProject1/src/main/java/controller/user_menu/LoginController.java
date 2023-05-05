@@ -43,7 +43,7 @@ public class LoginController extends ControllerUtils {
     }
 
     public static UserMessages getForgotPasswordQuestion() {
-        UserMessages.MenuMessage.setTxt(currentUser.getPasswordRecoveryQuestion());
+        UserMessages.MenuMessage.setTxt(User.getUserByUsername(inputs.get("username")).getPasswordRecoveryQuestion());
         return UserMessages.MenuMessage;
     }
 

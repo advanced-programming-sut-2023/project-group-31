@@ -20,7 +20,7 @@ public class ViewUtils {
     }
 
     public static HashMap<String, String> putInHashmap(Matcher matcher, String regex) {
-        Matcher groups = Pattern.compile("\\(\\?\\<(?<groupName>[\\S]+)\\>").matcher(regex);
+        Matcher groups = Pattern.compile("\\(\\?\\<(?<groupName>[^\\)]+)\\>").matcher(regex);
         String groupName;
         HashMap<String, String> inputs = new HashMap<String, String>();
 
