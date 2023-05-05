@@ -1,10 +1,8 @@
-package controller.game_menu;
+package controller.game_system;
 
 import model.game_stuff.Block;
 import model.game_stuff.Map;
 import model.game_stuff.enums.Textures;
-import view.game_system.MapMenu;
-import view.user_system.messages.UserMessages;
 import view.viewStyle.Colors;
 
 public class MapController {

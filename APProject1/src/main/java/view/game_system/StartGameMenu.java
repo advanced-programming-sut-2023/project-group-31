@@ -1,7 +1,7 @@
 package view.game_system;
 
 import controller.ControllerUtils;
-import controller.game_menu.StartGameController;
+import controller.game_system.StartGameController;
 import view.game_system.commands.StartGameCommands;
 import view.game_system.messages.StartGameMessages;
 import view.user_system.messages.MenuSwitcherMessages;

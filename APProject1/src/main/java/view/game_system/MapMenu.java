@@ -1,14 +1,9 @@
 package view.game_system;
 
-import controller.game_menu.MapController;
-import model.game_stuff.Block;
-import model.game_stuff.Map;
-import model.game_stuff.enums.Textures;
+import controller.game_system.MapController;
 import view.ViewUtils;
 import view.game_system.commands.MapCommands;
-import view.viewStyle.Colors;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.regex.Matcher;
 

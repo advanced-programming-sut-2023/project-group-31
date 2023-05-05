@@ -1,6 +1,6 @@
 package model.game_stuff.people.enums;
 
-public enum ThrowerTypes {
+public enum TroopTypes {
     ;
     private int hp;
     private String name;
@@ -8,7 +8,7 @@ public enum ThrowerTypes {
     private int fightingRange;
     private int visionRange;
 
-    ThrowerTypes(int hp, String name, int damage, int fightingRange, int visionRange) {
+    TroopTypes(int hp, String name, int damage, int fightingRange, int visionRange) {
         this.hp = hp;
         this.name = name;
         this.damage = damage;

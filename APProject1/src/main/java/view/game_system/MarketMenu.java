@@ -1,7 +1,7 @@
 package view.game_system;
 
 import controller.ControllerUtils;
-import controller.game_menu.MarketController;
+import controller.game_system.MarketController;
 import view.ViewUtils;
 import view.game_system.commands.MarketCommands;
 import view.game_system.messages.GameSwitcherMessages;

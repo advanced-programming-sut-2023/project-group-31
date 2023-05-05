@@ -1,4 +1,4 @@
-package controller.game_menu;
+package controller.game_system;
 
 import view.user_system.messages.UserMessages;
 

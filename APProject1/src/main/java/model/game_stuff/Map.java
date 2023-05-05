@@ -113,13 +113,30 @@ public class Map {
         }
         return neighbours;
     }
+    public ArrayList<Block> getNeighboursWithDistance(Block block, int distance) {
+        ArrayList<Block> neighbours = new ArrayList<>();
+        Block block1;
+        int x, y;
+        for(int i = 0; i < distance; i++) {
+            int j = distance - i;
+            if (isInMap((x = block.getX() + i), (y = block.getY() + j)) && !neighbours.contains((block1 = getBlock(x, y)))) {
+                neighbours.add(block1);
+            }
+            if (isInMap((x = block.getX() + i), (y = block.getY() - j)) && !neighbours.contains((block1 = getBlock(x, y)))) {
+                neighbours.add(block1);
+            }
+            if (isInMap((x = block.getX() - i), (y = block.getY() + j)) && !neighbours.contains((block1 = getBlock(x, y)))) {
+                neighbours.add(block1);
+            }
+            if (isInMap((x = block.getX() - i), (y = block.getY() - j)) && !neighbours.contains((block1 = getBlock(x, y)))) {
+                neighbours.add(block1);
+            }
+        }
+        return neighbours;
+    }
     public boolean isInMap(int x, int y) {
         return x >= 0 &&  y >= 0 && x < size && y < size;
     }
-
-
-
-
 
     @Override
     public String toString() {
