@@ -6,7 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public enum ProfileCommands {
-    DISPLAY_PROFILE("display profile (?<field>[\\S]*)"),
+    DISPLAY_PROFILE("profile display( (?<field>[\\S]+))?"),
     CHANGE_USERNAME("profile change( -u (?<username>IN))"),
     CHANGE_NICKNAME("profile change( -n (?<nickname>IN))"),
     CHANGE_PASSWORD("profile change password( -o (?<oldPassword>IN))( -n (?<newPassword>IN))"),

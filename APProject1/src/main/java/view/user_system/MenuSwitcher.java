@@ -22,6 +22,9 @@ public class MenuSwitcher extends ViewUtils {
                 case PROFILE:
                     command = ProfileMenu.run(scanner);
                     break;
+                case MAIN:
+                    command = MainMenu.run();
+                    break;
                 // TODO :
             }
         }

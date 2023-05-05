@@ -6,8 +6,6 @@ import model.DataBase;
 import model.User;
 import view.user_system.messages.UserMessages;
 
-import java.util.regex.Matcher;
-
 public class RegisterController extends ControllerUtils {
 
     public static UserMessages userCreate() {
@@ -44,7 +42,7 @@ public class RegisterController extends ControllerUtils {
         if (User.doesUserExit(inputs.get("username"))) {
             newUsername = generateNewUsername(inputs.get("username"));
             inputs.put("username",newUsername);
-            return UserMessages.USER_EXITS_BEFORE.setAndPrintMessage(newUsername);
+            return UserMessages.USER_EXITS_BEFORE.setAndReturn(newUsername);
         }
 
 
@@ -57,7 +55,7 @@ public class RegisterController extends ControllerUtils {
 
 
     public static String generateNewUsername(String previousUsername) {
-        String newUsername;
+        String newUsername="";
         int number = 0;
         do {
             newUsername = (previousUsername + number);
@@ -91,18 +89,28 @@ public class RegisterController extends ControllerUtils {
         }
 
         if(Integer.parseInt(inputs.get("questionNumber"))-1>DataBase.getDataBase().getRecoveryQuestions().size()){
-            return UserMessages.INVALID_FORMAT.setAndPrintMessage("Question number is invalid");
+            return UserMessages.INVALID_FORMAT.setAndReturn("Question number is invalid");
         }
 
         if (!inputs.get("answer").equals(inputs.get("answerConfirm"))) {
             return UserMessages.ANSWER_NOT_MATCH;
         }
 
-        User.getUserByUsername(username).setPasswordRecoveryQuestion(DataBase.getDataBase().getSlogans().get(Integer.parseInt(inputs.get("questionNumber"))-1));
+        User.getUserByUsername(username).setPasswordRecoveryQuestion(DataBase.getDataBase().getRecoveryQuestions().get(Integer.parseInt(inputs.get("questionNumber"))-1));
         User.getUserByUsername(username).setPasswordRecoveryAnswer(inputs.get("answer"));
         DataBase.saveDataBase();
         return UserMessages.SUCCESS;
     }
 
 
+    public static UserMessages getForgotPasswordQuestions() {
+        int index=0;
+        String output="";
+        for(String question: DataBase.getDataBase().getRecoveryQuestions()){
+            index++;
+            output+=(index+". "+question+"\n");
+        }
+        return UserMessages.MESSAGES.setAndReturn(output);
+
+    }
 }

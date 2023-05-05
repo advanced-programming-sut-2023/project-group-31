@@ -28,7 +28,8 @@ public class LoginController extends ControllerUtils {
             DataBase.getDataBase().setLoggedInUser(User.getUserByUsername(inputs.get("username")));
         }
 
-        currentUser=User.getUserByUsername(inputs.get("username"));
+
+        setCurrentUser(User.getUserByUsername(inputs.get("username")));
 
 
         return UserMessages.SUCCESS;
@@ -43,12 +44,12 @@ public class LoginController extends ControllerUtils {
     }
 
     public static UserMessages getForgotPasswordQuestion() {
-        UserMessages.MenuMessage.setTxt(User.getUserByUsername(inputs.get("username")).getPasswordRecoveryQuestion());
-        return UserMessages.MenuMessage;
+        UserMessages.MESSAGE.setTxt(User.getUserByUsername(inputs.get("username")).getPasswordRecoveryQuestion());
+        return UserMessages.MESSAGE;
     }
 
     public static UserMessages checkForgotQuestionAnswerCorrectness(String input) {
-        if(input.equals(currentUser.getPasswordRecoveryAnswer())){
+        if(input.equals(User.getUserByUsername(inputs.get("username")).getPasswordRecoveryAnswer())){
             return UserMessages.CORRECT_ANSWER;
         }else{
             return UserMessages.WRONG_ANSWER;
@@ -59,7 +60,12 @@ public class LoginController extends ControllerUtils {
         if(!inputs.get("password").equals(inputs.get("passwordConfirmation"))){
             return UserMessages.PASSWORD_NOT_MATCH;
         }
-        currentUser.setPassword(inputs.get("password"));
+        if(checkPasswordWeakness(inputs.get("password"))!=null){
+            return UserMessages.PASSWORD_IS_WEAK;
+        }
+        User.getUserByUsername(inputs.get("username")).setPassword(inputs.get("password"));
+        currentUser=User.getUserByUsername(inputs.get("username"));
+        setCurrentUser(User.getUserByUsername(inputs.get("username")));
         return UserMessages.SUCCESS;
     }
 

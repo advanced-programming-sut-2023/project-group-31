@@ -9,7 +9,7 @@ public class ProfileController extends ControllerUtils {
 
 
 
-    private static User currentUser;
+
     //change user fields
 
     public static UserMessages profileChangeUsername(){
@@ -74,16 +74,21 @@ public class ProfileController extends ControllerUtils {
 
     //display user fields
     public static UserMessages profileDisplay(){
-        switch (inputs.get("field")){
-            case "highscore": UserMessages.MESSAGES.setTxt(Integer.toString(currentUser.getHighScore()));
-                break;
-            case "rank": UserMessages.MESSAGES.setTxt(Integer.toString(currentUser.getRank()));
-                break;
-            case "slogan": UserMessages.MESSAGES.setTxt(currentUser.getSlogan()!=null?currentUser.getSlogan():"You dont have slogan!");
-                break;
-            case "":   UserMessages.MESSAGES.setTxt(currentUser.toString()); break;
+        if(inputs.get("field")==null){
+            inputs.put("field","");
         }
-        return UserMessages.MESSAGES;
+        switch (inputs.get("field")){
+            case "highscore": UserMessages.MESSAGE.setTxt(Integer.toString(currentUser.getHighScore()));
+                break;
+            case "rank": UserMessages.MESSAGE.setTxt(Integer.toString(currentUser.getRank()));
+                break;
+            case "slogan": UserMessages.MESSAGE.setTxt(currentUser.getSlogan()!=null?currentUser.getSlogan():"You dont have slogan!");
+                break;
+            case "":   UserMessages.MESSAGE.setTxt(currentUser.toString()); break;
+
+            default: UserMessages.MESSAGE.setTxt("Invalid field");
+        }
+        return UserMessages.MESSAGE;
     }
 
 
