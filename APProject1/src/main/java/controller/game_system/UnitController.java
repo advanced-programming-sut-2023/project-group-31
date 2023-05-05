@@ -1,4 +1,4 @@
-package controller.game_menu;
+package controller.game_system;
 
 import controller.ControllerUtils;
 import model.game_stuff.Troop;

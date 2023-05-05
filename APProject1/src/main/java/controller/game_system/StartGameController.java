@@ -1,4 +1,4 @@
-package controller.game_menu;
+package controller.game_system;
 
 import controller.ControllerUtils;
 import model.User;
@@ -6,7 +6,6 @@ import model.game_stuff.Colors;
 import model.game_stuff.Map;
 import model.game_stuff.enums.Textures;
 import view.game_system.messages.StartGameMessages;
-import view.user_system.messages.MenuSwitcherMessages;
 import view.user_system.messages.UserMessages;
 
 import java.util.HashMap;

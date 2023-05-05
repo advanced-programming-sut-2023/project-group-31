@@ -1,7 +1,6 @@
-package controller.game_menu;
+package controller.game_system;
 
 import view.game_system.messages.MarketMessages;
-import view.user_system.messages.UserMessages;
 
 public class MarketController extends controller.ControllerUtils {
     public static String showPriceList(){
