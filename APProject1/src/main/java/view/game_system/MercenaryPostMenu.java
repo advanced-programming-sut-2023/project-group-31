@@ -1,6 +1,6 @@
-package main.java.view.game_system;
+package view.game_system;
 
-import main.java.controller.game_menu.MercenaryController;
+import controller.game_menu.MercenaryController;
 import main.java.view.game_system.commands.BarracksCommand;
 import main.java.view.game_system.messages.BarracksMessages;
 import view.game_system.messages.GameSwitcherMessages;
@@ -11,7 +11,7 @@ import java.util.regex.Matcher;
 import static view.ViewUtils.putInHashmap;
 
 public class MercenaryPostMenu {
-    public static view.game_system.messages.GameSwitcherMessages run(Scanner scanner){
+    public static GameSwitcherMessages run(Scanner scanner){
         String command;
         Matcher matcher;
         while (true){
