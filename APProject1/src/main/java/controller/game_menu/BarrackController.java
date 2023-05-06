@@ -1,11 +1,13 @@
 package controller.game_menu;
 
 import main.java.view.game_system.messages.BarracksMessages;
+import model.game_stuff.Troop;
 import model.game_stuff.enums.Items;
-import model.game_stuff.people.Kicker;
-import model.game_stuff.people.Thrower;
-import model.game_stuff.people.enums.KickerTypes;
-import model.game_stuff.people.enums.ThrowerTypes;
+//import model.game_stuff.people.Kicker;
+//import model.game_stuff.people.Thrower;
+//import model.game_stuff.people.enums.KickerTypes;
+//import model.game_stuff.people.enums.ThrowerTypes;
+import model.game_stuff.people.enums.TroopTypes;
 import model.game_stuff.types.Nationality;
 import model.game_stuff.types.Troops;
 
@@ -29,12 +31,12 @@ public class BarrackController extends controller.ControllerUtils {
             }
         switch (target.getType()){
             case "kicker":
-                KickerTypes kickerTypes=KickerTypes.getKickerByName(target.getName());
-                createKicker(kickerTypes);
+                TroopTypes Troops=TroopTypes.getTroopByName(target.getName());
+                createKicker(Troops);
                 break;
             case "thrower":
-                ThrowerTypes throwerTypes=ThrowerTypes.getThrowerByName(target.getName());
-                createThrower(throwerTypes);
+                TroopTypes troop=TroopTypes.getTroopByName(target.getName());
+                createThrower(troop);
                 break;
             default:
                 break;
@@ -43,15 +45,15 @@ public class BarrackController extends controller.ControllerUtils {
         return BarracksMessages.SUCCESS;
     }
 
-    private static void createThrower(ThrowerTypes target) {
-        Thrower thrower=new Thrower(currentPlayer,target);
-        thrower.setPosition();
+    private static void createThrower(TroopTypes target) {
+         Troop troop=new Troop(currentPlayer,target);
+        troop.setPosition();
         //currentplayer.barrack.getblock(0).add(thrower)
     }
 
-    private static void createKicker(KickerTypes target) {
-        Kicker kicker=new Kicker(currentPlayer,target);
-        kicker.setPosition();
+    private static void createKicker(TroopTypes target) {
+        Troop troop=new Troop(currentPlayer,target);
+        troop.setPosition();
         //currentplayer.barrack.getblock(0).add(kicker)
     }
 }

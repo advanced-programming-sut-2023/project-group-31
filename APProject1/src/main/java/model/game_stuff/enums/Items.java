@@ -18,6 +18,7 @@ public enum Items {
     BOW("bow", ItemTypes.WEAPON),
     CROSSBOW("crossbow", ItemTypes.WEAPON),
     SPEAR("spear", ItemTypes.WEAPON),
+    FIRE("fire",ItemTypes.WEAPON),
     PIKE("pike", ItemTypes.WEAPON),
     MACE("mace", ItemTypes.WEAPON),
     SWORDS("swords", ItemTypes.WEAPON),
