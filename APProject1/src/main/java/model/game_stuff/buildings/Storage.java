@@ -19,6 +19,10 @@ public class Storage extends Building {
         this.type = type;
     }
 
+    public HashMap<Items, Integer> getProperties() {
+        return properties;
+    }
+
     public StorageTypes getType() {
         return type;
     }

@@ -29,6 +29,7 @@ public enum TroopTypes {
     TroopTypes(String name,int hp, int damage, int speed,int fightingRange, int visionRange) {
         this.hp = hp;
         this.name = name;
+        this.speed=speed;
         this.damage = damage;
         this.fightingRange = fightingRange;
         this.visionRange = visionRange;
