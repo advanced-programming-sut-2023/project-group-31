@@ -26,7 +26,10 @@ public class MapMenu extends ViewUtils {
                 showMapByXY(matcher);
             } else if ((matcher = MapCommands.getMatcher(input, MapCommands.MOVE)) != null) {
                 moveOnMap(matcher.group("directions"));
-            } else if ((matcher = MapCommands.getMatcher(input, MapCommands.SHOW_DETAILS)) != null) {
+            }
+            else if(MapCommands.getMatcher(input,MapCommands.NEXT_TURN)!=null){
+                System.out.println(mapController.nextTurn());
+            }else if ((matcher = MapCommands.getMatcher(input, MapCommands.SHOW_DETAILS)) != null) {
                 showDetails(Integer.parseInt(matcher.group("x")),(Integer.parseInt(matcher.group("y"))));
             } else if(input.equals("exit")){
                 return;

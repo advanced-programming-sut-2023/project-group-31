@@ -14,7 +14,7 @@ public class MercenaryController extends ControllerUtils {
         if(inputs.get("type")==null||Integer.parseInt(inputs.get("amount"))<=0) {
             return BarracksMessages.INVALID_COMMAND;
         }
-        Troops troop=Troops.getTroopByName(inputs.get("type"));
+        Troops troop=Troops.getTroopsByName(inputs.get("type"));
         if(troop==null&&troop.getNationality()==Nationality.EUROPEAN){
             return BarracksMessages.INVALID_TROOP_TYPE;
         }

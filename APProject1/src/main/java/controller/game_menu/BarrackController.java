@@ -15,7 +15,7 @@ public class BarrackController extends controller.ControllerUtils {
             return BarracksMessages.INVALID_COMMAND;
         }
 
-        Troops target=Troops.getTroopByName(inputs.get("type"));
+        Troops target=Troops.getTroopsByName(inputs.get("type"));
 
         if(target==null&&target.getNationality()==Nationality.ARAB){
             return BarracksMessages.INVALID_TROOP_TYPE;
