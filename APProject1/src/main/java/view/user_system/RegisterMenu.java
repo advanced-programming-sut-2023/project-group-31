@@ -82,10 +82,7 @@ public class RegisterMenu extends ViewUtils {
         Matcher matcher;
         System.out.println("pick one of these questions.");
         int index=0;
-        for(String question: DataBase.getDataBase().getSlogans()){
-            index++;
-            System.out.println(index+". "+question);
-        }
+        System.out.println(RegisterController.getForgotPasswordQuestions());
         while (true) {
             input = scanner.nextLine().trim();
             if ((matcher = RegisterCommands.getMatcher(input, RegisterCommands.PICK_QUESTION)) != null) {

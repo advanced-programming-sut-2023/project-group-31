@@ -14,6 +14,7 @@ public class MainMenu extends ViewUtils {
     public static MenuSwitcherMessages run() {
         String input;
         Matcher matcher;
+        System.out.println("--------Main menu-----");
         while (true) {
             input=scanner.nextLine().trim();
             if ((matcher= MainMenuCommands.getMatcher(input,MainMenuCommands.LOGOUT))!=null) {

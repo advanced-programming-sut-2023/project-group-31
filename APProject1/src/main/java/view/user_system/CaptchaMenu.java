@@ -33,23 +33,23 @@ public class CaptchaMenu extends ViewUtils {
     public boolean run() {
         System.out.println("Enter captcha code.");
         System.out.println(obscureCaptchaCode(generateCaptchaCode()));
-        ControllerUtils.putInput("captchaCode",captchaCode);
+        ControllerUtils.putInput("captchaCode", captchaCode);
         String input;
         Matcher matcher;
         int wrongAnswers = 0;
         while (true) {
             input = scanner.nextLine().trim();
             if (input.matches("[\\d]+")) {
-                ControllerUtils.putInput("inputCaptcha",input);
+                ControllerUtils.putInput("inputCaptcha", input);
                 result = ControllerUtils.checkCaptchaMatching();
                 if (result.equals(UserMessages.SUCCESS)) {
-                    object=null;
+                    object = null;
                     return true;
-                } else if(result.equals(UserMessages.FAIL)){
-                    System.out.println("Wrong captcha code! (you have only "+(3-wrongAnswers)+ "chance left!)");
+                } else if (result.equals(UserMessages.FAIL)) {
+                    System.out.println("Wrong captcha code! (you have only " + (3 - wrongAnswers) + "chance left!)");
                     wrongAnswers++;
-                    if(wrongAnswers >=2) {
-                        object=null;
+                    if (wrongAnswers >= 2) {
+                        object = null;
                         return false;
                     }
                 }
@@ -60,10 +60,10 @@ public class CaptchaMenu extends ViewUtils {
     }
 
     private String generateCaptchaCode() {
-        captchaCode=ControllerUtils.getCaptchaCode().getTxt();
-        ArrayList<String>[] digitLines =new ArrayList[4];
+        captchaCode = ControllerUtils.getCaptchaCode().getTxt();
+        ArrayList<String>[] digitLines = new ArrayList[4];
         for (int i = 0; i < 4; i++) {
-            digitLines[i] = new ArrayList<>(Arrays.asList(captchaDigits.get(Integer.parseInt(captchaCode.substring(i,i+1))).trim().split("\n")));
+            digitLines[i] = new ArrayList<>(Arrays.asList(captchaDigits.get(Integer.parseInt(captchaCode.substring(i, i + 1))).trim().split("\n")));
         }
         String createdCaptchaCode = "";
         for (int i = 0; i < digitLines[0].size(); i++) {
@@ -80,7 +80,7 @@ public class CaptchaMenu extends ViewUtils {
         String obscuredCaptchaCode = "";
         for (int i = 0; i < captchaCode.length(); i++) {
 
-            if (i % 15 == random) {
+            if (captchaCode.charAt(i) != '\n' && captchaCode.charAt(i) != '*' && i % 30 == random) {
                 obscuredCaptchaCode += "&";
             } else {
                 obscuredCaptchaCode += captchaCode.charAt(i);

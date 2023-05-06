@@ -110,19 +110,19 @@ public abstract class ControllerUtils {
 
     protected static UserMessages checkPasswordWeakness(String password) {
         if (password.length() < 6) {
-            return UserMessages.PASSWORD_IS_WEAK.setAndPrintMessage("password is short!");
+            return UserMessages.PASSWORD_IS_WEAK.setAndReturn("password is short!");
         }
         if (!password.matches(".*[a-z].*")) {
-            return UserMessages.PASSWORD_IS_WEAK.setAndPrintMessage("password should have small letter!");
+            return UserMessages.PASSWORD_IS_WEAK.setAndReturn("password should have small letter!");
         }
         if (!password.matches(".*[A-Z].*")) {
-            return UserMessages.PASSWORD_IS_WEAK.setAndPrintMessage("password should have capital letter!");
+            return UserMessages.PASSWORD_IS_WEAK.setAndReturn("password should have capital letter!");
         }
         if (!password.matches(".*[\\d].*")) {
-            return UserMessages.PASSWORD_IS_WEAK.setAndPrintMessage("password should have at least one digit!");
+            return UserMessages.PASSWORD_IS_WEAK.setAndReturn("password should have at least one digit!");
         }
         if (!password.matches(".*([^\\da-zA-Z]).*")) {
-            return UserMessages.PASSWORD_IS_WEAK.setAndPrintMessage("password should have one not letter nad numeric character!");
+            return UserMessages.PASSWORD_IS_WEAK.setAndReturn("password should have one not letter nad numeric character!");
         }
         return null;
     }

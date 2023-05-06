@@ -14,7 +14,7 @@ public class LoginMenu extends ViewUtils {
 
 
     public static MenuSwitcherMessages run(Scanner scanner) {
-        if(ControllerUtils.isUserLoggedIn()){
+        if (ControllerUtils.isUserLoggedIn()) {
             return MenuSwitcherMessages.MAIN;
         }
         System.out.println("--------login menu-------");
@@ -25,20 +25,22 @@ public class LoginMenu extends ViewUtils {
             if ((matcher = LoginCommands.getMatcher(input, LoginCommands.LOGIN)) != null) {
                 ControllerUtils.setInputs(putInHashmap(matcher, LoginCommands.LOGIN.getRegex()));
                 userLogin();
-                if(LoginController.isUserLoggedIN()){
+                if (LoginController.isUserLoggedIN()) {
                     return MenuSwitcherMessages.MAIN;
                 }
             } else if (input.matches("goto[\\s]+register[\\s]+menu")) {
                 return MenuSwitcherMessages.REGISTER;
             } else {
                 System.out.println("Invalid command!");
+                continue;
             }
+            System.out.println("login failed please try again!");
         }
 
     }
 
     private static void userLogin() {
-        if(!CaptchaMenu.getObject().run()){
+        if (!CaptchaMenu.getObject().run()) {
             System.out.println("login failed: wrong captcha");
             return;
         }
@@ -69,9 +71,9 @@ public class LoginMenu extends ViewUtils {
                 LoginController.getForgotPasswordQuestion();
                 forgotPasswordMenu();
                 return;
-            } else if(input.equalsIgnoreCase("exit")){
+            } else if (input.equalsIgnoreCase("exit")) {
                 return;
-            }else {
+            } else {
                 System.out.println("Invalid command!");
             }
         }
@@ -80,17 +82,28 @@ public class LoginMenu extends ViewUtils {
 
     private static void forgotPasswordMenu() {
 
-        System.out.println(UserMessages.MenuMessage);
+        System.out.println("Answer this question!");
+        System.out.println(UserMessages.MESSAGE);
         String input;
         Matcher matcher;
-
+        int wrongAnswers = 0;
+        while (true) {
             input = scanner.nextLine().trim();
             if (LoginController.checkForgotQuestionAnswerCorrectness(input).equals(UserMessages.CORRECT_ANSWER)) {
                 System.out.println(UserMessages.CORRECT_ANSWER);
                 changePasswordMenu();
+                if(ControllerUtils.isUserLoggedIn()){
+                    return;
+                }
             } else {
                 System.out.println(UserMessages.WRONG_ANSWER);
+                wrongAnswers++;
             }
+            if (wrongAnswers > 3) {
+                return;
+            }
+        }
+
 
     }
 
@@ -100,32 +113,26 @@ public class LoginMenu extends ViewUtils {
         Matcher matcher;
         while (true) {
             input = scanner.nextLine().trim();
-            if ((matcher = LoginCommands.getMatcher(input,LoginCommands.ENTER_NEW_PASSWORD)) != null){
-                ControllerUtils.setInputs(putInHashmap(matcher, LoginCommands.LOGIN.getRegex()));
+            if ((matcher = LoginCommands.getMatcher(input, LoginCommands.ENTER_NEW_PASSWORD)) != null) {
+                String username = ControllerUtils.getInputs().get("username");
+                ControllerUtils.setInputs(putInHashmap(matcher, LoginCommands.ENTER_NEW_PASSWORD.getRegex()));
+                ControllerUtils.putInput("username", username);
                 changePassword();
-                return;
-            }else {
+                if(ControllerUtils.isUserLoggedIn()){
+                    return;
+                }
+            } else {
                 System.out.println("Invalid command!");
             }
         }
     }
 
     private static void changePassword() {
-        result=LoginController.changePassword();
-        if(result.equals(UserMessages.SUCCESS)){
-            System.out.println("change password: "+result.getTxt());
-        }else{
-            System.out.println("change password failed: "+result.getTxt());
+        result = LoginController.changePassword();
+        if (result.equals(UserMessages.SUCCESS)) {
+            System.out.println("change password: " + result.getTxt());
+        } else {
+            System.out.println("change password failed: " + result.getTxt());
         }
     }
-
-
-    private static void user() {
-
-    }
-
-    private static void userCreate() {
-
-    }
-
 }

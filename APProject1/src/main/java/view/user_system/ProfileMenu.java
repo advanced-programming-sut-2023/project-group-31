@@ -92,7 +92,7 @@ public class ProfileMenu extends ViewUtils {
         if (result.equals(UserMessages.MESSAGES)) {
             System.out.println(result);
         } else {
-            System.out.println("display profile failed: " + result);
+            System.out.println("display profile success: " + result);
         }
     }
 
