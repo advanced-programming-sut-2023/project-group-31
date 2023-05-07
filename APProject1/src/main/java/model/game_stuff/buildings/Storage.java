@@ -54,15 +54,12 @@ public class Storage extends Building {
 
     @Override
     public String toString() {
-        return "Storage{" +
-                "type=" + type +
-                ", properties=" + properties +
-                ", amountOfProducts=" + amountOfProducts +
-                ", hp=" + hp +
-                ", maxHp=" + maxHp +
-                ", owner=" + owner +
-                ", name='" + name + '\'' +
-                ", blocks=" + blocks +
-                '}';
+        String output = type.getName() + "\n" +
+            "hp: " + hp + " / " + maxHp + "\n" +
+            "capacity: " + amountOfProducts + " / " + type.getCapacity();
+        for (Items item : properties.keySet()) {
+            output += "\n" + item.getName() + ": " + properties.get(item);
+        }
+        return output;
     }
 }

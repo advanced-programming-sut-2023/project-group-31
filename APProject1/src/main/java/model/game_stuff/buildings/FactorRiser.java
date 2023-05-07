@@ -18,14 +18,8 @@ public class FactorRiser extends Building {
 
     @Override
     public String toString() {
-        return "FactorRiser{" +
-                "type=" + type +
-                ", hp=" + hp +
-                ", maxHp=" + maxHp +
-                ", owner=" + owner +
-                ", name='" + name + '\'' +
-                ", blocks=" + blocks +
-                '}';
+        return  type.getName() + "\n" +
+                "hp: " + hp + " / " + maxHp;
     }
     public String getName() {
         return type.getName();

@@ -61,6 +61,16 @@ public class Tower extends Building {
 
     @Override
     public String toString() {
-        return "Tower{" + "type=" + type + ", hasStairs=" + hasStairs + ", hp=" + hp + ", maxHp=" + maxHp + ", owner=" + owner + ", name='" + name + '\'' + ", blocks=" + blocks + '}';
+        String output = type.getName() + "\n" +
+            "hp: " + hp + " / " + maxHp;
+        if(!hasStairs.isEmpty()) {
+            output += "\nhas stairs in directions:";
+            for (Direction direction : hasStairs.keySet()) {
+                if (hasStairs.get(direction)) {
+                    output += " " + direction.getName();
+                }
+            }
+        }
+        return output;
     }
 }

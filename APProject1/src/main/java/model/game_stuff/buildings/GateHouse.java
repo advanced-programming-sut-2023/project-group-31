@@ -40,15 +40,13 @@ public class GateHouse extends Building {
 
     @Override
     public String toString() {
-        return "GateHouse{" +
-                "type=" + type +
-                ", isHorizontal=" + isHorizontal +
-                ", isOpen=" + isOpen +
-                ", hp=" + hp +
-                ", maxHp=" + maxHp +
-                ", owner=" + owner +
-                ", name='" + name + '\'' +
-                ", blocks=" + blocks +
-                '}';
+        String output = type.getName() + "\n" +
+            "hp: " + hp + " / " + maxHp + "\n";
+        if(isOpen) {
+            output += "open";
+        } else {
+            output += "closed";
+        }
+        return output;
     }
 }
