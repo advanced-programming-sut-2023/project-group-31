@@ -1,4 +1,4 @@
-package controller.game_menu;
+package controller.game_system;
 
 import controller.ControllerUtils;
 import main.java.view.game_system.messages.BarracksMessages;

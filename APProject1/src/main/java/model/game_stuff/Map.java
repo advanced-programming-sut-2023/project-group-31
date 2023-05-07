@@ -95,7 +95,7 @@ public class Map {
     public ArrayList<ArrayList<Block>> getBlocks() {
         return blocks;
     }
-    private Block getNeighbour(Direction direction, Block block) {
+    public Block getNeighbour(Direction direction, Block block) {
         int x = block.getX() + direction.getX();
         int y = block.getY() + direction.getY();
         if(!isInMap(x, y)){

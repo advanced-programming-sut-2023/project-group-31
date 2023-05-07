@@ -11,7 +11,7 @@ public class Block {
     private Textures type;
     private ArrayList<Person> people;
     private ArrayList<Tree> trees;
-    private HashMap<String, Integer> numberOfPeople;
+    private HashMap<String, Integer> numberOfEachPeople;
     private Building building;
     private int x;
     private int y;
@@ -19,7 +19,7 @@ public class Block {
     {
         people = new ArrayList<>();
         trees = new ArrayList<>();
-        numberOfPeople = new HashMap<>();
+        numberOfEachPeople = new HashMap<>();
         building = null;
     }
 
@@ -40,18 +40,18 @@ public class Block {
 
     public void addPerson(Person person) {
         people.add(person);
-        if(numberOfPeople.containsKey(person.getName())) {
-            numberOfPeople.replace(person.getName() ,numberOfPeople.get(person.getName()) + 1);
+        if(numberOfEachPeople.containsKey(person.getName())) {
+            numberOfEachPeople.replace(person.getName() , numberOfEachPeople.get(person.getName()) + 1);
             return;
         }
-        numberOfPeople.put(person.getName(), 1);
+        numberOfEachPeople.put(person.getName(), 1);
     }
 
     public void removePerson(Person person) {
         people.remove(person);
-        numberOfPeople.replace(person.getName() ,numberOfPeople.get(person.getName()) -1);
-        if(numberOfPeople.get(person.getName()) == 0) {
-            numberOfPeople.remove(person.getName());
+        numberOfEachPeople.replace(person.getName() , numberOfEachPeople.get(person.getName()) -1);
+        if(numberOfEachPeople.get(person.getName()) == 0) {
+            numberOfEachPeople.remove(person.getName());
         }
     }
     public void addTree(Tree tree) {
@@ -77,8 +77,11 @@ public class Block {
         this.type = type;
     }
 
-    public HashMap<String, Integer> getNumberOfPeople() {
-        return numberOfPeople;
+    public HashMap<String, Integer> getNumberOfEachPeople() {
+        return numberOfEachPeople;
+    }
+    public int getNumberOfPeople() {
+        return people.size();
     }
 
     public void setBuilding(Building building) {
@@ -110,8 +113,8 @@ public class Block {
         if(building == null) output += "empty";
         else output += building.getName();
         output += "\n people:";
-        for (String personName : numberOfPeople.keySet()) {
-            output += "\t" + personName + ":" + numberOfPeople.get(personName);
+        for (String personName : numberOfEachPeople.keySet()) {
+            output += "\t" + personName + ":" + numberOfEachPeople.get(personName);
         }
         return output;
     }
@@ -122,5 +125,8 @@ public class Block {
                 return true;
         }
         return false;
+    }
+    public Boolean isPermeable() {
+        return type.isPermeable();
     }
 }

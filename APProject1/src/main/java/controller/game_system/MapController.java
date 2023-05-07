@@ -10,7 +10,7 @@ import view.viewStyle.Colors;
 import java.util.ArrayList;
 
 public class MapController extends ControllerUtils {
-    Map map;
+    private Map map;
     private int length;
     private int width;
 
