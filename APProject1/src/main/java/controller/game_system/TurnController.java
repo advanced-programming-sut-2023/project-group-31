@@ -5,9 +5,7 @@ import model.game_stuff.Block;
 import model.game_stuff.Building;
 import model.game_stuff.buildings.*;
 import model.game_stuff.buildings.enums.*;
-import model.game_stuff.enums.Textures;
 import model.game_stuff.types.Buildings;
-import view.game_system.commands.TurnCommands;
 import view.game_system.messages.TurnMessages;
 import view.user_system.messages.UserMessages;
 
@@ -57,7 +55,7 @@ public class TurnController extends ControllerUtils {
     private static Building createNewBuilding(String type) {
         Building building;
         if (BuildingMenus.getEnumByName(type) != null) {
-            return new MenuBuildings(currentPlayer, BuildingMenus.getEnumByName(type));
+            return new MenuBuilding(currentPlayer, BuildingMenus.getEnumByName(type));
         }
         if (FactorRiserTypes.getEnumByName(type) != null) {
             return new FactorRiser(currentPlayer, FactorRiserTypes.getEnumByName(type));
@@ -112,13 +110,13 @@ public class TurnController extends ControllerUtils {
         if ((building = currentGame.getMap().getBlock(x, y).getBuilding()) == null) {
             return TurnMessages.EMPTY_PLACE;
         }
-        if (!(building instanceof MenuBuildings)) {
+        if (!(building instanceof MenuBuilding)) {
             return TurnMessages.MESSAGE.setAndGetTxt(building.toString());
         }
-        if (((MenuBuildings) building).getType().equals(BuildingMenus.BARRACK)) {
+        if (((MenuBuilding) building).getType().equals(BuildingMenus.BARRACK)) {
             return TurnMessages.BARRACK.setAndGetTxt(building.toString());
         }
-        if (((MenuBuildings) building).getType().equals(BuildingMenus.MERCENARY_POST)) {
+        if (((MenuBuilding) building).getType().equals(BuildingMenus.MERCENARY_POST)) {
             return TurnMessages.MERCENARY_POST.setAndGetTxt(building.toString());
         }
         return null;

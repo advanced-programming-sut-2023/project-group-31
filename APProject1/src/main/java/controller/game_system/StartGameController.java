@@ -2,17 +2,14 @@ package controller.game_system;
 
 import controller.ControllerUtils;
 import model.User;
-import model.game_stuff.Colors;
-import model.game_stuff.Game;
-import model.game_stuff.Government;
-import model.game_stuff.Map;
+import model.game_stuff.*;
+import model.game_stuff.buildings.MenuBuilding;
+import model.game_stuff.buildings.enums.BuildingMenus;
 import model.game_stuff.enums.Textures;
 import view.game_system.messages.StartGameMessages;
 import view.user_system.messages.UserMessages;
 
-import java.security.PrivateKey;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 
 public class StartGameController extends ControllerUtils {
@@ -88,8 +85,8 @@ public class StartGameController extends ControllerUtils {
         if(!inputs.containsKey("x") || !inputs.containsKey("y") || !inputs.containsKey("type")) {
             return StartGameMessages.INVALID_COMMAND;
         }
-        int x = Integer.parseInt(inputs.get("x").trim());
-        int y = Integer.parseInt(inputs.get("y").trim());
+        int x = Integer.parseInt(inputs.get("x").trim()),y = Integer.parseInt(inputs.get("y").trim());
+
         if(x > chosenMap.getLength() || x < 1 || y > chosenMap.getWidth() || y < 1) {
             return StartGameMessages.COORDINATE_OUT_OF_BOUND;
         }
@@ -253,9 +250,20 @@ public class StartGameController extends ControllerUtils {
         }
         currentGame = new Game(chosenMap);
         currentMap = chosenMap;
+        Government player;
+        Block block;
         ArrayList<Government> players = new ArrayList<>();
         for (PrimitivePlayer primitivePlayer : primitivePlayers) {
-            players.add(new Government(primitivePlayer.getUser(), primitivePlayer.getColor()));
+            player = new Government(primitivePlayer.getUser(),primitivePlayer.getColor());
+            players.add(player);
+            block =
+            MenuBuilding menuBuilding = new MenuBuilding(player, BuildingMenus.LORD_HOUSE);
+            for (int i = ; i < 2; i++) {
+                for (int j = ; j < 2; j++) {
+                    currentGame.getMap().getBlock(i, j).setBuilding();
+                    building.addBlock(currentGame.getMap().getBlock(i, j));
+                }
+            }
             //TODO : add real lord house
         }
         currentGame.setPlayers(players);
