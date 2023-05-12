@@ -13,7 +13,15 @@ public class GameSwitcher {
         while (true) {
             switch (command) {
                 case GAME:
-
+                    break;
+                case BARRACKS:
+                    command=BarracksMenu.run(scanner);
+                    break;
+                case MERCENARY_POST:
+                    command=MercenaryPostMenu.run(scanner);
+                    break;
+                case KINGDOM:
+                    command=KingdomMenu.run(scanner);
                     break;
                 case BACK:
                     return MenuSwitcherMessages.MAIN;
