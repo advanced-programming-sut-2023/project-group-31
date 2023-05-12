@@ -4,9 +4,9 @@ import model.game_stuff.Building;
 import model.game_stuff.Government;
 import model.game_stuff.buildings.enums.BuildingMenus;
 
-public class MenuBuildings extends Building {
+public class MenuBuilding extends Building {
     private BuildingMenus type;
-    public MenuBuildings(Government government, BuildingMenus menu) {
+    public MenuBuilding(Government government, BuildingMenus menu) {
         super(government);
         this.type = menu;
     }
