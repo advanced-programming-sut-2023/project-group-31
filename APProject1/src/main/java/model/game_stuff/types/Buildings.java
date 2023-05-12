@@ -1,65 +1,87 @@
 package model.game_stuff.types;
 
+import model.game_stuff.enums.Textures;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public enum Buildings {
-    NULL(null,0,0,0,0,0),
-    SMALLSTONEGATEHOUSE("Small stone gatehouse",0,0,0,0,1000),
-    BIGSTONEGATEHOUSE("Big stone gatehouse",20,0,0,0,2000),
-    DRAWBRIDGE("Drawbridge",0,10,0,0,1000),
-    LOOKOUTTOWER("Lookout tower",10,0,0,0,1200),
-    PREMITERTOWER("Premiter tower",10,0,0,0,1000),
-    TURRET("Turret",15,0,0,0,1200),
-    SQUARETURRET("Square turret",35,0,0,0,2500),
-    CIRCULARTURRET("Circular turret",40,0,0,0,3000),
-    ARMOURY("Armoury",0,5,0,0,200),
-    BARRACK("Barrack",15,0,0,0,200),
-    MERCENARYPOST("Mercenary post",0,10,0,0,200),
-    ENGINEERGUILD("Engineer gulid",0,10,0,0,100),
-    INN("Inn",0,20,1,0,100),
-    KILLINGPIT("Killing pit",0,6,0,0,0),
-    MARKET("Market",0,5,1,0,0),
-    OXTETHER("Ox tether",0,5,1,0,0),
-    MILL("Mill",0,20,3,0,0),
-    QUARRY("Quarry",0,20,3,0,0),
-    PITCHDITCH("Pitch ditch",0,20,1,0,0),
-    IRONMINE("Iron mine",0,20,2,0,0),
+    NULL(1, 1, null, 0, 0, 0, 0, 0),
+    SMALLSTONEGATEHOUSE(2, 1, "small stone gatehouse", 0, 0, 0, 0, 2000),
+    BIGSTONEGATEHOUSE(2, 3, "big stone gatehouse", 20, 0, 0, 0, 2000),
+    DRAWBRIDGE(1, 2, "drawbridge", 0, 10, 0, 0, 1000),
+    LOOKOUTTOWER(2, 2, "Lookout tower", 10, 0, 0, 0, 1200),
+    PREMITERTOWER(2, 2, "Premiter tower", 10, 0, 0, 0, 1000),
+    TURRET(2, 2, "Turret", 15, 0, 0, 0, 1200),
+    SQUARETURRET(2, 2, "Square turret", 35, 0, 0, 0, 2500),
+    CIRCULARTURRET(2, 2, "Circular turret", 40, 0, 0, 0, 3000),
+    ARMOURY(2, 2, "Armoury", 0, 5, 0, 0, 200),
+    BARRACK(2, 2, "Barrack", 15, 0, 0, 0, 200),
+    MERCENARYPOST(2, 2, "Mercenary post", 0, 10, 0, 0, 200),
+    ENGINEERGUILD(2, 2, "Engineer gulid", 0, 10, 0, 0, 100),
+    INN(2, 2, "Inn", 0, 20, 1, 0, 100),
+    KILLINGPIT(2, 2, "Killing pit", 0, 6, 0, 0, 0),
+    MARKET(2, 2, "Market", 0, 5, 1, 0, 0),
+    OXTETHER(2, 2, "Ox tether", 0, 5, 1, 0, 0),
+    MILL(2, 2, "Mill", 0, 20, 3, 0, 0),
+    QUARRY(2, 2, "Quarry", 0, 20, 3, 0, 0, Textures.QUARRY),
+    PITCHDITCH(2, 2, "Pitch ditch", 0, 20, 1, 0, 0),
+    IRONMINE(2, 2, "Iron mine", 0, 20, 2, 0, 0, Textures.IRON),
     //SIEGETENT("Siege tent",),//nadarim
-    STOCKPILE("Stockpile",0,0,0,0,0),
+    STOCKPILE(2, 2, "Stockpile", 0, 0, 0, 0, 0),
     //WATERPOT("Water pot",),//nadarim
-    CATHEDRAL("Cathedral",0,0,0,0,1000),
-    CHURCH("Church",0,0,0,0,250),
-    HOVEL("Hovel",0,6,0,0,0),
+    CATHEDRAL(2, 2, "Cathedral", 0, 0, 0, 0, 1000),
+    CHURCH(3, 3, "Church", 0, 0, 0, 0, 250),
+    HOVEL(2, 2, "Hovel", 0, 6, 0, 0, 0),
     //PITCHRIG("Pitch rig",),//need to define pitch as object
-    FOODSTOCKPILE("Food stockpile",0,5,0,0,0),
-    WOODCUTTER("Wood cutter",0,3,1,0,0),
-    ARMOURER("Armourer",0,20,1,0,100),
-    LEATHER_ARMOURER("Leather armourer",0,20,1,0,100),
-    MACE_MAKER("Mace maker",0,20,1,0,100),
-    PIKE_MAKER("Pike maker",0,20,1,0,100),
-    CROSSBOW_MAKER("Crossbow maker",0,20,1,0,100),
-    FLETCHER("Fletcher",0,20,1,0,100),
-    POLETURNER("Poleturner",0,10,1,0,100),
-    BLACKSMITH("Black smith",0,20,1,0,100),
-    OILSMELTER("Oil smelter",10,0,1,0,100),
-    CAGEWARDOGS("Cage war dogs",0,10,0,0,100),
-    STABLE("Stable",0,20,0,0,400),
-    APPLEGARDEN("Apple garden",0,5,1,0,0),
-    DIARYPRODUCTS("Diary products",0,10,1,0,0),
-    GRAINFARM("Grain farm",0,15,1,0,0),
-    HUNTINGPOST("Hunting post",0,5,1,0,0),
-    WHEATFARM("Wheat farm",0,15,1,0,0),
-    BAKERY("Bakery",0,10,1,0,0),
-    BREWERY("Brewery",0,10,0,0,0);
+    FOODSTOCKPILE(2, 2, "Food stockpile", 0, 5, 0, 0, 0),
+    WOODCUTTER(2, 2, "Wood cutter", 0, 3, 1, 0, 0),
+    ARMOURER(2, 2, "Armourer", 0, 20, 1, 0, 100),
+    LEATHER_ARMOURER(2, 2, "Leather armourer", 0, 20, 1, 0, 100),
+    MACE_MAKER(2, 2, "Mace maker", 0, 20, 1, 0, 100),
+    PIKE_MAKER(2, 2, "Pike maker", 0, 20, 1, 0, 100),
+    CROSSBOW_MAKER(2, 2, "Crossbow maker", 0, 20, 1, 0, 100),
+    FLETCHER(2, 2, "Fletcher", 0, 20, 1, 0, 100),
+    POLETURNER(2, 2, "Poleturner", 0, 10, 1, 0, 100),
+    BLACKSMITH(2, 2, "Black smith", 0, 20, 1, 0, 100),
+    OILSMELTER(2, 2, "Oil smelter", 10, 0, 1, 0, 100),
+    CAGEWARDOGS(2, 2, "Cage war dogs", 0, 10, 0, 0, 100),
+    STABLE(2, 2, "Stable", 0, 20, 0, 0, 400),
+    APPLEGARDEN(3, 3, "Apple garden", 0, 5, 1, 0, 0, Textures.GROSS),
+    DIARYPRODUCTS(2, 2, "Diary products", 0, 10, 1, 0, 0),
+    GRAINFARM(3, 3, "Grain farm", 0, 15, 1, 0, 0, Textures.GROSS),
+    HUNTINGPOST(2, 2, "Hunting post", 0, 5, 1, 0, 0),
+    WHEATFARM(3, 3, "Wheat farm", 0, 15, 1, 0, 0, Textures.GROSS),
+    BAKERY(2, 2, "Bakery", 0, 10, 1, 0, 0),
+    BREWERY(2, 2, "Brewery", 0, 10, 0, 0, 0);
     private String name;
     private double rockNeeded;
     private double woodNeeded;
     private double workerNeeded;
     private double ironNeeded;
+
     private double goldNeeded;
-    Buildings(String name,double rockNeeded, double woodNeeded, double workerNeeded, double ironNeeded,double goldNeeded) {
+
+    private int length;
+
+    private int width;
+
+    private final Textures possibleTexture;
+
+    Buildings(int length, int width, String name, double rockNeeded, double woodNeeded, double workerNeeded, double ironNeeded, double goldNeeded, Textures possibleTexture) {
         this.rockNeeded = rockNeeded;
         this.woodNeeded = woodNeeded;
         this.workerNeeded = workerNeeded;
         this.ironNeeded = ironNeeded;
+        this.possibleTexture = possibleTexture;
+    }
+
+    Buildings(int length, int width, String name, double rockNeeded, double woodNeeded, double workerNeeded, double ironNeeded, double goldNeeded) {
+        this.rockNeeded = rockNeeded;
+        this.woodNeeded = woodNeeded;
+        this.workerNeeded = workerNeeded;
+        this.ironNeeded = ironNeeded;
+        this.possibleTexture = null;
     }
 
     public void setRockNeeded(double rockNeeded) {
@@ -77,4 +99,58 @@ public enum Buildings {
     public void setIronNeeded(double ironNeeded) {
         this.ironNeeded = ironNeeded;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public double getRockNeeded() {
+        return rockNeeded;
+    }
+
+    public int getLength() {
+        return length;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public double getWoodNeeded() {
+        return woodNeeded;
+    }
+
+    public double getWorkerNeeded() {
+        return workerNeeded;
+    }
+
+    public double getIronNeeded() {
+        return ironNeeded;
+    }
+
+    public double getGoldNeeded() {
+        return goldNeeded;
+    }
+
+    public Textures getPossibleTexture() {
+        return possibleTexture;
+    }
+
+    public static Buildings getBuildingByName(String name) {
+        for (Buildings building : values()) {
+            if (building.name.equalsIgnoreCase(name)) {
+                return building;
+            }
+        }
+        return null;
+    }
+
+    public boolean isAreaPossible(Textures texture) {
+        if ((!texture.equals(Textures.CLIFF))&&(!texture.equals(Textures.WATER))&&(possibleTexture == null || texture==possibleTexture)) {
+            return true;
+        }
+        return false;
+    }
+
+
 }
