@@ -3,6 +3,8 @@ package controller.game_system;
 import controller.ControllerUtils;
 import model.User;
 import model.game_stuff.Colors;
+import model.game_stuff.Game;
+import model.game_stuff.Government;
 import model.game_stuff.Map;
 import model.game_stuff.enums.Textures;
 import view.game_system.messages.StartGameMessages;
@@ -208,6 +210,10 @@ public class StartGameController extends ControllerUtils {
         if (primitivePlayer == null) {
             return StartGameMessages.NO_SUCH_USER;
         }
+        lordHouseNumber --;
+        if(lordHouseNumber < 0 || lordHouseNumber >= 8) {
+            return StartGameMessages.INVALID_LORD_HOUSE_NUMBER;
+        }
         if (usedLordHouses.contains(lordHouseNumber)) {
             return StartGameMessages.LORD_HOUSE_IS_SELECTED_BEFORE;
         }
@@ -215,11 +221,44 @@ public class StartGameController extends ControllerUtils {
         return StartGameMessages.SUCCESS;
     }
 
-    public static StartGameMessages setPlayersTeam(String username, String color) {
+    public static StartGameMessages setPlayersTeam(String username, String colorString) {
         PrimitivePlayer primitivePlayer = getPlayerByUsername(username);
         if (primitivePlayer == null) {
             return StartGameMessages.NO_SUCH_USER;
         }
+        Colors color = Colors.getColorByName(colorString);
+        if(color == null) {
+            return StartGameMessages.INVALID_COLOR;
+        }
+        if(color.equals(primitivePlayer.getColor())) {
+            return StartGameMessages.COLOR_IS_ALREADY_SET;
+        }
+        primitivePlayer.setColor(color);
+        return StartGameMessages.SUCCESS;
+    }
 
+    public static String showLordHousesLeft() {
+        String output = "lord house left:";
+        for(int i = 0; i < 8; i++) {
+            if(!usedLordHouses.contains(i)) {
+                output += "\t" + (i + 1);
+            }
+        }
+        return output;
+    }
+
+    public static StartGameMessages start() {
+        if(primitivePlayers.size() < 2) {
+            return StartGameMessages.TOO_FEW_PLAYERS;
+        }
+        currentGame = new Game(chosenMap);
+        currentMap = chosenMap;
+        ArrayList<Government> players = new ArrayList<>();
+        for (PrimitivePlayer primitivePlayer : primitivePlayers) {
+            players.add(new Government(primitivePlayer.getUser(), primitivePlayer.getColor()));
+            //TODO : add real lord house
+        }
+        currentGame.setPlayers(players);
+        return StartGameMessages.SUCCESS;
     }
 }

@@ -44,10 +44,30 @@ public class StartGameMenu{
                 setPlayersLordHouse(matcher);
             } else if ((matcher = StartGameCommands.getMatcher(command, StartGameCommands.SET_PLAYERS_TEAM)) != null) {
                 setPlayersTeam(matcher);
-            } else if ((matcher = StartGameCommands.getMatcher(command, StartGameCommands.SET_PLAYERS_LORD_HOUSE)) != null) {
-                setPlayersLordHouse(matcher);
+            } else if ((matcher = StartGameCommands.getMatcher(command, StartGameCommands.SHOW_LORD_HOUSES_LEFT)) != null) {
+                System.out.println(StartGameController.showLordHousesLeft());
+            } else if ((matcher = StartGameCommands.getMatcher(command, StartGameCommands.START)) != null) {
+                if(startTheGame()) {
+                    TurnMenu.run();
+                    //mishe jash berim to menu elam natayej or something
+                    return MenuSwitcherMessages.MAIN;
+                }
             }
         }
+    }
+
+    private static boolean startTheGame() {
+        StartGameMessages message = StartGameController.start();
+        if (message == StartGameMessages.SUCCESS) {
+            System.out.println(StartGameMessages.SUCCESS.getTxt());
+            return true;
+        }
+        if (message == StartGameMessages.INVALID_COMMAND) {
+            System.out.println("invalid command!");
+            return false;
+        }
+        System.out.println("start game failed: " + message.getTxt());
+        return false;
     }
 
     private static void setPlayersTeam(Matcher matcher) {

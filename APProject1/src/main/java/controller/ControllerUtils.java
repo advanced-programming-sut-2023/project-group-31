@@ -3,6 +3,7 @@ package controller;
 import model.User;
 import model.game_stuff.Game;
 import model.game_stuff.Government;
+import model.game_stuff.Map;
 import view.user_system.messages.UserMessages;
 
 import java.util.HashMap;
@@ -13,6 +14,11 @@ public abstract class ControllerUtils {
     protected static User currentUser = null;
     protected static Government currentPlayer;
     protected static Game currentGame;
+    protected static Map currentMap;
+
+    public static Map getCurrentMap() {
+        return currentMap;
+    }
 
     public Government getCurrentPlayer() {
         return currentPlayer;

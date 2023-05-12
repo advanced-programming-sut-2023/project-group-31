@@ -6,7 +6,7 @@ import view.game_system.commands.TurnCommands;
 import java.util.regex.Matcher;
 
 public class TurnMenu extends ViewUtils {
-    public static GameSwitcher run() {
+    public static void run() {
         String input;
         Matcher matcher;
         while (true) {

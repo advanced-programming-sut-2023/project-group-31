@@ -8,6 +8,14 @@ public class Game {
     private  ArrayList<Government>players;
     private Map map;
 
+    public Game(Map map) {
+        this.map = map;
+    }
+
+    public void setPlayers(ArrayList<Government> players) {
+        this.players = players;
+    }
+
     public Map getMap() {
         return map;
     }

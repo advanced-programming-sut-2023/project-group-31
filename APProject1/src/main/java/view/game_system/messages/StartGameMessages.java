@@ -11,6 +11,10 @@ public enum StartGameMessages {
     USER_IS_ALREADY_ADDED("user is already added!"),
     MAXIMUM_NUMBER_OF_USERS("can not add any more user!"),
     LORD_HOUSE_IS_SELECTED_BEFORE("the lord house is already selected for another player!"),
+    INVALID_COLOR("invalid color!"),
+    COLOR_IS_ALREADY_SET("player is already in the team!"),
+    INVALID_LORD_HOUSE_NUMBER("invalid lord house number!"),
+    TOO_FEW_PLAYERS("too few players"),
     ;
     private String txt;
     private String input;
