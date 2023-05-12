@@ -7,6 +7,7 @@ public enum GameSwitcherMessages {
     GAME,
     MAP,
     BARRACKS,
-    MERCENARY_POST;
+    MERCENARY_POST,
+    KINGDOM;
 
 }
