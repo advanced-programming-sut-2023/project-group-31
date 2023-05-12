@@ -30,7 +30,7 @@ public class MapController extends ControllerUtils {
     public String showMapByXY() {
         String output="";
         if(map.getSize()<=(x+length/2)||map.getSize()<=(y+width/2)){
-            System.out.println("show map failed: invalid position.");
+            return "show map failed: invalid position.";
         }
         output+=showLine();
         for (int i = y; i < y + width; i++) {

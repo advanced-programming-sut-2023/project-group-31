@@ -4,7 +4,6 @@ import controller.ControllerUtils;
 import controller.game_system.MarketController;
 import view.ViewUtils;
 import view.game_system.commands.MarketCommands;
-import view.game_system.messages.GameSwitcherMessages;
 import view.game_system.messages.MarketMessages;
 
 import java.util.Scanner;

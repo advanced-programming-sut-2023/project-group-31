@@ -22,7 +22,6 @@ public class MapMenu extends ViewUtils {
         while (true) {
             input = scanner.nextLine().trim();
             if ((matcher = MapCommands.getMatcher(input, MapCommands.SHOW_MAP)) != null) {
-
                 showMapByXY(matcher);
             } else if ((matcher = MapCommands.getMatcher(input, MapCommands.MOVE)) != null) {
                 moveOnMap(matcher.group("directions"));

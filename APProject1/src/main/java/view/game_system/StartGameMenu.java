@@ -7,10 +7,12 @@ import view.game_system.messages.StartGameMessages;
 import view.user_system.messages.MenuSwitcherMessages;
 import view.ViewUtils;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 
-public class StartGameMenu {
+public class StartGameMenu{
+    //TODO: dastoor e clear
     public static MenuSwitcherMessages run(Scanner scanner) {
         Matcher matcher;
         String command;
@@ -32,8 +34,78 @@ public class StartGameMenu {
                 setTextureForARectangle(matcher);
             } else if ((matcher = StartGameCommands.getMatcher(command, StartGameCommands.SHOW_DETAILS)) != null) {
                 showDetails(matcher);
+            } else if ((matcher = StartGameCommands.getMatcher(command, StartGameCommands.SHOW_MAPS)) != null) {
+                System.out.println(StartGameController.showMaps());
+            } else if ((matcher = StartGameCommands.getMatcher(command, StartGameCommands.ADD_PLAYER)) != null) {
+                addPlayer(matcher);
+            } else if ((matcher = StartGameCommands.getMatcher(command, StartGameCommands.REMOVE_PLAYER)) != null) {
+                removePlayer(matcher);
+            } else if ((matcher = StartGameCommands.getMatcher(command, StartGameCommands.SET_PLAYERS_LORD_HOUSE)) != null) {
+                setPlayersLordHouse(matcher);
+            } else if ((matcher = StartGameCommands.getMatcher(command, StartGameCommands.SET_PLAYERS_TEAM)) != null) {
+                setPlayersTeam(matcher);
+            } else if ((matcher = StartGameCommands.getMatcher(command, StartGameCommands.SET_PLAYERS_LORD_HOUSE)) != null) {
+                setPlayersLordHouse(matcher);
             }
         }
+    }
+
+    private static void setPlayersTeam(Matcher matcher) {
+        String username = ViewUtils.fixDoubleQuotes(matcher.group("username"));
+        String color = ViewUtils.fixDoubleQuotes(matcher.group("color"));
+        StartGameMessages message = StartGameController.setPlayersTeam(username, color);
+        if (message == StartGameMessages.SUCCESS) {
+            System.out.println(StartGameMessages.SUCCESS.getTxt());
+            return;
+        }
+        if (message == StartGameMessages.INVALID_COMMAND) {
+            System.out.println("invalid command!");
+            return;
+        }
+        System.out.println("remove player failed: " + message.getTxt());
+    }
+
+    private static void setPlayersLordHouse(Matcher matcher) {
+        String username = ViewUtils.fixDoubleQuotes(matcher.group("username"));
+        int lordHouseNumber = Integer.parseInt(matcher.group("lord_house"));
+        StartGameMessages message = StartGameController.setPlayersLordHouse(username, lordHouseNumber);
+        if (message == StartGameMessages.SUCCESS) {
+            System.out.println(StartGameMessages.SUCCESS.getTxt());
+            return;
+        }
+        if (message == StartGameMessages.INVALID_COMMAND) {
+            System.out.println("invalid command!");
+            return;
+        }
+        System.out.println("remove player failed: " + message.getTxt());
+    }
+
+    private static void removePlayer(Matcher matcher) {
+        String username = ViewUtils.fixDoubleQuotes(matcher.group("username"));
+        StartGameMessages message = StartGameController.removePlayer(username);
+        if (message == StartGameMessages.SUCCESS) {
+            System.out.println(StartGameMessages.SUCCESS.getTxt());
+            return;
+        }
+        if (message == StartGameMessages.INVALID_COMMAND) {
+            System.out.println("invalid command!");
+            return;
+        }
+        System.out.println("remove player failed: " + message.getTxt());
+    }
+
+    private static void addPlayer(Matcher matcher) {
+        String username = matcher.group("username");
+        StartGameMessages message = StartGameController.addPlayer(username);
+        if (message == StartGameMessages.SUCCESS) {
+            System.out.println(StartGameMessages.SUCCESS.getTxt());
+            return;
+        }
+        if (message == StartGameMessages.INVALID_COMMAND) {
+            System.out.println("invalid command!");
+            return;
+        }
+        System.out.println("add player failed: " + message.getTxt());
     }
 
     private static void gotoMapMenu() {
@@ -96,36 +168,4 @@ public class StartGameMenu {
         }
         System.out.println("choose map failed: " + message.getTxt());
     }
-
-    private void addPlayer(Matcher matcher) {
-    }
-
-    private void removePlayer(Matcher matcher) {
-    }
-
-    private boolean start() {
-
-        return false;
-    }
-
-    private void setTexture(Matcher matcher) {
-
-    }
-
-    private void clear(Matcher matcher) {
-
-    }
-
-    private void dropRock(Matcher matcher) {
-
-    }
-
-    private void dropTree(Matcher matcher) {
-
-    }
-
-    private void dropLordHouse(Matcher matcher) {
-
-    }
-
 }

@@ -8,14 +8,25 @@ import model.game_stuff.enums.Textures;
 import view.game_system.messages.StartGameMessages;
 import view.user_system.messages.UserMessages;
 
+import java.security.PrivateKey;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 
 public class StartGameController extends ControllerUtils {
 
     private static Map chosenMap;
-    private static HashMap<User, Colors> usersToPlay;
+    private static ArrayList<PrimitivePlayer> primitivePlayers;
+    private static HashSet<Colors> usedColors;
+    private static HashSet<Integer> usedLordHouses;
     private static int xToShow;
     private static int yToShow;
+
+    {
+        primitivePlayers = new ArrayList<>();
+        usedColors = new HashSet<>();
+        usedLordHouses = new HashSet<>();
+    }
     public static String showMaps() {
         String output = "CHOSEN MAP:\n" + chosenMap + "\nAVAILABLE MAPS:";
         for (Map map : Map.getMaps()) {
@@ -53,8 +64,8 @@ public class StartGameController extends ControllerUtils {
     }
     public static String showPlayersInTheGame() {
         String output = "PLAYERS:";
-        for (User user : usersToPlay.keySet()) {
-            output += user.getNickname() + " " + usersToPlay.get(user);
+        for (PrimitivePlayer  primitivePlayer: primitivePlayers) {
+            output += primitivePlayer.getUser().getNickname() + " " + primitivePlayer.getColor() + " in lord house " + primitivePlayer.getLordHouseNumber();
         }
         return output;
     }
@@ -136,5 +147,79 @@ public class StartGameController extends ControllerUtils {
         }
         StartGameMessages.SUCCESS.setTxt(chosenMap.getBlock(x, y).toString());
         return StartGameMessages.SUCCESS;
+    }
+
+    public static StartGameMessages addPlayer(String username) {
+        User user;
+        if((user = User.getUserByUsername(username)) == null) {
+            return StartGameMessages.NO_SUCH_USER;
+        }
+        for (PrimitivePlayer primitivePlayer : primitivePlayers) {
+            if(primitivePlayer.getUser().equals(user))
+                return StartGameMessages.USER_IS_ALREADY_ADDED;
+        }
+        if(primitivePlayers.size() >= 8) {
+            return StartGameMessages.MAXIMUM_NUMBER_OF_USERS;
+        }
+        Colors color = null;
+        for (Colors color1 : Colors.values()) {
+            if(!usedColors.contains(color1)) {
+                color = color1;
+                usedColors.add(color);
+                break;
+            }
+        }
+        int lordHouse = -1;
+        for(int i = 0; i < 8; i++) {
+            if(!usedLordHouses.contains(i)) {
+                lordHouse = i;
+                usedLordHouses.add(i);
+                break;
+            }
+        }
+        primitivePlayers.add(new PrimitivePlayer(user, color, lordHouse));
+        return StartGameMessages.SUCCESS;
+    }
+    private static PrimitivePlayer getPlayerByUsername(String username) {
+        for (PrimitivePlayer primitivePlayer : primitivePlayers) {
+            if(primitivePlayer.getUser().getUsername().equals(username))
+                return primitivePlayer;
+        }
+        return null;
+    }
+    public static StartGameMessages removePlayer(String username) {
+        PrimitivePlayer playerToRemove = getPlayerByUsername(username);
+        if(playerToRemove == null) {
+            return StartGameMessages.NO_SUCH_USER;
+        }
+        Colors color = playerToRemove.getColor();
+        usedLordHouses.remove(playerToRemove.getLordHouseNumber());
+        primitivePlayers.remove(playerToRemove);
+        for (PrimitivePlayer primitivePlayer : primitivePlayers) {
+            if(primitivePlayer.getColor().equals(color))
+                return StartGameMessages.SUCCESS;
+        }
+        usedColors.remove(color);
+        return StartGameMessages.SUCCESS;
+    }
+
+    public static StartGameMessages setPlayersLordHouse(String username, int lordHouseNumber) {
+        PrimitivePlayer primitivePlayer = getPlayerByUsername(username);
+        if (primitivePlayer == null) {
+            return StartGameMessages.NO_SUCH_USER;
+        }
+        if (usedLordHouses.contains(lordHouseNumber)) {
+            return StartGameMessages.LORD_HOUSE_IS_SELECTED_BEFORE;
+        }
+        primitivePlayer.setLordHouseNumber(lordHouseNumber);
+        return StartGameMessages.SUCCESS;
+    }
+
+    public static StartGameMessages setPlayersTeam(String username, String color) {
+        PrimitivePlayer primitivePlayer = getPlayerByUsername(username);
+        if (primitivePlayer == null) {
+            return StartGameMessages.NO_SUCH_USER;
+        }
+
     }
 }

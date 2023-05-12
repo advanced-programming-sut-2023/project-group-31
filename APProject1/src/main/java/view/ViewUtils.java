@@ -13,10 +13,10 @@ public class ViewUtils {
     protected static UserMessages result;
 
     public static String editRegex(String regex){
-        String result;
-        result=regex.replaceAll("[\\s]+","[\\s]+");
-        result=regex.replaceAll("IN","([\\\\S]*)|(\"[^*]*\")");
-        return result;
+        regex = regex.replaceAll("[\\s]+","[\\s]+");
+        regex = regex.replaceAll("IN","([\\\\S]*)|(\"[^*]*\")");
+        regex = regex.replaceAll("\\d", "-?\\d");
+        return regex;
     }
 
     public static HashMap<String, String> putInHashmap(Matcher matcher, String regex) {
@@ -36,7 +36,11 @@ public class ViewUtils {
         inputs.put("command",regex.substring(0,regex.indexOf("(")));
         return inputs;
     }
-
-
-
+    public static String fixDoubleQuotes(String input) {
+        input = input.trim();
+        if(input.charAt(0) == '\"') {
+            input.replaceAll("\"", "");
+        }
+        return input;
+    }
 }

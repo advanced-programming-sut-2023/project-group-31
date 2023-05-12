@@ -3,6 +3,7 @@ package model.game_stuff;
 import model.User;
 import model.game_stuff.buildings.Storage;
 import model.game_stuff.enums.Items;
+import model.game_stuff.people.Worker;
 
 import java.util.ArrayList;
 
@@ -14,6 +15,9 @@ public class Government {
     private final ArrayList<Storage> stockpiles;
     private final ArrayList<Storage > granaries;
     private final ArrayList<Storage> weaponries;
+    private ArrayList<Building> buildings;
+    private ArrayList<Troop> troops;
+    private ArrayList<Worker> workers;
     private Block LordsHouse;
     private Colors color;
     //private int gold;
@@ -24,6 +28,7 @@ public class Government {
     private int popularityGrowthRate;
     private int fearRate;
     private int efficiency;
+    private int maxPopulation;
     private ArrayList<Trade> tradeHistory;
 
     {
@@ -41,12 +46,34 @@ public class Government {
         granaries = new ArrayList<>();
         weaponries = new ArrayList<>();
         tradeHistory = new ArrayList<>();
+        buildings = new ArrayList<>();
+        workers = new ArrayList<>();
+        troops = new ArrayList<>();
     }
 
     public Government(User owner, Colors color) {
         this.owner = owner;
         this.name = owner.getNickname();
         this.color = color;
+    }
+
+    public void addBuilding(Building building) {
+        buildings.add(building);
+    }
+    public void removeBuilding(Building building) {
+        buildings.remove(building);
+    }
+
+    public ArrayList<Building> getBuildings() {
+        return buildings;
+    }
+
+    public ArrayList<Troop> getTroops() {
+        return troops;
+    }
+
+    public ArrayList<Worker> getWorkers() {
+        return workers;
     }
 
     public model.game_stuff.Possession getPossession() {

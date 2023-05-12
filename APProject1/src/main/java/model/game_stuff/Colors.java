@@ -22,6 +22,13 @@ public enum Colors {
         return name;
     }
 
+    public Colors getColorByName(String name) {
+        for (Colors color : values()) {
+            if(color.getName().equals(name))
+                return color;
+        }
+        return null;
+    }
     @Override
     public String toString() {
         return name;

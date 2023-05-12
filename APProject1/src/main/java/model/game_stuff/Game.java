@@ -19,6 +19,13 @@ public class Game {
     public ArrayList<Government> getPlayers() {
         return players;
     }
+    public Government getPlayerByNickname(String name) {
+        for (Government player : players) {
+            if(player.getGame().equals(name))
+                return player;
+        }
+        return null;
+    }
 
     public void setTurn(int turn) {
         this.turn = turn;
