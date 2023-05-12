@@ -23,14 +23,17 @@ public class TurnController extends ControllerUtils {
         if (isThereAPlaceForBuilding(x, y, buildingType) != null) {
             return isThereAPlaceForBuilding(x, y, buildingType);
         }
-        if (!isRequirementEnough(buildingType, 100)) {
-
+        if (!isRequirementEnough(buildingType, 1)) {
+            return TurnMessages.NOT_ENOUGH_REQUIREMENT;
         }
+        Building building=createNewBuilding(inputs.get("type"));
         for (int i = x; i < buildingType.getLength(); i++) {
             for (int j = y; j < buildingType.getWidth(); j++) {
-                currentGame.getMap().getBlock(i, j).setBuilding(createNewBuilding(inputs.get("type")));
+                currentGame.getMap().getBlock(i, j).setBuilding(building);
+                building.addBlock(currentGame.getMap().getBlock(i, j));
             }
         }
+        decreaseRequirement(buildingType,1);
         return TurnMessages.SUCCESS;
     }
 
@@ -90,7 +93,15 @@ public class TurnController extends ControllerUtils {
         if (Math.ceil(buildings.getWoodNeeded() * percent) > currentPlayer.getPossession().getWood()) { //stone ==rock
             return false;
         }
-//TODO
+        return true;
+    }
+
+    private static boolean decreaseRequirement(Buildings buildings, double percent) {
+        Double dou;
+        currentPlayer.getPossession().setGold((int)Math.ceil(currentPlayer.getPossession().getGold()-buildings.getGoldNeeded() * percent));
+        currentPlayer.getPossession().setIron((int)Math.ceil(currentPlayer.getPossession().getIron()-buildings.getIronNeeded() * percent));
+        currentPlayer.getPossession().setStone((int)Math.ceil(currentPlayer.getPossession().getStone()-buildings.getRockNeeded() * percent));
+        currentPlayer.getPossession().setWood((int)Math.ceil(currentPlayer.getPossession().getWood()-buildings.getWoodNeeded() * percent));
         return true;
     }
 
@@ -126,9 +137,11 @@ public class TurnController extends ControllerUtils {
                 return TurnMessages.ENEMY_IS_CLOSE;
             }
         }
-        if(isRequirementEnough(building.ge,building.getHp())){
-
+        if(isRequirementEnough(Buildings.getBuildingByName(building.getName()),building.getHpLost())){
+            return TurnMessages.NOT_ENOUGH_REQUIREMENT;
         }
+        building.getRepaired();
+        decreaseRequirement(Buildings.getBuildingByName(building.getName()),1);
         return null;
     }
 

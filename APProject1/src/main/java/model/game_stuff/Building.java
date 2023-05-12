@@ -19,7 +19,7 @@ public abstract class Building implements HasHp{
     public void getRepaired() {
         hp = maxHp;
     }
-    public double hpLost() {
+    public double getHpLost() {
         return (double)(maxHp - hp) / ((double) maxHp);
     }
 
@@ -53,6 +53,10 @@ public abstract class Building implements HasHp{
         for (Block block : blocks) {
             block.setBuilding(null);
         }
+    }
+
+    public void addBlock(Block block){
+        blocks.add(block);
     }
 
     public void setUnderAttack(boolean underAttack) {

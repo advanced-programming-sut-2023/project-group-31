@@ -10,7 +10,7 @@ public enum TurnMessages {
     MESSAGE(""),
     MERCENARY_POST(""),
     BARRACK(""),
-    ENEMY_IS_CLOSE("Enemy soldiers are very close to the wall.");
+    ENEMY_IS_CLOSE("Enemy soldiers are very close to the wall."), NOT_ENOUGH_REQUIREMENT("not enough requirement");
     private String txt;
     TurnMessages(String txt) {
         this.txt = txt;
