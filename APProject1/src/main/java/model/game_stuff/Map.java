@@ -2,6 +2,7 @@ package model.game_stuff;
 
 import model.game_stuff.enums.Direction;
 import model.game_stuff.enums.Textures;
+import model.game_stuff.enums.TreeTypes;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -136,6 +137,41 @@ public class Map {
     }
     public boolean isInMap(int x, int y) {
         return x >= 0 &&  y >= 0 && x < size && y < size;
+    }
+
+    public static void setMaps(ArrayList<Map> maps) {
+        Map.maps = maps;
+    }
+
+    public static void setDefaultMaps(){
+        Map newMap=new Map("Default map",150);
+        for(int i=1;i<20;i++){
+            for(int j=1;j<30;j++){
+                newMap.getBlock(i,j).setType(Textures.GROSS);
+                Tree tree= new Tree(newMap.getBlock(i,j), TreeTypes.OLIVE);
+            }
+
+        }
+
+        for(int i=80;i<100;i++){
+            for(int j=100;j<150;j++){
+                newMap.getBlock(i,j).setType(Textures.GROSS);
+                Tree tree= new Tree(newMap.getBlock(i,j), TreeTypes.DATE);
+            }
+        }
+
+        for(int i=50;i<150;i++){
+            for(int j=120;j<150;j++){
+                newMap.getBlock(i,j).setType(Textures.WATER);
+            }
+        }
+
+        for(int i=40;i<100;i++){
+            for(int j=1;j<20;j++){
+                newMap.getBlock(i,j).setType(Textures.WATER);
+            }
+        }
+
     }
 
     @Override

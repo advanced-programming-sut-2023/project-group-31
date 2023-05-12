@@ -83,5 +83,8 @@ public class MapMenu extends ViewUtils {
         mapController.moveOnMap(rights,ups);
         System.out.println(mapController.showMapByXY());
     }
+
+    
+
 }
 

@@ -5,6 +5,7 @@ import java.util.*;
 
 import com.google.gson.Gson;
 import controller.ControllerUtils;
+import model.game_stuff.Map;
 
 
 public class DataBase {
@@ -13,6 +14,8 @@ public class DataBase {
     private ArrayList<String> slogans;
     private ArrayList<String> recoveryQuestions;
     private ArrayList<User> users;
+
+    private ArrayList<Map> maps;
 
     private final static String path = new File("").getAbsolutePath() + "\\src\\main\\resources\\";
     ;
@@ -32,6 +35,7 @@ public class DataBase {
                 "Chips mikhori?"));
         this.users = new ArrayList<User>();
         this.loggedInUser = null;
+        maps=new ArrayList<Map>();
 
     }
 
@@ -49,7 +53,6 @@ public class DataBase {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         return builder.toString();
     }
 
@@ -102,6 +105,7 @@ public class DataBase {
             hashUsers.put(user.getUsername(),user);
         }
         User.setUsers(hashUsers);
+        Map.setMaps(dataBase.maps);
     }
 
 

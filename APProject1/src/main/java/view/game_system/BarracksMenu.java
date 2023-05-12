@@ -1,6 +1,7 @@
 package view.game_system;
 
-import controller.game_menu.BarrackController;
+
+import controller.game_system.BarrackController;
 import main.java.view.game_system.commands.BarracksCommand;
 import main.java.view.game_system.messages.BarracksMessages;
 
