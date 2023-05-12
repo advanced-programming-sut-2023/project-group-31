@@ -1,6 +1,8 @@
 package model.game_stuff.buildings.enums;
 
 public enum BuildingMenus {
+    MERCENARY_POST("Mercenary post","MercenaryPostMenu"),
+    BARRACK("Barrack","BarracksMenu")
     ;
     private String name;
     private String menu;
