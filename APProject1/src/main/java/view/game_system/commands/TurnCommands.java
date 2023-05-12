@@ -8,11 +8,17 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public enum TurnCommands {
-    DROP_BUILDING("dropbuilding(( -x (?<x>[\\d]+))|( -y (?<y>[\\d]+))|( -type (?<type>IN)))+")
+    DROP_BUILDING("dropbuilding(( -x (?<x>[\\d]+))|( -y (?<y>[\\d]+))|( -type (?<type>IN)))+"),
+    REPAIR("repair"),
+    SELECT_BUILDING("select building(( -x (?<x>IN))|( -y (?<y>IN)))+")
     ;
     String regex;
     TurnCommands(String regex){
         this.regex= ViewUtils.editRegex(regex);
+    }
+
+    public String getRegex() {
+        return regex;
     }
 
     public static Matcher getMatcher(String input, TurnCommands command) {

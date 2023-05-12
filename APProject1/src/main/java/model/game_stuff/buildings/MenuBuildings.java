@@ -15,6 +15,10 @@ public class MenuBuildings extends Building {
         return type.getMenu();
     }
 
+    public BuildingMenus getType() {
+        return type;
+    }
+
     @Override
     public String toString() {
         return type.getName() + "\n" +
