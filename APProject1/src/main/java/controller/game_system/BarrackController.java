@@ -3,6 +3,7 @@ package controller.game_system;
 import controller.ControllerUtils;
 import main.java.view.game_system.messages.BarracksMessages;
 import model.game_stuff.Troop;
+import model.game_stuff.buildings.Storage;
 import model.game_stuff.enums.Items;
 //import model.game_stuff.people.Kicker;
 //import model.game_stuff.people.Thrower;
@@ -13,6 +14,7 @@ import model.game_stuff.types.Nationality;
 import model.game_stuff.types.Troops;
 
 public class BarrackController extends ControllerUtils {
+    private static Storage storage;
     public static BarracksMessages createUnit(){
         if(inputs.get("type")==null||Integer.parseInt(inputs.get("amount"))<=0){
             return BarracksMessages.INVALID_COMMAND;
@@ -46,15 +48,19 @@ public class BarrackController extends ControllerUtils {
         return BarracksMessages.SUCCESS;
     }
 
+    public static void setStorage(Storage storage) {
+        BarrackController.storage = storage;
+    }
+
     private static void createThrower(TroopTypes target) {
          Troop troop=new Troop(currentPlayer,target);
-        troop.setPosition();
+        troop.setPosition(storage.getPosition());
         //currentplayer.barrack.getblock(0).add(thrower)
     }
 
     private static void createKicker(TroopTypes target) {
         Troop troop=new Troop(currentPlayer,target);
-        troop.setPosition();
+        troop.setPosition(storage.getPosition());
         //currentplayer.barrack.getblock(0).add(kicker)
     }
 }

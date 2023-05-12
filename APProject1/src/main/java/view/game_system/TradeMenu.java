@@ -4,7 +4,6 @@ import controller.ControllerUtils;
 import controller.game_system.TradeController;
 import view.ViewUtils;
 import view.game_system.commands.TradeCommands;
-import view.game_system.messages.GameSwitcherMessages;
 import view.game_system.messages.TradeMessages;
 
 import java.util.Scanner;

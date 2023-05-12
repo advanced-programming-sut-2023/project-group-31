@@ -8,6 +8,14 @@ public class Game {
     private  ArrayList<Government>players;
     private Map map;
 
+    public Game(Map map) {
+        this.map = map;
+    }
+
+    public void setPlayers(ArrayList<Government> players) {
+        this.players = players;
+    }
+
     public Map getMap() {
         return map;
     }
@@ -18,6 +26,13 @@ public class Game {
 
     public ArrayList<Government> getPlayers() {
         return players;
+    }
+    public Government getPlayerByNickname(String name) {
+        for (Government player : players) {
+            if(player.getGame().equals(name))
+                return player;
+        }
+        return null;
     }
 
     public void setTurn(int turn) {

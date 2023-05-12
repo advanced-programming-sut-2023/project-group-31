@@ -9,8 +9,7 @@ import java.util.regex.Matcher;
 
 public class TurnMenu extends ViewUtils {
     private static TurnMessages result;
-
-    public static GameSwitcher run() {
+    public static void run() {
         String input;
         Matcher matcher;
         while (true) {

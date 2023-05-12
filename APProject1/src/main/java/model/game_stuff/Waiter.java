@@ -25,7 +25,7 @@ public class Waiter {
         this.turnCounter = turnCounter;
     }
     public boolean isTheTurn() {
-        if(turnCounter == turnsToWait) {
+        if(turnCounter >= turnsToWait) {
             turnCounter = 0;
             return true;
         }
