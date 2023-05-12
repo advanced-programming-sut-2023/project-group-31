@@ -6,6 +6,7 @@ import model.game_stuff.buildings.*;
 import model.game_stuff.buildings.enums.*;
 import model.game_stuff.enums.Textures;
 import model.game_stuff.types.Buildings;
+import view.game_system.commands.TurnCommands;
 import view.game_system.messages.TurnMessages;
 import view.user_system.messages.UserMessages;
 
@@ -21,20 +22,15 @@ public class TurnController extends ControllerUtils {
         if (isThereAPlaceForBuilding(x, y, buildingType) != null) {
             return isThereAPlaceForBuilding(x, y, buildingType);
         }
+        if (!isRequirementEnough(buildingType, 100)) {
 
+        }
         for (int i = x; i < buildingType.getLength(); i++) {
             for (int j = y; j < buildingType.getWidth(); j++) {
-                currentGame.getMap().getBlock(i, j).setBuilding();
+                currentGame.getMap().getBlock(i, j).setBuilding(createNewBuilding(inputs.get("type")));
             }
         }
-
-        if(buildingType.getGoldNeeded()){
-
-        }
-
-        createNewBuilding(inputs.get("type"));
-
-        currentGame.getMap();
+        return TurnMessages.SUCCESS;
     }
 
     private static TurnMessages isThereAPlaceForBuilding(int x, int y, Buildings buildingType) {
@@ -57,36 +53,62 @@ public class TurnController extends ControllerUtils {
     private static Building createNewBuilding(String type) {
         Building building;
         if (BuildingMenus.getEnumByName(type) != null) {
-             return new MenuBuildings(currentPlayer, BuildingMenus.getEnumByName(type));
+            return new MenuBuildings(currentPlayer, BuildingMenus.getEnumByName(type));
         }
         if (FactorRiserTypes.getEnumByName(type) != null) {
             return new FactorRiser(currentPlayer, FactorRiserTypes.getEnumByName(type));
         }
         if (GateHouseTypes.getEnumByName(type) != null) {
-            return new GateHouse(GateHouseTypes.getEnumByName(type),currentPlayer,true);
+            return new GateHouse(GateHouseTypes.getEnumByName(type), currentPlayer, true);
         }
         if (ProducerTypes.getEnumByName(type) != null) {
-            return new Producer(ProducerTypes.getEnumByName(type),currentPlayer);
+            return new Producer(ProducerTypes.getEnumByName(type), currentPlayer);
         }
         if (StorageTypes.getEnumByName(type) != null) {
             return new Storage(currentPlayer, StorageTypes.getEnumByName(type));
         }
-        if(TowerTypes.getEnumByName(type)!=null){
-            return new Tower(TowerTypes.getEnumByName(type),currentPlayer);
+        if (TowerTypes.getEnumByName(type) != null) {
+            return new Tower(TowerTypes.getEnumByName(type), currentPlayer);
         }
-        if(TrapTypes.getEnumByName(type)!=null){
-            return new Trap(TrapTypes.getEnumByName(type),currentPlayer);
+        if (TrapTypes.getEnumByName(type) != null) {
+            return new Trap(TrapTypes.getEnumByName(type), currentPlayer);
         }
         return null;
     }
 
-    private static boolean areRequirementsEnough(Buildings buildings){
-//        if(currentPlayer.){
-//
-//        }
+    private static boolean isRequirementEnough(Buildings buildings, double percent) {
+        if (Math.ceil(buildings.getGoldNeeded() * percent) > currentPlayer.getPossession().getGold()) {
+            return false;
+        }
+        if (Math.ceil(buildings.getIronNeeded() * percent) > currentPlayer.getPossession().getIron()) {
+            return false;
+        }
+        if (Math.ceil(buildings.getRockNeeded() * percent) > currentPlayer.getPossession().getStone()) { //stone ==rock
+            return false;
+        }
+        if (Math.ceil(buildings.getWoodNeeded() * percent) > currentPlayer.getPossession().getWood()) { //stone ==rock
+            return false;
+        }
+//TODO
+        return true;
     }
 
-    public static TurnMessages selectBuilding(int x, int y) {
+    public static TurnMessages selectBuilding() {
+        int x = Integer.parseInt(inputs.get("x"));
+        int y = Integer.parseInt(inputs.get("y"));
+        Building building;
+        if ((building = currentGame.getMap().getBlock(x, y).getBuilding()) == null) {
+            return TurnMessages.EMPTY_PLACE;
+        }
+        if (!(building instanceof MenuBuildings)) {
+            return TurnMessages.MESSAGE.setAndGetTxt(building.toString());
+        }
+        if (((MenuBuildings) building).getType().equals(BuildingMenus.BARRACK)) {
+            return TurnMessages.BARRACK.setAndGetTxt(building.toString());
+        }
+        if (((MenuBuildings) building).getType().equals(BuildingMenus.MERCENARY_POST)) {
+            return TurnMessages.MERCENARY_POST.setAndGetTxt(building.toString());
+        }
         return null;
     }
 

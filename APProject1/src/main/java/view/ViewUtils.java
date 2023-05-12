@@ -10,7 +10,8 @@ import java.util.regex.Pattern;
 
 public class ViewUtils {
     protected static Scanner scanner;
-    protected static UserMessages result;
+    protected static UserMessages userResult;
+
 
     public static String editRegex(String regex){
         regex = regex.replaceAll("[\\s]+","[\\s]+");

@@ -50,12 +50,12 @@ public class ProfileMenu extends ViewUtils {
 
 
     private static void changeUsername() {
-        result = ProfileController.profileChangeUsername();
+        userResult = ProfileController.profileChangeUsername();
         System.out.println(changeProfileMessage("username"));
     }
 
     private static void changeNickname() {
-        result = ProfileController.profileChangeNickname();
+        userResult = ProfileController.profileChangeNickname();
         System.out.println(changeProfileMessage("nickname"));
     }
 
@@ -64,35 +64,35 @@ public class ProfileMenu extends ViewUtils {
             System.out.println("change password failed: wrong captcha.");
             return;
         }
-        result = ProfileController.profileChangePassword();
+        userResult = ProfileController.profileChangePassword();
         System.out.println(changeProfileMessage("password"));
     }
 
     private static void changeEmail() {
-        result = ProfileController.profileChangeEmail();
+        userResult = ProfileController.profileChangeEmail();
         System.out.println(changeProfileMessage("email"));
     }
 
     private static void changeSlogan() {
-        result = ProfileController.profileChangeSlogan();
+        userResult = ProfileController.profileChangeSlogan();
         System.out.println(changeProfileMessage("slogan"));
     }
 
     private static String changeProfileMessage(String field) {
-        if (result.equals(UserMessages.SUCCESS)) {
-            return (field + " change: " + result);
+        if (userResult.equals(UserMessages.SUCCESS)) {
+            return (field + " change: " + userResult);
         } else {
-            return (field + " change failed: " + result);
+            return (field + " change failed: " + userResult);
         }
     }
 
 
     private static void displayProfile() {
-        result = ProfileController.profileDisplay();
-        if (result.equals(UserMessages.MESSAGES)) {
-            System.out.println(result);
+        userResult = ProfileController.profileDisplay();
+        if (userResult.equals(UserMessages.MESSAGES)) {
+            System.out.println(userResult);
         } else {
-            System.out.println("display profile success: " + result);
+            System.out.println("display profile success: " + userResult);
         }
     }
 

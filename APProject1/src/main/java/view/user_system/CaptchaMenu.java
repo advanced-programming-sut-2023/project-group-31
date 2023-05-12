@@ -38,11 +38,11 @@ public class CaptchaMenu extends ViewUtils {
             input = scanner.nextLine().trim();
             if (input.matches("[\\d]+")) {
                 ControllerUtils.putInput("inputCaptcha", input);
-                result = ControllerUtils.checkCaptchaMatching();
-                if (result.equals(UserMessages.SUCCESS)) {
+                userResult = ControllerUtils.checkCaptchaMatching();
+                if (userResult.equals(UserMessages.SUCCESS)) {
                     object = null;
                     return true;
-                } else if (result.equals(UserMessages.FAIL)) {
+                } else if (userResult.equals(UserMessages.FAIL)) {
                     System.out.println("Wrong captcha code! (you have only " + (3 - wrongAnswers) + "chance left!)");
                     wrongAnswers++;
                     if (wrongAnswers >= 2) {

@@ -87,7 +87,7 @@ public class RegisterMenu extends ViewUtils {
                 String username=ControllerUtils.getInputs().get("username");
                 ControllerUtils.setInputs(putInHashmap(matcher, RegisterCommands.PICK_QUESTION.getRegex()));
                 pickQuestion(username);
-                if(result.equals(UserMessages.SUCCESS)) return;
+                if(userResult.equals(UserMessages.SUCCESS)) return;
             } else {
                 System.out.println("Invalid command!");
             }
@@ -96,11 +96,11 @@ public class RegisterMenu extends ViewUtils {
 
     private static void pickQuestion(String username) {
 
-        result = RegisterController.pickQuestion(username);
-        if (result.equals(UserMessages.SUCCESS)) {
-            System.out.println("question pick: " + result.getTxt());
+        userResult = RegisterController.pickQuestion(username);
+        if (userResult.equals(UserMessages.SUCCESS)) {
+            System.out.println("question pick: " + userResult.getTxt());
         } else {
-            System.out.println("question pick failed: " + result.getTxt());
+            System.out.println("question pick failed: " + userResult.getTxt());
         }
 
     }

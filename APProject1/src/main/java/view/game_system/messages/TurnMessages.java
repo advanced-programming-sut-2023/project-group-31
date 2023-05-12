@@ -5,7 +5,11 @@ public enum TurnMessages {
     OUT_OF_MAP("Your building coordinate is out of map!"),
     BANNED_AREA("you can not put the building on that area!"),
 
-    THERE_IS_BUILDING_ON_AREA("There is building on that area!")
+    THERE_IS_BUILDING_ON_AREA("There is building on that area!"),
+    SUCCESS("Success"), EMPTY_PLACE("There is no building here."),
+    MESSAGE(""),
+    MERCENARY_POST(""),
+    BARRACK("")
     ;
     private String txt;
     TurnMessages(String txt) {

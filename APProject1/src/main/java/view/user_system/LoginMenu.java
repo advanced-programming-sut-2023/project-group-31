@@ -44,14 +44,14 @@ public class LoginMenu extends ViewUtils {
             System.out.println("login failed: wrong captcha");
             return;
         }
-        result = LoginController.loginUser();
-        if (result.equals(UserMessages.SUCCESS)) {
+        userResult = LoginController.loginUser();
+        if (userResult.equals(UserMessages.SUCCESS)) {
             System.out.println("user login: " + UserMessages.SUCCESS.getTxt());
-        } else if (result.equals(UserMessages.PASSWORD_IS_NOT_CORRECT)) {
-            System.out.println("user login failed: " + result.getTxt());
+        } else if (userResult.equals(UserMessages.PASSWORD_IS_NOT_CORRECT)) {
+            System.out.println("user login failed: " + userResult.getTxt());
             wrongPasswordMenu();
         } else {
-            System.out.println("user login failed: " + result.getTxt());
+            System.out.println("user login failed: " + userResult.getTxt());
         }
 
     }
@@ -128,11 +128,11 @@ public class LoginMenu extends ViewUtils {
     }
 
     private static void changePassword() {
-        result = LoginController.changePassword();
-        if (result.equals(UserMessages.SUCCESS)) {
-            System.out.println("change password: " + result.getTxt());
+        userResult = LoginController.changePassword();
+        if (userResult.equals(UserMessages.SUCCESS)) {
+            System.out.println("change password: " + userResult.getTxt());
         } else {
-            System.out.println("change password failed: " + result.getTxt());
+            System.out.println("change password failed: " + userResult.getTxt());
         }
     }
 }
