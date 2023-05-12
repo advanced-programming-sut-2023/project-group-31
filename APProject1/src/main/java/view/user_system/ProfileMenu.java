@@ -1,7 +1,7 @@
 package view.user_system;
 
 import controller.ControllerUtils;
-import controller.user_menu.ProfileController;
+import controller.user_system.ProfileController;
 import view.ViewUtils;
 import view.user_system.commands.ProfileCommands;
 import view.user_system.messages.MenuSwitcherMessages;

@@ -1,7 +1,7 @@
 package view.user_system;
 
 import controller.ControllerUtils;
-import controller.user_menu.LoginController;
+import controller.user_system.LoginController;
 import view.ViewUtils;
 import view.user_system.commands.LoginCommands;
 import view.user_system.messages.MenuSwitcherMessages;

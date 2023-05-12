@@ -5,11 +5,9 @@ import model.game_stuff.Government;
 import model.game_stuff.buildings.enums.ProducerTypes;
 import model.game_stuff.people.Worker;
 
-import java.util.ArrayList;
-
 public class Producer extends Building {
     private ProducerTypes type;
-    private ArrayList<Worker> workers;
+    private Worker worker;
     private int numberOfProductsAvailable;
     {
 
@@ -37,15 +35,9 @@ public class Producer extends Building {
 
     @Override
     public String toString() {
-        return "Producer{" +
-                "type=" + type +
-                ", workers=" + workers +
-                ", numberOfProductsAvailable=" + numberOfProductsAvailable +
-                ", hp=" + hp +
-                ", maxHp=" + maxHp +
-                ", owner=" + owner +
-                ", name='" + name + '\'' +
-                ", blocks=" + blocks +
-                '}';
+        return  type.getName() + "\n" +
+            "productsAvailable: " + numberOfProductsAvailable + " / " + type.getCapacity() + "\n"
+            + worker.getState().getName() + "\n" +
+            "hp: " + hp + " / " + maxHp;
     }
 }

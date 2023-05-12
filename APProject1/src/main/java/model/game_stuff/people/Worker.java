@@ -101,6 +101,11 @@ public class Worker extends Person {
         int distance = destination.getDistanceTo(position);
         transportingWaiter = new Waiter(distance / type.getSpeed());
     }
+
+    public WorkerStates getState() {
+        return state;
+    }
+
     private Block findBestStorage(ArrayList<Storage> storages) {
         Storage bestStorage = null;
         int minimumDistance = 500;

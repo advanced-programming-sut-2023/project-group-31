@@ -1,17 +1,21 @@
 package controller.game_system;
 
+import controller.ControllerUtils;
+import model.game_stuff.buildings.Storage;
+import model.game_stuff.enums.Items;
 import view.game_system.messages.MarketMessages;
 
-public class MarketController extends controller.ControllerUtils {
+import java.util.Map;
+
+public class MarketController extends ControllerUtils {
     public static String showPriceList(){
-        //TODO   KINGDOM CONTROLLER
-        // StringBuilder result
-        //getCurrentGovernment.getPossession().for
-        //result.append(good.getName()).append(good.getPrice)
-        //result.append('\n');
-        /*ya mishe ye tabe static az ye possession tarif ke
-        hame kala haro dashte bashe*/
-        return null;
+        StringBuilder result=new StringBuilder();
+        for (Storage stockpile : currentPlayer.getStockpiles()) {
+            for (Map.Entry<Items, Integer> itemsIntegerEntry : stockpile.getProperties().entrySet()) {
+                result.append("item name "+itemsIntegerEntry.getKey().getName()+"item type "+itemsIntegerEntry.getKey().getType()+"number "+itemsIntegerEntry.getValue()).append('\n');
+            }
+        }
+        return result.toString();
     }
     public static MarketMessages buy(){
         if(inputs.get("item")==null){
@@ -20,14 +24,25 @@ public class MarketController extends controller.ControllerUtils {
         if(Integer.parseInt(inputs.get("amount"))<=0){
             return MarketMessages.INVALID_COMMAND;
         }
-        //getCurrentGovernment.getPossession().for
-        //if(good.getName.equals(item))
-        // return good
-        //if not return MarketMessages.INVALID_GOOD_NAME
-        //if(User.getGold<amount*good.getPrice() return NOT_ENOUGH_GOLD
-        //if(government.isStockpilesFull) return YOUR_STOCKPILE_IS_FULL
-        //else user.setgold(user.getgold-amount*goodPrice()) stockpile add good and return SUCCESS
-        return null;
+        Items target= Items.getItemByName(inputs.get("type"));
+        if(target==null){
+            return MarketMessages.INVALID_GOOD_NAME;
+        }
+        boolean isFull=false;
+        for (Storage stockpile : currentPlayer.getStockpiles()) {
+            if (stockpile.isFull()){
+                isFull=true;
+            }
+        }
+        if(isFull==false){
+            return MarketMessages.YOUR_STOCKPILE_IS_FULL;
+        }
+        if (currentPlayer.getPossession().getGold()<target.getCost()*Integer.parseInt(inputs.get("amount"))){
+            return MarketMessages.NOT_ENOUGH_GOLD;
+        }
+
+         currentPlayer.getPossession().setGold(currentPlayer.getPossession().getGold()-target.getCost()*Integer.parseInt(inputs.get("amount")));
+         return MarketMessages.SUCCESS;
     }
     public static MarketMessages sell(){
         if(inputs.get("item")==null){
@@ -36,14 +51,18 @@ public class MarketController extends controller.ControllerUtils {
         if(Integer.parseInt(inputs.get("amount"))<=0){
             return MarketMessages.INVALID_COMMAND;
         }
-        //getCurrentGovernment.getPossession().for
-        //if(good.getName().equals(item))
-        //return good
-        // if not return  INVALID_GOOD_NAME
-        //if(good.getCount()<amount)return NOT_ENOUGH_GOOD
-        // currentUser.getPossession.get(item).setNumber(getNumber-amount)
-        //currentUser.setgold(getgold+amount*good.getPrice())
-        //return SUCCESS
-        return null;
+        Items target=Items.getItemByName(inputs.get("item"));
+        if(target==null){
+            return MarketMessages.INVALID_GOOD_NAME;
+        }
+        if(currentPlayer.getPossession().getItem(target)==0){
+            return MarketMessages.NOT_ENOUGH_GOOD;
+        }
+
+        // type bayad moshakhas beshe ke bayad az koja gerefte beshe
+            //currentPlayer.getPossession().getItem();
+
+        currentPlayer.getPossession().setGold(currentPlayer.getPossession().getGold()+target.getCost()*Integer.parseInt(inputs.get("amount")));
+        return MarketMessages.SUCCESS;
     }
 }

@@ -1,17 +1,14 @@
-import controller.ControllerUtils;
-import controller.user_menu.LoginController;
-import controller.user_menu.RegisterController;
+import controller.user_system.LoginController;
+import controller.user_system.RegisterController;
 import model.DataBase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import view.ViewUtils;
-import view.user_system.RegisterMenu;
 import view.user_system.commands.LoginCommands;
 import view.user_system.commands.RegisterCommands;
 import view.user_system.messages.UserMessages;
 
-import javax.xml.crypto.dsig.spec.HMACParameterSpec;
 import java.util.regex.Matcher;
 
 public class JavaUserTest {

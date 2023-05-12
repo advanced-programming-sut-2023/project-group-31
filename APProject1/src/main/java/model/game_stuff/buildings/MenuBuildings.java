@@ -5,21 +5,19 @@ import model.game_stuff.Government;
 import model.game_stuff.buildings.enums.BuildingMenus;
 
 public class MenuBuildings extends Building {
-    private BuildingMenus menu;
+    private BuildingMenus type;
     public MenuBuildings(Government government, BuildingMenus menu) {
         super(government);
-        this.menu = menu;
+        this.type = menu;
+    }
+
+    public String getMenu() {
+        return type.getMenu();
     }
 
     @Override
     public String toString() {
-        return "MenuBuildings{" +
-                "menu=" + menu +
-                ", hp=" + hp +
-                ", maxHp=" + maxHp +
-                ", owner=" + owner +
-                ", name='" + name + '\'' +
-                ", blocks=" + blocks +
-                '}';
+        return type.getName() + "\n" +
+            "hp: " + hp + " / " + maxHp;
     }
 }

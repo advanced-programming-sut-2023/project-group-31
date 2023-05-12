@@ -1,12 +1,16 @@
 package controller.game_system;
 
+import controller.ControllerUtils;
 import model.game_stuff.Block;
+import model.game_stuff.Government;
 import model.game_stuff.Map;
 import model.game_stuff.enums.Textures;
 import view.viewStyle.Colors;
 
-public class MapController {
-    Map map;
+import java.util.ArrayList;
+
+public class MapController extends ControllerUtils {
+    private Map map;
     private int length;
     private int width;
 
@@ -85,5 +89,41 @@ public class MapController {
         }
         x=x+rights;
         y=y+ups;
+    }
+
+    public String nextTurn() {
+        doNextTurn();
+        return currentPlayer.getName()+"is now playing!";
+    }
+
+    private void doNextTurn() {
+        //TODO
+        //bayad to data base hame darbazar begiri inaro mirza
+        realNextTurn();
+        Government current=getCurrentPlayer();
+        //current.getPopulation().nextTurn();
+        //current.getTroops.nextTurn();
+        //current.getAllProducers.nextTurn();
+    }
+
+    private void realNextTurn() {
+        removeLoser();
+        getCurrentGame().setTurn(getCurrentGame().getTurn()+1);
+        int toTurn=getCurrentGame().getTurn()% getCurrentGame().getPlayers().size();
+        //TODO
+        //to faze shabake fek konam bayad check beshe ke aya aslan online hast ya na
+        setCurrentPlayer(getCurrentGame().getPlayers().get(toTurn));
+    }
+
+    private void removeLoser() {
+        ArrayList<Government>playerToRemove=new ArrayList<>();
+        for (Government player : getCurrentGame().getPlayers()) {
+            if(player.getLordsHouse().getBuilding().getHp()==0){
+                System.out.println("player "+player.getName()+" is losing!!!");
+                playerToRemove.add(player);
+               // player.getOwner().setScores();
+            }
+        }
+        getCurrentGame().getPlayers().removeAll(playerToRemove);
     }
 }

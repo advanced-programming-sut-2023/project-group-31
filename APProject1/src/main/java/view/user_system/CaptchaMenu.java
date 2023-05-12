@@ -1,11 +1,8 @@
 package view.user_system;
 
 import controller.ControllerUtils;
-import controller.user_menu.LoginController;
 import model.DataBase;
 import view.ViewUtils;
-import view.user_system.commands.LoginCommands;
-import view.user_system.messages.MenuSwitcherMessages;
 import view.user_system.messages.UserMessages;
 
 import java.util.ArrayList;

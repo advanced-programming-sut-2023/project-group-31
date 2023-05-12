@@ -6,12 +6,14 @@ public enum TowerTypes {
     private int hp;
     private int fireRange;
     private int defendRange;
+    private int capacity;
 
-    TowerTypes(String name, int hp, int fireRange, int defendRange) {
+    TowerTypes(String name, int hp, int fireRange, int defendRange, int capacity) {
         this.name = name;
         this.hp = hp;
         this.fireRange = fireRange;
         this.defendRange = defendRange;
+        this.capacity = capacity;
     }
 
     public int getHp() {
@@ -28,5 +30,9 @@ public enum TowerTypes {
 
     public int getDefendRange() {
         return defendRange;
+    }
+
+    public int getCapacity() {
+        return capacity;
     }
 }

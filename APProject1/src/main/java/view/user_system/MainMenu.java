@@ -1,11 +1,10 @@
 package view.user_system;
 
-import controller.user_menu.LoginController;
+import controller.user_system.LoginController;
 import view.ViewUtils;
 import view.user_system.commands.MainMenuCommands;
 import view.user_system.messages.MenuSwitcherMessages;
 
-import java.util.Scanner;
 import java.util.regex.Matcher;
 
 public class MainMenu extends ViewUtils {
