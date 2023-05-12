@@ -36,6 +36,7 @@ public class DataBase {
         this.users = new ArrayList<User>();
         this.loggedInUser = null;
         maps=new ArrayList<Map>();
+        maps.add(Map.getDefaultMap());
 
     }
 

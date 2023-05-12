@@ -26,9 +26,9 @@ public class Map {
     public Map(String name, int size) {
         this.name = name;
         this.size = size;
-        for(int i = 0; i < size; i++) {
+        for (int i = 0; i < size; i++) {
             blocks.add(new ArrayList<>());
-            for(int j = 0; j < size; j++) {
+            for (int j = 0; j < size; j++) {
                 blocks.get(i).add(new Block(Textures.GROUND, j, i));
             }
         }
@@ -37,9 +37,11 @@ public class Map {
     public ArrayList<Block> getLordHouses() {
         return lordHouses;
     }
+
     public void addLordHouse(Block block) {
         lordHouses.add(block);
     }
+
     public void removeLordHouse(Block block) {
         lordHouses.remove(block);
     }
@@ -51,6 +53,7 @@ public class Map {
     public void setName(String name) {
         this.name = name;
     }
+
     public Block getBlock(int x, int y) {
         return blocks.get(x).get(y);
     }
@@ -78,9 +81,11 @@ public class Map {
     public int getSize() {
         return size;
     }
+
     public int getLength() {
         return size;
     }
+
     public int getWidth() {
         return size;
     }
@@ -96,29 +101,32 @@ public class Map {
     public ArrayList<ArrayList<Block>> getBlocks() {
         return blocks;
     }
+
     public Block getNeighbour(Direction direction, Block block) {
         int x = block.getX() + direction.getX();
         int y = block.getY() + direction.getY();
-        if(!isInMap(x, y)){
+        if (!isInMap(x, y)) {
             return null;
         }
         return getBlock(x, y);
     }
+
     public HashMap<Direction, Block> getNeighbours(Block block) {
         HashMap<Direction, Block> neighbours = new HashMap<>();
         Block neighbour;
         for (Direction direction : Direction.values()) {
-            if((neighbour = getNeighbour(direction, block)) != null) {
+            if ((neighbour = getNeighbour(direction, block)) != null) {
                 neighbours.put(direction, neighbour);
             }
         }
         return neighbours;
     }
+
     public ArrayList<Block> getNeighboursWithDistance(Block block, int distance) {
         ArrayList<Block> neighbours = new ArrayList<>();
         Block block1;
         int x, y;
-        for(int i = 0; i < distance; i++) {
+        for (int i = 0; i < distance; i++) {
             int j = distance - i;
             if (isInMap((x = block.getX() + i), (y = block.getY() + j)) && !neighbours.contains((block1 = getBlock(x, y)))) {
                 neighbours.add(block1);
@@ -135,44 +143,45 @@ public class Map {
         }
         return neighbours;
     }
+
     public boolean isInMap(int x, int y) {
-        return x >= 0 &&  y >= 0 && x < size && y < size;
+        return x >= 0 && y >= 0 && x < size && y < size;
     }
 
     public static void setMaps(ArrayList<Map> maps) {
         Map.maps = maps;
     }
 
-    public static void setDefaultMaps(){
-        Map newMap=new Map("Default map",150);
-        for(int i=1;i<20;i++){
-            for(int j=1;j<30;j++){
-                newMap.getBlock(i,j).setType(Textures.GROSS);
-                Tree tree= new Tree(newMap.getBlock(i,j), TreeTypes.OLIVE);
+    public static Map getDefaultMap() {
+        Map newMap = new Map("Default map", 150);
+        for (int i = 1; i < 20; i++) {
+            for (int j = 1; j < 30; j++) {
+                newMap.getBlock(i, j).setType(Textures.GROSS);
+                Tree tree = new Tree(newMap.getBlock(i, j), TreeTypes.OLIVE);
             }
 
         }
 
-        for(int i=80;i<100;i++){
-            for(int j=100;j<150;j++){
-                newMap.getBlock(i,j).setType(Textures.GROSS);
-                Tree tree= new Tree(newMap.getBlock(i,j), TreeTypes.DATE);
+        for (int i = 80; i < 100; i++) {
+            for (int j = 100; j < 150; j++) {
+                newMap.getBlock(i, j).setType(Textures.GROSS);
+                Tree tree = new Tree(newMap.getBlock(i, j), TreeTypes.DATE);
             }
         }
-
-        for(int i=50;i<150;i++){
-            for(int j=120;j<150;j++){
-                newMap.getBlock(i,j).setType(Textures.WATER);
-            }
-        }
-
-        for(int i=40;i<100;i++){
-            for(int j=1;j<20;j++){
-                newMap.getBlock(i,j).setType(Textures.WATER);
-            }
-        }
-
+        setTextures(newMap,100, 135, 50, 15,Textures.WATER);
+        setTextures(newMap,70, 10, 30, 10, Textures.CLIFF);
+        setTextures(newMap,130,120,10,10,Textures.IRON);
+        return newMap;
     }
+
+    private static void setTextures(Map newMap,int x, int y, int length, int width,Textures texture) {
+        for (int i = x-(length/2); i < x+(length/2); i++) {
+            for (int j = y-(width/2); j < y+(width/2); j++) {
+                newMap.getBlock(i, j).setType(texture);
+            }
+        }
+    }
+
 
     @Override
     public String toString() {

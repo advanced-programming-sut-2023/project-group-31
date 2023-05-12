@@ -22,6 +22,9 @@ public class MercenaryPostMenu {
             else if((matcher= BarracksCommand.getMatcher(command,BarracksCommand.CREATE_UNIT))!=null){
                 createUnit(matcher);
             }
+            else {
+                System.out.println("Invalid command!");
+            }
         }
     }
 

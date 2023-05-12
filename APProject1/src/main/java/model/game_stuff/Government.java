@@ -24,8 +24,11 @@ public class Government {
     //private int numberOfPeasants;
     private int population;
     private int populationGrowthRate;
-    private int popularity;
     private int popularityGrowthRate;
+    private int popularity;
+    private int foodRate;
+    private int taxRate;
+    private int religionRate;
     private int fearRate;
     private int efficiency;
     private int maxPopulation;
@@ -38,8 +41,11 @@ public class Government {
         population = 8;
         populationGrowthRate = 2; //TODO: sakhtan e formul
         popularity = 100;
-        popularityGrowthRate = 0;
+        foodRate=0;
         fearRate = 0;
+        religionRate=0;
+        popularityGrowthRate=0;
+        taxRate=0;
         efficiency = 8; //TODO: rabete
 
         stockpiles = new ArrayList<>();
@@ -204,6 +210,30 @@ public class Government {
 
     public ArrayList<Trade> getTradeHistory() {
         return tradeHistory;
+    }
+
+    public int getFoodRate() {
+        return foodRate;
+    }
+
+    public int getReligionRate() {
+        return religionRate;
+    }
+
+    public int getTaxRate() {
+        return taxRate;
+    }
+
+    public void setFoodRate(int foodRate) {
+        this.foodRate = foodRate;
+    }
+
+    public void setReligionRate(int religionRate) {
+        this.religionRate = religionRate;
+    }
+
+    public void setTaxRate(int taxRate) {
+        this.taxRate = taxRate;
     }
 
     public Game getGame() {

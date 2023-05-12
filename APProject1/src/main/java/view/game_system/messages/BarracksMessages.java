@@ -1,4 +1,4 @@
-package main.java.view.game_system.messages;
+package view.game_system.messages;
 
 public enum BarracksMessages {
     SUCCESS("successfully done!"),

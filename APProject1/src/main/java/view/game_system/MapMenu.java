@@ -25,6 +25,8 @@ public class MapMenu extends ViewUtils {
                 showMapByXY(matcher);
             } else if ((matcher = MapCommands.getMatcher(input, MapCommands.MOVE)) != null) {
                 moveOnMap(matcher.group("directions"));
+            }else if(input.equals("show hole all")){
+                showHoleMap();
             }
             else if(MapCommands.getMatcher(input,MapCommands.NEXT_TURN)!=null){
                 System.out.println(mapController.nextTurn());
@@ -83,7 +85,11 @@ public class MapMenu extends ViewUtils {
         System.out.println(mapController.showMapByXY());
     }
 
-    
+
+    private void showHoleMap(){
+        System.out.println(mapController.showHoleMap());
+    }
+
 
 }
 

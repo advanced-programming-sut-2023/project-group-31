@@ -1,15 +1,23 @@
 package view.game_system;
 
-import java.util.Scanner;
+import view.ViewUtils;
+import view.game_system.commands.TurnCommands;
+
 import java.util.regex.Matcher;
 
-public class TurnMenu {
-    public static void run(Scanner scanner) {
+public class TurnMenu extends ViewUtils {
+    public static GameSwitcher run() {
+        String input;
         Matcher matcher;
-        String command;
-        while(true) {
-            command = scanner.nextLine().trim();
-
+        while (true) {
+            input = scanner.nextLine();
+            if ((matcher = TurnCommands.getMatcher(input, TurnCommands.DROP_BUILDING)) != null) {
+                dropBuilding();
+            }
         }
+    }
+
+    private static void dropBuilding() {
+
     }
 }
