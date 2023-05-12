@@ -256,15 +256,14 @@ public class StartGameController extends ControllerUtils {
         for (PrimitivePlayer primitivePlayer : primitivePlayers) {
             player = new Government(primitivePlayer.getUser(),primitivePlayer.getColor());
             players.add(player);
-            block =
-            MenuBuilding menuBuilding = new MenuBuilding(player, BuildingMenus.LORD_HOUSE);
-            for (int i = ; i < 2; i++) {
-                for (int j = ; j < 2; j++) {
-                    currentGame.getMap().getBlock(i, j).setBuilding();
-                    building.addBlock(currentGame.getMap().getBlock(i, j));
+            block = chosenMap.getLordHouses().get(primitivePlayer.getLordHouseNumber());
+            MenuBuilding lordHouse = new MenuBuilding(player, BuildingMenus.LORD_HOUSE);
+            for (int i = block.getX(); i < 2; i++) {
+                for (int j = block.getY(); j < 2; j++) {
+                    currentGame.getMap().getBlock(i, j).setBuilding(lordHouse);
+                    lordHouse.addBlock(currentGame.getMap().getBlock(i, j));
                 }
             }
-            //TODO : add real lord house
         }
         currentGame.setPlayers(players);
         return StartGameMessages.SUCCESS;

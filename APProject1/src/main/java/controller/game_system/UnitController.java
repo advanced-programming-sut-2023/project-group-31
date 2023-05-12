@@ -20,4 +20,10 @@ public class UnitController extends ControllerUtils {
             return U;
         }
     }
+
+    public static void setTroops(ArrayList<Troop> troops) {
+        UnitController.troops = troops;
+    }
+
+
 }
