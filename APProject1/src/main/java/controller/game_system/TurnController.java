@@ -2,12 +2,8 @@ package controller.game_system;
 
 import controller.ControllerUtils;
 import model.game_stuff.Building;
-import model.game_stuff.buildings.FactorRiser;
-import model.game_stuff.buildings.GateHouse;
-import model.game_stuff.buildings.MenuBuildings;
-import model.game_stuff.buildings.enums.BuildingMenus;
-import model.game_stuff.buildings.enums.FactorRiserTypes;
-import model.game_stuff.buildings.enums.GateHouseTypes;
+import model.game_stuff.buildings.*;
+import model.game_stuff.buildings.enums.*;
 import model.game_stuff.enums.Textures;
 import model.game_stuff.types.Buildings;
 import view.game_system.messages.TurnMessages;
@@ -31,6 +27,12 @@ public class TurnController extends ControllerUtils {
                 currentGame.getMap().getBlock(i, j).setBuilding();
             }
         }
+
+        if(buildingType.getGoldNeeded()){
+
+        }
+
+        createNewBuilding(inputs.get("type"));
 
         currentGame.getMap();
     }
@@ -61,9 +63,27 @@ public class TurnController extends ControllerUtils {
             return new FactorRiser(currentPlayer, FactorRiserTypes.getEnumByName(type));
         }
         if (GateHouseTypes.getEnumByName(type) != null) {
-            return new GateHouse(currentPlayer, GateHouseTypes.getEnumByName(type),);
+            return new GateHouse(GateHouseTypes.getEnumByName(type),currentPlayer,true);
         }
+        if (ProducerTypes.getEnumByName(type) != null) {
+            return new Producer(ProducerTypes.getEnumByName(type),currentPlayer);
+        }
+        if (StorageTypes.getEnumByName(type) != null) {
+            return new Storage(currentPlayer, StorageTypes.getEnumByName(type));
+        }
+        if(TowerTypes.getEnumByName(type)!=null){
+            return new Tower(TowerTypes.getEnumByName(type),currentPlayer);
+        }
+        if(TrapTypes.getEnumByName(type)!=null){
+            return new Trap(TrapTypes.getEnumByName(type),currentPlayer);
+        }
+        return null;
+    }
 
+    private static boolean areRequirementsEnough(Buildings buildings){
+//        if(currentPlayer.){
+//
+//        }
     }
 
     public static TurnMessages selectBuilding(int x, int y) {
