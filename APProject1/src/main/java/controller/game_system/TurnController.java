@@ -31,6 +31,7 @@ public class TurnController extends ControllerUtils {
                 building.addBlock(currentGame.getMap().getBlock(i, j));
             }
         }
+        currentPlayer.addBuilding(building);
         decreaseRequirement(buildingType,1);
         return TurnMessages.SUCCESS;
     }
