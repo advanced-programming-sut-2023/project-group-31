@@ -3,11 +3,11 @@ package controller.game_system;
 import controller.ControllerUtils;
 import model.game_stuff.Block;
 import model.game_stuff.Government;
-import model.game_stuff.Map;
 import model.game_stuff.enums.Textures;
 import view.viewStyle.Colors;
-
+import model.game_stuff.Map;
 import java.util.ArrayList;
+
 
 public class MapController extends ControllerUtils {
     private Map map;
@@ -112,6 +112,9 @@ public class MapController extends ControllerUtils {
 
     public String nextTurn() {
         doNextTurn();
+        for (Government player : currentGame.getPlayers()) {
+            KingdomController.nextTurnForGovernment(player);
+        }
         return currentPlayer.getName() + "is now playing!";
     }
 
