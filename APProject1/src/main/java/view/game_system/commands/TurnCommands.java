@@ -8,9 +8,15 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public enum TurnCommands {
-    DROP_BUILDING("dropbuilding(( -x (?<x>[\\d]+))|( -y (?<y>[\\d]+))|( -type (?<type>IN)))+"),
-    REPAIR("repair(( -x (?<x>[\\d]+))|( -y (?<y>[\\d]+)))+"),
-    SELECT_BUILDING("select building(( -x (?<x>IN))|( -y (?<y>IN)))+")
+    DROP_BUILDING("drop building (( -x (?<x>\\d+))|( -y (?<y>\\d+))|( -type (?<type>IN)))+"),
+    REPAIR("repair building at (( -x (?<x>\\d+))|( -y (?<y>\\d+)))+"),
+    SELECT_BUILDING("select building(( -x (?<x>\\d+))|( -y (?<y>\\d+)))+"),
+    SELECT_UNIT("select unit (( -x (?<x>\\d+))|( -y (?<y>\\d+)))+"),
+    TRADE_MENU("trade menu"),
+    NEXT_TURN("next turn"),
+    SHOW_MAP("show map(( -x (?<x>[\\d]+))|( -y (?<y>[\\d]+)))+"),
+    MOVE_MAP("map up(?<directions>(( (left|right|up|down))|( (left|right|up|down)))+)"),
+    SHOW_DETAILS("show details(( -x (?<x>[\\d]+))|( -y (?<y>[\\d]+)))+");
     ;
     String regex;
     TurnCommands(String regex){
