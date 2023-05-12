@@ -2,10 +2,11 @@ package controller.game_system;
 
 import view.user_system.messages.UserMessages;
 
-public class BuildingController extends KingdomController{
+public class TurnController {
     public static UserMessages dropBuilding(int x, int y, String type){
         return null;
     }
+
     public static UserMessages selectBuilding(int x, int y){
         return null;
     }
@@ -22,6 +23,7 @@ public class BuildingController extends KingdomController{
     public static UserMessages build(String equipmentName){
         return null;
     }
+
     public static UserMessages disbandUnit(){
         return null;
     }

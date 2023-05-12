@@ -1,10 +1,14 @@
 package model.game_stuff.types;
 
+import model.game_stuff.enums.Textures;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public enum Buildings {
     NULL(null,0,0,0,0,0),
-    SMALLSTONEGATEHOUSE("Small stone gatehouse",0,0,0,0,1000),
-    BIGSTONEGATEHOUSE("Big stone gatehouse",20,0,0,0,2000),
-    DRAWBRIDGE("Drawbridge",0,10,0,0,1000),
+    BIGSTONEGATEHOUSE("big stone gatehouse",20,0,0,0,2000),
+    DRAWBRIDGE("drawbridge",0,10,0,0,1000),
     LOOKOUTTOWER("Lookout tower",10,0,0,0,1200),
     PREMITERTOWER("Premiter tower",10,0,0,0,1000),
     TURRET("Turret",15,0,0,0,1200),
@@ -19,9 +23,9 @@ public enum Buildings {
     MARKET("Market",0,5,1,0,0),
     OXTETHER("Ox tether",0,5,1,0,0),
     MILL("Mill",0,20,3,0,0),
-    QUARRY("Quarry",0,20,3,0,0),
+    QUARRY("Quarry",0,20,3,0,0,Textures.QUARRY),
     PITCHDITCH("Pitch ditch",0,20,1,0,0),
-    IRONMINE("Iron mine",0,20,2,0,0),
+    IRONMINE("Iron mine",0,20,2,0,0,Textures.IRON),
     //SIEGETENT("Siege tent",),//nadarim
     STOCKPILE("Stockpile",0,0,0,0,0),
     //WATERPOT("Water pot",),//nadarim
@@ -44,9 +48,9 @@ public enum Buildings {
     STABLE("Stable",0,20,0,0,400),
     APPLEGARDEN("Apple garden",0,5,1,0,0),
     DIARYPRODUCTS("Diary products",0,10,1,0,0),
-    GRAINFARM("Grain farm",0,15,1,0,0),
+    GRAINFARM("Grain farm",0,15,1,0,0,Textures.GROSS),
     HUNTINGPOST("Hunting post",0,5,1,0,0),
-    WHEATFARM("Wheat farm",0,15,1,0,0),
+    WHEATFARM("Wheat farm",0,15,1,0,0,Textures.GROSS),
     BAKERY("Bakery",0,10,1,0,0),
     BREWERY("Brewery",0,10,0,0,0);
     private String name;
@@ -54,12 +58,25 @@ public enum Buildings {
     private double woodNeeded;
     private double workerNeeded;
     private double ironNeeded;
+
     private double goldNeeded;
+
+    private final Textures possibleTexture;
+
+    Buildings(String name,double rockNeeded, double woodNeeded, double workerNeeded, double ironNeeded,double goldNeeded,Textures possibleTexture) {
+        this.rockNeeded = rockNeeded;
+        this.woodNeeded = woodNeeded;
+        this.workerNeeded = workerNeeded;
+        this.ironNeeded = ironNeeded;
+        this.possibleTexture=possibleTexture;
+    }
+
     Buildings(String name,double rockNeeded, double woodNeeded, double workerNeeded, double ironNeeded,double goldNeeded) {
         this.rockNeeded = rockNeeded;
         this.woodNeeded = woodNeeded;
         this.workerNeeded = workerNeeded;
         this.ironNeeded = ironNeeded;
+        this.possibleTexture=null;
     }
 
     public void setRockNeeded(double rockNeeded) {
@@ -77,4 +94,6 @@ public enum Buildings {
     public void setIronNeeded(double ironNeeded) {
         this.ironNeeded = ironNeeded;
     }
+
+
 }
