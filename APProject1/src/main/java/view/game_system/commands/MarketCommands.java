@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 public enum MarketCommands {
     BUY("buy -i (?<item>.+) -a (?<amount>\\d+)"),
     SELL("sell -i (?<item>.+) -a (?<amount>\\d+)"),
-    SHOWPRICELIST("show price list");
+    SHOW_PRICE_LIST("show price list");
     String regex;
     private MarketCommands (String regex){
         this.regex=regex;
