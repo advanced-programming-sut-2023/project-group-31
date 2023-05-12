@@ -41,4 +41,15 @@ public enum TowerTypes {
     public int getCapacity() {
         return capacity;
     }
+
+
+    public static TowerTypes getEnumByName(String name) {
+        for (TowerTypes towerTypes : values()) {
+            if(towerTypes.name.equalsIgnoreCase(name)){
+                return towerTypes;
+            }
+        }
+        return null;
+    }
+
 }

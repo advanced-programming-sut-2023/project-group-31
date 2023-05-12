@@ -1,9 +1,8 @@
 package model.game_stuff.buildings.enums;
 
 public enum BuildingMenus {
-    MERCENARY_POST("Mercenary post","MercenaryPostMenu"),
-    BARRACK("Barrack","BarracksMenu")
-    ;
+    MERCENARY_POST("Mercenary post", "MercenaryPostMenu"),
+    BARRACK("Barrack", "BarracksMenu");
     private String name;
     private String menu;
 
@@ -18,5 +17,14 @@ public enum BuildingMenus {
 
     public String getMenu() {
         return menu;
+    }
+
+    public static BuildingMenus getEnumByName(String name) {
+        for (BuildingMenus buildingMenu : values()) {
+            if(buildingMenu.name.equalsIgnoreCase(name)){
+                return buildingMenu;
+            }
+        }
+        return null;
     }
 }

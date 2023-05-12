@@ -19,4 +19,13 @@ public enum GateHouseTypes {
     public int getHp() {
         return hp;
     }
+
+    public static GateHouseTypes getEnumByName(String name) {
+        for (GateHouseTypes gateHouseType : values()) {
+            if(gateHouseType.name.equalsIgnoreCase(name)){
+                return gateHouseType;
+            }
+        }
+        return null;
+    }
 }

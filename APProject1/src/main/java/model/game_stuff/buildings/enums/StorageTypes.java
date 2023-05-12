@@ -30,4 +30,13 @@ public enum StorageTypes {
     public ItemTypes getProductType() {
         return productType;
     }
+
+    public static StorageTypes getEnumByName(String name) {
+        for (StorageTypes storageType : values()) {
+            if(storageType.name.equalsIgnoreCase(name)){
+                return storageType;
+            }
+        }
+        return null;
+    }
 }

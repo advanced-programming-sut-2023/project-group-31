@@ -15,4 +15,14 @@ public enum TrapTypes {
     public String getName() {
         return name;
     }
+
+    public static TrapTypes getEnumByName(String name) {
+        for (TrapTypes trapTypes : values()) {
+            if(trapTypes.name.equalsIgnoreCase(name)){
+                return trapTypes;
+            }
+        }
+        return null;
+    }
+
 }

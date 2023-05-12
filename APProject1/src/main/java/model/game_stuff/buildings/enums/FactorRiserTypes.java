@@ -31,4 +31,13 @@ public enum FactorRiserTypes {
     public int getHp() {
         return hp;
     }
+
+    public static FactorRiserTypes getEnumByName(String name) {
+        for (FactorRiserTypes factorRiserTypes : values()) {
+            if(factorRiserTypes.name.equalsIgnoreCase(name)){
+                return factorRiserTypes;
+            }
+        }
+        return null;
+    }
 }

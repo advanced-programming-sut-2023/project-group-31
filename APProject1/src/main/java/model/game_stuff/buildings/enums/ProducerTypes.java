@@ -61,4 +61,13 @@ public enum ProducerTypes {
     public int getCapacity() {
         return capacity;
     }
+
+    public static ProducerTypes getEnumByName(String name) {
+        for (ProducerTypes producerType : values()) {
+            if(producerType.name.equalsIgnoreCase(name)){
+                return producerType;
+            }
+        }
+        return null;
+    }
 }
