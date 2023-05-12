@@ -1,6 +1,8 @@
 package model.game_stuff.buildings.enums;
 
 public enum GateHouseTypes {
+    SMALL_STONE_GATEHOUSE(1000,"Small stone gatehouse"),
+    BIG_STONE_GATEHOUSE(2000,"Big stone gatehouse"),
     ;
     private int hp;
     private String name;

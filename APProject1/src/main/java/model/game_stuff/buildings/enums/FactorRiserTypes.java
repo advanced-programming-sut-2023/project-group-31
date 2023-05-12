@@ -1,7 +1,8 @@
 package model.game_stuff.buildings.enums;
 
 public enum FactorRiserTypes {
-    ;
+    CATHEDRAL("Cathedral",1,2,2000),
+    CHURCH("Church",1,2,1200);
     private String name;
     private int turnsToWait;
     private int amountToRise;
