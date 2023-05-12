@@ -152,7 +152,7 @@ public class Map {
         Map.maps = maps;
     }
 
-    public static void setDefaultMap() {
+    public static Map getDefaultMap() {
         Map newMap = new Map("Default map", 150);
         for (int i = 1; i < 20; i++) {
             for (int j = 1; j < 30; j++) {
@@ -171,7 +171,7 @@ public class Map {
         setTextures(newMap,100, 135, 50, 15,Textures.WATER);
         setTextures(newMap,70, 10, 30, 10, Textures.CLIFF);
         setTextures(newMap,130,120,10,10,Textures.IRON);
-
+        return newMap;
     }
 
     private static void setTextures(Map newMap,int x, int y, int length, int width,Textures texture) {
