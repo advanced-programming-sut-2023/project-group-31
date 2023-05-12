@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 
 public enum TurnCommands {
     DROP_BUILDING("dropbuilding(( -x (?<x>[\\d]+))|( -y (?<y>[\\d]+))|( -type (?<type>IN)))+"),
-    REPAIR("repair"),
+    REPAIR("repair(( -x (?<x>[\\d]+))|( -y (?<y>[\\d]+)))+"),
     SELECT_BUILDING("select building(( -x (?<x>IN))|( -y (?<y>IN)))+")
     ;
     String regex;

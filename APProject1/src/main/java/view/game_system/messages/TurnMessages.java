@@ -9,8 +9,8 @@ public enum TurnMessages {
     SUCCESS("Success"), EMPTY_PLACE("There is no building here."),
     MESSAGE(""),
     MERCENARY_POST(""),
-    BARRACK("")
-    ;
+    BARRACK(""),
+    ENEMY_IS_CLOSE("Enemy soldiers are very close to the wall.");
     private String txt;
     TurnMessages(String txt) {
         this.txt = txt;

@@ -1,6 +1,7 @@
 package controller.game_system;
 
 import controller.ControllerUtils;
+import model.game_stuff.Block;
 import model.game_stuff.Building;
 import model.game_stuff.buildings.*;
 import model.game_stuff.buildings.enums.*;
@@ -113,7 +114,21 @@ public class TurnController extends ControllerUtils {
     }
 
 
-    public static TurnMessages repair(int x, int y, String type) {
+    public static TurnMessages repair() {
+        int x = Integer.parseInt(inputs.get("x"));
+        int y = Integer.parseInt(inputs.get("y"));
+        Building building;
+        if ((building = currentGame.getMap().getBlock(x, y).getBuilding()) == null) {
+            return TurnMessages.EMPTY_PLACE;
+        }
+        for(Block block:currentGame.getMap().getNeighboursWithDistance(currentGame.getMap().getBlock(x,y), 3)){
+            if(block.containsEnemyPerson(building.getOwner().getColor())){
+                return TurnMessages.ENEMY_IS_CLOSE;
+            }
+        }
+        if(isRequirementEnough(building.ge,building.getHp())){
+
+        }
         return null;
     }
 

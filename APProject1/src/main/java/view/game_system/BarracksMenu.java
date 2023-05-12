@@ -9,7 +9,7 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 
 public class BarracksMenu extends view.ViewUtils {
-    public static view.game_system.messages.GameSwitcherMessages run(Scanner scanner){
+    public static view.game_system.messages.GameSwitcherMessages run(){
         String command;
         Matcher matcher;
         while (true){

@@ -12,7 +12,7 @@ import java.util.regex.Matcher;
 import static view.ViewUtils.putInHashmap;
 
 public class MercenaryPostMenu {
-    public static GameSwitcherMessages run(Scanner scanner){
+    public static GameSwitcherMessages run(){
         String command;
         Matcher matcher;
         while (true){
