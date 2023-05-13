@@ -106,6 +106,11 @@ public class Map {
         return blocks;
     }
 
+    public static void addMap(Map map){
+        maps.add(map);
+
+    }
+
     public Block getNeighbour(Direction direction, Block block) {
         int x = block.getX() + direction.getX();
         int y = block.getY() + direction.getY();
@@ -193,12 +198,12 @@ public class Map {
         map.size=this.size;
         map.trees=new ArrayList<Tree>(this.trees);
         map.lordHouses=new ArrayList<>(this.lordHouses);
-        map.saved=this.saved;
+        map.saved=false;
         map.blocks=new ArrayList<ArrayList<Block>>();
         for (int i = 0; i < this.size; i++) {
             map.blocks.add(new ArrayList<>());
             for (int j = 0; j < this.size; j++) {
-                map.blocks.get(i).add(new Block(this.blocks.get(i).get(i).getType(),this.blocks.get(i).get(j).getX(),this.blocks.get(i).get(j).getY()));
+                map.blocks.get(i).add(this.blocks.get(i).get(j).clone());
             }
         }
         map.description=this.description;

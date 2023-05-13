@@ -100,6 +100,11 @@ public class Block {
     public void setBuilding(Building building) {
         this.building = building;
     }
+
+    public void setTrees(ArrayList<Tree> trees) {
+        this.trees = trees;
+    }
+
     public boolean isEmpty() {
         return (building == null && people.isEmpty() && trees.isEmpty()&&tunneled==false);
     }
@@ -165,5 +170,12 @@ public class Block {
     }
     public Boolean isPermeable() {
         return type.isPermeable();
+    }
+
+    @Override
+    public Block clone(){
+        Block block=new Block(this.getType(),this.getX(),this.getY());
+        block.setTrees(new ArrayList<Tree>(this.getTrees()));
+        return block;
     }
 }

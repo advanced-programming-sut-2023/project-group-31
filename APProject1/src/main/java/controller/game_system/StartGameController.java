@@ -72,7 +72,7 @@ public class StartGameController extends ControllerUtils {
     public static StartGameMessages chooseMap(String name) {
         for (Map map : Map.getMaps()) {
             if(map.getName().equals(name)) {
-                chosenMap = map;
+                chosenMap = map.clone();
                 return StartGameMessages.SUCCESS;
             }
         }
@@ -267,5 +267,13 @@ public class StartGameController extends ControllerUtils {
         }
         currentGame.setPlayers(players);
         return StartGameMessages.SUCCESS;
+    }
+
+    public static void saveMap() {
+        if(!Map.getMaps().contains(currentMap)){
+            Map.addMap(currentMap);
+            currentMap.setSaved(true);
+        }
+
     }
 }

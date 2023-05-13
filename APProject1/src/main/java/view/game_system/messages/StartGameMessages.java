@@ -14,7 +14,7 @@ public enum StartGameMessages {
     INVALID_COLOR("invalid color!"),
     COLOR_IS_ALREADY_SET("player is already in the team!"),
     INVALID_LORD_HOUSE_NUMBER("invalid lord house number!"),
-    TOO_FEW_PLAYERS("too few players"),
+    TOO_FEW_PLAYERS("too few players")
     ;
     private String txt;
     private String input;
