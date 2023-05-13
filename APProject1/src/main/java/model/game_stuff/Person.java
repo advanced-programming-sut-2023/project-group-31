@@ -1,5 +1,6 @@
 package model.game_stuff;
 
+import model.game_stuff.buildings.GateHouse;
 import model.game_stuff.buildings.Tower;
 import model.game_stuff.enums.Direction;
 
@@ -53,6 +54,9 @@ public abstract class Person implements HasHp{
                     moveOrder.clear();
                     return false;
                 }
+            }
+            if(target.getBuilding() instanceof GateHouse) {
+                
             }
             moveOrder.clear();
             return false;

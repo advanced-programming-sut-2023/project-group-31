@@ -146,16 +146,7 @@ public class TurnController extends ControllerUtils {
         return null;
     }
 
-    public static UserMessages digTunnel(String username, int x, int y) {
-        return null;
-    }
+    public void nextTurn() {
 
-    public static UserMessages build(String equipmentName) {
-        return null;
     }
-
-    public static UserMessages disbandUnit() {
-        return null;
-    }
-
 }

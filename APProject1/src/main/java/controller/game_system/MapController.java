@@ -94,7 +94,7 @@ public class MapController extends ControllerUtils {
         y = y + ups;
     }
 
-    public String showHoleMap() {
+    public String showWholeTheMap() {
         String output = "", type;
         for (int i = 0; i < currentMap.getSize(); i++) {
             for (int j = 0; j < currentMap.getSize(); j++) {
@@ -155,7 +155,7 @@ public class MapController extends ControllerUtils {
         ArrayList<Government> playerToRemove = new ArrayList<>();
         for (Government player : getCurrentGame().getPlayers()) {
             if (player.getLordsHouse().getBuilding().getHp() == 0) {
-                System.out.println("player " + player.getName() + " is losing!!!");
+                //System.out.println("player " + player.getName() + " is losing!!!");
                 playerToRemove.add(player);
                 // player.getOwner().setScores();
             }

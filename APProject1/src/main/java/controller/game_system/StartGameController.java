@@ -14,29 +14,23 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 public class StartGameController extends ControllerUtils {
-
-    private static Map chosenMap;
     private static ArrayList<PrimitivePlayer> primitivePlayers;
     private static HashSet<Colors> usedColors;
     private static HashSet<Integer> usedLordHouses;
     private static int xToShow;
     private static int yToShow;
 
-    {
+    static {
         primitivePlayers = new ArrayList<>();
         usedColors = new HashSet<>();
         usedLordHouses = new HashSet<>();
     }
     public static String showMaps() {
-        String output = "CHOSEN MAP:\n" + chosenMap + "\nAVAILABLE MAPS:";
+        String output = "CHOSEN MAP:\n" + currentMap + "\nAVAILABLE MAPS:";
         for (Map map : Map.getMaps()) {
             output += "\n" + map;
         }
         return output;
-    }
-
-    public static Map getChosenMap() {
-        return chosenMap;
     }
 
     public static UserMessages setTexture(int x, int y, String type){
@@ -66,14 +60,17 @@ public class StartGameController extends ControllerUtils {
     public static String showAllPlayers() {
         String output = "PLAYERS:";
         for (User user : User.getUsers().values()) {
-            output += "\n" + user;
+            output += "\n" + user + "\n-------------------";
         }
         return output;
     }
     public static String showPlayersInTheGame() {
+        if(primitivePlayers.isEmpty()) {
+            return "nothing to show!";
+        }
         String output = "PLAYERS:";
         for (PrimitivePlayer  primitivePlayer: primitivePlayers) {
-            output += primitivePlayer.getUser().getNickname() + " " + primitivePlayer.getColor() + " in lord house " + primitivePlayer.getLordHouseNumber();
+            output += "\n" + primitivePlayer.getUser().getUsername() + " " + primitivePlayer.getColor() + " in lord house " + (primitivePlayer.getLordHouseNumber() + 1);
         }
         return output;
     }
@@ -81,7 +78,7 @@ public class StartGameController extends ControllerUtils {
     public static StartGameMessages chooseMap(String name) {
         for (Map map : Map.getMaps()) {
             if(map.getName().equals(name)) {
-                chosenMap = map.clone();
+                currentMap = map;
                 return StartGameMessages.SUCCESS;
             }
         }
@@ -96,10 +93,10 @@ public class StartGameController extends ControllerUtils {
         }
         int x = Integer.parseInt(inputs.get("x").trim()),y = Integer.parseInt(inputs.get("y").trim());
 
-        if(x > chosenMap.getLength() || x < 1 || y > chosenMap.getWidth() || y < 1) {
+        if(x > currentMap.getLength() || x < 1 || y > currentMap.getWidth() || y < 1) {
             return StartGameMessages.COORDINATE_OUT_OF_BOUND;
         }
-        if(!chosenMap.getBlock(x, y).isEmpty()) {
+        if(!currentMap.getBlock(x, y).isEmpty()) {
             StartGameMessages.BLOCK_IS_NOT_EMPTY.setInput("(" + x + "," + y + ")");
             return StartGameMessages.BLOCK_IS_NOT_EMPTY;
         }
@@ -107,7 +104,7 @@ public class StartGameController extends ControllerUtils {
         if((texture = Textures.getTextureByName(inputs.get("type").trim().replaceAll("\"", ""))) == null) {
             return StartGameMessages.INVALID_TEXTURE_TYPE;
         }
-        chosenMap.getBlock(x, y).setType(texture);
+        currentMap.getBlock(x, y).setType(texture);
         return StartGameMessages.SUCCESS;
     }
 
@@ -120,8 +117,8 @@ public class StartGameController extends ControllerUtils {
         int y1 = Integer.parseInt(inputs.get("y1").trim());
         int x2 = Integer.parseInt(inputs.get("x2").trim());
         int y2 = Integer.parseInt(inputs.get("y2").trim());
-        if(x1 < 1 || x1 > x2 || x2 > chosenMap.getLength() ||
-                y1 < 1 || y1 > y2 || y2 > chosenMap.getLength()) {
+        if(x1 < 1 || x1 > x2 || x2 > currentMap.getLength() ||
+                y1 < 1 || y1 > y2 || y2 > currentMap.getLength()) {
             return StartGameMessages.COORDINATE_OUT_OF_BOUND;
         }
         Textures texture;
@@ -130,7 +127,7 @@ public class StartGameController extends ControllerUtils {
         }
         for(int i = x1 - 1; i < x2; i++) {
             for(int j = y1 - 1; j < y2; j++) {
-                if(!chosenMap.getBlock(i, j).isEmpty()) {
+                if(!currentMap.getBlock(i, j).isEmpty()) {
                     StartGameMessages.BLOCK_IS_NOT_EMPTY.setInput("(" + (i+1) + "," + (j+1) + ")");
                     return StartGameMessages.BLOCK_IS_NOT_EMPTY;
                 }
@@ -138,7 +135,7 @@ public class StartGameController extends ControllerUtils {
         }
         for(int i = x1 - 1; i < x2; i++) {
             for(int j = y1 - 1; j < y2; j++) {
-               chosenMap.getBlock(i, j).setType(texture);
+               currentMap.getBlock(i, j).setType(texture);
             }
         }
         return StartGameMessages.SUCCESS;
@@ -150,10 +147,10 @@ public class StartGameController extends ControllerUtils {
         }
         int x = Integer.parseInt(inputs.get("x").trim());
         int y = Integer.parseInt(inputs.get("y").trim());
-        if(x > chosenMap.getLength() || x < 1 || y > chosenMap.getWidth() || y < 1) {
+        if(x > currentMap.getLength() || x < 1 || y > currentMap.getWidth() || y < 1) {
             return StartGameMessages.COORDINATE_OUT_OF_BOUND;
         }
-        StartGameMessages.SUCCESS.setTxt(chosenMap.getBlock(x, y).toString());
+        StartGameMessages.SUCCESS.setTxt(currentMap.getBlock(x, y).toString());
         return StartGameMessages.SUCCESS;
     }
 
@@ -224,6 +221,7 @@ public class StartGameController extends ControllerUtils {
             return StartGameMessages.LORD_HOUSE_IS_SELECTED_BEFORE;
         }
         primitivePlayer.setLordHouseNumber(lordHouseNumber);
+        usedLordHouses.add(lordHouseNumber);
         return StartGameMessages.SUCCESS;
     }
 
@@ -257,15 +255,14 @@ public class StartGameController extends ControllerUtils {
         if(primitivePlayers.size() < 2) {
             return StartGameMessages.TOO_FEW_PLAYERS;
         }
-        currentGame = new Game(chosenMap);
-        currentMap = chosenMap;
+        currentGame = new Game(currentMap);
         Government player;
         Block block;
         ArrayList<Government> players = new ArrayList<>();
         for (PrimitivePlayer primitivePlayer : primitivePlayers) {
             player = new Government(primitivePlayer.getUser(),primitivePlayer.getColor());
             players.add(player);
-            block = chosenMap.getLordHouses().get(primitivePlayer.getLordHouseNumber());
+            block = currentMap.getLordHouses().get(primitivePlayer.getLordHouseNumber());
             MenuBuilding lordHouse = new MenuBuilding(player, BuildingMenus.LORD_HOUSE);
             for (int i = block.getX(); i < 2; i++) {
                 for (int j = block.getY(); j < 2; j++) {
@@ -275,6 +272,7 @@ public class StartGameController extends ControllerUtils {
             }
         }
         currentGame.setPlayers(players);
+        currentPlayer = players.get(0);
         return StartGameMessages.SUCCESS;
     }
 
