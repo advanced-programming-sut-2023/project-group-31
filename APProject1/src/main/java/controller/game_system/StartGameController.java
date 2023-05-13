@@ -289,7 +289,7 @@ public class StartGameController extends ControllerUtils {
         }
         return StartGameMessages.SUCCESS;
     }
-
+    }
 
 
 }
