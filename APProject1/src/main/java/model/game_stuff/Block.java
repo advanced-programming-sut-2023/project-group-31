@@ -106,6 +106,30 @@ public class Block {
         return false;
     }
 
+    public String getDetails(){
+        String detail="";
+        for(Person person : people){
+            detail+=person.toString();
+            detail+="\n";
+        }
+        return detail;
+    }
+
+    public String getMoreDetails(){
+        String output = "(" + x + "," + y + ")" + "\t|\t" + type + "\t|\t";
+        if(building == null) output += "empty";
+        else output += building.getName();
+        output += "\t people:";
+        for (String personName : numberOfEachPeople.keySet()) {
+            output += "\t" + personName + ":" + numberOfEachPeople.get(personName);
+        }
+        for(Person person : people){
+            output+=person.toString();
+            output+="\t";
+        }
+        return output;
+    }
+
 
     @Override
     public String toString() {

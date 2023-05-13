@@ -188,7 +188,7 @@ public class UnitController extends ControllerUtils {
         if(troops==null||troops.size()==0){
             return UnitMessages.NOTHING_SELECTED;
         }
-        ArrayList<Direction> directions;
+        ArrayList<Direction> directions=new ArrayList<>();
         int i=x-troops.get(0).getPosition().getX();
         int j=y-troops.get(0).getPosition().getY();
         routUnit(troops.get(0).getPosition().getX(),troops.get(0).getPosition().getY(),directions,i,j);
