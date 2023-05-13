@@ -6,11 +6,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public enum UnitCommands {
-    MOVE("move to (?<move_order>IN)"),
+    RIGHT_CLICK("right click"),
+    SET_MOVE_ORDER("set move order to (?<move_order>[URDL]+)"),
     PATROL("patrol in order (?<move_order>IN)"),
     SET_STATE("set state to (?<state>IN)"),
     ATTACK("attack (( -x (?<x>\\d+) )|( -y (?<y>\\d+) ))+"),
     DIG_TUNNEL("dig tunnel"),
+    SELECT_SPECIAL_TROOPS("select (?<troop_type>IN)"),
     ;
     private String regex;
 
@@ -22,7 +24,7 @@ public enum UnitCommands {
         return regex;
     }
 
-    public static Matcher getMatcher(String input, TurnCommands command) {
+    public static Matcher getMatcher(String input, UnitCommands command) {
         Matcher matcher = Pattern.compile(command.regex).matcher(input);
         return matcher.matches() ? matcher : null;
     }

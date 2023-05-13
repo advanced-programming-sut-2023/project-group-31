@@ -3,6 +3,7 @@ package model.game_stuff;
 import model.User;
 import model.game_stuff.buildings.Storage;
 import model.game_stuff.enums.Items;
+import model.game_stuff.people.Troop;
 import model.game_stuff.people.Worker;
 
 import java.util.ArrayList;

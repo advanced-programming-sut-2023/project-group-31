@@ -1,19 +1,38 @@
-package model.game_stuff;
+package model.game_stuff.people;
 
+import model.game_stuff.Block;
+import model.game_stuff.Government;
+import model.game_stuff.HasHp;
+import model.game_stuff.Person;
+import model.game_stuff.people.enums.TroopState;
 import model.game_stuff.people.enums.TroopTypes;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Troop extends Person{
+public class Troop extends Person {
     protected int damage;
     protected TroopTypes type;
+    protected TroopState state;
     protected Block attackTarget;
+
+    {
+        attackTarget = null;
+        state = TroopState.DEFENCIVE;
+    }
     public Troop(Government owner, TroopTypes type) {
         super(owner);
         this.type = type;
         damage = type.getDamage();
-        attackTarget = null;
+        name = type.getName();
+    }
+
+    public TroopState getState() {
+        return state;
+    }
+
+    public void setState(TroopState state) {
+        this.state = state;
     }
 
     public void setAttackTarget(Block attackTarget) {
