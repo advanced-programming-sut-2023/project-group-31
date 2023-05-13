@@ -30,35 +30,36 @@ public abstract class Person implements HasHp{
         return moveOrder;
     }
 
-    public void move() {
+    public boolean move() {
         if(moveOrder.isEmpty()) {
-            return;
+            return false;
         }
         Block target;
         if((target = owner.getGame().getMap().getNeighbour(moveOrder.getFirst(), position)) == null) {
             moveOrder.clear();
-            return;
+            return false;
         }
         if(!target.isPermeable()) {
             moveOrder.clear();
-            return;
+            return false;
         }
         if(target.containsEnemyBuilding(owner.getColor()) || target.containsEnemyPerson(owner.getColor())) {
-            return;
+            return false;
         }
         if(target.getBuilding().getOwner().equals(owner)) {
             if(target.getBuilding() instanceof Tower) {
                 Tower tower = (Tower) target.getBuilding();
                 if (moveOrder.size() != 1 || !tower.canEnter(moveOrder.getFirst()) || !tower.isFull()) {
                     moveOrder.clear();
-                    return;
+                    return false;
                 }
             }
             moveOrder.clear();
-            return;
+            return false;
         }
         move(target);
         moveOrder.removeFirst();
+        return true;
     }
 
     public void setHp(int hp) {
@@ -91,6 +92,7 @@ public abstract class Person implements HasHp{
         position.removePerson(this);
         destination.addPerson(this);
     }
+    public abstract void work();
     abstract public String toString();
 
 }

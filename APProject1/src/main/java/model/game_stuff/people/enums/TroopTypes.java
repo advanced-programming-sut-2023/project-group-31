@@ -12,13 +12,14 @@ public enum TroopTypes {
     MACEMEN("Macemen",500,3000,3,1,2),
     SWORDSMEN("Swordsmen",600,1500,1,1,2),
     KNIGHT("Knight",600,3750,5,1,2),
-    TUNNELER("Tunneler",400,1500,4,1,2),
-    LADDERMEN("Laddermen",0,1500,4,1,2),
-    ENGINEER("Engineer",0,1500,3,1,2),
+    TUNNELER("Tunneler",400,0,4,1,2),
+    LADDERMEN("Laddermen",400,0,4,1,2),
+    ENGINEER("Engineer",400,0,3,1,2),
     BLACKMONK("Black Monk",400,3000,2,1,2),
     SLAVES("Slaves",200,750,4,1,2),
     ASSASSINS("Assassins",400,3000,3,1,2),
-    ARABIANSWORDSMEN("Arabian Swordsmen",500,3750,5,1,2);
+    ARABIANSWORDSMEN("Arabian Swordsmen",500,3750,5,1,2),
+    CATAPULT("Catapult",1000,3000,2,4,6);
     private int hp;
     private String name;
     private int damage;
