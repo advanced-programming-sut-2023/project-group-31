@@ -6,6 +6,7 @@ import model.game_stuff.*;
 import model.game_stuff.buildings.MenuBuilding;
 import model.game_stuff.buildings.enums.BuildingMenus;
 import model.game_stuff.enums.Textures;
+import model.game_stuff.enums.TreeTypes;
 import view.game_system.messages.StartGameMessages;
 import view.user_system.messages.UserMessages;
 
@@ -43,8 +44,16 @@ public class StartGameController extends ControllerUtils {
         return null;
     }
 
-    public static UserMessages dropTree(int x, int y, String type){
-        return null;
+    public static StartGameMessages dropTree(int x, int y, String tree){
+        if (x >= currentMap.getSize() || y >= currentMap.getSize()) {
+            return StartGameMessages.OUT_OF_MAP;
+        }
+        TreeTypes treeType;
+        if((treeType=TreeTypes.getTreeType(tree))==null){
+            return StartGameMessages.INVALID_COMMAND;
+        }
+        currentMap.getBlocks().get(x).get(y).addTree(new Tree(currentMap.getBlocks().get(x).get(y),treeType));
+        return StartGameMessages.SUCCESS;
     }
 
     public static UserMessages startGame(){
@@ -280,4 +289,7 @@ public class StartGameController extends ControllerUtils {
         }
         return StartGameMessages.SUCCESS;
     }
+    }
+
+
 }
