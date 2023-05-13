@@ -122,4 +122,8 @@ public class Worker extends Person {
         }
         return bestStorage.getPosition();
     }
+    @Override
+    public String toString() {
+        return type.getName() + ":" + (100 * hp / type.getHp());
+    }
 }

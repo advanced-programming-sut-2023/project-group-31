@@ -124,4 +124,9 @@ public class Troop extends Person {
         }
         return enemyBlocks;
     }
+
+    @Override
+    public String toString() {
+        return type.getName() + ":" + (100 * hp / type.getHp());
+    }
 }

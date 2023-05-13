@@ -93,4 +93,6 @@ public abstract class Person implements HasHp{
         destination.addPerson(this);
     }
     public abstract void work();
+    abstract public String toString();
+
 }
