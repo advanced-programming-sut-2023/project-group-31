@@ -95,7 +95,7 @@ public class UnitController extends ControllerUtils {
         }
         ArrayList<Direction> directions=new ArrayList<>();
         int i=x1-troops.get(0).getPosition().getX();
-        int j=y-troops.get(0).getPosition().getY();
+        int j=y1-troops.get(0).getPosition().getY();
         routUnit(troops.get(0).getPosition().getX(),troops.get(0).getPosition().getY(),directions,i,j);
 
         return UnitMessages.SUCCESS;

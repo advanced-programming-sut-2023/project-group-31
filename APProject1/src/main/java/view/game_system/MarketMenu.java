@@ -4,13 +4,14 @@ import controller.ControllerUtils;
 import controller.game_system.MarketController;
 import view.ViewUtils;
 import view.game_system.commands.MarketCommands;
+import view.game_system.messages.GameSwitcherMessages;
 import view.game_system.messages.MarketMessages;
 
 import java.util.Scanner;
 import java.util.regex.Matcher;
 
 public class MarketMenu extends ViewUtils {
-    public static GameSwitcherMessages run(Scanner scanner){
+    public static GameSwitcherMessages run(){
         String command ;
         Matcher matcher=null;
         while (true){
