@@ -7,6 +7,7 @@ import model.game_stuff.enums.TreeTypes;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class Map {
     private static ArrayList<Map> maps;
@@ -177,10 +178,25 @@ public class Map {
         setTextures(newMap,100, 135, 50, 15,Textures.WATER);
         setTextures(newMap,70, 10, 30, 10, Textures.CLIFF);
         setTextures(newMap,130,120,10,10,Textures.IRON);
+        newMap.setDescription("default default");
+        ArrayList<Block> lordHouses = new ArrayList<>();
+        lordHouses.add(newMap.getBlock(20, 20));
+        lordHouses.add(newMap.getBlock(94, 25));
+        lordHouses.add(newMap.getBlock(170, 15));
+        lordHouses.add(newMap.getBlock(190, 80));
+        lordHouses.add(newMap.getBlock(180, 180));
+        lordHouses.add(newMap.getBlock(110, 190));
+        lordHouses.add(newMap.getBlock(25, 185));
+        lordHouses.add(newMap.getBlock(15, 100));
+        newMap.setLordHouses(lordHouses);
         return newMap;
     }
 
-    private static void setTextures(Map newMap,int x, int y, int length, int width,Textures texture) {
+    private void setLordHouses(ArrayList<Block> lordHouses) {
+        this.lordHouses = lordHouses;
+    }
+
+    private static void setTextures(Map newMap, int x, int y, int length, int width, Textures texture) {
         for (int i = x-(length/2); i < x+(length/2); i++) {
             for (int j = y-(width/2); j < y+(width/2); j++) {
                 newMap.getBlock(i, j).setType(texture);
@@ -207,7 +223,7 @@ public class Map {
 
     @Override
     public String toString() {
-        return "Map " + name +
+        return "Map :" + name +
                 "\t\t" + size +
                 " * " + size +
                 "\n\t" + description;

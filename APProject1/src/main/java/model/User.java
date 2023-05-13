@@ -22,7 +22,11 @@ public class User {
                 String email, String slogan) {
         this.username = username;
         this.password = password;
-        this.nickname = nickname;
+        if(nickname == null) {
+            this.nickname = username;
+        }else {
+            this.nickname = nickname;
+        }
         this.email = email;
         this.slogan = slogan;
         this.scores = new ArrayList<Score>();
@@ -172,6 +176,6 @@ public class User {
                 "nickname: " + ((nickname == null) ? "not have been set" : nickname) + "\n" +
                 "highScore=" + getRank() + "\n" +
                 "rank=" + getHighScore() + "\n" +
-                "slogan: '" + slogan;
+                "slogan: " + slogan;
     }
 }

@@ -90,7 +90,7 @@ public class StartGameMenu extends ViewUtils{
 
     private static void setPlayersLordHouse(Matcher matcher) {
         String username = ViewUtils.fixDoubleQuotes(matcher.group("username"));
-        int lordHouseNumber = Integer.parseInt(matcher.group("lord_house"));
+        int lordHouseNumber = Integer.parseInt(matcher.group("lordHouse"));
         StartGameMessages message = StartGameController.setPlayersLordHouse(username, lordHouseNumber);
         if (message == StartGameMessages.SUCCESS) {
             System.out.println(StartGameMessages.SUCCESS.getTxt());
@@ -100,7 +100,7 @@ public class StartGameMenu extends ViewUtils{
             System.out.println("invalid command!");
             return;
         }
-        System.out.println("remove player failed: " + message.getTxt());
+        System.out.println("set lord house failed: " + message.getTxt());
     }
 
     private static void removePlayer(Matcher matcher) {
