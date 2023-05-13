@@ -46,7 +46,7 @@ public class Storage extends Building {
     }
     public void removeProduct(Items product, int amount) {
         properties.replace(product, properties.get(product) - amount);
-        if(properties.get(product) == 0) {
+        if (properties.get(product) == 0) {
             properties.remove(product);
         }
         amountOfProducts -= amount;

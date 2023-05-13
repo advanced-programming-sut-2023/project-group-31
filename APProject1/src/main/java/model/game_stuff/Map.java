@@ -187,7 +187,23 @@ public class Map {
             }
         }
     }
-
+    @Override
+    public Map clone(){
+        Map map=new Map(this.name,this.size);
+        map.size=this.size;
+        map.trees=new ArrayList<Tree>(this.trees);
+        map.lordHouses=new ArrayList<>(this.lordHouses);
+        map.saved=this.saved;
+        map.blocks=new ArrayList<ArrayList<Block>>();
+        for (int i = 0; i < this.size; i++) {
+            map.blocks.add(new ArrayList<>());
+            for (int j = 0; j < this.size; j++) {
+                map.blocks.get(i).add(new Block(this.blocks.get(i).get(i).getType(),this.blocks.get(i).get(j).getX(),this.blocks.get(i).get(j).getY()));
+            }
+        }
+        map.description=this.description;
+        return map;
+    }
 
     @Override
     public String toString() {
