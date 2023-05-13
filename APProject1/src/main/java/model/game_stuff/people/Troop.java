@@ -42,35 +42,57 @@ public class Troop extends Person {
     public void hit(HasHp livingBeing) {
         livingBeing.getDamaged(damage);
     }
+    public void work() {
+        switch (state) {
+            case AGGRESSIVE:
+                if(!attack()) {
+                    move();
+                }
+                break;
+            case DEFENCIVE:
+                if(!move()) {
+                    attack();
+                }
+        }
+    }
     public boolean attack() {
+        Random random = new Random();
+        if(attackTarget == null || (!attackTarget.containsEnemyPerson(owner.getColor()) && !attackTarget.containsEnemyBuilding(owner.getColor()))) {
+            if(!findEnemyBlockToAttack())
+                return false;
+        }
+        if(attackTarget.containsEnemyTroop(owner.getColor())) {
+            ArrayList<Person> enemyTroops = new ArrayList<>();
+            for (Person person : attackTarget.getPeople()) {
+                if(person instanceof Troop) {
+                    enemyTroops.add(person);
+                }
+            }
+            hit(enemyTroops.get(random.nextInt(enemyTroops.size())));
+        } else if(attackTarget.containsEnemyPerson(owner.getColor())) {
+            hit(attackTarget.getPeople().get(random.nextInt(attackTarget.getPeople().size())));
+        } else {
+            hit(attackTarget.getBuilding());
+        }
+        return true;
+    }
+
+    private boolean findEnemyBlockToAttack() {
         Random random = new Random();
         for(int i = 1; i <= type.getFightingRange(); i++) {
             ArrayList<Block> blocks = findEnemyTroopsPosition(i);
             if (!blocks.isEmpty()) {
-                if(attackTarget == null || (!attackTarget.containsEnemyPerson(owner.getColor()) && !attackTarget.containsEnemyBuilding(owner.getColor()))) {
-                    attackTarget = blocks.get(random.nextInt(blocks.size()));
-                }
-                ArrayList<Person> enemies = new ArrayList<>();
-                for (Person person : attackTarget.getPeople()) {
-                    if(person instanceof Troop)
-                        enemies.add(person);
-                }
-                hit(enemies.get(random.nextInt(enemies.size())));
-                break;
+                attackTarget = blocks.get(random.nextInt(blocks.size()));
+                return true;
             } else if (!(blocks = findEnemyPeoplePositions(i)).isEmpty()) {
                 attackTarget = blocks.get(random.nextInt(blocks.size()));
-                hit(attackTarget.getPeople().get(random.nextInt(attackTarget.getPeople().size())));
-                break;
+                return true;
             } else if (!(blocks = findEnemyBuildingsPosition(i)).isEmpty()) {
                 attackTarget = blocks.get(random.nextInt(blocks.size()));
-                hit(attackTarget.getBuilding());
-                break;
+                return true;
             }
         }
-        if(attackTarget == null) {
-            return false;
-        }
-        return true;
+        return false;
     }
     protected ArrayList<Block> findEnemyPeoplePositions(int distance) {
         ArrayList<Block> enemyBlocks = new ArrayList<>();
