@@ -32,13 +32,13 @@ public class Government {
     private int taxRate;
     private int religionRate;
     private int fearRate;
-    private int efficiency;
+    private double efficiency;
     private int maxPopulation;
     private Waiter populationWater;
     private ArrayList<Trade> tradeHistory;
 
     {
-        possession = new Possession();
+        possession = new Possession(this);
         //gold = 0;
         //numberOfPeasants = 8;
         population = 8;
@@ -49,7 +49,7 @@ public class Government {
         religionRate=0;
         popularityGrowthRate=0;
         taxRate=0;
-        efficiency = 8; //TODO: rabete
+        efficiency = 1; //TODO: rabete
         turnsToWaitForNewPeasant = 2;
 
         stockpiles = new ArrayList<>();
@@ -190,11 +190,11 @@ public class Government {
         this.popularity = popularity;
     }
 
-    public int getEfficiency() {
+    public double getEfficiency() {
         return efficiency;
     }
 
-    public void setEfficiency(int efficiency) {
+    public void setEfficiency(double efficiency) {
         this.efficiency = efficiency;
     }
 

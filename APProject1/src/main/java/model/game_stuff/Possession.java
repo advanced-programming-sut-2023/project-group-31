@@ -5,6 +5,7 @@ import model.game_stuff.enums.Items;
 import java.util.HashMap;
 
 public class Possession {
+    private Government owner;
     private HashMap<Items, Integer> items;
     private int gold;
     private int peasant;
@@ -38,7 +39,9 @@ public class Possession {
         items.put(Items.GOLD, 0);
         //TODO: add other items
     }
-
+    public Possession(Government player){
+        this.owner=player;
+    }
     public int getItem(Items item) {
         return items.get(item);
     }
@@ -226,6 +229,8 @@ public class Possession {
     }
 
     public void setPeasant(int peasant) {
+        int toSum=peasant-this.peasant;
+        owner.setPopulation(owner.getPopulation()+toSum);
         this.peasant = peasant;
     }
 }
