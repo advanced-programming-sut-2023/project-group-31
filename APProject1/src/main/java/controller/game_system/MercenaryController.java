@@ -48,13 +48,13 @@ public class MercenaryController extends ControllerUtils {
 
     private static void createKicker(TroopTypes kickerTypes) {
         Troop kicker =new Troop(currentPlayer,kickerTypes);
-        kicker.setPosition();//Mercenary post location
+   //     kicker.setPosition();//Mercenary post location
         //currentplayer.mercenaryPost.getBlock(0).add(thrower)
     }
 
     private static void createThrower(TroopTypes throwerTypes) {
         Troop thrower=new Troop(currentPlayer,throwerTypes);
-        thrower.setPosition();//Mercenary post location
+     //   thrower.setPosition();//Mercenary post location
         //currentplayer.mercanaryPost.getBlock(0).add(thrower)
     }
 }

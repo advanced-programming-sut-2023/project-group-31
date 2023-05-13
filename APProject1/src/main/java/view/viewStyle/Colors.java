@@ -1,14 +1,16 @@
 package view.viewStyle;
 
 public enum Colors {
-    RED("red", "\\u001B[40m"),
-    GREEN("green","\\u001B[42m"),
-    BLUE("blue","\t\\u001B[44m"),
-    PURPLE("purple","\\u001B[45m"),
-    BLACK("black","\\u001B[40m"),
-    YELLOW("yellow","\\u001B[43m"),
-    WHITE("white","\\u001B[47m"),
-    RESET("reset","\\033[0m");
+    RED("red", "\u001B[41m"),
+    GREEN("green","\u001B[42m"),
+    BLUE("blue","\u001B[34m"),
+
+    PURPLE("purple","\u001B[45m"),
+
+    BLACK("black","\u001B[40m"),
+    YELLOW("yellow","\u001B[43m"),
+    WHITE("white","\u001B[47m"),
+    RESET("reset","\u001B[0m");
     private String name;
     private String backgroundColorCode;
 

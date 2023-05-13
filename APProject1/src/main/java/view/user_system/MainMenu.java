@@ -21,6 +21,8 @@ public class MainMenu extends ViewUtils {
                 return MenuSwitcherMessages.LOGIN;
             }else if((matcher= MainMenuCommands.getMatcher(input,MainMenuCommands.GOTO_PROFILE_MENU))!=null){
                 return MenuSwitcherMessages.PROFILE;
+            }else if(input.equals("start game")){
+                return MenuSwitcherMessages.START_GAME;
             }else {
                 System.out.println("Invalid command!");
             }

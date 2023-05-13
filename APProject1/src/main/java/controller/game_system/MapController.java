@@ -10,7 +10,6 @@ import java.util.ArrayList;
 
 
 public class MapController extends ControllerUtils {
-    private Map map;
     private int length;
     private int width;
 
@@ -18,7 +17,7 @@ public class MapController extends ControllerUtils {
     private int y;
 
     public MapController() {
-        this.map = StartGameController.getChosenMap();
+        //currentMap = StartGameController.getChosenMap();
         length = 14;
         width = 4;
     }
@@ -30,7 +29,7 @@ public class MapController extends ControllerUtils {
 
     public String showMapByXY() {
         String output="";
-        if(map.getSize()<=(x+length/2)||map.getSize()<=(y+width/2)){
+        if(currentMap.getSize()<=(x+length/2)|| currentMap.getSize()<=(y+width/2)){
             return "show map failed: invalid position.";
         }
         output += showLine();
@@ -59,11 +58,11 @@ public class MapController extends ControllerUtils {
         String type, output = "";
         for (int i = x - (length / 2); i < x + (length / 2); i++) {
             output += ("|");
-            if (map.getBlocks().get(i).get(y).getType().equals(Textures.GROUND)) {
+            if (currentMap.getBlocks().get(i).get(y).getType().equals(Textures.GROUND)) {
                 type = "#";
             } else {
-                type = map.getBlocks().get(i).get(y).getType().getColor().getBackgroundColorCode()
-                        + map.getBlocks().get(i).get(y).getType().getName().substring(0, 1)
+                type = currentMap.getBlocks().get(i).get(y).getType().getColor().getBackgroundColorCode()
+                        + currentMap.getBlocks().get(i).get(y).getType().getName().substring(0, 1)
                         + Colors.RESET.getBackgroundColorCode();
             }
             for (int j = 0; j < 6; j++) {
@@ -76,10 +75,10 @@ public class MapController extends ControllerUtils {
 
 
     public String showDetails(int x, int y,boolean superDetailed) {
-        if (x >= map.getSize() || y >= map.getSize()) {
+        if (x >= currentMap.getSize() || y >= currentMap.getSize()) {
             return "Invalid x and y!";
         }
-        Block block = map.getBlocks().get(x).get(y);
+        Block block = currentMap.getBlocks().get(x).get(y);
         if(superDetailed)
             return block.getDetails();
         else
@@ -88,7 +87,7 @@ public class MapController extends ControllerUtils {
 
 
     public void moveOnMap(int rights, int ups) {
-        if (map.getSize() <= (x + rights + length / 2) || map.getSize() <= (y + ups + width / 2)) {
+        if (currentMap.getSize() <= (x + rights + length / 2) || currentMap.getSize() <= (y + ups + width / 2)) {
             System.out.println("show map failed: invalid position.");
         }
         x = x + rights;
@@ -97,13 +96,13 @@ public class MapController extends ControllerUtils {
 
     public String showHoleMap() {
         String output = "", type;
-        for (int i = 0; i < map.getSize(); i++) {
-            for (int j = 0; j < map.getSize(); j++) {
-                if (Textures.GROUND.equals(map.getBlocks().get(i).get(j).getType())) {
+        for (int i = 0; i < currentMap.getSize(); i++) {
+            for (int j = 0; j < currentMap.getSize(); j++) {
+                if (Textures.GROUND.equals(currentMap.getBlocks().get(i).get(j).getType())) {
                     type = "#";
                 } else {
-                    type = map.getBlocks().get(i).get(y).getType().getColor().getBackgroundColorCode()
-                            + map.getBlocks().get(i).get(y).getType().getName().substring(0, 1)
+                    type = currentMap.getBlocks().get(i).get(j).getType().getColor().getBackgroundColorCode()
+                            + currentMap.getBlocks().get(i).get(j).getType().getName().substring(0, 1)
                             + Colors.RESET.getBackgroundColorCode();
                 }
                 output += type;
@@ -117,8 +116,10 @@ public class MapController extends ControllerUtils {
         String result="";
         for(int i=x-2;i<=x+2;i++){
             for(int j=y-2;j<=y+2;j++){
-                result+=map.getBlock(i,j).getMoreDetails();
+                result+= currentMap.getBlock(i,j).getMoreDetails();
+                result+="\t";
             }
+            result+="\n";
         }
         return result;
     }

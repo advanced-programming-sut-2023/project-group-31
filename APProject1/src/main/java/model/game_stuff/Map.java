@@ -1,5 +1,6 @@
 package model.game_stuff;
 
+import model.DataBase;
 import model.game_stuff.enums.Direction;
 import model.game_stuff.enums.Textures;
 import model.game_stuff.enums.TreeTypes;
@@ -9,6 +10,9 @@ import java.util.HashMap;
 
 public class Map {
     private static ArrayList<Map> maps;
+    {
+        maps=new ArrayList<Map>();
+    }
     private String name;
     private int size;
     private ArrayList<Tree> trees;
@@ -151,6 +155,8 @@ public class Map {
     public static void setMaps(ArrayList<Map> maps) {
         Map.maps = maps;
     }
+
+
 
     public static Map getDefaultMap() {
         Map newMap = new Map("Default map", 150);

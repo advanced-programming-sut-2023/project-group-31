@@ -6,8 +6,8 @@ public enum MenuSwitcherMessages {
     REGISTER,
     PROFILE,
 
-    MAIN
+    MAIN,
 
 
-    ;
+    START_GAME;
 }

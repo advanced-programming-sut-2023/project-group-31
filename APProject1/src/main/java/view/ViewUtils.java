@@ -14,10 +14,10 @@ public class ViewUtils {
 
 
     public static String editRegex(String regex){
-        regex = regex.replaceAll("[\\s]+","[\\s]+");
-        regex = regex.replaceAll("IN","([\\\\S]*)|(\"[^*]*\")");
-        regex = regex.replaceAll("\\d", "-?\\d");
-        return regex;
+        String result;
+        result=regex.replaceAll("[\\s]+","[\\s]+");
+        result=regex.replaceAll("IN","([\\\\S]*)|(\"[^*]*\")");
+        return result;
     }
 
     public static HashMap<String, String> putInHashmap(Matcher matcher, String regex) {

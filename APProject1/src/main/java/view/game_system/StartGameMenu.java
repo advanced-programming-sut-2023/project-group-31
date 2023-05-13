@@ -11,9 +11,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 
-public class StartGameMenu{
+public class StartGameMenu extends ViewUtils{
     //TODO: dastoor e clear
-    public static MenuSwitcherMessages run(Scanner scanner) {
+    public static MenuSwitcherMessages run() {
+        System.out.println("------Start game menu-----");
         Matcher matcher;
         String command;
         while (true) {

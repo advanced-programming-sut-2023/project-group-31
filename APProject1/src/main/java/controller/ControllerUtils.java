@@ -15,6 +15,11 @@ public abstract class ControllerUtils {
     protected static Government currentPlayer;
     protected static Game currentGame;
     protected static Map currentMap;
+    {
+        if(Map.getMaps()!=null) {
+            currentMap = Map.getMaps().get(0);
+        }
+    }
 
     public static Map getCurrentMap() {
         return currentMap;
