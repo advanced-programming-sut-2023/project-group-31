@@ -14,45 +14,70 @@ import java.util.ArrayList;
 public class UnitController extends ControllerUtils {
     static private ArrayList<Troop> troops;
 
-    public static UnitMessages selectUnit(int x, int y){
-        troops=new ArrayList<Troop>();
-        for(Person person:currentGame.getMap().getBlock(x,y).getPeople()){
-            if(person instanceof Troop){
-                troops.add((Troop)person);
+    public static UnitMessages selectUnit(int x, int y) {
+        troops = new ArrayList<Troop>();
+        for (Person person : currentGame.getMap().getBlock(x, y).getPeople()) {
+            if (person instanceof Troop) {
+                troops.add((Troop) person);
             }
         }
-        if(troops.size()==0){
+        if (troops.size() == 0) {
             return UnitMessages.EMPTY_BLOCK;
         }
         return UnitMessages.SUCCESS;
     }
 
-    private void routUnit(int x,int y, ArrayList<Direction> directions,int i,int j){
-        int dirX,dirY;
-        if(i>0){
-            dirX=1;
-        }else{
+    private ArrayList<Direction> routUnit(int x, int y, ArrayList<Direction> directions, int i, int j) {
+        if(i==0&&j==0){
+            return directions;
+        }
+        int dirX = 0, dirY = 0;
+        if (i > 0) {
+            dirX = 1;
+        } else if (i < 0) {
+            dirX = -1;
+        }
+        if (j > 0) {
+            dirY = 1;
+        } else if (j < 0) {
+            dirY = -1;
+        }
+        if (dirX != 0 && isPossibleToGo(currentGame.getMap().getBlock(x+dirX, y))) {
+            directions.add(Direction.getDirectionByXY(dirX,0));
+            return routUnit( x+dirX,  y, directions, i-dirX, j);
+        }
+        if (dirY != 0 && isPossibleToGo(currentGame.getMap().getBlock(x, y+dirY))) {
+            directions.add(Direction.getDirectionByXY(0,dirY));
+            return routUnit( x,  y+dirY, directions, i, j-dirY);
+        }
+        if(dirX==0){
             dirX=-1;
         }
-        if(j>0){
-            dirY=1;
-        }else{
+        if(dirY==0){
             dirY=-1;
         }
-        if(isPossibleToGo(currentGame.getMap().getBlock(x,y))){
-
+        if ( isPossibleToGo(currentGame.getMap().getBlock(x-dirX, y))) {
+            directions.add(Direction.getDirectionByXY(-dirX,0));
+            return routUnit( x-dirX,  y, directions, i+dirX, j);
         }
+        if ( isPossibleToGo(currentGame.getMap().getBlock(x, y-dirY))) {
+            directions.add(Direction.getDirectionByXY(0,-dirY));
+            return routUnit( x,  y+dirY, directions, i, j+dirY);
+        }
+        return null;
 
     }
 
-    private boolean isPossibleToGo(Block block){
+    private boolean isPossibleToGo(Block block) {
         if (!block.isPermeable() ||
                 block.containsEnemyBuilding(currentPlayer.getColor()) ||
                 block.containsEnemyPerson(currentPlayer.getColor())) {
-                return false;
+            return false;
         }
         return true;
     }
+
+
 
     public static void setTroops(ArrayList<Troop> troops) {
         UnitController.troops = troops;

@@ -15,7 +15,7 @@ public enum Direction {
         this.name = name;
     }
 
-    public Direction getDirectionByXY(int x, int y) {
+    public static Direction getDirectionByXY(int x, int y) {
         for (Direction direction : values()) {
             if (direction.getX() == x && direction.getY()==y) {
                 return  direction;
