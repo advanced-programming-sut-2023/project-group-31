@@ -47,6 +47,8 @@ public class StartGameMenu extends ViewUtils{
                 setPlayersTeam(matcher);
             } else if ((matcher = StartGameCommands.getMatcher(command, StartGameCommands.SHOW_LORD_HOUSES_LEFT)) != null) {
                 System.out.println(StartGameController.showLordHousesLeft());
+            } else if ((matcher = StartGameCommands.getMatcher(command, StartGameCommands.SAVE_MAP)) != null) {
+                saveMap();
             } else if ((matcher = StartGameCommands.getMatcher(command, StartGameCommands.START)) != null) {
                 if(startTheGame()) {
                     TurnMenu.run();
@@ -57,6 +59,10 @@ public class StartGameMenu extends ViewUtils{
                 System.out.println("invalid command!");
             }
         }
+    }
+
+    private static void saveMap() {
+        StartGameController.saveMap();
     }
 
     private static boolean startTheGame() {

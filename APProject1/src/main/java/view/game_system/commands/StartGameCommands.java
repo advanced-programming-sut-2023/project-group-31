@@ -25,7 +25,8 @@ public enum StartGameCommands {
     SHOW_LORD_HOUSES_LEFT("show lord houses left"),
     SET_PLAYERS_TEAM("set team (?<color>IN) to (?<username>IN)"),
     START("start"),
-    GOTO_MAP_MENU("goto map menu");
+    GOTO_MAP_MENU("goto map menu"),
+    SAVE_MAP("save map");
     private String regex;
     StartGameCommands(String regex) {
         this.regex = ViewUtils.editRegex(regex);

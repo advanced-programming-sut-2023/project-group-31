@@ -266,4 +266,12 @@ public class StartGameController extends ControllerUtils {
         currentPlayer = players.get(0);
         return StartGameMessages.SUCCESS;
     }
+
+    public static void saveMap() {
+        if(!Map.getMaps().contains(currentMap)){
+            Map.addMap(currentMap);
+            currentMap.setSaved(true);
+        }
+
+    }
 }

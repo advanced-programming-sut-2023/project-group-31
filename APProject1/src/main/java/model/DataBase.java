@@ -210,4 +210,9 @@ public class DataBase {
         return dataBase.maps;
     }
 
+    public static void addMap(Map map){
+        dataBase.maps.add(map);
+        saveDataBase();
+    }
+
 }
