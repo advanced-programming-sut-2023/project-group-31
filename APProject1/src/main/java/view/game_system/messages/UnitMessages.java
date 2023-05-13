@@ -2,7 +2,7 @@ package view.game_system.messages;
 
 public enum UnitMessages {
     MESSAGE(""),
-    EMPTY_BLOCK(""), SUCCESS("success");
+    EMPTY_BLOCK(""), SUCCESS("success"), NOTHING_SELECTED("Nothing had been selected.");
     private String txt;
     UnitMessages(String txt) {
         this.txt = txt;
