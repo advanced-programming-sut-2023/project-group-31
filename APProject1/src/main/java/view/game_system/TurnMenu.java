@@ -12,6 +12,8 @@ public class TurnMenu extends ViewUtils {
     public static void run() {
         String input;
         Matcher matcher;
+        System.out.println("Welcome to the great game of stronghold crusader!");
+        announceCurrentPlayer();
         while (true) {
             input = scanner.nextLine();
             if ((matcher = TurnCommands.getMatcher(input, TurnCommands.DROP_BUILDING)) != null) {
@@ -27,6 +29,10 @@ public class TurnMenu extends ViewUtils {
                 System.out.println("Invalid command");
             }
         }
+    }
+
+    private static void announceCurrentPlayer() {
+        System.out.println(TurnController.getCurrentPlayer().getName() + " plays!\n---------------------------");
     }
 
     private static void selectBuilding() {

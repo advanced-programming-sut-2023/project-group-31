@@ -62,7 +62,16 @@ public class StartGameMenu extends ViewUtils{
     }
 
     private static void saveMap() {
-        StartGameController.saveMap();
+        StartGameMessages message = StartGameController.saveMap();
+        if (message == StartGameMessages.SUCCESS) {
+            System.out.println(StartGameMessages.SUCCESS.getTxt());
+            return;
+        }
+        if (message == StartGameMessages.INVALID_COMMAND) {
+            System.out.println("invalid command!");
+            return;
+        }
+        System.out.println("save map failed: " + message.getTxt());
     }
 
     private static boolean startTheGame() {

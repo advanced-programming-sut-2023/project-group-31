@@ -16,6 +16,7 @@ public class StartGameController extends ControllerUtils {
     private static ArrayList<PrimitivePlayer> primitivePlayers;
     private static HashSet<Colors> usedColors;
     private static HashSet<Integer> usedLordHouses;
+    private static boolean mapIsChanged;
     private static int xToShow;
     private static int yToShow;
 
@@ -23,6 +24,8 @@ public class StartGameController extends ControllerUtils {
         primitivePlayers = new ArrayList<>();
         usedColors = new HashSet<>();
         usedLordHouses = new HashSet<>();
+        mapIsChanged = false;
+        //TODO: dastoor hayi ke map ro taghyir midan bayad mapIsChanged ro true konan
     }
     public static String showMaps() {
         String output = "CHOSEN MAP:\n" + currentMap + "\nAVAILABLE MAPS:";
@@ -69,7 +72,7 @@ public class StartGameController extends ControllerUtils {
     public static StartGameMessages chooseMap(String name) {
         for (Map map : Map.getMaps()) {
             if(map.getName().equals(name)) {
-                currentMap = map;
+                currentMap = map.clone();
                 return StartGameMessages.SUCCESS;
             }
         }
@@ -267,11 +270,14 @@ public class StartGameController extends ControllerUtils {
         return StartGameMessages.SUCCESS;
     }
 
-    public static void saveMap() {
+    public static StartGameMessages saveMap() {
         if(!Map.getMaps().contains(currentMap)){
             Map.addMap(currentMap);
             currentMap.setSaved(true);
+            return StartGameMessages.SUCCESS;
+        } else if(!mapIsChanged){
+            return StartGameMessages.THE_MAP_IS_ALREADY_SAVED;
         }
-
+        return StartGameMessages.SUCCESS;
     }
 }
