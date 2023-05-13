@@ -15,12 +15,13 @@ public class Block {
     private Building building;
     private int x;
     private int y;
-
+    private boolean tunneled;
     {
         people = new ArrayList<>();
         trees = new ArrayList<>();
         numberOfEachPeople = new HashMap<>();
         building = null;
+        tunneled=false;
     }
 
     public Block(Textures type, int x, int y) {
@@ -37,6 +38,9 @@ public class Block {
         return y;
     }
 
+    public ArrayList<Tree> getTrees() {
+        return trees;
+    }
 
     public void addPerson(Person person) {
         people.add(person);
@@ -88,7 +92,7 @@ public class Block {
         this.building = building;
     }
     public boolean isEmpty() {
-        return (building == null && people.isEmpty() && trees.isEmpty());
+        return (building == null && people.isEmpty() && trees.isEmpty()&&tunneled==false);
     }
     public int getDistanceTo(Block anotherBlock) {
         return Math.abs(x - anotherBlock.getX()) + Math.abs(y - anotherBlock.getY());
@@ -104,6 +108,10 @@ public class Block {
         if(building != null && building.getOwner().getColor() != color)
             return true;
         return false;
+    }
+
+    public void setTunneled(boolean tunneled) {
+        this.tunneled = tunneled;
     }
 
     public String getDetails(){

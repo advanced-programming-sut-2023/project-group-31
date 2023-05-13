@@ -66,6 +66,7 @@ public class BarrackController extends ControllerUtils {
     private static void createKicker(TroopTypes target) {
         Troop troop=new Troop(currentPlayer,target);
         troop.setPosition(storage.getPosition());
+        storage.getPosition().addPerson(troop);
         //currentplayer.barrack.getblock(0).add(kicker)
     }
 }
