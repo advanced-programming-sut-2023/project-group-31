@@ -24,7 +24,7 @@ public abstract class ControllerUtils {
         return currentMap;
     }
 
-    public Government getCurrentPlayer() {
+    public static Government getCurrentPlayer() {
         return currentPlayer;
     }
 
