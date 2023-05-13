@@ -24,6 +24,7 @@ public class Government {
     //private int numberOfPeasants;
     private int population;
     private int populationGrowthRate;
+    private int turnsToWaitForNewPeasant;
     private int popularityGrowthRate;
     private int popularity;
     private int foodRate;
@@ -32,6 +33,7 @@ public class Government {
     private int fearRate;
     private int efficiency;
     private int maxPopulation;
+    private Waiter populationWater;
     private ArrayList<Trade> tradeHistory;
 
     {
@@ -47,6 +49,7 @@ public class Government {
         popularityGrowthRate=0;
         taxRate=0;
         efficiency = 8; //TODO: rabete
+        turnsToWaitForNewPeasant = 2;
 
         stockpiles = new ArrayList<>();
         granaries = new ArrayList<>();
@@ -55,12 +58,48 @@ public class Government {
         buildings = new ArrayList<>();
         workers = new ArrayList<>();
         troops = new ArrayList<>();
+        populationWater = new Waiter(2);
     }
 
     public Government(User owner, Colors color) {
         this.owner = owner;
         this.name = owner.getNickname();
         this.color = color;
+    }
+
+    public void nextTurn() {
+        popularityGrowthRate = (fearRate + taxRate + religionRate + fearRate) / 2;
+        risePopularity();
+        setTurnsToWaitForNewPeasant();
+        fixPopularity();
+    }
+
+    private void risePopularity() {
+        popularity += popularityGrowthRate;
+        if(popularity > 100) {
+            popularity = 100;
+        } else if(popularity < 0) {
+            popularity = 0;
+        }
+    }
+
+    private void setTurnsToWaitForNewPeasant() {
+        if(popularity >= 70 || popularity <= 30) {
+            populationWater.setTurnsToWait(2);
+        } else {
+            populationWater.setTurnsToWait(4);
+        }
+    }
+    private void fixPopularity() {
+        if(popularity >= 55) {
+            if(populationWater.isTheTurn() && possession.getPeasant() < maxPopulation) {
+                possession.setPeasant(possession.getPeasant() + 1);
+            }
+        } else if(popularity <= 45) {
+            if(populationWater.isTheTurn() && possession.getPeasant() > 0) {
+                possession.setPeasant(possession.getPeasant() - 1);
+            }
+        }
     }
 
     public void addBuilding(Building building) {

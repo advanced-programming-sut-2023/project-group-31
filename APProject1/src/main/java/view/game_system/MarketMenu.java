@@ -24,7 +24,7 @@ public class MarketMenu extends ViewUtils {
             else if((matcher=MarketCommands.getMatcher(command,MarketCommands.BUY))!=null){
                 buy(matcher);
             }
-            else if (MarketCommands.getMatcher(command,MarketCommands.SHOWPRICELIST)!=null){
+            else if (MarketCommands.getMatcher(command,MarketCommands.SHOW_PRICE_LIST)!=null){
                 System.out.println(MarketController.showPriceList());
             }
             else {

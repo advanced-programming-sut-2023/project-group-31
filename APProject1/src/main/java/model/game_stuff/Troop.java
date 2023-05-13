@@ -8,39 +8,47 @@ import java.util.Random;
 public class Troop extends Person{
     protected int damage;
     protected TroopTypes type;
+    protected Block attackTarget;
     public Troop(Government owner, TroopTypes type) {
         super(owner);
         this.type = type;
         damage = type.getDamage();
+        attackTarget = null;
     }
+
+    public void setAttackTarget(Block attackTarget) {
+        this.attackTarget = attackTarget;
+    }
+
     public void hit(HasHp livingBeing) {
         livingBeing.getDamaged(damage);
     }
     public boolean attack() {
-        Block target = null;
         Random random = new Random();
         for(int i = 1; i <= type.getFightingRange(); i++) {
             ArrayList<Block> blocks = findEnemyTroopsPosition(i);
             if (!blocks.isEmpty()) {
-                target = blocks.get(random.nextInt(blocks.size()));
+                if(attackTarget == null || (!attackTarget.containsEnemyPerson(owner.getColor()) && !attackTarget.containsEnemyBuilding(owner.getColor()))) {
+                    attackTarget = blocks.get(random.nextInt(blocks.size()));
+                }
                 ArrayList<Person> enemies = new ArrayList<>();
-                for (Person person : target.getPeople()) {
+                for (Person person : attackTarget.getPeople()) {
                     if(person instanceof Troop)
                         enemies.add(person);
                 }
                 hit(enemies.get(random.nextInt(enemies.size())));
                 break;
             } else if (!(blocks = findEnemyPeoplePositions(i)).isEmpty()) {
-                target = blocks.get(random.nextInt(blocks.size()));
-                hit(target.getPeople().get(random.nextInt(target.getPeople().size())));
+                attackTarget = blocks.get(random.nextInt(blocks.size()));
+                hit(attackTarget.getPeople().get(random.nextInt(attackTarget.getPeople().size())));
                 break;
             } else if (!(blocks = findEnemyBuildingsPosition(i)).isEmpty()) {
-                target = blocks.get(random.nextInt(blocks.size()));
-                hit(target.getBuilding());
+                attackTarget = blocks.get(random.nextInt(blocks.size()));
+                hit(attackTarget.getBuilding());
                 break;
             }
         }
-        if(target == null) {
+        if(attackTarget == null) {
             return false;
         }
         return true;
