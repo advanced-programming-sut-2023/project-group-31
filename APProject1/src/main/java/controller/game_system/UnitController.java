@@ -176,12 +176,9 @@ public class UnitController extends ControllerUtils {
     }
 
     private static boolean isPossibleToGo(Block block) {
-        if (!block.isPermeable() ||
-                block.containsEnemyBuilding(currentPlayer.getColor()) ||
-                block.containsEnemyPerson(currentPlayer.getColor())) {
-            return false;
-        }
-        return true;
+        return block.isPermeable() &&
+            !block.containsEnemyBuilding(currentPlayer.getColor()) &&
+            !block.containsEnemyPerson(currentPlayer.getColor());
     }
 
     public static UnitMessages moveTroop(int x,int y){
