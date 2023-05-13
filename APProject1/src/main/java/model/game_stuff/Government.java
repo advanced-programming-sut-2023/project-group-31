@@ -64,7 +64,7 @@ public class Government {
 
     public Government(User owner, Colors color) {
         this.owner = owner;
-        this.name = owner.getNickname();
+        this.name = owner.getUsername();
         this.color = color;
     }
 

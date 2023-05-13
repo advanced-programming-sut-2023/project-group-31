@@ -15,7 +15,8 @@ public enum StartGameMessages {
     COLOR_IS_ALREADY_SET("player is already in the team!"),
     INVALID_LORD_HOUSE_NUMBER("invalid lord house number!"),
     TOO_FEW_PLAYERS("too few players"),
-    OUT_OF_MAP("The position is out of map")
+    OUT_OF_MAP("The position is out of map"),
+    THE_MAP_IS_ALREADY_SAVED("the map is already saved!");
     ;
     private String txt;
     private String input;
