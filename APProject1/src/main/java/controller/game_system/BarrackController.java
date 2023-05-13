@@ -1,9 +1,9 @@
 package controller.game_system;
 
 import controller.ControllerUtils;
-import main.java.view.game_system.messages.BarracksMessages;
 import model.game_stuff.people.Troop;
 import model.game_stuff.buildings.Storage;
+import model.game_stuff.enums.Items;
 //import model.game_stuff.people.Kicker;
 //import model.game_stuff.people.Thrower;
 //import model.game_stuff.people.enums.KickerTypes;
@@ -11,6 +11,7 @@ import model.game_stuff.buildings.Storage;
 import model.game_stuff.people.enums.TroopTypes;
 import model.game_stuff.types.Nationality;
 import model.game_stuff.types.Troops;
+import view.game_system.messages.BarracksMessages;
 
 public class BarrackController extends ControllerUtils {
     private static Storage storage;

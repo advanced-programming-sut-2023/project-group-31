@@ -2,9 +2,8 @@ package view.game_system;
 
 
 import controller.game_system.BarrackController;
-import main.java.view.game_system.commands.BarracksCommand;
-import main.java.view.game_system.messages.BarracksMessages;
-
+import view.game_system.messages.BarracksMessages;
+import view.game_system.commands.BarracksCommand;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 

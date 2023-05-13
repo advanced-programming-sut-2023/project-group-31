@@ -15,10 +15,10 @@ public class GameSwitcher {
                 case GAME:
                     break;
                 case BARRACKS:
-                    command=BarracksMenu.run(scanner);
+                    command=BarracksMenu.run();
                     break;
                 case MERCENARY_POST:
-                    command=MercenaryPostMenu.run(scanner);
+                    command=MercenaryPostMenu.run();
                     break;
                 case KINGDOM:
                     command=KingdomMenu.run(scanner);
@@ -26,10 +26,10 @@ public class GameSwitcher {
                 case BACK:
                     return MenuSwitcherMessages.MAIN;
                 case MARKET:
-                    command= view.game_system.MarketMenu.run(scanner);
+                    command= view.game_system.MarketMenu.run();
                     break;
                 case TRADE:
-                    command= view.game_system.TradeMenu.run(scanner);
+                    command= view.game_system.TradeMenu.run();
                 // TODO :
             }
         }

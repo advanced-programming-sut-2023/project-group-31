@@ -134,7 +134,7 @@ public class UnitController extends ControllerUtils {
         return UnitMessages.SUCCESS;
     }
 
-    private ArrayList<Direction> routUnit(int x, int y, ArrayList<Direction> directions, int i, int j) {
+    private static ArrayList<Direction> routUnit(int x, int y, ArrayList<Direction> directions, int i, int j) {
         if(i==0&&j==0){
             return directions;
         }
@@ -175,7 +175,7 @@ public class UnitController extends ControllerUtils {
 
     }
 
-    private boolean isPossibleToGo(Block block) {
+    private static boolean isPossibleToGo(Block block) {
         if (!block.isPermeable() ||
                 block.containsEnemyBuilding(currentPlayer.getColor()) ||
                 block.containsEnemyPerson(currentPlayer.getColor())) {
@@ -183,4 +183,34 @@ public class UnitController extends ControllerUtils {
         }
         return true;
     }
+
+    public static UnitMessages moveTroop(int x,int y){
+        if(troops==null||troops.size()==0){
+            return UnitMessages.NOTHING_SELECTED;
+        }
+        ArrayList<Direction> directions;
+        int i=x-troops.get(0).getPosition().getX();
+        int j=y-troops.get(0).getPosition().getY();
+        routUnit(troops.get(0).getPosition().getX(),troops.get(0).getPosition().getY(),directions,i,j);
+
+        return UnitMessages.SUCCESS;
+    }
+
+    public static UnitMessages patrolUnit(int x1,int y1,int x2,int y2){
+        if(troops==null||troops.size()==0){
+            return UnitMessages.NOTHING_SELECTED;
+        }
+        ArrayList<Direction> directions=new ArrayList<>();
+        int i=x1-troops.get(0).getPosition().getX();
+        int j=y1-troops.get(0).getPosition().getY();
+        routUnit(troops.get(0).getPosition().getX(),troops.get(0).getPosition().getY(),directions,i,j);
+
+        return UnitMessages.SUCCESS;
+    }
+
+    public static void setTroops(ArrayList<Troop> troops) {
+        UnitController.troops = troops;
+    }
+
+
 }

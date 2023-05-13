@@ -4,13 +4,14 @@ import controller.ControllerUtils;
 import controller.game_system.TradeController;
 import view.ViewUtils;
 import view.game_system.commands.TradeCommands;
+import view.game_system.messages.GameSwitcherMessages;
 import view.game_system.messages.TradeMessages;
 
 import java.util.Scanner;
 import java.util.regex.Matcher;
 
 public class TradeMenu extends ViewUtils {
-    public static GameSwitcherMessages run(Scanner scanner) {
+    public static GameSwitcherMessages run() {
         System.out.println(TradeController.showNewTrades());
         String command;
         Matcher matcher;
