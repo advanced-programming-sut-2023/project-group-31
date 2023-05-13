@@ -32,6 +32,8 @@ public class MapMenu extends ViewUtils {
                 System.out.println(mapController.nextTurn());
             }else if ((matcher = MapCommands.getMatcher(input, MapCommands.SHOW_DETAILS)) != null) {
                 showDetails(Integer.parseInt(matcher.group("x")),(Integer.parseInt(matcher.group("y"))));
+            }else if ((matcher = MapCommands.getMatcher(input, MapCommands.SHOW_MORE_DETAILS)) != null) {
+                showMoreDetails(Integer.parseInt(matcher.group("x")),(Integer.parseInt(matcher.group("y"))));
             } else if(input.equals("exit")){
                 return;
             }else {
@@ -40,13 +42,17 @@ public class MapMenu extends ViewUtils {
         }
     }
 
+    private void showMoreDetails(int x, int y) {
+        System.out.println(mapController.detailedMap(x,y));
+    }
+
     private void showMapByXY(Matcher matcher){
         mapController.setXy(Integer.parseInt(matcher.group("x")),Integer.parseInt(matcher.group("y")));
         System.out.println(mapController.showMapByXY());
     }
 
     private void showDetails(int x,int y){
-        System.out.println(mapController.showDetails(x,y));
+        System.out.println(mapController.showDetails(x,y,false));
     }
 
 

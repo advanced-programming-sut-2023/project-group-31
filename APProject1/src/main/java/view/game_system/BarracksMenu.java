@@ -28,7 +28,7 @@ public class BarracksMenu extends view.ViewUtils {
     private static void createUnit(Matcher matcher) {
         controller.ControllerUtils.setInputs(putInHashmap(matcher,BarracksCommand.CREATE_UNIT.getRegex()));
         BarracksMessages message= BarrackController.createUnit();
-        if(message==BarracksMessages.INVALID_COMMAND){
+        if(message.equals(BarracksMessages.INVALID_COMMAND)){
             System.out.println("Invalid command!");
             return;
         }
