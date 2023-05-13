@@ -6,7 +6,6 @@ import model.game_stuff.Person;
 import model.game_stuff.people.Troop;
 import model.game_stuff.enums.Direction;
 import model.game_stuff.people.enums.TroopState;
-import view.game_system.messages.StartGameMessages;
 import view.game_system.messages.UnitMessages;
 
 import java.util.ArrayList;

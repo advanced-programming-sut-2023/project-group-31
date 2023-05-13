@@ -33,6 +33,14 @@ public class Producer extends Building {
         }
     }
 
+    public void work() {
+        if (worker == null) {
+            //search for worker
+            return;
+        }
+        worker.work();
+    }
+
     @Override
     public String toString() {
         return  type.getName() + "\n" +

@@ -1,6 +1,7 @@
 package model.game_stuff;
 
 
+import model.game_stuff.buildings.Trap;
 import model.game_stuff.enums.Textures;
 import model.game_stuff.people.Fighter;
 
@@ -11,6 +12,7 @@ public class Block {
     private Textures type;
     private ArrayList<Person> people;
     private ArrayList<Tree> trees;
+    private Trap trap;
     private HashMap<String, Integer> numberOfEachPeople;
     private Building building;
     private int x;
@@ -21,6 +23,7 @@ public class Block {
         trees = new ArrayList<>();
         numberOfEachPeople = new HashMap<>();
         building = null;
+        trap = null;
     }
 
     public Block(Textures type, int x, int y) {
@@ -88,7 +91,7 @@ public class Block {
         this.building = building;
     }
     public boolean isEmpty() {
-        return (building == null && people.isEmpty() && trees.isEmpty());
+        return (trap == null && building == null && people.isEmpty() && trees.isEmpty());
     }
     public int getDistanceTo(Block anotherBlock) {
         return Math.abs(x - anotherBlock.getX()) + Math.abs(y - anotherBlock.getY());

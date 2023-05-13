@@ -93,7 +93,7 @@ public class MapMenu extends ViewUtils {
 
 
     private void showHoleMap(){
-        System.out.println(mapController.showHoleMap());
+        System.out.println(mapController.showWholeTheMap());
     }
 
 

@@ -266,6 +266,7 @@ public class StartGameController extends ControllerUtils {
             }
         }
         currentGame.setPlayers(players);
+        currentPlayer = players.get(0);
         return StartGameMessages.SUCCESS;
     }
 }
