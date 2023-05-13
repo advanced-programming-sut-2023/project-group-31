@@ -115,26 +115,195 @@ public class KingdomController extends ControllerUtils {
         //TODO ADD ARRAYS OF BUILDINGS
         //if(currentPlayer.getBuildings.contains(FactorRiser)){
          // currentPlayer.setReligionRate(2)}
-        int setPopularity=current.getFoodRate()+current.getFearRate()+current.getReligionRate()+current.getTaxRate();
-        current.setPopularity(setPopularity);
+         int addToPopularityFoods=0;
+         int addToPopularityBuildings=0;
+         if(!current.getBuildings().isEmpty()){
+             addToPopularityBuildings=1;
+         }
+         addToPopularityFoods= current.getPossession().getMeat()+current.getPossession().getBread()+current.getPossession().getCheese()+current.getPossession().getApple()-1;
+         current.setPopularity(current.getPopularity()+addToPopularityFoods+addToPopularityBuildings);
+         if(current.getPopularity()>100){
+             current.setPopularity(100);
+         }
+         if(current.getPopularity()<0){
+             current.setPopularity(0);
+         }
         checkForPopulation(current);
+        checkForTax();
+        checkForFood();
+        checkForFear();
      }
-     public static void checkForPopulation(Government current){
-        if(current.getPopulation()<30&&currentGame.getTurn()%2==0){
-            //current.getWorkLessPeople().set(x-1)
 
+    private static void checkForFear() {
+        switch (currentPlayer.getFearRate()){
+            case 5:
+                currentPlayer.setEfficiency(0.75);
+                break;
+            case 4:
+                currentPlayer.setEfficiency(0.80);
+                break;
+            case 3:
+                currentPlayer.setEfficiency(0.85);
+                break;
+            case 2:
+                currentPlayer.setEfficiency(0.90);
+                break;
+            case 1:
+                currentPlayer.setEfficiency(0.95);
+                break;
+            case 0:
+                currentPlayer.setEfficiency(1);
+                break;
+            case -1 :
+                currentPlayer.setEfficiency(1.05);
+                break;
+            case -2:
+                currentPlayer.setEfficiency(1.1);
+                break;
+            case -3:
+                currentPlayer.setEfficiency(1.15);
+                break;
+            case -4:
+                currentPlayer.setEfficiency(1.2);
+                break;
+            case -5:
+                currentPlayer.setEfficiency(1.25);
+                break;
+            default:
+                break;
+        }
+    }
+
+    private static void checkForFood() {
+        switch (currentPlayer.getFoodRate()){
+            case -2:
+                foodToPeople(0,-8);
+                break;
+            case -1:
+                foodToPeople(0.5,-4);
+                break;
+            case 0:
+                foodToPeople(1,0);
+                break;
+            case 1:
+                foodToPeople(1.5,4);
+                break;
+            case 2:
+                foodToPeople(2,8);
+                break;
+            default:
+                break;
+        }
+    }
+
+    private static void foodToPeople(double foodToDonate, int popularityRate) {
+        double toDecreaseFromStorage=Math.ceil(foodToDonate*currentPlayer.getPopulation());
+        currentPlayer.setPopularity(currentPlayer.getPopularity()+popularityRate);
+        if(currentPlayer.getPopularity()>100){
+            currentPlayer.setPopularity(100);
+        }
+        else if(currentPlayer.getPopularity()<0){
+            currentPlayer.setPopularity(0);
+        }
+        while (toDecreaseFromStorage>0){
+            for (Storage granary : currentPlayer.getGranaries()) {
+                if(granary.getProperties().get(Items.CHEESE)!=0) {
+                    granary.removeProduct(Items.CHEESE, 1);
+                    toDecreaseFromStorage--;
+                    continue;
+                }
+                if(granary.getProperties().get(Items.BREAD)!=0){
+                    granary.removeProduct(Items.BREAD,1);
+                    toDecreaseFromStorage--;
+                    continue;
+                }
+                if(granary.getProperties().get(Items.APPLE)!=0){
+                    granary.removeProduct(Items.APPLE,1);
+                    toDecreaseFromStorage--;
+                    continue;
+                }
+                if(granary.getProperties().get(Items.MEAT)!=0){
+                    granary.removeProduct(Items.MEAT,1);
+                    toDecreaseFromStorage--;
+                    continue;
+                }
+            }
+        }
+        if(toDecreaseFromStorage!=0){
+            currentPlayer.setFoodRate(-2);
+        }
+    }
+
+    private static void checkForTax() {
+        switch (currentPlayer.getTaxRate()){
+            case -3:
+                getTax(-1,7);
+            case -2:
+                getTax(-0.8,5);
+            case -1:
+                getTax(-0.6,3);
+            case 0:
+                getTax(0,1);
+                break;
+            case 1:
+                getTax(0.6,-2);
+                break;
+            case 2:
+                getTax(0.8,-4);
+                break;
+            case 3:
+                getTax(1,-6);
+                break;
+            case 4:
+                getTax(1.2,-8);
+                break;
+            case 5:
+                getTax(1.4,-12);
+                break;
+            case 6:
+                getTax(1.6,-16);
+                break;
+            case 7:
+                getTax(1.8,-20);
+                break;
+            case 8:
+                getTax(2,-24);
+                break;
+            default:
+                break;
+        }
+    }
+
+    private static void getTax(double gold, int toChange) {
+        currentPlayer.setPopularity(currentPlayer.getPopularity()+toChange);
+        if(currentPlayer.getPopularity()>100){
+            currentPlayer.setPopularity(100);
+        }
+        else if(currentPlayer.getPopularity()<0){
+            currentPlayer.setPopularity(0);
+        }
+        double toDecrease=Math.ceil(currentPlayer.getPopulation()*gold);
+        currentPlayer.getPossession().setGold(currentPlayer.getPossession().getGold()+(int) toDecrease);
+        if(currentPlayer.getPossession().getGold()<0){
+            currentPlayer.getPossession().setGold(0);
+        }
+    }
+
+    public static void checkForPopulation(Government current){
+        if(current.getPopulation()<30&&currentGame.getTurn()%2==0){
+            current.getPossession().setPeasant(current.getPossession().getPeasant()-1);
             return;
         }
         else if(current.getPopularity()>70&&currentGame.getTurn()%2==0){
-            //current.getWorkLessPeople().set(x+1)
+            current.getPossession().setPeasant(current.getPossession().getPeasant()+1);
             return;
         }
         else if(current.getPopularity()<50&&currentGame.getTurn()%4==0){
-            //current.getWorkLessPeople().set(x-1)
+            current.getPossession().setPeasant(current.getPossession().getPeasant()-1);
             return;
         }
         else if(current.getPopularity()>=50&&currentGame.getTurn()%4==0){
-            //current.getWorkLessPeople.set(x+1)
+            current.getPossession().setPeasant(current.getPossession().getPeasant()+1);
             return;
         }
      }
