@@ -3,7 +3,7 @@ package model.game_stuff.enums;
 public enum Direction {
     UP(0, 1, "up"),
     DOWN(0, -1, "down"),
-    RIGHT(1,0, "right"),
+    RIGHT(1, 0, "right"),
     LEFT(-1, 0, "left"),
     ;
     private int x, y;
@@ -13,6 +13,15 @@ public enum Direction {
         this.x = x;
         this.y = y;
         this.name = name;
+    }
+
+    public static Direction getDirectionByXY(int x, int y) {
+        for (Direction direction : values()) {
+            if (direction.getX() == x && direction.getY()==y) {
+                return  direction;
+            }
+        }
+        return null;
     }
 
     public int getX() {

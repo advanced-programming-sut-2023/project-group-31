@@ -26,6 +26,7 @@ public class Worker extends Person {
         this.type = type;
         producingWaiter = new Waiter(type.getTurnsToWait());
         state = WorkerStates.HEADING_BACK;
+        name = type.getName();
     }
     public boolean isInWorkHouse() {
         return position.equals(workHouse.getPosition());
@@ -120,5 +121,9 @@ public class Worker extends Person {
             return null;
         }
         return bestStorage.getPosition();
+    }
+    @Override
+    public String toString() {
+        return type.getName() + ":" + (100 * hp / type.getHp());
     }
 }

@@ -52,6 +52,8 @@ public class StartGameMenu{
                     //mishe jash berim to menu elam natayej or something
                     return MenuSwitcherMessages.MAIN;
                 }
+            } else {
+                System.out.println("invalid command!");
             }
         }
     }

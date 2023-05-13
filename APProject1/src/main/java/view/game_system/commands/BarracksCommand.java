@@ -1,4 +1,4 @@
-package main.java.view.game_system.commands;
+package view.game_system.commands;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

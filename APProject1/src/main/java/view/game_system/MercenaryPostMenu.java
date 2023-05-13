@@ -2,15 +2,17 @@ package view.game_system;
 
 
 import controller.game_system.MercenaryController;
-import main.java.view.game_system.commands.BarracksCommand;
-import main.java.view.game_system.messages.BarracksMessages;
+import view.ViewUtils;
+import view.game_system.commands.BarracksCommand;
+import view.game_system.messages.BarracksMessages;
+import view.game_system.messages.GameSwitcherMessages;
 
 import java.util.Scanner;
 import java.util.regex.Matcher;
 
 import static view.ViewUtils.putInHashmap;
 
-public class MercenaryPostMenu {
+public class MercenaryPostMenu extends ViewUtils {
     public static GameSwitcherMessages run(){
         String command;
         Matcher matcher;

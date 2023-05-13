@@ -2,9 +2,8 @@ package view.game_system;
 
 
 import controller.game_system.BarrackController;
-import main.java.view.game_system.commands.BarracksCommand;
-import main.java.view.game_system.messages.BarracksMessages;
-
+import view.game_system.messages.BarracksMessages;
+import view.game_system.commands.BarracksCommand;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 
@@ -29,7 +28,7 @@ public class BarracksMenu extends view.ViewUtils {
     private static void createUnit(Matcher matcher) {
         controller.ControllerUtils.setInputs(putInHashmap(matcher,BarracksCommand.CREATE_UNIT.getRegex()));
         BarracksMessages message= BarrackController.createUnit();
-        if(message==BarracksMessages.INVALID_COMMAND){
+        if(message.equals(BarracksMessages.INVALID_COMMAND)){
             System.out.println("Invalid command!");
             return;
         }

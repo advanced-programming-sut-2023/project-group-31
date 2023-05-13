@@ -75,12 +75,15 @@ public class MapController extends ControllerUtils {
     }
 
 
-    public String showDetails(int x, int y) {
+    public String showDetails(int x, int y,boolean superDetailed) {
         if (x >= map.getSize() || y >= map.getSize()) {
             return "Invalid x and y!";
         }
         Block block = map.getBlocks().get(x).get(y);
-        return block.toString();
+        if(superDetailed)
+            return block.getDetails();
+        else
+            return block.toString();
     }
 
 
@@ -108,6 +111,16 @@ public class MapController extends ControllerUtils {
             output+="\n";
         }
         return output;
+    }
+
+    public String detailedMap(int x, int y){
+        String result="";
+        for(int i=x-2;i<=x+2;i++){
+            for(int j=y-2;j<=y+2;j++){
+                result+=map.getBlock(i,j).getMoreDetails();
+            }
+        }
+        return result;
     }
 
     public String nextTurn() {

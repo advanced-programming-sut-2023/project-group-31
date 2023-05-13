@@ -1,20 +1,20 @@
 package controller.game_system;
 
 import controller.ControllerUtils;
+import model.game_stuff.buildings.MenuBuilding;
 import view.game_system.messages.BarracksMessages;
 //import model.game_stuff.people.Kicker;
 //import model.game_stuff.people.Thrower;
 //import model.game_stuff.people.enums.KickerTypes;
 //import model.game_stuff.people.enums.ThrowerTypes;
-import model.game_stuff.Troop;
-import model.game_stuff.buildings.MenuBuildings;
+import model.game_stuff.people.Troop;
 import model.game_stuff.people.enums.TroopTypes;
 import model.game_stuff.types.Nationality;
 import model.game_stuff.types.Troops;
 import view.game_system.messages.BarracksMessages;
 
 public class MercenaryController extends ControllerUtils {
-    private static MenuBuildings menuBuildings;
+    private static MenuBuilding menuBuildings;
     public static BarracksMessages createUnit(){
         if(inputs.get("type")==null||Integer.parseInt(inputs.get("amount"))<=0) {
             return BarracksMessages.INVALID_COMMAND;
@@ -28,7 +28,7 @@ public class MercenaryController extends ControllerUtils {
         }
         if (!currentPlayer.getWeaponries().contains(troop.getWeapon())){
             return BarracksMessages.NOT_ENOUGH_WEAPON;}
-        if(currentPlayer.getPossession().getPeasant()==0){
+        if(currentPlayer.getPopulation()==0){
             return BarracksMessages.PEOPLE_NEEDED;
         }
         switch (troop.getType()){
@@ -59,7 +59,7 @@ public class MercenaryController extends ControllerUtils {
         //currentplayer.mercenaryPost.getBlock(0).add(thrower)
     }
 
-    public void setMenuBuildings(MenuBuildings menuBuildings) {
+    public void setMenuBuildings(MenuBuilding menuBuildings) {
         this.menuBuildings = menuBuildings;
     }
 
