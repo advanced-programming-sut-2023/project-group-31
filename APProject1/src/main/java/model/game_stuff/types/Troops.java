@@ -13,9 +13,9 @@ public enum Troops{//assassins - fire towers - horseArchers,ladder man, ordinary
     MACEMEN("Macemen",Nationality.EUROPEAN,10,"kicker",Items.MACE),
     SWORDSMEN("Swordsmen",Nationality.EUROPEAN,10,"kicker",Items.SWORDS),
     KNIGHT("Knight",Nationality.EUROPEAN,10,"kicker",Items.SWORDS),
-    TUNNELER("Tunneler",Nationality.EUROPEAN,10,"kicker",null),
-    LADDERMEN("Laddermen",Nationality.EUROPEAN,10,"kicker",null),
-    ENGINEER("Engineer",Nationality.EUROPEAN,10,"kicker",null),
+    TUNNELER("Tunneler",Nationality.NULL,10,"kicker",null),
+    LADDERMEN("Laddermen",Nationality.NULL,10,"kicker",null),
+    ENGINEER("Engineer",Nationality.NULL,10,"kicker",null),
     BLACKMONK("Black Monk",Nationality.EUROPEAN,10,"kicker",Items.SWORDS),
     ARCHERBOW("Archer Bow",Nationality.ARAB,10,"thrower",Items.BOW),
     SLAVES("Slaves",Nationality.ARAB,10,"kicker",Items.FIRE),
@@ -23,7 +23,8 @@ public enum Troops{//assassins - fire towers - horseArchers,ladder man, ordinary
     ASSASSINS("Assassins",Nationality.ARAB,10,"kicker",Items.SWORDS),
     HORSEARCHERS("Horse Archers",Nationality.ARAB,10,"thrower",Items.BOW),
     ARABIANSWORDSMEN("Arabian Swordsmen",Nationality.ARAB,10,"kicker",Items.SWORDS),
-    FIRETHROWERS("Fire Throwers",Nationality.ARAB,10,"thrower",Items.BOW);
+    FIRETHROWERS("Fire Throwers",Nationality.ARAB,10,"thrower",Items.BOW),
+    CATAPULT("Catapult",Nationality.NULL,10,null,null);
     // hes mikonam ke sarbazaye arab bayad barashoon tedad moshakhas beshe vali nemidoonam
 
 //    private double damage;// very high 6 high 5 average 4 low 3 very low 2 no damage 1

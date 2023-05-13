@@ -9,7 +9,7 @@ import java.util.regex.Matcher;
 
 public class MapMenu extends ViewUtils {
 
-    MapController mapController;
+    private static MapController mapController;
 
     public MapMenu() {
         mapController=new MapController();
@@ -25,7 +25,7 @@ public class MapMenu extends ViewUtils {
                 showMapByXY(matcher);
             } else if ((matcher = MapCommands.getMatcher(input, MapCommands.MOVE)) != null) {
                 moveOnMap(matcher.group("directions"));
-            }else if(input.equals("show hole all")){
+            }else if(input.equals("show whole map")){
                 showHoleMap();
             }
             else if(MapCommands.getMatcher(input,MapCommands.NEXT_TURN)!=null){

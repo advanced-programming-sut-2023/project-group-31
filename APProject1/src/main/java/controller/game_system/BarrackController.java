@@ -1,6 +1,8 @@
 package controller.game_system;
 
 import controller.ControllerUtils;
+import view.game_system.messages.BarracksMessages;
+import model.game_stuff.buildings.MenuBuilding;
 import model.game_stuff.people.Troop;
 import model.game_stuff.buildings.Storage;
 import model.game_stuff.enums.Items;
@@ -14,7 +16,7 @@ import model.game_stuff.types.Troops;
 import view.game_system.messages.BarracksMessages;
 
 public class BarrackController extends ControllerUtils {
-    private static Storage storage;
+    private static MenuBuilding storage;
     public static BarracksMessages createUnit(){
         if(inputs.get("type")==null||Integer.parseInt(inputs.get("amount"))<=0){
             return BarracksMessages.INVALID_COMMAND;
@@ -29,16 +31,18 @@ public class BarrackController extends ControllerUtils {
             return BarracksMessages.NOT_ENOUGH_GOLD;
         }
         if(!currentPlayer.getWeaponries().contains(target.getWeapon()))
-            if(currentPlayer.getPopulation()==0){
+            if(currentPlayer.getPossession().getPeasant()==0){
                 return BarracksMessages.PEOPLE_NEEDED;
             }
         switch (target.getType()){
             case "kicker":
                 TroopTypes Troops=TroopTypes.getTroopByName(target.getName());
+                currentPlayer.getPossession().setPeasant(currentPlayer.getPossession().getPeasant()-1);
                 createKicker(Troops);
                 break;
             case "thrower":
                 TroopTypes troop=TroopTypes.getTroopByName(target.getName());
+                currentPlayer.getPossession().setPeasant(currentPlayer.getPossession().getPeasant()-1);
                 createThrower(troop);
                 break;
             default:
@@ -48,13 +52,14 @@ public class BarrackController extends ControllerUtils {
         return BarracksMessages.SUCCESS;
     }
 
-    public static void setStorage(Storage storage) {
+    public static void setStorage(MenuBuilding storage) {
         BarrackController.storage = storage;
     }
 
     private static void createThrower(TroopTypes target) {
          Troop troop=new Troop(currentPlayer,target);
         troop.setPosition(storage.getPosition());
+        storage.getPosition().addPerson(troop);
         //currentplayer.barrack.getblock(0).add(thrower)
     }
 

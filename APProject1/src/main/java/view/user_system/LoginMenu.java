@@ -64,7 +64,7 @@ public class LoginMenu extends ViewUtils {
         while (true) {
             input = scanner.nextLine().trim();
             if ((matcher = LoginCommands.getMatcher(input, LoginCommands.ENTER_PASSWORD)) != null) {
-                ControllerUtils.setInputs(putInHashmap(matcher, LoginCommands.ENTER_PASSWORD.getRegex()));
+                ControllerUtils.putInput("password",matcher.group("password"));
                 userLogin();
                 return;
             } else if (LoginCommands.getMatcher(input, LoginCommands.FORGOT_PASSWORD) != null) {

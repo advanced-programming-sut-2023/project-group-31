@@ -15,6 +15,7 @@ public class Block {
     private Trap trap;
     private HashMap<String, Integer> numberOfEachPeople;
     private Building building;
+    private boolean tunneled;
     private int x;
     private int y;
 
@@ -23,6 +24,7 @@ public class Block {
         trees = new ArrayList<>();
         numberOfEachPeople = new HashMap<>();
         building = null;
+        tunneled = false;
         trap = null;
     }
 
@@ -30,6 +32,14 @@ public class Block {
         this.type = type;
         this.x = x;
         this.y = y;
+    }
+
+    public boolean isTunneled() {
+        return tunneled;
+    }
+
+    public void setTunneled(boolean tunneled) {
+        this.tunneled = tunneled;
     }
 
     public int getX() {
@@ -40,6 +50,9 @@ public class Block {
         return y;
     }
 
+    public ArrayList<Tree> getTrees() {
+        return trees;
+    }
 
     public void addPerson(Person person) {
         people.add(person);

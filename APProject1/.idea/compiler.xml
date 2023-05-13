@@ -7,8 +7,10 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="APProject1" />
-        <module name="WeakholdCampaigner" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="WeakholdCampaigner" target="11" />
+    </bytecodeTargetLevel>
   </component>
 </project>

@@ -77,7 +77,7 @@ public class CaptchaMenu extends ViewUtils {
         String obscuredCaptchaCode = "";
         for (int i = 0; i < captchaCode.length(); i++) {
 
-            if (captchaCode.charAt(i) != '\n' && captchaCode.charAt(i) != '*' && i % 30 == random) {
+            if (captchaCode.charAt(i) != '\n' && captchaCode.charAt(i) != '*' && i % 30 == random % 30) {
                 obscuredCaptchaCode += "&";
             } else {
                 obscuredCaptchaCode += captchaCode.charAt(i);

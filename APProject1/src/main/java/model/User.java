@@ -167,7 +167,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "username: " + "\n" +
+        return "username: " +username + "\n" +
                 "email: " + email + "\n" +
                 "nickname: " + ((nickname == null) ? "not have been set" : nickname) + "\n" +
                 "highScore=" + getRank() + "\n" +

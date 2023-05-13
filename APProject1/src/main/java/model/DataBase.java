@@ -6,6 +6,9 @@ import java.util.*;
 import com.google.gson.Gson;
 import controller.ControllerUtils;
 import model.game_stuff.Map;
+import model.game_stuff.Tree;
+import model.game_stuff.enums.Textures;
+import model.game_stuff.enums.TreeTypes;
 
 
 public class DataBase {
@@ -15,7 +18,7 @@ public class DataBase {
     private ArrayList<String> recoveryQuestions;
     private ArrayList<User> users;
 
-    private ArrayList<Map> maps;
+    private final ArrayList<Map> maps;
 
     private final static String path = new File("").getAbsolutePath() + "\\src\\main\\resources\\";
     ;
@@ -37,6 +40,7 @@ public class DataBase {
         this.loggedInUser = null;
         maps=new ArrayList<Map>();
         maps.add(Map.getDefaultMap());
+        Map.getMaps().add(maps.get(0));
 
     }
 
@@ -86,6 +90,7 @@ public class DataBase {
             }
 
         }
+
     }
 
     public static void saveDataBase() {
@@ -93,11 +98,16 @@ public class DataBase {
         Gson gson = new Gson();
         String jsonString = gson.toJson(dataBase);
         saveResource("dataBase.txt", jsonString);
+
     }
 
     public static void loadApp() {
         connectToDatabase();
-        ControllerUtils.setCurrentUser(dataBase.loggedInUser);
+        //System.exit(0);
+        if(dataBase.loggedInUser!=null){
+            ControllerUtils.setCurrentUser(dataBase.loggedInUser);
+        }
+
         if (dataBase.isUserLoggedInBefore()) {
             ControllerUtils.setCurrentUser(dataBase.loggedInUser);
         }
@@ -107,6 +117,7 @@ public class DataBase {
         }
         User.setUsers(hashUsers);
         Map.setMaps(dataBase.maps);
+
     }
 
 
@@ -194,4 +205,9 @@ public class DataBase {
     public ArrayList<String> getRecoveryQuestions() {
         return recoveryQuestions;
     }
+
+    public static ArrayList<Map> getMaps() {
+        return dataBase.maps;
+    }
+
 }

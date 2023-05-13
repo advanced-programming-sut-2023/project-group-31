@@ -4,14 +4,13 @@ import model.game_stuff.Government;
 import model.game_stuff.Person;
 import model.game_stuff.people.enums.TroopTypes;
 
-public class LadderMan extends Troop {
-    public LadderMan(Government owner) {
-        super(owner, TroopTypes.LADDERMEN);
+public class Engineer extends Troop {
+    private TroopTypes troopTypes;
+    public Engineer(Government owner,TroopTypes troopTypes) {
+        super(owner, TroopTypes.ENGINEER);
+        this.troopTypes=troopTypes;
     }
 
-    public void putLadder(){
-
-    }
     @Override
     public void work() {
 

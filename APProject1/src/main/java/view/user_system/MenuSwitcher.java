@@ -1,6 +1,7 @@
 package view.user_system;
 
 import view.ViewUtils;
+import view.game_system.StartGameMenu;
 import view.user_system.messages.MenuSwitcherMessages;
 
 import java.util.Scanner;
@@ -24,6 +25,9 @@ public class MenuSwitcher extends ViewUtils {
                     break;
                 case MAIN:
                     command = MainMenu.run();
+                    break;
+                case START_GAME:
+                    command = StartGameMenu.run();
                     break;
                 // TODO :
             }
