@@ -1,5 +1,6 @@
 package model.game_stuff;
 
+import model.DataBase;
 import model.game_stuff.enums.Direction;
 import model.game_stuff.enums.Textures;
 import model.game_stuff.enums.TreeTypes;
@@ -9,6 +10,9 @@ import java.util.HashMap;
 
 public class Map {
     private static ArrayList<Map> maps;
+    {
+        maps=new ArrayList<Map>();
+    }
     private String name;
     private int size;
     private ArrayList<Tree> trees;
@@ -152,6 +156,8 @@ public class Map {
         Map.maps = maps;
     }
 
+
+
     public static Map getDefaultMap() {
         Map newMap = new Map("Default map", 150);
         for (int i = 1; i < 20; i++) {
@@ -181,7 +187,23 @@ public class Map {
             }
         }
     }
-
+    @Override
+    public Map clone(){
+        Map map=new Map(this.name,this.size);
+        map.size=this.size;
+        map.trees=new ArrayList<Tree>(this.trees);
+        map.lordHouses=new ArrayList<>(this.lordHouses);
+        map.saved=this.saved;
+        map.blocks=new ArrayList<ArrayList<Block>>();
+        for (int i = 0; i < this.size; i++) {
+            map.blocks.add(new ArrayList<>());
+            for (int j = 0; j < this.size; j++) {
+                map.blocks.get(i).add(new Block(this.blocks.get(i).get(i).getType(),this.blocks.get(i).get(j).getX(),this.blocks.get(i).get(j).getY()));
+            }
+        }
+        map.description=this.description;
+        return map;
+    }
 
     @Override
     public String toString() {

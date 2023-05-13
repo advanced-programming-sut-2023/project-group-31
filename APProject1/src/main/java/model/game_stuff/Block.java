@@ -13,21 +13,30 @@ public class Block {
     private ArrayList<Tree> trees;
     private HashMap<String, Integer> numberOfEachPeople;
     private Building building;
+    private boolean tunneled;
     private int x;
     private int y;
-    private boolean tunneled;
+
     {
         people = new ArrayList<>();
         trees = new ArrayList<>();
         numberOfEachPeople = new HashMap<>();
         building = null;
-        tunneled=false;
+        tunneled = false;
     }
 
     public Block(Textures type, int x, int y) {
         this.type = type;
         this.x = x;
         this.y = y;
+    }
+
+    public boolean isTunneled() {
+        return tunneled;
+    }
+
+    public void setTunneled(boolean tunneled) {
+        this.tunneled = tunneled;
     }
 
     public int getX() {
@@ -108,10 +117,6 @@ public class Block {
         if(building != null && building.getOwner().getColor() != color)
             return true;
         return false;
-    }
-
-    public void setTunneled(boolean tunneled) {
-        this.tunneled = tunneled;
     }
 
     public String getDetails(){

@@ -97,8 +97,10 @@ public class TurnController extends ControllerUtils {
 
     private static boolean decreaseRequirement(Buildings buildings, double percent) {
         Double dou;
+        int amountToGet;
         currentPlayer.getPossession().setGold((int)Math.ceil(currentPlayer.getPossession().getGold()-buildings.getGoldNeeded() * percent));
-        currentPlayer.getPossession().setIron((int)Math.ceil(currentPlayer.getPossession().getIron()-buildings.getIronNeeded() * percent));
+        amountToGet=(int)Math.ceil(buildings.getIronNeeded() * percent);
+        currentPlayer.getPossession().setIron(currentPlayer.getPossession().getIron() - amountToGet);
         currentPlayer.getPossession().setStone((int)Math.ceil(currentPlayer.getPossession().getStone()-buildings.getRockNeeded() * percent));
         currentPlayer.getPossession().setWood((int)Math.ceil(currentPlayer.getPossession().getWood()-buildings.getWoodNeeded() * percent));
         return true;
