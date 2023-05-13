@@ -6,6 +6,7 @@ import view.game_system.commands.StartGameCommands;
 import view.game_system.messages.StartGameMessages;
 import view.user_system.messages.MenuSwitcherMessages;
 import view.ViewUtils;
+import view.user_system.messages.UserMessages;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -49,6 +50,8 @@ public class StartGameMenu extends ViewUtils{
                 System.out.println(StartGameController.showLordHousesLeft());
             } else if ((matcher = StartGameCommands.getMatcher(command, StartGameCommands.SAVE_MAP)) != null) {
                 saveMap();
+            } else if ((matcher = StartGameCommands.getMatcher(command, StartGameCommands.DROP_TREE)) != null) {
+                dropTree(matcher);
             } else if ((matcher = StartGameCommands.getMatcher(command, StartGameCommands.START)) != null) {
                 if(startTheGame()) {
                     TurnMenu.run();
@@ -63,6 +66,16 @@ public class StartGameMenu extends ViewUtils{
 
     private static void saveMap() {
         StartGameController.saveMap();
+    }
+
+    private static void dropTree(Matcher matcher){
+        StartGameMessages result=StartGameController.dropTree(Integer.parseInt(matcher.group("x")),
+                Integer.parseInt(matcher.group("y")),matcher.group("type"));
+        if(result.equals(StartGameMessages.SUCCESS)){
+            System.out.println("Tree dropped successfully.");
+        }else{
+            System.out.println(result);
+        }
     }
 
     private static boolean startTheGame() {
