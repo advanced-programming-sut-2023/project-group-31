@@ -1,18 +1,125 @@
 package controller.game_system;
 
-import com.sun.net.httpserver.Authenticator;
 import controller.ControllerUtils;
 import model.game_stuff.Block;
 import model.game_stuff.Person;
-import model.game_stuff.Troop;
-import model.game_stuff.buildings.Tower;
+import model.game_stuff.people.Troop;
 import model.game_stuff.enums.Direction;
+import model.game_stuff.people.enums.TroopState;
+import view.game_system.messages.StartGameMessages;
 import view.game_system.messages.UnitMessages;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
 
 public class UnitController extends ControllerUtils {
     static private ArrayList<Troop> troops;
+    private static HashMap<String, Integer> numberOfEachTroop;
+
+    {
+        troops = new ArrayList<>();
+        numberOfEachTroop = new HashMap<>();
+    }
+
+    public static UnitMessages setState(String state) {
+        switch (state) {
+            case "aggressive":
+                for (Troop troop : troops) {
+                    troop.setState(TroopState.AGGRESSIVE);
+                }
+                break;
+            case "defensive":
+                for (Troop troop : troops) {
+                    troop.setState(TroopState.DEFENCIVE);
+                }
+                break;
+        }
+        return UnitMessages.SUCCESS;
+    }
+
+    public static UnitMessages setMoveOrder(String moveOrderString) {
+        LinkedList<Direction> moveOrder = stringToMoveOrder(moveOrderString);
+        for (Troop troop : troops) {
+            troop.setMoveOrder(moveOrder);
+        }
+        return UnitMessages.SUCCESS;
+    }
+
+    private static LinkedList<Direction> stringToMoveOrder(String moveOrderString) {
+        LinkedList<Direction> moveOrder = new LinkedList<>();
+        char singleMove;
+        for(int i = 0; i < moveOrderString.length(); i++) {
+            singleMove = moveOrderString.charAt(i);
+            switch (singleMove) {
+                case 'U' :
+                    moveOrder.add(Direction.UP);
+                    break;
+                case 'R' :
+                    moveOrder.add(Direction.RIGHT);
+                    break;
+                case 'D' :
+                    moveOrder.add(Direction.DOWN);
+                    break;
+                case 'L' :
+                    moveOrder.add(Direction.LEFT);
+                    break;
+            }
+        }
+        return moveOrder;
+    }
+
+    public static UnitMessages selectSpecialTroops(String troopTypeString) {
+        if (!numberOfEachTroop.containsKey(troopTypeString)) {
+            return UnitMessages.NO_SUCH_TROOP;
+        }
+        for (int i = 0; i < troops.size(); i++) {
+            if (!troops.get(i).getName().equals(troopTypeString)) {
+                troops.remove(troops.get(i));
+                i--;
+            }
+        }
+        HashMap<String, Integer> newNumber = new HashMap<>();
+        newNumber.put(troopTypeString, numberOfEachTroop.get(troopTypeString));
+        numberOfEachTroop = newNumber;
+        return UnitMessages.SUCCESS;
+    }
+
+    public static UnitMessages setAttackTarget() {
+        if(!inputs.containsKey("x") || !inputs.containsKey("y")) {
+            return UnitMessages.INVALID_COMMAND;
+        }
+        int x = Integer.parseInt(inputs.get("x").trim());
+        int y = Integer.parseInt(inputs.get("y").trim());
+        if(!currentMap.isInMap(x, y)) {
+            return UnitMessages.COORDINATE_OUT_OF_BOUND;
+        }
+        Block target = currentMap.getBlock(x, y);
+        if (!target.containsEnemyBuilding(currentPlayer.getColor()) && !target.containsEnemyPerson(currentPlayer.getColor())) {
+            return UnitMessages.NOTHING_TO_ATTACK_TO;
+        }
+        for (Troop troop : troops) {
+            troop.setAttackTarget(target);
+        }
+        return UnitMessages.SUCCESS;
+    }
+
+    public void addTroop(Troop troop) {
+        troops.add(troop);
+        if(numberOfEachTroop.containsKey(troop.getName())) {
+            numberOfEachTroop.replace(troop.getName() , numberOfEachTroop.get(troop.getName()) + 1);
+            return;
+        }
+        numberOfEachTroop.put(troop.getName(), 1);
+    }
+
+    public void removeTroop(Troop troop) {
+        troops.remove(troop);
+        numberOfEachTroop.replace(troop.getName() , numberOfEachTroop.get(troop.getName()) -1);
+        if(numberOfEachTroop.get(troop.getName()) == 0) {
+            numberOfEachTroop.remove(troop.getName());
+        }
+    }
 
     public static UnitMessages selectUnit(int x, int y) {
         troops = new ArrayList<Troop>();

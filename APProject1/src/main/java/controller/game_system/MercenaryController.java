@@ -5,7 +5,7 @@ import controller.ControllerUtils;
 //import model.game_stuff.people.Thrower;
 //import model.game_stuff.people.enums.KickerTypes;
 //import model.game_stuff.people.enums.ThrowerTypes;
-import model.game_stuff.Troop;
+import model.game_stuff.people.Troop;
 import model.game_stuff.people.enums.TroopTypes;
 import model.game_stuff.types.Nationality;
 import model.game_stuff.types.Troops;
