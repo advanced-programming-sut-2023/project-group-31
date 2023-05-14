@@ -8,7 +8,9 @@ public enum UnitMessages {
     NO_SUCH_TROOP("no such troop!"),
     COORDINATE_OUT_OF_BOUND("the coordinate is out of bound!"),
     NOTHING_TO_ATTACK_TO("there is nothing to attack to"),
-    NOTHING_SELECTED("Nothing had been selected.");
+    NOTHING_SELECTED("Nothing had been selected."),
+    INVALID_DIRECTION("invalid direction!"),
+    ;
     private String txt;
     UnitMessages(String txt) {
         this.txt = txt;

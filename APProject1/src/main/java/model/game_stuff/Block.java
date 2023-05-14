@@ -181,4 +181,14 @@ public class Block {
         block.setTrees(new ArrayList<Tree>(this.getTrees()));
         return block;
     }
+
+    public void collapse () {
+        while(!people.isEmpty()) {
+            people.get(0).die();
+        }
+        building.terminate();
+        while(!trees.isEmpty()) {
+            trees.get(0).terminate();
+        }
+    }
 }
