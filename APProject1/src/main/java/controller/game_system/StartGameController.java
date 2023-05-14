@@ -18,6 +18,9 @@ public class StartGameController extends ControllerUtils {
     private static HashSet<Colors> usedColors;
     private static HashSet<Integer> usedLordHouses;
     private static boolean mapIsChanged;
+
+    private static Map baseMap;
+
     private static int xToShow;
     private static int yToShow;
 
@@ -26,6 +29,7 @@ public class StartGameController extends ControllerUtils {
         usedColors = new HashSet<>();
         usedLordHouses = new HashSet<>();
         mapIsChanged = false;
+        baseMap = Map.getDefaultMap();
         //TODO: dastoor hayi ke map ro taghyir midan bayad mapIsChanged ro true konan
     }
     public static String showMaps() {
@@ -82,6 +86,7 @@ public class StartGameController extends ControllerUtils {
         for (Map map : Map.getMaps()) {
             if(map.getName().equals(name)) {
                 currentMap = map.clone();
+                baseMap = map;
                 return StartGameMessages.SUCCESS;
             }
         }
@@ -288,6 +293,15 @@ public class StartGameController extends ControllerUtils {
             return StartGameMessages.THE_MAP_IS_ALREADY_SAVED;
         }
         return StartGameMessages.SUCCESS;
+    }
+
+    public static StartGameMessages clearBlock(int x,int y){
+        if(!currentMap.isInMap(x,y)){
+            return StartGameMessages.OUT_OF_MAP;
+        }
+        currentMap.setBlock(x,y,baseMap.getBlock(x,y).clone());
+        return StartGameMessages.SUCCESS;
+
     }
 
 

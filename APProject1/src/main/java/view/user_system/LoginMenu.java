@@ -18,7 +18,7 @@ public class LoginMenu extends ViewUtils {
         if (ControllerUtils.isUserLoggedIn()) {
             return MenuSwitcherMessages.MAIN;
         }
-        System.out.println(Colors.RED +"--------login menu-------"+Colors.RESET);
+        System.out.println("\n"+Colors.GREEN.getBackgroundColorCode() +"--------login menu-------"+Colors.RESET.getBackgroundColorCode()+"\n");
         String input;
         Matcher matcher;
         while (true) {

@@ -15,7 +15,7 @@ public class MainMenu extends ViewUtils {
     public static MenuSwitcherMessages run() {
         String input;
         Matcher matcher;
-        System.out.println(Colors.RED +"--------Main menu-----"+Colors.RESET);
+        System.out.println("\n"+Colors.GREEN.getBackgroundColorCode() +"--------Main menu-----"+Colors.RESET.getBackgroundColorCode()+"\n");
         while (true) {
             input=scanner.nextLine().trim();
             if ((matcher= MainMenuCommands.getMatcher(input,MainMenuCommands.LOGOUT))!=null) {

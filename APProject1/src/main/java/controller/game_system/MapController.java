@@ -92,7 +92,7 @@ public class MapController extends ControllerUtils {
             System.out.println("show map failed: invalid position.");
         }
         x = x + rights;
-        y = y + ups;
+        y = y - ups;
     }
 
     public String showWholeTheMap() {
