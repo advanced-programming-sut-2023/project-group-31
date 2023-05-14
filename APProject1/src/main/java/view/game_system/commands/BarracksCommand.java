@@ -4,7 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public enum BarracksCommand {
-    CREATE_UNIT("createunit -t (?<type>.+) -c (?<count>.+)");
+    CREATE_UNIT("createunit -t (?<type>.+) -c (?<amount>.+)");
     String regex;
     BarracksCommand(String regex){
         this.regex=regex;
