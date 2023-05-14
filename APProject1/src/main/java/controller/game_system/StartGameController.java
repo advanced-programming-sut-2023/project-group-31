@@ -4,12 +4,16 @@ import controller.ControllerUtils;
 import model.User;
 import model.game_stuff.*;
 import model.game_stuff.buildings.MenuBuilding;
+import model.game_stuff.buildings.Storage;
 import model.game_stuff.buildings.enums.BuildingMenus;
+import model.game_stuff.buildings.enums.StorageTypes;
+import model.game_stuff.enums.Items;
 import model.game_stuff.enums.Textures;
 import model.game_stuff.enums.TreeTypes;
 import model.game_stuff.people.Lord;
 import model.game_stuff.people.Troop;
 import model.game_stuff.people.enums.TroopTypes;
+import model.game_stuff.types.Buildings;
 import view.game_system.messages.StartGameMessages;
 import view.user_system.messages.UserMessages;
 
@@ -277,22 +281,38 @@ public class StartGameController extends ControllerUtils {
         for (PrimitivePlayer primitivePlayer : primitivePlayers) {
             player = new Government(primitivePlayer.getUser(),primitivePlayer.getColor());
             players.add(player);
+            player.setGame(currentGame);
             block = currentMap.getLordHouses().get(primitivePlayer.getLordHouseNumber());
             MenuBuilding lordHouse = new MenuBuilding(player, BuildingMenus.LORD_HOUSE);
             Lord lord = new Lord(player);
             lord.setPosition(block);
             block.addPerson(lord);
             player.setLord(lord);
-            for (int i = block.getX(); i < 2; i++) {
-                for (int j = block.getY(); j < 2; j++) {
-                    currentGame.getMap().getBlock(i, j).setBuilding(lordHouse);
-                    lordHouse.addBlock(currentGame.getMap().getBlock(i, j));
-                }
-            }
+            setBlockForBuilding(block, lordHouse, 2, 2);
+            Storage storage = new Storage(player, StorageTypes.STOCKPILE);
+            setBlockForBuilding(currentMap.getBlock(block.getX() + 2, block.getY()), storage, 2, 2);
+            player.addStockpile(storage);
+            storage.addProduct(Items.WOOD, 100);
+            storage.addProduct(Items.STONE, 100);
+            storage = new Storage(player, StorageTypes.Granary);
+            setBlockForBuilding(currentMap.getBlock(block.getX(), block.getY() + 2), storage, 2, 2);
+            player.addGranary(storage);
+            storage.addProduct(Items.BREAD, 100);
         }
         currentGame.setPlayers(players);
         currentPlayer = players.get(0);
         return StartGameMessages.SUCCESS;
+    }
+
+    private static void setBlockForBuilding(Block block, Building building, int length, int width) {
+        int x = block.getX();
+        int y = block.getY();
+        for (int i = x; i < length; i++) {
+            for (int j = y; j < width; j++) {
+                currentGame.getMap().getBlock(i, j).setBuilding(building);
+                building.addBlock(currentGame.getMap().getBlock(i, j));
+            }
+        }
     }
 
     public static StartGameMessages saveMap() {

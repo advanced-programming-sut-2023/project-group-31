@@ -3,11 +3,14 @@ package model.game_stuff;
 import model.User;
 import model.game_stuff.buildings.Producer;
 import model.game_stuff.buildings.Storage;
+import model.game_stuff.buildings.enums.StorageTypes;
+import model.game_stuff.enums.ItemTypes;
 import model.game_stuff.enums.Items;
 import model.game_stuff.people.Troop;
 import model.game_stuff.people.Worker;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Government {
     private Game game;
@@ -21,6 +24,7 @@ public class Government {
     private ArrayList<Building> buildings;
     private ArrayList<Working> workingsBuildings;
     private ArrayList<Troop> troops;
+    private HashMap<Items, Integer> popularityFactors;
     private Block LordsHouse;
     private Colors color;
     //private int gold;
@@ -64,6 +68,9 @@ public class Government {
         troops = new ArrayList<>();
         workingsBuildings = new ArrayList<>();
         populationWaiter = new Waiter(2);
+        popularityFactors = new HashMap<>();
+
+        popularityFactors.put(Items.FEAR_POPULARITY, 0);
     }
 
     public Government(User owner, Colors color) {
@@ -93,10 +100,14 @@ public class Government {
     }
 
     public void nextTurn() {
-        popularityGrowthRate = (fearRate + taxRate + religionRate + fearRate) / 2;
+        fixPopularityGrowthRate();
         risePopularity();
         setTurnsToWaitForNewPeasant();
-        fixPopularity();
+        fixPopulation();
+    }
+
+    private void fixPopularityGrowthRate() {
+        popularityGrowthRate = fearRate * 4 + foodRate * 4 + religionRate - taxRate * 2;
     }
 
     private void risePopularity() {
@@ -115,13 +126,13 @@ public class Government {
             populationWaiter.setTurnsToWait(4);
         }
     }
-    private void fixPopularity() {
+    private void fixPopulation() {
         if(popularity >= 55) {
-            if(populationWaiter.isTheTurn() && possession.getPeasant() < maxPopulation) {
+            if(populationWaiter.isTheTurn() && population < maxPopulation) {
                 possession.setPeasant(possession.getPeasant() + 1);
             }
         } else if(popularity <= 45) {
-            if(populationWaiter.isTheTurn() && possession.getPeasant() > 0) {
+            if(populationWaiter.isTheTurn() && population > 0) {
                 possession.setPeasant(possession.getPeasant() - 1);
             }
         }
@@ -309,6 +320,58 @@ public class Government {
     }
     public int getNumberOfAnItem(Items item) {
         return possession.getItem(item);
+    }
+
+    public void reduceItem(Items item, int amount) {
+        if(item.getType().equals(ItemTypes.FOOD)) {
+            getFromStorage(granaries, item, amount);
+        } else if(item.getType().equals(ItemTypes.RAW_MATERIAL)) {
+            getFromStorage(stockpiles, item, amount);
+        } else if(item.getType().equals(ItemTypes.WEAPON)) {
+            getFromStorage(weaponries, item, amount);
+        }
+    }
+
+    private void getFromStorage(ArrayList<Storage> storages, Items item, int amount) {
+        Storage storage;
+        int amountAvailable;
+        for(int i = 0; amount > 0; i++) {
+            storage = storages.get(i);
+            amountAvailable = storage.getProperties().get(item);
+            if(amount > amountAvailable) {
+                storage.removeProduct(item, amountAvailable);
+                amount -= amountAvailable;
+            } else {
+                storage.removeProduct(item, amount);
+                amount = 0;
+            }
+        }
+    }
+
+    public void addItem(Items item, int amount) {
+        if(item.getType().equals(ItemTypes.FOOD)) {
+            getFromStorage(granaries, item, amount);
+        } else if(item.getType().equals(ItemTypes.RAW_MATERIAL)) {
+            getFromStorage(stockpiles, item, amount);
+        } else if(item.getType().equals(ItemTypes.WEAPON)) {
+            getFromStorage(weaponries, item, amount);
+        }
+    }
+
+    public void addToStorage(ArrayList<Storage> storages, Items item, int amount) {
+        Storage storage;
+        int amountAvailable;
+        for(int i = 0; amount > 0; i++) {
+            storage = storages.get(i);
+            amountAvailable = storage.getCapacityLeft();
+            if(amount > amountAvailable) {
+                storage.addProduct(item, amountAvailable);
+                amount -= amountAvailable;
+            } else {
+                storage.addProduct(item, amount);
+                amount = 0;
+            }
+        }
     }
 
     public void terminate() {

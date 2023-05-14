@@ -128,7 +128,18 @@ public class TradeController extends ControllerUtils {
         if(inputs.get("message") != null) {
             trade.setOthersMessage(inputs.get("message"));
         }
-        //TODO: hazf kardan item ha az storage ha !!!!!
+        for (Items item : trade.getProvidedItems().keySet()) {
+            trade.getOwner().reduceItem(item, trade.getProvidedItems().get(item));
+        }
+        for (Items item : trade.getAskedItems().keySet()) {
+            trade.getAskedPlayer().reduceItem(item, trade.getAskedItems().get(item));
+        }
+        for (Items item : trade.getProvidedItems().keySet()) {
+            trade.getAskedPlayer().addItem(item, trade.getProvidedItems().get(item));
+        }
+        for (Items item : trade.getAskedItems().keySet()) {
+            trade.getOwner().addItem(item, trade.getAskedItems().get(item));
+        }
         return TradeMessages.SUCCESS;
     }
 }

@@ -105,13 +105,17 @@ public class TurnController extends ControllerUtils {
     }
 
     private static boolean decreaseRequirement(Buildings buildings, double percent) {
-        Double dou;
         int amountToGet;
         currentPlayer.getPossession().setGold((int)Math.ceil(currentPlayer.getPossession().getGold()-buildings.getGoldNeeded() * percent));
         amountToGet=(int)Math.ceil(buildings.getIronNeeded() * percent);
         currentPlayer.getPossession().setItem(Items.IRON, - amountToGet);
+        currentPlayer.reduceItem(Items.IRON, amountToGet);
+        amountToGet=(int)Math.ceil(-buildings.getRockNeeded() * (int)percent);
         currentPlayer.getPossession().setItem(Items.STONE,(int) -buildings.getRockNeeded() * (int)percent);
+        currentPlayer.reduceItem(Items.STONE, amountToGet);
+        amountToGet=(int)Math.ceil(-buildings.getWoodNeeded() * percent);
         currentPlayer.getPossession().setItem(Items.WOOD,(int)(-buildings.getWoodNeeded() * percent));
+        currentPlayer.reduceItem(Items.WOOD, amountToGet);
         return true;
     }
 
@@ -178,17 +182,20 @@ public class TurnController extends ControllerUtils {
             for (Troop troop : playerToRun.getTroops()) {
                 troop.work();
             }
-            playerToRun.nextTurn(); //TODO: islah
+            nextTurnForGovernment(playerToRun); //TODO: islah
             if(isTheGameOver()) {
                 TurnMessages.GAME_FINISHED.setTxt(announceTheWinners());
                 //TODO: calculate scores
                 return TurnMessages.GAME_FINISHED;
             }
+            counter++;
+            playerToRun = getNextPlayer(playerToRun);
         }
         //TODO: announce dead lords
+        currentPlayer = getNextPlayer(currentPlayer);
         return TurnMessages.SUCCESS;
     }
-    private static Government GetNextPlayer(Government player) {
+    private static Government getNextPlayer(Government player) {
         int next = 0;
         for(int i = 0; i < currentGame.getPlayers().size(); i++) {
             if(currentGame.getPlayers().get(i).equals(player)) {
@@ -291,5 +298,186 @@ public class TurnController extends ControllerUtils {
             }
         }
         return TurnMessages.SUCCESS;
+    }
+
+
+
+    //////////////////////////////////////////
+
+
+    public static void nextTurnForGovernment(Government current){
+        //TODO ADD ARRAYS OF BUILDINGS
+        //if(currentPlayer.getBuildings.contains(FactorRiser)){
+        // currentPlayer.setReligionRate(2)}
+        int addToPopularityFoods=0;
+        int addToPopularityBuildings=0;
+        if(!current.getBuildings().isEmpty()){
+            addToPopularityBuildings=1;
+        }
+        addToPopularityFoods= current.getPossession().getItem(Items.MEAT)+current.getPossession().getItem(Items.BREAD)+current.getPossession().getItem(Items.CHEESE)+current.getPossession().getItem(Items.APPLE)-1;
+        current.setPopularity(current.getPopularity()+addToPopularityFoods+addToPopularityBuildings);
+        if(current.getPopularity()>100){
+            current.setPopularity(100);
+        }
+        if(current.getPopularity()<0){
+            current.setPopularity(0);
+        }
+        checkForTax();
+        checkForFood();
+        checkForFear();
+        current.nextTurn();
+    }
+
+    private static void checkForFear() {
+        switch (currentPlayer.getFearRate()){
+            case 5:
+                currentPlayer.setEfficiency(0.75);
+                break;
+            case 4:
+                currentPlayer.setEfficiency(0.80);
+                break;
+            case 3:
+                currentPlayer.setEfficiency(0.85);
+                break;
+            case 2:
+                currentPlayer.setEfficiency(0.90);
+                break;
+            case 1:
+                currentPlayer.setEfficiency(0.95);
+                break;
+            case 0:
+                currentPlayer.setEfficiency(1);
+                break;
+            case -1 :
+                currentPlayer.setEfficiency(1.05);
+                break;
+            case -2:
+                currentPlayer.setEfficiency(1.1);
+                break;
+            case -3:
+                currentPlayer.setEfficiency(1.15);
+                break;
+            case -4:
+                currentPlayer.setEfficiency(1.2);
+                break;
+            case -5:
+                currentPlayer.setEfficiency(1.25);
+                break;
+            default:
+                break;
+        }
+    }
+
+    private static void checkForFood() {
+        switch (currentPlayer.getFoodRate()){
+            case -2:
+                foodToPeople(0,-8);
+                break;
+            case -1:
+                foodToPeople(0.5,-4);
+                break;
+            case 0:
+                foodToPeople(1,0);
+                break;
+            case 1:
+                foodToPeople(1.5,4);
+                break;
+            case 2:
+                foodToPeople(2,8);
+                break;
+            default:
+                break;
+        }
+    }
+
+    private static void foodToPeople(double foodToDonate, int popularityRate) {
+        double toDecreaseFromStorage=Math.ceil(foodToDonate*currentPlayer.getPopulation());
+        while (toDecreaseFromStorage>0){
+            for (Storage granary : currentPlayer.getGranaries()) {
+                if(currentPlayer.getPossession().getItem(Items.CHEESE)==0&&currentPlayer.getPossession().getItem(Items.BREAD)==0
+                    &&currentPlayer.getPossession().getItem(Items.APPLE)==0&&currentPlayer.getPossession().getItem(Items.MEAT)==0){
+                    break;
+                }
+                if(granary.getProperties().get(Items.CHEESE)!=0) {
+                    granary.removeProduct(Items.CHEESE, 1);
+                    currentPlayer.getPossession().setItem(Items.CHEESE,-1);
+                    toDecreaseFromStorage--;
+                    continue;
+                }
+                if(granary.getProperties().get(Items.BREAD)!=0){
+                    granary.removeProduct(Items.BREAD,1);
+                    currentPlayer.getPossession().setItem(Items.BREAD,-1);
+                    toDecreaseFromStorage--;
+                    continue;
+                }
+                if(granary.getProperties().get(Items.APPLE)!=0){
+                    granary.removeProduct(Items.APPLE,1);
+                    currentPlayer.getPossession().setItem(Items.APPLE,-1);
+                    toDecreaseFromStorage--;
+                    continue;
+                }
+                if(granary.getProperties().get(Items.MEAT)!=0){
+                    granary.removeProduct(Items.MEAT,1);
+                    currentPlayer.getPossession().setItem(Items.MEAT,-1);
+                    toDecreaseFromStorage--;
+                    continue;
+                }
+            }
+        }
+        if(toDecreaseFromStorage!=0){
+            currentPlayer.setFoodRate(-2);
+        }
+    }
+
+    private static void checkForTax() {
+        switch (currentPlayer.getTaxRate()){
+            case -3:
+                getTax(-1,7);
+            case -2:
+                getTax(-0.8,5);
+            case -1:
+                getTax(-0.6,3);
+            case 0:
+                getTax(0,1);
+                break;
+            case 1:
+                getTax(0.6,-2);
+                break;
+            case 2:
+                getTax(0.8,-4);
+                break;
+            case 3:
+                getTax(1,-6);
+                break;
+            case 4:
+                getTax(1.2,-8);
+                break;
+            case 5:
+                getTax(1.4,-12);
+                break;
+            case 6:
+                getTax(1.6,-16);
+                break;
+            case 7:
+                getTax(1.8,-20);
+                break;
+            case 8:
+                getTax(2,-24);
+                break;
+            default:
+                break;
+        }
+    }
+
+    private static void getTax(double gold, int toChange) {
+        if (currentPlayer.getPossession().getGold()==0 && currentPlayer.getTaxRate() < 0) {
+            currentPlayer.setTaxRate(0);
+            return;
+        }
+        double toDecrease=Math.ceil(currentPlayer.getPopulation()*gold);
+        currentPlayer.getPossession().setGold(currentPlayer.getPossession().getGold()+(int) toDecrease);
+        if(currentPlayer.getPossession().getGold()<0){
+            currentPlayer.getPossession().setGold(0);
+        }
     }
 }

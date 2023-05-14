@@ -35,6 +35,12 @@ public enum Items {
     EFFICIENCY("efficiency", ItemTypes.FACTOR,0),
     GOLD("gold", ItemTypes.FACTOR,0),
     NUMBER_OF_PEASANTS("number of peasants", ItemTypes.FACTOR,0),
+
+    MAX_POPULARITY("max popularity", ItemTypes.FACTOR, 0),
+    FEAR_POPULARITY("fear popularity", ItemTypes.FACTOR, 0),
+    FOOD_POPULARITY("food popularity", ItemTypes.FACTOR, 0),
+    TAX_POPULARITY("tax popularity", ItemTypes.FACTOR, 0),
+    RELIGION_POPULARITY("religion popularity", ItemTypes.FACTOR, 0),
     ;
     private String name;
     private ItemTypes type;

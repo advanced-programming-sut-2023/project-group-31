@@ -12,7 +12,7 @@ public enum TurnCommands {
     DROP_BUILDING("drop building(( -x (?<x>\\d+))|( -y (?<y>\\d+))|( -type (?<type>IN)))+"),
     REPAIR("repair building at(( -x (?<x>\\d+))|( -y (?<y>\\d+)))+"),
     SELECT_BUILDING("select building(( -x (?<x>\\d+))|( -y (?<y>\\d+)))+"),
-    SELECT_UNIT("user login -u username -p 123456Aa$ --stay-login-menu"),
+    SELECT_UNIT("select unit(( -x (?<x>\\d+))|( -y (?<y>\\d+)))+"),
     TRADE_MENU("trade menu"),
     GOVERNMENT_MENU("go to government menu"),
     NEXT_TURN("next turn"),

@@ -1,5 +1,7 @@
 package model.game_stuff.buildings.enums;
 
+import model.game_stuff.enums.ItemTypes;
+
 public enum BuildingMenus {
     MERCENARY_POST("Mercenary post", "MercenaryPostMenu"),
     BARRACK("Barrack", "BarracksMenu"),

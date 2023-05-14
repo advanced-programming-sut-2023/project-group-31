@@ -5,6 +5,8 @@ import model.game_stuff.buildings.enums.BuildingMenus;
 import view.game_system.messages.BarracksMessages;
 import model.game_stuff.buildings.MenuBuilding;
 import model.game_stuff.people.Troop;
+import model.game_stuff.buildings.Storage;
+import model.game_stuff.enums.Items;
 //import model.game_stuff.people.Kicker;
 //import model.game_stuff.people.Thrower;
 //import model.game_stuff.people.enums.KickerTypes;
@@ -12,6 +14,7 @@ import model.game_stuff.people.Troop;
 import model.game_stuff.people.enums.TroopTypes;
 import model.game_stuff.types.Nationality;
 import model.game_stuff.types.Troops;
+import view.game_system.messages.BarracksMessages;
 
 public class BarrackController extends ControllerUtils {
     private static MenuBuilding menuBuilding;
@@ -21,6 +24,7 @@ public class BarrackController extends ControllerUtils {
         }
 
         Troops target=Troops.getTroopsByName(inputs.get("type"));
+
         if(target==null&&target.getNationality()==Nationality.ARAB){
             return BarracksMessages.INVALID_TROOP_TYPE;
         }
