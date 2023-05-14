@@ -11,13 +11,13 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 
 public class MarketMenu extends ViewUtils {
-    public static GameSwitcherMessages run(){
+    public static void run(){
         String command ;
         Matcher matcher=null;
         while (true){
             command=scanner.nextLine().trim();
             if(command.matches("exit")){
-                return GameSwitcherMessages.GAME;
+                return ;
             }
             else if((matcher=MarketCommands.getMatcher(command,MarketCommands.SELL))!=null){
                 sell(matcher);

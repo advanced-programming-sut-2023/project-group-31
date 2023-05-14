@@ -15,7 +15,6 @@ public enum MapCommands {
 
     private MapCommands(String regex) {
         this.regex = ViewUtils.editRegex(regex);
-        System.out.println(regex);
     }
 
     public String getRegex() {

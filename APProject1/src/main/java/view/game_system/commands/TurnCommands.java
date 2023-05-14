@@ -19,7 +19,7 @@ public enum TurnCommands {
     SHOW_MAP("show map(( -x (?<x>[\\d]+))|( -y (?<y>[\\d]+)))+"),
     MOVE_MAP("map up(?<directions>(( (left|right|up|down))|( (left|right|up|down)))+)"),
     SHOW_DETAILS("show details(( -x (?<x>[\\d]+))|( -y (?<y>[\\d]+)))+"),
-    SELECT_MULTIPLE_UNITS("select unit(( -x1 (?<x1>\\\\d+))|( -y1 (?<y1>\\\\d+))|( -x2 (?<x2>\\\\d+))|( -y2 (?<y2>\\\\d+)))"),
+    SELECT_MULTIPLE_UNITS("select unit(( -x1 (?<x1>\\d+))|( -y1 (?<y1>\\d+))|( -x2 (?<x2>\\d+))|( -y2 (?<y2>\\d+)))+"),
     ;
     String regex;
     TurnCommands(String regex){

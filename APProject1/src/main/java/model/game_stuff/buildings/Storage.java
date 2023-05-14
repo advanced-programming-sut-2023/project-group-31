@@ -13,6 +13,7 @@ public class Storage extends Building {
     private int amountOfProducts;
     {
         amountOfProducts = 0;
+        properties = new HashMap<>();
     }
     public Storage(Government government, StorageTypes type) {
         super(government);
@@ -29,6 +30,7 @@ public class Storage extends Building {
                 owner.addWeaponry(this);
                 break;
         }
+        name = type.getName();
     }
 
     public HashMap<Items, Integer> getProperties() {

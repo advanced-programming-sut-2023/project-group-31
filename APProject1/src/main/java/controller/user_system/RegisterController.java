@@ -19,7 +19,10 @@ public class RegisterController extends ControllerUtils {
         }
 
         if (inputs.get("randomPassword")!=null) {
-            inputs.put("password",generateNewPassword());
+            String newPassword=generateNewPassword();
+            inputs.put("password",newPassword);
+            inputs.put("passwordConfirmation",newPassword);
+            inputs.put("randomPassword",null);
             return UserMessages.RANDOM_PASSWORD;
         }
 

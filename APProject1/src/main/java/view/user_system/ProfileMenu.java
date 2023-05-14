@@ -41,7 +41,10 @@ public class ProfileMenu extends ViewUtils {
             } else if ((matcher = ProfileCommands.getMatcher(input, ProfileCommands.DISPLAY_PROFILE)) != null) {
                 ViewUtils.putInHashmap(matcher, ProfileCommands.DISPLAY_PROFILE.getRegex());
                 displayProfile();
-            } else {
+            }  else if ((matcher = ProfileCommands.getMatcher(input, ProfileCommands.REMOVE_SLOGAN)) != null) {
+                ProfileController.removeSlogan();
+                System.out.println("slogan is removed");
+            }else {
                 System.out.println("Invalid command!");
             }
 

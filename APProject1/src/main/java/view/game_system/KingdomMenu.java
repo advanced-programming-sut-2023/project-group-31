@@ -12,7 +12,7 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 
 public class KingdomMenu extends ViewUtils {
-    public static GameSwitcherMessages run(Scanner scanner){
+    public static GameSwitcherMessages run(){
         String command;
         Matcher matcher;
         while (true){

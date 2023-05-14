@@ -14,7 +14,7 @@ public class MarketController extends ControllerUtils {
         result.append("product in stockpile : ").append('\n');
         for (Items value : Items.values()) {
             if(value.getType()== ItemTypes.RAW_MATERIAL){
-                result.append("item name : ").append(value.getName()).append("price : ").append(value.getCost()).append('\n');
+                result.append("item name : ").append(value.getName()).append(" price : ").append(value.getCost()).append('\n');
             }
         }
         result.append("product of granary : ").append('\n');
@@ -38,18 +38,22 @@ public class MarketController extends ControllerUtils {
         if(Integer.parseInt(inputs.get("amount"))<=0){
             return MarketMessages.INVALID_COMMAND;
         }
-        Items target= Items.getItemByName(inputs.get("type"));
+        Items target= Items.getItemByName(inputs.get("item"));
         if(target==null){
             return MarketMessages.INVALID_GOOD_NAME;
         }
         if (currentPlayer.getPossession().getGold()<target.getCost()*Integer.parseInt(inputs.get("amount"))){
             return MarketMessages.NOT_ENOUGH_GOLD;
         }
+
         int number=Integer.parseInt(inputs.get("amount"));
         int copyOfNumber=number;
         boolean done=false;
         switch (target.getType()){
             case WEAPON:
+                if(currentPlayer.getWeaponries().isEmpty()){
+                    return MarketMessages.YOU_DONT_HAVE_ANY_STORAGE;
+                }
                 while (number>0){
                     for (Storage weaponry : currentPlayer.getWeaponries()) {
                         if(weaponry.getCapacityLeft()>=number){
@@ -73,6 +77,9 @@ public class MarketController extends ControllerUtils {
                 }
                 break;
             case RAW_MATERIAL:
+                if(currentPlayer.getStockpiles().isEmpty()){
+                    return MarketMessages.YOU_DONT_HAVE_ANY_STORAGE;
+                }
                 while (number>0){
                     for (Storage weaponry : currentPlayer.getStockpiles()) {
                         if(weaponry.getCapacityLeft()>=number){
@@ -96,6 +103,9 @@ public class MarketController extends ControllerUtils {
                 }
                 break;
             case FOOD:
+                if(currentPlayer.getGranaries().isEmpty()){
+                    return MarketMessages.YOU_DONT_HAVE_ANY_STORAGE;
+                }
                 while (number>0){
                     for (Storage weaponry : currentPlayer.getGranaries()) {
                         if(weaponry.getCapacityLeft()>=number){

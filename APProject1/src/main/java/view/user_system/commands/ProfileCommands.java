@@ -12,7 +12,8 @@ public enum ProfileCommands {
     CHANGE_PASSWORD("profile change password( -o (?<oldPassword>IN))( -n (?<newPassword>IN))"),
     CHANGE_EMAIL("profile change( -e (?<email>IN))"),
     CHANGE_SLOGAN("profile change slogan( -s (?<slogan>IN))"),
-    PROFILE_DISPLAY_RANK("profile display rank");
+    PROFILE_DISPLAY_RANK("profile display rank"),
+    REMOVE_SLOGAN("profile remove slogan");
     private final String regex;
 
     ProfileCommands(String regex) {

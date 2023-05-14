@@ -2,6 +2,7 @@ package controller.game_system;
 
 import controller.ControllerUtils;
 import model.game_stuff.buildings.MenuBuilding;
+import model.game_stuff.people.Assassin;
 import view.game_system.messages.BarracksMessages;
 //import model.game_stuff.people.Kicker;
 //import model.game_stuff.people.Thrower;
@@ -38,17 +39,31 @@ public class MercenaryController extends ControllerUtils {
                 if(throwerTypes==null)
                     break;
                 createThrower(throwerTypes);
+                break;
             case "kicker":
                TroopTypes troopTypes= TroopTypes.getTroopByName(troop.getName());
                currentPlayer.getPossession().setPeasant(currentPlayer.getPossession().getPeasant()-1);
                 if(troopTypes==null)
                     break;
                 createKicker(troopTypes);
+                break;
+            case "assassins":
+                 TroopTypes types=TroopTypes.getTroopByName(troop.getName());
+                 if(types==null){
+                     break;
+                 }
+                 createAssassins(types);
             default:
                 break;
         }
         currentPlayer.getPossession().setGold(currentPlayer.getPossession().getGold()-troop.getCost()*Integer.parseInt(inputs.get("amount")));
         return BarracksMessages.SUCCESS;
+    }
+
+    private static void createAssassins(TroopTypes types) {
+        Assassin assassin=new Assassin(currentPlayer);
+        assassin.setPosition(menuBuildings.getPosition());
+        menuBuildings.getPosition().addPerson(assassin);
     }
 
     private static void createKicker(TroopTypes kickerTypes) {
