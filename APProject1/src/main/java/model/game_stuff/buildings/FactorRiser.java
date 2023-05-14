@@ -11,6 +11,7 @@ public class FactorRiser extends Building {
         super(government);
         this.type = type;
         owner.addBuilding(this);
+
     }
 
     public FactorRiserTypes getType() {

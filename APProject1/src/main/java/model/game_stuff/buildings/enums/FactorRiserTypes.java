@@ -14,6 +14,7 @@ public enum FactorRiserTypes {
         this.amountToRise = amountToRise;
         this.hp = hp;
         this.name = name;
+
     }
 
     public String getName() {
