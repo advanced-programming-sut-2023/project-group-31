@@ -281,6 +281,7 @@ public class StartGameController extends ControllerUtils {
         for (PrimitivePlayer primitivePlayer : primitivePlayers) {
             player = new Government(primitivePlayer.getUser(),primitivePlayer.getColor());
             players.add(player);
+            player.setGame(currentGame);
             block = currentMap.getLordHouses().get(primitivePlayer.getLordHouseNumber());
             MenuBuilding lordHouse = new MenuBuilding(player, BuildingMenus.LORD_HOUSE);
             Lord lord = new Lord(player);

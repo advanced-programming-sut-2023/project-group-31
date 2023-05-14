@@ -345,7 +345,32 @@ public class Government {
             }
         }
     }
-    //TODO: addItem
+
+    public void addItem(Items item, int amount) {
+        if(item.getType().equals(ItemTypes.FOOD)) {
+            getFromStorage(granaries, item, amount);
+        } else if(item.getType().equals(ItemTypes.RAW_MATERIAL)) {
+            getFromStorage(stockpiles, item, amount);
+        } else if(item.getType().equals(ItemTypes.WEAPON)) {
+            getFromStorage(weaponries, item, amount);
+        }
+    }
+
+    public void addToStorage(ArrayList<Storage> storages, Items item, int amount) {
+        Storage storage;
+        int amountAvailable;
+        for(int i = 0; amount > 0; i++) {
+            storage = storages.get(i);
+            amountAvailable = storage.getCapacityLeft();
+            if(amount > amountAvailable) {
+                storage.addProduct(item, amountAvailable);
+                amount -= amountAvailable;
+            } else {
+                storage.addProduct(item, amount);
+                amount = 0;
+            }
+        }
+    }
 
     public void terminate() {
         for (Building building : buildings) {
