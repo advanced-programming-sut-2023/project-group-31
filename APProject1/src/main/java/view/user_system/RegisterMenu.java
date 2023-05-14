@@ -17,7 +17,7 @@ public class RegisterMenu extends ViewUtils {
         if (ControllerUtils.isUserLoggedIn()) {
             return MenuSwitcherMessages.MAIN;
         }
-        System.out.println("\n"+Colors.GREEN.getBackgroundColorCode() +"_________Register Menu_______"+Colors.RESET.getBackgroundColorCode()+"\n");
+        System.out.println("\n" + Colors.GREEN.getBackgroundColorCode() + "_________Register Menu_______" + Colors.RESET.getBackgroundColorCode() + "\n");
         String input;
         Matcher matcher;
         while (true) {
@@ -47,21 +47,29 @@ public class RegisterMenu extends ViewUtils {
             System.out.println("user register: " + result.getTxt());
             pickQuestionMenu();
         } else if (result.equals(UserMessages.RANDOM_PASSWORD)) {
-            confirmUsernameOrPasswordMenu();
+
+            confirmUsernameOrPasswordMenu(false);
         } else if (result.equals(UserMessages.USER_EXITS_BEFORE)) {
             System.out.println("create user failed: " + result.getTxt());
-            confirmUsernameOrPasswordMenu();
+            confirmUsernameOrPasswordMenu(true);
         } else {
             System.out.println("create user failed: " + result.getTxt());
         }
     }
 
-    private static void confirmUsernameOrPasswordMenu() {
-
+    private static void confirmUsernameOrPasswordMenu(boolean isUsername) {
+        System.out.println("Do you like this?");
+        if (isUsername)
+            System.out.println(ControllerUtils.getInputs().get("username"));
+        else
+            System.out.println(ControllerUtils.getInputs().get("password"));
         String input;
         while (true) {
             input = scanner.nextLine().trim();
             if (input.equals("YES")) {
+                if (!isUsername) {
+                    correctConfirmQuestion();
+                }
                 userCreate();
                 return;
             } else if (input.equals("NO")) {
@@ -73,6 +81,17 @@ public class RegisterMenu extends ViewUtils {
         }
     }
 
+    private static boolean correctConfirmQuestion() {
+        String input;
+        Matcher matcher;
+        System.out.println("enter password again");
+        while (true) {
+            input = scanner.nextLine().trim();
+            if (input.equals(ControllerUtils.getInputs().get("password"))) {
+                return true;
+            }
+        }
+    }
 
     private static void pickQuestionMenu() {
         String input;

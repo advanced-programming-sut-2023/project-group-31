@@ -5,6 +5,7 @@ public enum InputFormats {
     PASSWORD("password",true),
     EMAIL("email","([\\w]|\\.)+@([\\w]|\\.)+.([\\w]|\\.)+",true),
     QUESTION_NUMBER("question-number","([\\w]|\\.)+@([\\w]|\\.)+.([\\w]|\\.)+",true),
+    RANDOM_PASSWORD("randomPassword",".+",false),
     X("[\\d]+",true),
     Y("[\\d]+",true),
     DEFAULT(".*",true)

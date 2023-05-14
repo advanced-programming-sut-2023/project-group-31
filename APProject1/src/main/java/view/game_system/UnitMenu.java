@@ -58,6 +58,7 @@ public class UnitMenu extends ViewUtils {
             System.out.println("dig tunnel failed: " + message.getTxt());
         }
     }
+
     private static void attack(Matcher matcher) {
         ControllerUtils.setInputs(ViewUtils.putInHashmap(matcher, UnitCommands.ATTACK.getRegex()));
         UnitMessages message = UnitController.setAttackTarget();

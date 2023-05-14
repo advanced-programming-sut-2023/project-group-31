@@ -174,8 +174,8 @@ public class User {
         return "username: " +username + "\n" +
                 "email: " + email + "\n" +
                 "nickname: " + ((nickname == null) ? "not have been set" : nickname) + "\n" +
-                "highScore=" + getRank() + "\n" +
-                "rank=" + getHighScore() + "\n" +
+                "highScore=" + getHighScore() + "\n" +
+                "rank=" + getRank() + "\n" +
                 "slogan: " + slogan;
     }
 }

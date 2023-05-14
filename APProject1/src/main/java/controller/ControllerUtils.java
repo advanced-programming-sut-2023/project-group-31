@@ -10,7 +10,7 @@ import java.util.HashMap;
 
 public abstract class ControllerUtils {
 
-    protected static HashMap<String,String> inputs;
+    protected static HashMap<String, String> inputs;
     protected static User currentUser = null;
     protected static Government currentPlayer;
     protected static Game currentGame;
@@ -44,8 +44,8 @@ public abstract class ControllerUtils {
         return currentUser;
     }
 
-    public static boolean isUserLoggedIn(){
-        return currentUser!=null;
+    public static boolean isUserLoggedIn() {
+        return currentUser != null;
     }
 
     public static void setCurrentUser(User currentUser) {
@@ -56,28 +56,28 @@ public abstract class ControllerUtils {
         ControllerUtils.inputs = inputs;
     }
 
-    public static HashMap<String, String> getInputs(){
+    public static HashMap<String, String> getInputs() {
         return inputs;
     }
 
-    public static void putInput(String key,String value){
-        inputs.put(key,value);
+    public static void putInput(String key, String value) {
+        inputs.put(key, value);
     }
 
-    public static UserMessages getCaptchaCode(){
-        String captchaCode="";
+    public static UserMessages getCaptchaCode() {
+        String captchaCode = "";
         int[] random = new int[4];
         for (int i = 0; i < 4; i++) {
             random[i] = (int) Math.floor(Math.random() * 10);
             captchaCode += random[i];
         }
-        inputs.put("captchaCode",captchaCode);
+        inputs.put("captchaCode", captchaCode);
         UserMessages.MESSAGE.setTxt(captchaCode);
         return UserMessages.MESSAGE;
     }
 
-    public static UserMessages checkCaptchaMatching(){
-        if(inputs.get("inputCaptcha").equals(inputs.get("captchaCode"))){
+    public static UserMessages checkCaptchaMatching() {
+        if (inputs.get("inputCaptcha").equals(inputs.get("captchaCode"))) {
             return UserMessages.SUCCESS;
         }
         return UserMessages.FAIL;
@@ -91,12 +91,13 @@ public abstract class ControllerUtils {
     }
 
 
-    protected static UserMessages checkEmptyError(HashMap<String,String> inputs){
+    protected static UserMessages checkEmptyError(HashMap<String, String> inputs) {
         for (String groupName : inputs.keySet()) {
             if (inputs.get(groupName) == null && (InputFormats.getInputFormat(groupName).isCompulsory())) {
-                UserMessages.NOT_ENOUGH_MESSAGES.setTxt(groupName+"can't be null!");
+                UserMessages.NOT_ENOUGH_MESSAGES.setTxt(groupName + "can't be null!");
                 return UserMessages.NOT_ENOUGH_MESSAGES;
-            }if(inputs.get(groupName).equals("")){
+            }
+            if (inputs.get(groupName) != null && inputs.get(groupName).equals("")) {
                 return UserMessages.NOT_ENOUGH_MESSAGES;
             }
         }
@@ -105,13 +106,13 @@ public abstract class ControllerUtils {
 
     protected static UserMessages checkFormatErrors(HashMap<String, String> inputs) {
         UserMessages result;
-        if((result=checkEmptyError(inputs))!=null){
+        if ((result = checkEmptyError(inputs)) != null) {
             return result;
         }
         for (String groupName : inputs.keySet()) {
             if (inputs.get(groupName) != null && !isFormatCorrect(inputs.get(groupName), InputFormats.getInputFormat(groupName))) {
-                
-                UserMessages.INVALID_FORMAT.setTxt("Inavlid"+groupName+"format!");
+
+                UserMessages.INVALID_FORMAT.setTxt("Inavlid" + groupName + "format!");
                 return UserMessages.INVALID_FORMAT;
             }
         }
@@ -136,7 +137,6 @@ public abstract class ControllerUtils {
         }
         return null;
     }
-
 
 
 }

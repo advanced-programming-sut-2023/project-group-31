@@ -1,6 +1,7 @@
 package view.game_system;
 
 import controller.ControllerUtils;
+import controller.game_system.PrimitivePlayer;
 import controller.game_system.StartGameController;
 import view.game_system.commands.StartGameCommands;
 import view.game_system.messages.StartGameMessages;
@@ -8,6 +9,7 @@ import view.user_system.messages.MenuSwitcherMessages;
 import view.ViewUtils;
 import view.viewStyle.Colors;
 
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 
 public class StartGameMenu extends ViewUtils{
@@ -19,6 +21,7 @@ public class StartGameMenu extends ViewUtils{
         while (true) {
             command = scanner.nextLine().trim();
             if (StartGameCommands.getMatcher(command, StartGameCommands.EXIT) != null) {
+                StartGameController.setPrimitivePlayers(new ArrayList<>());
                 return MenuSwitcherMessages.MAIN;
             } else if (StartGameCommands.getMatcher(command, StartGameCommands.GOTO_MAP_MENU) != null) {
                 MapMenu.run();
@@ -54,6 +57,8 @@ public class StartGameMenu extends ViewUtils{
                 MapMenu.showMapByXY(matcher);
             } else if ((matcher = StartGameCommands.getMatcher(command, StartGameCommands.SHOW_WHOLE_MAP)) != null) {
                 MapMenu.showHoleMap();
+            } else if ((matcher = StartGameCommands.getMatcher(command, StartGameCommands.CLEAR_BLOCK)) != null) {
+                clearBlock(Integer.parseInt(matcher.group("x")),Integer.parseInt(matcher.group("y")));
             } else if ((matcher = StartGameCommands.getMatcher(command, StartGameCommands.START)) != null) {
                 if(startTheGame()) {
                     TurnMenu.run();
@@ -63,6 +68,15 @@ public class StartGameMenu extends ViewUtils{
             } else {
                 System.out.println("invalid command!");
             }
+        }
+    }
+
+    private static void clearBlock(int x,int y){
+        StartGameMessages result =StartGameController.clearBlock(x,y);
+        if(result.equals(StartGameMessages.SUCCESS)){
+            System.out.println("block have been cleared.");
+        }else{
+            System.out.println(result.getTxt());
         }
     }
 

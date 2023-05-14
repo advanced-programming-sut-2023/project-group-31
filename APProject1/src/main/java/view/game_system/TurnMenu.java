@@ -40,7 +40,7 @@ public class TurnMenu extends ViewUtils {
             } else if ((matcher = TurnCommands.getMatcher(command, TurnCommands.SELECT_MULTIPLE_UNITS)) != null) {
                 selectMultipleUnit(matcher);
             } else if (TurnCommands.getMatcher(command, TurnCommands.GOVERNMENT_MENU) != null) {
-                KingdomMenu.run(scanner);
+                KingdomMenu.run();
             } else if (TurnCommands.getMatcher(command, TurnCommands.TRADE_MENU) != null) {
                 TradeMenu.run();
             } else if (command.equalsIgnoreCase("goto map menu")) {
@@ -95,12 +95,19 @@ public class TurnMenu extends ViewUtils {
 
     private static void selectBuilding() {
         result = TurnController.selectBuilding();
+        System.out.println(result.getTxt());
         if (result.equals(TurnMessages.EMPTY_PLACE)) {
-            System.out.println(result.getTxt());
+            return;
         } else if (result.equals(TurnMessages.BARRACK)) {
             BarracksMenu.run();
         } else if (result.equals(TurnMessages.MERCENARY_POST)) {
             MercenaryPostMenu.run();
+        } else if (result.equals(TurnMessages.LORD_HOUSE)) {
+            KingdomMenu.run();
+        } else if (result.equals(TurnMessages.MARKET)) {
+            MarketMenu.run();
+        } else{
+            System.out.println(result.getTxt());
         }
     }
 

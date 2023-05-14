@@ -43,6 +43,10 @@ public class StartGameController extends ControllerUtils {
         return output;
     }
 
+    public static void setPrimitivePlayers(ArrayList<PrimitivePlayer> primitivePlayers) {
+        StartGameController.primitivePlayers = primitivePlayers;
+    }
+
     public static UserMessages setTexture(int x, int y, String type){
         return null;
     }
