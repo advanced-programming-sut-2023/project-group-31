@@ -283,6 +283,10 @@ public class KingdomController extends ControllerUtils {
     }
 
     private static void getTax(double gold, int toChange) {
+//        if (currentPlayer.getPossession().getGold()==0) {
+//
+//            return;
+//        }
         currentPlayer.setPopularity(currentPlayer.getPopularity()+toChange);
         if(currentPlayer.getPopularity()>100){
             currentPlayer.setPopularity(100);

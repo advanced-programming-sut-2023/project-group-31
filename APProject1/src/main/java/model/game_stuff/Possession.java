@@ -7,7 +7,7 @@ import java.util.HashMap;
 public class Possession {
     private Government owner;
     private HashMap<Items, Integer> items;
-    private int gold;
+    private int gold=1000;
     private int peasant;
 //
 //    private int meat;
@@ -39,13 +39,13 @@ public class Possession {
         items.put(Items.MEAT,0);
         items.put(Items.APPLE,0);
         items.put(Items.CHEESE,0);
-        items.put(Items.BREAD,0);
+        items.put(Items.BREAD,100);
         items.put(Items.ALE,0);
         items.put(Items.HOPS,0);
         items.put(Items.WHEAT,0);
         items.put(Items.FLOUR,0);
-        items.put(Items.WOOD,0);
-        items.put(Items.STONE,0);
+        items.put(Items.WOOD,100);
+        items.put(Items.STONE,100);
         items.put(Items.IRON,0);
         items.put(Items.PITCH,0);
         items.put(Items.BOW,0);
