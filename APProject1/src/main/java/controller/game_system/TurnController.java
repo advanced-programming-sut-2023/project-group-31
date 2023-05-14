@@ -1,12 +1,16 @@
 package controller.game_system;
 
 import controller.ControllerUtils;
-import model.game_stuff.Block;
-import model.game_stuff.Building;
+import model.game_stuff.*;
 import model.game_stuff.buildings.*;
 import model.game_stuff.buildings.enums.*;
+import model.game_stuff.people.Lord;
+import model.game_stuff.people.Troop;
 import model.game_stuff.types.Buildings;
+import view.game_system.messages.StartGameMessages;
 import view.game_system.messages.TurnMessages;
+
+import java.util.ArrayList;
 
 public class TurnController extends ControllerUtils {
     public static TurnMessages dropBuilding() {
@@ -145,8 +149,128 @@ public class TurnController extends ControllerUtils {
         return null;
     }
 
-    public TurnMessages nextTurn() {
-        //TODO:
-        return null;
+    public static TurnMessages nextTurn() {
+        int counter = 0;
+        Government playerToRun = currentPlayer;
+        while (counter < currentGame.getPlayers().size()) {
+            for (Working workingsBuilding : playerToRun.getWorkingsBuildings()) {
+                workingsBuilding.work();
+            }
+            for (Troop troop : playerToRun.getTroops()) {
+                troop.work();
+            }
+            playerToRun.nextTurn(); //TODO: islah
+            if(isTheGameOver()) {
+                TurnMessages.GAME_FINISHED.setTxt(announceTheWinners());
+                //TODO: calculate scores
+                return TurnMessages.GAME_FINISHED;
+            }
+        }
+        //TODO: announce dead lords
+        return TurnMessages.SUCCESS;
+    }
+    private static Government GetNextPlayer(Government player) {
+        int next = 0;
+        for(int i = 0; i < currentGame.getPlayers().size(); i++) {
+            if(currentGame.getPlayers().get(i).equals(player)) {
+                next = (i + 1) % currentGame.getPlayers().size();
+            }
+        }
+        return currentGame.getPlayers().get(next);
+    }
+    private static void nextTurnForGovernment() {
+
+    }
+    private static boolean isTheGameOver() {
+        Colors color = currentPlayer.getColor();
+        for (Government player : currentGame.getPlayers()) {
+            if(!player.getColor().equals(color))
+                return false;
+        }
+        return true;
+    }
+
+    private static String announceTheWinners() {
+        String output = currentPlayer.getColor().getName().toUpperCase() + " team wins:";
+        for (Government player : currentGame.getPlayers()) {
+            output += "\n* " + player.getName();
+        }
+        return output;
+    }
+
+    public static TurnMessages selectUnit() {
+        if(!inputs.containsKey("x") || !inputs.containsKey("y")) {
+            return TurnMessages.INVALID_COMMAND;
+        }
+        int x = Integer.parseInt(inputs.get("x").trim()) - 1;
+        int y = Integer.parseInt(inputs.get("y").trim()) - 1;
+        if(!currentMap.isInMap(x, y)) {
+            return TurnMessages.COORDINATE_OUT_OF_BOUND;
+        }
+        Block block = currentMap.getBlock(x, y);
+        ArrayList<Block> blocks = new ArrayList<>();
+        blocks.add(block);
+        ArrayList<Troop> troops = getMyTroopsIn(blocks);
+        if(troops.size() < 1) {
+            return TurnMessages.NO_UNIT_FOUND;
+        }
+        if(troops.size() == 1 && (troops.get(0) instanceof Lord)) {
+            UnitController.setTroops(troops);
+            return TurnMessages.SUCCESS;
+        }
+        for (Troop troop : troops) {
+            if(troop instanceof Lord) {
+                troops.remove(troop);
+                break;
+            }
+        }
+        return TurnMessages.SUCCESS;
+    }
+    private static ArrayList<Troop> getMyTroopsIn(ArrayList<Block> blocks) {
+        ArrayList<Troop> troops = new ArrayList<>();
+        for (Block block : blocks) {
+            for (Person person : block.getPeople()) {
+                if ((person instanceof Troop) && person.getOwner().equals(currentPlayer)) {
+                    troops.add((Troop) person);
+                }
+            }
+        }
+        return troops;
+    }
+
+    public static TurnMessages selectMultipleUnits() {
+        if(!inputs.containsKey("x1") || !inputs.containsKey("y1") ||
+            !inputs.containsKey("x2") || !inputs.containsKey("y2") || !inputs.containsKey("type")) {
+            return TurnMessages.INVALID_COMMAND;
+        }
+        int x1 = Integer.parseInt(inputs.get("x1").trim()) - 1;
+        int y1 = Integer.parseInt(inputs.get("y1").trim()) - 1;
+        int x2 = Integer.parseInt(inputs.get("x2").trim()) - 1;
+        int y2 = Integer.parseInt(inputs.get("y2").trim()) - 1;
+        if(x1 < 0 || x1 > x2 || x2 >= currentMap.getLength() ||
+            y1 < 0 || y1 > y2 || y2 >= currentMap.getLength()) {
+            return TurnMessages.COORDINATE_OUT_OF_BOUND;
+        }
+        ArrayList<Block> blocks = new ArrayList<>();
+        for(int i = x1; i <= x2; i++) {
+            for(int j = y1; j <= y2; j++) {
+                blocks.add(currentMap.getBlock(i, j));
+            }
+        }
+        ArrayList<Troop> troops = getMyTroopsIn(blocks);
+        if(troops.size() < 1) {
+            return TurnMessages.NO_UNIT_FOUND;
+        }
+        if(troops.size() == 1 && (troops.get(0) instanceof Lord)) {
+            UnitController.setTroops(troops);
+            return TurnMessages.SUCCESS;
+        }
+        for (Troop troop : troops) {
+            if(troop instanceof Lord) {
+                troops.remove(troop);
+                break;
+            }
+        }
+        return TurnMessages.SUCCESS;
     }
 }

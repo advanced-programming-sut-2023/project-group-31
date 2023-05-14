@@ -129,4 +129,9 @@ public class Troop extends Person {
     public String toString() {
         return type.getName() + ":" + (100 * hp / type.getHp());
     }
+
+    public void die() {
+        position.removePerson(this);
+        owner.getTroops().remove(this);
+    }
 }

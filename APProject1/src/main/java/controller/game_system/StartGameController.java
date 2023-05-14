@@ -7,6 +7,9 @@ import model.game_stuff.buildings.MenuBuilding;
 import model.game_stuff.buildings.enums.BuildingMenus;
 import model.game_stuff.enums.Textures;
 import model.game_stuff.enums.TreeTypes;
+import model.game_stuff.people.Lord;
+import model.game_stuff.people.Troop;
+import model.game_stuff.people.enums.TroopTypes;
 import view.game_system.messages.StartGameMessages;
 import view.user_system.messages.UserMessages;
 
@@ -267,6 +270,10 @@ public class StartGameController extends ControllerUtils {
             players.add(player);
             block = currentMap.getLordHouses().get(primitivePlayer.getLordHouseNumber());
             MenuBuilding lordHouse = new MenuBuilding(player, BuildingMenus.LORD_HOUSE);
+            Lord lord = new Lord(player);
+            lord.setPosition(block);
+            block.addPerson(lord);
+            player.setLord(lord);
             for (int i = block.getX(); i < 2; i++) {
                 for (int j = block.getY(); j < 2; j++) {
                     currentGame.getMap().getBlock(i, j).setBuilding(lordHouse);

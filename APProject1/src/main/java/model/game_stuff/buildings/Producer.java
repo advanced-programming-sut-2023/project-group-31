@@ -55,9 +55,21 @@ public class Producer extends Building implements Working {
 
     @Override
     public String toString() {
-        return  type.getName() + "\n" +
-            "productsAvailable: " + numberOfProductsAvailable + " / " + type.getCapacity() + "\n"
-            + worker.getState().getName() + "\n" +
-            "hp: " + hp + " / " + maxHp;
+        String output = type.getName() + "\n" +
+            "productsAvailable: " + numberOfProductsAvailable + " / " + type.getCapacity() + "\n";
+        if(worker != null) {
+            output += worker.getState().getName() + "\n";
+        } else {
+            output += "no worker";
+        }
+        output += "hp: " + hp + " / " + maxHp;
+        return output;
+    }
+
+    public void terminate() {
+        super.terminate();
+        if(worker != null) {
+            worker.die();
+        }
     }
 }
