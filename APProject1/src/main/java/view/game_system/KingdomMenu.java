@@ -57,17 +57,7 @@ public class KingdomMenu extends ViewUtils {
             System.out.println("Invalid command!");
             return;
         }
-        else if(message==KingdomMessages.NEGATIVE){
-            System.out.println("People are leaving your castle");
-            return;
-        }
-        else if(message==KingdomMessages.ZERO){
-            System.out.println("Your popularity is stable my lord!");
-            return;
-        }
-        else {
-            System.out.println("Your popularity is risen");
-        }
+
     }
 
     private static void taxRate(Matcher matcher) {
