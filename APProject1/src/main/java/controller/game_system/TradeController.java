@@ -3,6 +3,7 @@ package controller.game_system;
 import controller.ControllerUtils;
 import model.game_stuff.Government;
 import model.game_stuff.Trade;
+import model.game_stuff.buildings.Storage;
 import model.game_stuff.enums.Items;
 import view.game_system.messages.TradeMessages;
 

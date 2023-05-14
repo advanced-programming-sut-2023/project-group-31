@@ -198,13 +198,13 @@ public class KingdomController extends ControllerUtils {
 
     private static void foodToPeople(double foodToDonate, int popularityRate) {
         double toDecreaseFromStorage=Math.ceil(foodToDonate*currentPlayer.getPopulation());
-        currentPlayer.setPopularity(currentPlayer.getPopularity()+popularityRate);
+        /*currentPlayer.setPopularity(currentPlayer.getPopularity()+popularityRate);
         if(currentPlayer.getPopularity()>100){
             currentPlayer.setPopularity(100);
         }
         else if(currentPlayer.getPopularity()<0){
             currentPlayer.setPopularity(0);
-        }
+        }*/
         while (toDecreaseFromStorage>0){
             for (Storage granary : currentPlayer.getGranaries()) {
                 if(currentPlayer.getPossession().getItem(Items.CHEESE)==0&&currentPlayer.getPossession().getItem(Items.BREAD)==0
@@ -283,17 +283,17 @@ public class KingdomController extends ControllerUtils {
     }
 
     private static void getTax(double gold, int toChange) {
-//        if (currentPlayer.getPossession().getGold()==0) {
-//
-//            return;
-//        }
-        currentPlayer.setPopularity(currentPlayer.getPopularity()+toChange);
+        if (currentPlayer.getPossession().getGold()==0 && currentPlayer.getTaxRate() < 0) {
+            currentPlayer.setTaxRate(0);
+            return;
+        }
+        /*currentPlayer.setPopularity(currentPlayer.getPopularity()+toChange);
         if(currentPlayer.getPopularity()>100){
             currentPlayer.setPopularity(100);
         }
         else if(currentPlayer.getPopularity()<0){
             currentPlayer.setPopularity(0);
-        }
+        }*/
         double toDecrease=Math.ceil(currentPlayer.getPopulation()*gold);
         currentPlayer.getPossession().setGold(currentPlayer.getPossession().getGold()+(int) toDecrease);
         if(currentPlayer.getPossession().getGold()<0){

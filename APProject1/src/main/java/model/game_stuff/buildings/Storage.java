@@ -18,6 +18,17 @@ public class Storage extends Building {
         super(government);
         this.type = type;
         owner.addBuilding(this);
+        switch (type.getProductType()) {
+            case FOOD:
+                owner.addGranary(this);
+                break;
+            case RAW_MATERIAL:
+                owner.addStockpile(this);
+                break;
+            case WEAPON:
+                owner.addWeaponry(this);
+                break;
+        }
     }
 
     public HashMap<Items, Integer> getProperties() {

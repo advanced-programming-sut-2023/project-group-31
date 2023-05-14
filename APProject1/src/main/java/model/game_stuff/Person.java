@@ -8,7 +8,6 @@ import model.game_stuff.enums.Direction;
 import java.util.LinkedList;
 
 public abstract class Person implements HasHp{
-    ///TODO: chiz hay invisible dar jadval zakhire nemishavand va serfan dar government zakhire mishan
     protected Government owner;
     protected String name;
     protected int hp;

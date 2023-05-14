@@ -4,8 +4,6 @@ import controller.ControllerUtils;
 import view.game_system.messages.BarracksMessages;
 import model.game_stuff.buildings.MenuBuilding;
 import model.game_stuff.people.Troop;
-import model.game_stuff.buildings.Storage;
-import model.game_stuff.enums.Items;
 //import model.game_stuff.people.Kicker;
 //import model.game_stuff.people.Thrower;
 //import model.game_stuff.people.enums.KickerTypes;
@@ -13,10 +11,9 @@ import model.game_stuff.enums.Items;
 import model.game_stuff.people.enums.TroopTypes;
 import model.game_stuff.types.Nationality;
 import model.game_stuff.types.Troops;
-import view.game_system.messages.BarracksMessages;
 
 public class BarrackController extends ControllerUtils {
-    private static MenuBuilding storage;
+    private static MenuBuilding menuBuilding;
     public static BarracksMessages createUnit(){
         if(inputs.get("type")==null||Integer.parseInt(inputs.get("amount"))<=0){
             return BarracksMessages.INVALID_COMMAND;
@@ -52,21 +49,21 @@ public class BarrackController extends ControllerUtils {
         return BarracksMessages.SUCCESS;
     }
 
-    public static void setStorage(MenuBuilding storage) {
-        BarrackController.storage = storage;
+    public static void setMenuBuilding(MenuBuilding menuBuilding) {
+        BarrackController.menuBuilding = menuBuilding;
     }
 
     private static void createThrower(TroopTypes target) {
          Troop troop=new Troop(currentPlayer,target);
-        troop.setPosition(storage.getPosition());
-        storage.getPosition().addPerson(troop);
+        troop.setPosition(menuBuilding.getPosition());
+        menuBuilding.getPosition().addPerson(troop);
         //currentplayer.barrack.getblock(0).add(thrower)
     }
 
     private static void createKicker(TroopTypes target) {
         Troop troop=new Troop(currentPlayer,target);
-        troop.setPosition(storage.getPosition());
-        storage.getPosition().addPerson(troop);
+        troop.setPosition(menuBuilding.getPosition());
+        menuBuilding.getPosition().addPerson(troop);
         //currentplayer.barrack.getblock(0).add(kicker)
     }
 }
