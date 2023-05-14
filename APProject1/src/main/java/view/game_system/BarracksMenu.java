@@ -35,7 +35,7 @@ public class BarracksMenu extends view.ViewUtils {
             return;
         }
         else if(message==BarracksMessages.SUCCESS){
-            System.out.println("create unit "+matcher.group("type")+"successfully done");
+            System.out.println("create unit "+matcher.group("type")+" successfully done");
             return;
         }
         System.out.println("create unit failed : "+message.getCommand());

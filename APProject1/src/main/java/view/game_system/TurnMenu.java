@@ -1,6 +1,7 @@
 package view.game_system;
 
 import controller.ControllerUtils;
+import controller.game_system.BarrackController;
 import controller.game_system.TurnController;
 import view.ViewUtils;
 import view.game_system.commands.TurnCommands;
@@ -106,6 +107,8 @@ public class TurnMenu extends ViewUtils {
             KingdomMenu.run();
         } else if (result.equals(TurnMessages.MARKET)) {
             MarketMenu.run();
+        } else if (result.equals(TurnMessages.ENGINEER_GUID)) {
+            EngineerGuildMenu.run();
         } else{
             System.out.println(result.getTxt());
         }

@@ -44,6 +44,7 @@ public class Government {
         //gold = 0;
         //numberOfPeasants = 8;
         population = 8;
+        possession.setPeasant(8);
         populationGrowthRate = 2; //TODO: sakhtan e formul
         popularity = 100;
         foodRate=0;
@@ -70,6 +71,7 @@ public class Government {
         this.name = owner.getUsername();
         this.color = color;
     }
+
 
     public ArrayList<Working> getWorkingsBuildings() {
         return workingsBuildings;

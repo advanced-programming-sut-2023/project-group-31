@@ -1,11 +1,10 @@
 package controller.game_system;
 
 import controller.ControllerUtils;
+import model.game_stuff.buildings.enums.BuildingMenus;
 import view.game_system.messages.BarracksMessages;
 import model.game_stuff.buildings.MenuBuilding;
 import model.game_stuff.people.Troop;
-import model.game_stuff.buildings.Storage;
-import model.game_stuff.enums.Items;
 //import model.game_stuff.people.Kicker;
 //import model.game_stuff.people.Thrower;
 //import model.game_stuff.people.enums.KickerTypes;
@@ -13,37 +12,40 @@ import model.game_stuff.enums.Items;
 import model.game_stuff.people.enums.TroopTypes;
 import model.game_stuff.types.Nationality;
 import model.game_stuff.types.Troops;
-import view.game_system.messages.BarracksMessages;
 
 public class BarrackController extends ControllerUtils {
-    private static MenuBuilding storage;
+    private static MenuBuilding menuBuilding;
     public static BarracksMessages createUnit(){
         if(inputs.get("type")==null||Integer.parseInt(inputs.get("amount"))<=0){
             return BarracksMessages.INVALID_COMMAND;
         }
 
         Troops target=Troops.getTroopsByName(inputs.get("type"));
-
         if(target==null&&target.getNationality()==Nationality.ARAB){
             return BarracksMessages.INVALID_TROOP_TYPE;
         }
+        int number=Integer.parseInt(inputs.get("amount"));
         if(target.getCost()*Integer.parseInt(inputs.get("amount"))> currentPlayer.getPossession().getGold()){
             return BarracksMessages.NOT_ENOUGH_GOLD;
         }
         if(!currentPlayer.getWeaponries().contains(target.getWeapon()))
-            if(currentPlayer.getPossession().getPeasant()==0){
+            if(currentPlayer.getPossession().getPeasant()<number){
                 return BarracksMessages.PEOPLE_NEEDED;
             }
         switch (target.getType()){
             case "kicker":
-                TroopTypes Troops=TroopTypes.getTroopByName(target.getName());
-                currentPlayer.getPossession().setPeasant(currentPlayer.getPossession().getPeasant()-1);
-                createKicker(Troops);
+                TroopTypes Troops = TroopTypes.getTroopByName(target.getName());
+                while (number>0) {
+                    createKicker(Troops);
+                    number--;
+                }
                 break;
             case "thrower":
-                TroopTypes troop=TroopTypes.getTroopByName(target.getName());
-                currentPlayer.getPossession().setPeasant(currentPlayer.getPossession().getPeasant()-1);
-                createThrower(troop);
+                TroopTypes troop = TroopTypes.getTroopByName(target.getName());
+                while (number>0) {
+                    createThrower(troop);
+                    number--;
+                }
                 break;
             default:
                 break;
@@ -52,21 +54,25 @@ public class BarrackController extends ControllerUtils {
         return BarracksMessages.SUCCESS;
     }
 
-    public static void setStorage(MenuBuilding storage) {
-        BarrackController.storage = storage;
+    public static void setMenuBuilding(MenuBuilding menuBuilding) {
+        BarrackController.menuBuilding = menuBuilding;
     }
 
     private static void createThrower(TroopTypes target) {
          Troop troop=new Troop(currentPlayer,target);
-        troop.setPosition(storage.getPosition());
-        storage.getPosition().addPerson(troop);
+        currentPlayer.getPossession().setPeasant(currentPlayer.getPossession().getPeasant() - 1);
+        //System.out.println(currentPlayer.getPossession().getPeasant());
+        troop.setPosition(menuBuilding.getPosition());
+        menuBuilding.getPosition().addPerson(troop);
         //currentplayer.barrack.getblock(0).add(thrower)
     }
 
     private static void createKicker(TroopTypes target) {
         Troop troop=new Troop(currentPlayer,target);
-        troop.setPosition(storage.getPosition());
-        storage.getPosition().addPerson(troop);
+        currentPlayer.getPossession().setPeasant(currentPlayer.getPossession().getPeasant() - 1);
+        //System.out.println(currentPlayer.getPossession().getPeasant());
+        troop.setPosition(menuBuilding.getPosition());
+        menuBuilding.getPosition().addPerson(troop);
         //currentplayer.barrack.getblock(0).add(kicker)
     }
 }

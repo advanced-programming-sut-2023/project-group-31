@@ -21,10 +21,11 @@ public class EngineerGuildController extends ControllerUtils {
         if(troop==null&&troop.getNationality()== Nationality.ARAB&&troop.getNationality()==Nationality.EUROPEAN){
             return BarracksMessages.INVALID_TROOP_TYPE;
         }
+        int number=Integer.parseInt(inputs.get("amount"));
         if(troop.getCost()*Integer.parseInt(inputs.get("amount"))>currentPlayer.getPossession().getGold()){
             return BarracksMessages.NOT_ENOUGH_GOLD;
         }
-        if(currentPlayer.getPossession().getPeasant()==0){
+        if(currentPlayer.getPossession().getPeasant()<number){
             return BarracksMessages.PEOPLE_NEEDED;
         }
         switch (troop.getName()){

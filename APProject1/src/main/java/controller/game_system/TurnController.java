@@ -8,6 +8,7 @@ import model.game_stuff.enums.Items;
 import model.game_stuff.people.Lord;
 import model.game_stuff.people.Troop;
 import model.game_stuff.types.Buildings;
+import view.game_system.MercenaryPostMenu;
 import view.game_system.messages.StartGameMessages;
 import view.game_system.messages.TurnMessages;
 
@@ -125,15 +126,22 @@ public class TurnController extends ControllerUtils {
             return TurnMessages.MESSAGE.setAndGetTxt(building.toString());
         }
         if (((MenuBuilding) building).getType().equals(BuildingMenus.BARRACK)) {
+            BarrackController.setMenuBuilding((MenuBuilding) building);
             return TurnMessages.BARRACK.setAndGetTxt(building.toString());
         }
         if (((MenuBuilding) building).getType().equals(BuildingMenus.MERCENARY_POST)) {
+            MercenaryController.setMenuBuildings((MenuBuilding) building);
             return TurnMessages.MERCENARY_POST.setAndGetTxt(building.toString());
+        }
+        if (((MenuBuilding) building).getType().equals(BuildingMenus.ENGINEER_GUID)) {
+            MercenaryController.setMenuBuildings((MenuBuilding) building);
+            return TurnMessages.ENGINEER_GUID.setAndGetTxt(building.toString());
         }
         if (((MenuBuilding) building).getType().equals(BuildingMenus.LORD_HOUSE)) {
             return TurnMessages.LORD_HOUSE.setAndGetTxt(building.toString());
         }
         if (((MenuBuilding) building).getType().equals(BuildingMenus.MARKET)) {
+            BarrackController.setMenuBuilding((MenuBuilding) building);
             return TurnMessages.MARKET.setAndGetTxt(building.toString());
         }
         return null;

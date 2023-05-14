@@ -2,6 +2,7 @@ package view.game_system;
 
 import controller.ControllerUtils;
 import controller.game_system.EngineerGuildController;
+import view.ViewUtils;
 import view.game_system.messages.BarracksMessages;
 import view.game_system.messages.GameSwitcherMessages;
 import view.game_system.commands.*;
@@ -10,8 +11,8 @@ import java.util.regex.Matcher;
 
 import static view.ViewUtils.putInHashmap;
 
-public class EngineerGuildMenu {
-    public static GameSwitcherMessages run(Scanner scanner){
+public class EngineerGuildMenu extends ViewUtils {
+    public static GameSwitcherMessages run(){
         String command ;
         Matcher matcher;
         while (true){

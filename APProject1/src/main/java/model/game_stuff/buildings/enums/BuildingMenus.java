@@ -4,7 +4,9 @@ public enum BuildingMenus {
     MERCENARY_POST("Mercenary post", "MercenaryPostMenu"),
     BARRACK("Barrack", "BarracksMenu"),
     LORD_HOUSE("lord house", "lord menu" ),
-    MARKET("Market","MarketMenu");
+    MARKET("Market","MarketMenu"),
+    ENGINEER_GUID("Engineer guid","EngineerGuildMenu");
+
     private String name;
     private String menu;
 
