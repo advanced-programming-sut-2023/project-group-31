@@ -25,4 +25,7 @@ public enum TrapTypes {
         return null;
     }
 
+    public int getDamage() {
+        return damage;
+    }
 }

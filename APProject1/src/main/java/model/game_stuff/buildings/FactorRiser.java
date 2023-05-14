@@ -10,6 +10,7 @@ public class FactorRiser extends Building {
     public FactorRiser(Government government, FactorRiserTypes type) {
         super(government);
         this.type = type;
+
     }
 
     public FactorRiserTypes getType() {

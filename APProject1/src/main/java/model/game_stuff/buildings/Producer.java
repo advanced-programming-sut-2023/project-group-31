@@ -2,10 +2,12 @@ package model.game_stuff.buildings;
 
 import model.game_stuff.Building;
 import model.game_stuff.Government;
+import model.game_stuff.Working;
 import model.game_stuff.buildings.enums.ProducerTypes;
 import model.game_stuff.people.Worker;
+import model.game_stuff.people.enums.WorkerTypes;
 
-public class Producer extends Building {
+public class Producer extends Building implements Working {
     private ProducerTypes type;
     private Worker worker;
     private int numberOfProductsAvailable;
@@ -35,10 +37,20 @@ public class Producer extends Building {
 
     public void work() {
         if (worker == null) {
-            //search for worker
-            return;
+            owner.giveWorker(this);
+            if(worker == null) {
+                return;
+            }
         }
         worker.work();
+    }
+
+    public void setWorker(Worker worker) {
+        this.worker = worker;
+    }
+
+    public WorkerTypes getWorkerType() {
+        return type.getWorkerType();
     }
 
     @Override

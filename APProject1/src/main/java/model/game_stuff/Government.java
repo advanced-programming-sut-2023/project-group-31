@@ -1,6 +1,7 @@
 package model.game_stuff;
 
 import model.User;
+import model.game_stuff.buildings.Producer;
 import model.game_stuff.buildings.Storage;
 import model.game_stuff.enums.Items;
 import model.game_stuff.people.Troop;
@@ -66,6 +67,13 @@ public class Government {
         this.owner = owner;
         this.name = owner.getUsername();
         this.color = color;
+    }
+
+    public void giveWorker(Producer producer) {
+        if(possession.getPeasant() > 0) {
+            possession.setPeasant(possession.getPeasant() - 1);
+            producer.setWorker(new Worker(producer, producer.getWorkerType()));
+        }
     }
 
     public void nextTurn() {

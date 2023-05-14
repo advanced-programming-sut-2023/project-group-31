@@ -10,19 +10,19 @@ import java.util.regex.Matcher;
 public class TurnMenu extends ViewUtils {
     private static TurnMessages result;
     public static void run() {
-        String input;
+        String command;
         Matcher matcher;
         System.out.println("Welcome to the great game of stronghold crusader!");
         announceCurrentPlayer();
         while (true) {
-            input = scanner.nextLine();
-            if ((matcher = TurnCommands.getMatcher(input, TurnCommands.DROP_BUILDING)) != null) {
+            command = scanner.nextLine();
+            if ((matcher = TurnCommands.getMatcher(command, TurnCommands.DROP_BUILDING)) != null) {
                 putInHashmap(matcher, TurnCommands.DROP_BUILDING.getRegex());
                 dropBuilding();
-            } else if ((matcher = TurnCommands.getMatcher(input, TurnCommands.REPAIR)) != null) {
+            } else if ((matcher = TurnCommands.getMatcher(command, TurnCommands.REPAIR)) != null) {
                 putInHashmap(matcher, TurnCommands.REPAIR.getRegex());
                 repair();
-            } else if ((matcher = TurnCommands.getMatcher(input, TurnCommands.SELECT_BUILDING)) != null) {
+            } else if ((matcher = TurnCommands.getMatcher(command, TurnCommands.SELECT_BUILDING)) != null) {
                 putInHashmap(matcher, TurnCommands.SELECT_BUILDING.getRegex());
                 selectBuilding();
             } else {

@@ -1,41 +1,38 @@
 package model.game_stuff.buildings.enums;
 
 import model.game_stuff.enums.Items;
+import model.game_stuff.people.enums.WorkerTypes;
 
 public enum ProducerTypes {
-    BREWERY(200,2,3,Items.ALE,3,"Brewery"),
-    BAKERY(300,2,5,Items.BREAD,5,"Bakery"),
-    WHEAT_FARM(100,1,2,Items.WHEAT,2,"Wheat farm"),
-    HUNTING_POST(100,1,2,Items.MEAT,2,"Hunting post"),
-    GRAIN_FARM(100,1,2,Items.HOPS,2,"Grain farm"),
-    DIARY_PRODUCTS(100,1,2,Items.CHEESE,2,"Diary products"),
-    APPLE_GARDEN(100,1,2,Items.APPLE,2,"Apple garden"),
-    WOOD_CUTTER(100,1,5,Items.WOOD,5,"Wood cutter"),
-    IRON_MINE(300,3,2,Items.IRON,2,"Iron mine"),
-    QUARRY(500,3,2,Items.STONE,2,"Quarry"),
-    BLACKSMITH(200,2,2,Items.SWORDS,2,"Black smith"),
-    FLETCHER(200,2,2,Items.BOW,2,"Fletcher"),
-    CROSSBOW_MAKER(200,2,2,Items.CROSSBOW,2,"Crossbow maker"),
-    POLE_TURNER(200,2,2,Items.SPEAR,2,"PoleTurner"),
-    ARMOURER(200,2,2,Items.METAL_ARMOR,2,"Armourer"),
-    LEATHER_ARMOURER(200,2,2,Items.LEATHER_ARMOR,2,"Leather armourer"),
-    STABLE(200,2,4,Items.HORSE,1,"Stable"),
-    PIKE_MAKER(200,2,2,Items.PIKE,2,"Pike maker"),
-    MACE_MAKER(200,2,2,Items.MACE,2,"Mace maker");
+    BREWERY(200,2,"Brewery",WorkerTypes.BREWERY),
+    BAKERY(300,2, "Bakery",WorkerTypes.BAKER),
+    WHEAT_FARM(100,1,"Wheat farm",WorkerTypes.WHEAT_FARMER),
+    HUNTING_POST(100,1,"Hunting post",WorkerTypes.HUNTER),
+    GRAIN_FARM(100,1,"Grain farm",WorkerTypes.GRAIN_FARMER),
+    DIARY_PRODUCTS(100,1,"Diary products",WorkerTypes.DIARY_PRODUCER),
+    APPLE_GARDEN(100,1,"Apple garden", WorkerTypes.APPLE_GARDENER),
+    WOOD_CUTTER(100,1,"Wood cutter",WorkerTypes.WOOD_CUTTER),
+    IRON_MINE(300,3,"Iron mine",WorkerTypes.IRON_MINER),
+    QUARRY(500,3,"Quarry",WorkerTypes.QUARRY_WORKER),
+    BLACKSMITH(200,2,"Black smith",WorkerTypes.BLACKSMITH),
+    FLETCHER(200,2,"Fletcher",WorkerTypes.FLETCHER),
+    CROSSBOW_MAKER(200,2, "Crossbow maker",WorkerTypes.CROSSBOW_MAKER),
+    POLE_TURNER(200,2,"PoleTurner",WorkerTypes.POLE_TURNER),
+    ARMOURER(200,2,"Armourer",WorkerTypes.ARMOURER),
+    LEATHER_ARMOURER(200,2,"Leather armourer",WorkerTypes.LEATHER_ARMOURER),
+    STABLE(200,2,"Stable",WorkerTypes.STABLE_WORKER),
+    PIKE_MAKER(200,2,"Pike maker",WorkerTypes.PIKE_MAKER),
+    MACE_MAKER(200,2,"Mace maker",WorkerTypes.MACE_MAKER);
     private String name;
     private int hp;
-    private int turnsToWait;
-    private int amountOfProductToProduce;
-    private Items product;
     private int capacity;
+    private WorkerTypes workerType;
 
-    ProducerTypes(int hp, int turnsToWait, int amountOfProductToProduce, Items product, int capacity, String name) {
+    ProducerTypes(int hp, int capacity, String name, WorkerTypes workerType) {
         this.name = name;
         this.hp = hp;
-        this.turnsToWait = turnsToWait;
-        this.amountOfProductToProduce = amountOfProductToProduce;
-        this.product = product;
         this.capacity = capacity;
+        this.workerType = workerType;
     }
 
     public int getHp() {
@@ -46,20 +43,12 @@ public enum ProducerTypes {
         return name;
     }
 
-    public int getTurnsToWait() {
-        return turnsToWait;
-    }
-
-    public int getAmountOfProductToProduce() {
-        return amountOfProductToProduce;
-    }
-
-    public Items getProduct() {
-        return product;
-    }
-
     public int getCapacity() {
         return capacity;
+    }
+
+    public WorkerTypes getWorkerType() {
+        return workerType;
     }
 
     public static ProducerTypes getEnumByName(String name) {
