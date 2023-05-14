@@ -6,7 +6,8 @@ public enum MarketMessages {
     NOT_ENOUGH_GOOD("not enough good from this type!"),
     NOT_ENOUGH_GOLD("not enough gold my lord!"),
     INVALID_COMMAND("invalid command!"),
-    YOUR_STOCKPILE_IS_FULL("your stockpile is full my lord!");
+    YOUR_STOCKPILE_IS_FULL("your stockpile is full my lord!"),
+    YOU_DONT_HAVE_ANY_STORAGE("You dont have Storage !!!");
     private String txt;
     private String input;
 
