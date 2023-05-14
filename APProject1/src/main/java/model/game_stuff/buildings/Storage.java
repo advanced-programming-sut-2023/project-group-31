@@ -17,6 +17,7 @@ public class Storage extends Building {
     public Storage(Government government, StorageTypes type) {
         super(government);
         this.type = type;
+        owner.addBuilding(this);
     }
 
     public HashMap<Items, Integer> getProperties() {

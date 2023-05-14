@@ -17,6 +17,8 @@ public class Producer extends Building implements Working {
     public Producer(ProducerTypes type, Government government) {
         super(government);
         this.type = type;
+        owner.addBuilding(this);
+        owner.getWorkingsBuildings().add(this);
     }
 
     public int getNumberOfProductsAvailable() {

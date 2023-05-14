@@ -8,6 +8,8 @@ public class Trap extends Building implements Working {
     public Trap(TrapTypes type, Government government) {
         super(government);
         this.type = type;
+        owner.addBuilding(this);
+        owner.getWorkingsBuildings().add(this);
     }
     public void work() {
         if(getPosition().containsEnemyPerson(owner.getColor())) {

@@ -25,6 +25,7 @@ public class Troop extends Person {
         this.type = type;
         damage = type.getDamage();
         name = type.getName();
+        owner.getTroops().add(this);
     }
 
     public TroopState getState() {
