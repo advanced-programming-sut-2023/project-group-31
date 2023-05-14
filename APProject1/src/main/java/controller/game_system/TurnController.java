@@ -178,6 +178,7 @@ public class TurnController extends ControllerUtils {
             if(isTheGameOver()) {
                 TurnMessages.GAME_FINISHED.setTxt(announceTheWinners());
                 //TODO: calculate scores
+                calculateScores();
                 return TurnMessages.GAME_FINISHED;
             }
             counter++;
@@ -186,6 +187,12 @@ public class TurnController extends ControllerUtils {
         //TODO: announce dead lords
         currentPlayer = getNextPlayer(currentPlayer);
         return TurnMessages.SUCCESS;
+    }
+
+    private static void calculateScores() {
+        for (Government player : currentGame.getPlayers()) {
+            player.getOwner().setHighScore(player.getOwner().getHighScore() * 12 / 10);
+        }
     }
     private static Government getNextPlayer(Government player) {
         int next = 0;
