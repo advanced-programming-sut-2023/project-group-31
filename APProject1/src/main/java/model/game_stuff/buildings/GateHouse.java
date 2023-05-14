@@ -2,20 +2,29 @@ package model.game_stuff.buildings;
 
 import model.game_stuff.Building;
 import model.game_stuff.Government;
+import model.game_stuff.Waiter;
+import model.game_stuff.Working;
 import model.game_stuff.buildings.enums.GateHouseTypes;
 
-public class GateHouse extends Building {
+public class GateHouse extends Building implements Working {
     private GateHouseTypes type;
     private boolean isHorizontal;
+    private Waiter closerWaiter;
     private boolean isOpen;
     {
         isOpen = false;
+        closerWaiter = new Waiter(5);
     }
     public GateHouse(GateHouseTypes type, Government government, boolean isHorizontal) {
         super(government);
         this.type=type;
         this.isHorizontal = isHorizontal;
         hp = type.getHp();
+    }
+    public void work() {
+        if (isOpen && closerWaiter.isTheTurn()) {
+            isOpen = false;
+        }
     }
 
     public boolean isHorizontal() {
@@ -30,8 +39,13 @@ public class GateHouse extends Building {
         isHorizontal = horizontal;
     }
 
-    public void setOpen(boolean open) {
-        isOpen = open;
+    public void open() {
+        isOpen = true;
+        closerWaiter.reset();
+    }
+
+    public void close() {
+        isOpen = false;
     }
 
     public GateHouseTypes getType() {

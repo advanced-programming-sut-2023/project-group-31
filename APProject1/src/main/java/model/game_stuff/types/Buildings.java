@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public enum Buildings {
-    NULL(1, 1, null, 0, 0, 0, 0, 0),
     SMALLSTONEGATEHOUSE(2, 1, "small stone gatehouse", 0, 0, 0, 0, 2000),
     BIGSTONEGATEHOUSE(2, 3, "big stone gatehouse", 20, 0, 0, 0, 2000),
     DRAWBRIDGE(1, 2, "drawbridge", 0, 10, 0, 0, 1000),
@@ -18,7 +17,7 @@ public enum Buildings {
     ARMOURY(2, 2, "Armoury", 0, 5, 0, 0, 200),
     BARRACK(2, 2, "Barrack", 15, 0, 0, 0, 200),
     MERCENARYPOST(2, 2, "Mercenary post", 0, 10, 0, 0, 200),
-    ENGINEERGUILD(2, 2, "Engineer gulid", 0, 10, 0, 0, 100),
+    ENGINEERGUILD(2, 2, "Engineer guid", 0, 10, 0, 0, 100),
     INN(2, 2, "Inn", 0, 20, 1, 0, 100),
     KILLINGPIT(2, 2, "Killing pit", 0, 6, 0, 0, 0),
     MARKET(2, 2, "Market", 0, 5, 1, 0, 0),
@@ -74,6 +73,10 @@ public enum Buildings {
         this.workerNeeded = workerNeeded;
         this.ironNeeded = ironNeeded;
         this.possibleTexture = possibleTexture;
+        this.length = length;
+        this.width = width;
+        this.name = name;
+        this.goldNeeded = goldNeeded;
     }
 
     Buildings(int length, int width, String name, double rockNeeded, double woodNeeded, double workerNeeded, double ironNeeded, double goldNeeded) {
@@ -82,6 +85,10 @@ public enum Buildings {
         this.workerNeeded = workerNeeded;
         this.ironNeeded = ironNeeded;
         this.possibleTexture = null;
+        this.length = length;
+        this.width = width;
+        this.name = name;
+        this.goldNeeded = goldNeeded;
     }
 
     public void setRockNeeded(double rockNeeded) {
@@ -146,7 +153,8 @@ public enum Buildings {
     }
 
     public boolean isAreaPossible(Textures texture) {
-        if ((!texture.equals(Textures.CLIFF))&&(!texture.equals(Textures.WATER))&&(possibleTexture == null || texture==possibleTexture)) {
+        if ((!texture.equals(Textures.CLIFF))&&(!texture.equals(Textures.WATER))&&
+            (possibleTexture == null || texture==possibleTexture)) {
             return true;
         }
         return false;

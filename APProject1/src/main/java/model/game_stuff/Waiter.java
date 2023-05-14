@@ -11,18 +11,11 @@ public class Waiter {
     public Waiter(int turnsToWait) {
         this.turnsToWait = turnsToWait;
     }
-
-    public int getTurnsToWait() {
-        return turnsToWait;
-    }
-    public int getTurnCounter() {
-        return turnCounter;
-    }
     public void setTurnsToWait(int turnsToWait) {
         this.turnsToWait = turnsToWait;
     }
-    public void setTurnCounter(int turnCounter) {
-        this.turnCounter = turnCounter;
+    public void reset() {
+        turnCounter = 0;
     }
     public boolean isTheTurn() {
         if(turnCounter >= turnsToWait) {
