@@ -61,6 +61,9 @@ public class Map {
     public Block getBlock(int x, int y) {
         return blocks.get(x).get(y);
     }
+    public void setBlock(int x, int y, Block block) {
+        blocks.get(x).set(y, block);
+    }
 
     public boolean isSaved() {
         return saved;

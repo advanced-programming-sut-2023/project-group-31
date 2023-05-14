@@ -16,7 +16,7 @@ public class MapMenu extends ViewUtils {
     public static void run() {
         String input;
         Matcher matcher;
-        System.out.println(Colors.RED+"----map menu---"+Colors.RESET);
+        System.out.println("\n"+Colors.RED.getBackgroundColorCode()+"----map menu---"+Colors.RESET.getBackgroundColorCode()+"\n");
         while (true) {
             input = scanner.nextLine().trim();
             if ((matcher = MapCommands.getMatcher(input, MapCommands.SHOW_MAP)) != null) {

@@ -7,6 +7,7 @@ import view.game_system.messages.StartGameMessages;
 import view.user_system.messages.MenuSwitcherMessages;
 import view.ViewUtils;
 import view.user_system.messages.UserMessages;
+import view.viewStyle.Colors;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -15,7 +16,7 @@ import java.util.regex.Matcher;
 public class StartGameMenu extends ViewUtils{
     //TODO: dastoor e clear
     public static MenuSwitcherMessages run() {
-        System.out.println("------Start game menu-----");
+        System.out.println("\n"+Colors.RED.getBackgroundColorCode()+"------Start game menu-----"+Colors.RESET.getBackgroundColorCode()+"\n");
         Matcher matcher;
         String command;
         while (true) {
@@ -109,7 +110,7 @@ public class StartGameMenu extends ViewUtils{
         String username = ViewUtils.fixDoubleQuotes(matcher.group("username"));
         String color = ViewUtils.fixDoubleQuotes(matcher.group("color"));
         StartGameMessages message = StartGameController.setPlayersTeam(username, color);
-        if (message == StartGameMessages.SUCCESS) {
+        if (message.equals(StartGameMessages.SUCCESS)) {
             System.out.println(StartGameMessages.SUCCESS.getTxt());
             return;
         }

@@ -5,6 +5,7 @@ import controller.game_system.TurnController;
 import view.ViewUtils;
 import view.game_system.commands.TurnCommands;
 import view.game_system.messages.TurnMessages;
+import view.viewStyle.Colors;
 
 import java.util.regex.Matcher;
 
@@ -13,7 +14,8 @@ public class TurnMenu extends ViewUtils {
     public static void run() {
         String command;
         Matcher matcher;
-        System.out.println("Welcome to the great game of stronghold crusader!");
+        System.out.println("\n"+Colors.GREEN.getBackgroundColorCode()+"Welcome to the great game of stronghold crusader!"
+                +Colors.RESET.getBackgroundColorCode()+"\n");
         announceCurrentPlayer();
         while (true) {
             command = scanner.nextLine();
@@ -41,6 +43,8 @@ public class TurnMenu extends ViewUtils {
                 KingdomMenu.run(scanner);
             } else if (TurnCommands.getMatcher(command, TurnCommands.TRADE_MENU) != null) {
                 TradeMenu.run();
+            } else if (command.equalsIgnoreCase("goto map menu")) {
+                MapMenu.run();
             } else {
                 System.out.println("Invalid command");
             }

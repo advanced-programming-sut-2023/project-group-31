@@ -16,7 +16,7 @@ public class ProfileMenu extends ViewUtils {
         if (!ControllerUtils.isUserLoggedIn()) {
             return MenuSwitcherMessages.LOGIN;
         }
-        System.out.println(Colors.RED+"_________Profile Menu_______"+Colors.RESET);
+        System.out.println("\n"+Colors.GREEN.getBackgroundColorCode()+"_________Profile Menu_______"+Colors.RESET.getBackgroundColorCode()+"\n");
         String input;
         Matcher matcher;
         while (true) {

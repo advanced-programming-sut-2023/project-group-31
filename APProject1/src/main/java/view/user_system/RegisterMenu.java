@@ -17,7 +17,7 @@ public class RegisterMenu extends ViewUtils {
         if (ControllerUtils.isUserLoggedIn()) {
             return MenuSwitcherMessages.MAIN;
         }
-        System.out.println(Colors.RED +"_________Register Menu_______"+Colors.RESET);
+        System.out.println("\n"+Colors.GREEN.getBackgroundColorCode() +"_________Register Menu_______"+Colors.RESET.getBackgroundColorCode()+"\n");
         String input;
         Matcher matcher;
         while (true) {
