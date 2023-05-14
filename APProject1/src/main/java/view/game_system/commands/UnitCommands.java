@@ -7,14 +7,14 @@ import java.util.regex.Pattern;
 
 public enum UnitCommands {
     RIGHT_CLICK("right click"),
-    SET_MOVE_ORDER("set move order to (?<move_order>[URDL]+)"),
+    SET_MOVE_ORDER("set move order to (?<moveOrder>[URDL]+)"),
     MOVE("move to(( -x (?<x>\\d+) )|( -y (?<y>\\d+) ))+"),
-    PATROL("patrol in order (?<move_order>IN)"),
+    PATROL("patrol in order (?<moveOrder>IN)"),
     SET_STATE("set state to (?<state>IN)"),
     ATTACK("attack (( -x (?<x>\\d+) )|( -y (?<y>\\d+) ))+"),
     DIG_TUNNEL("dig tunnel (?<direction>IN)"),
     FILL_TUNNEL("fill tunnel (?<direction>IN)"),
-    SELECT_SPECIAL_TROOPS("select (?<troop_type>IN)"),
+    SELECT_SPECIAL_TROOPS("select (?<troopType>IN)"),
     ;
     private String regex;
 

@@ -72,7 +72,7 @@ public class UnitMenu extends ViewUtils {
     }
 
     private static void selectSpecialTroops(Matcher matcher) {
-        String troopTypeString = fixDoubleQuotes(matcher.group("troop_type"));
+        String troopTypeString = fixDoubleQuotes(matcher.group("troopType"));
         UnitMessages message = UnitController.selectSpecialTroops(troopTypeString);
         if(message.equals(UnitMessages.SUCCESS)) {
             System.out.println("selection successful!");
@@ -84,7 +84,7 @@ public class UnitMenu extends ViewUtils {
     }
 
     private static void setMoveOrder(Matcher matcher) {
-        String moveOrderString = matcher.group("move_order").trim();
+        String moveOrderString = matcher.group("moveOrder").trim();
         UnitMessages message = UnitController.setMoveOrder(moveOrderString);
         if(message.equals(UnitMessages.SUCCESS)) {
             System.out.println("setMoveOrder successful!");
