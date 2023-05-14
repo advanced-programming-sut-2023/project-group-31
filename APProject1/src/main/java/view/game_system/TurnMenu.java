@@ -101,6 +101,8 @@ public class TurnMenu extends ViewUtils {
             BarracksMenu.run();
         } else if (result.equals(TurnMessages.MERCENARY_POST)) {
             MercenaryPostMenu.run();
+        } else{
+            System.out.println(result.getTxt());
         }
     }
 

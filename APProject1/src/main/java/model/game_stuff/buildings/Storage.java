@@ -13,11 +13,13 @@ public class Storage extends Building {
     private int amountOfProducts;
     {
         amountOfProducts = 0;
+        properties = new HashMap<>();
     }
     public Storage(Government government, StorageTypes type) {
         super(government);
         this.type = type;
         owner.addBuilding(this);
+        name = type.getName();
     }
 
     public HashMap<Items, Integer> getProperties() {

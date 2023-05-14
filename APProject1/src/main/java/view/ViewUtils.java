@@ -15,8 +15,8 @@ public class ViewUtils {
 
     public static String editRegex(String regex){
         String result;
-        result=regex.replaceAll("[\\s]+","[\\s]+");
-        result=regex.replaceAll("IN","([\\\\S]*)|(\"[^*]*\")");
+        result=regex.replaceAll("[\\s]+","[\\\\s]+");
+        result=result.replaceAll("IN","([\\\\S]*)|(\"[^*]*\")");
         return result;
     }
 
@@ -28,7 +28,7 @@ public class ViewUtils {
         while (groups.find()) {
             groupName = groups.group("groupName");
             if(matcher.group(groupName)!=null) {
-                inputs.put(groupName, matcher.group(groupName).replaceFirst("\"", "").replaceFirst("(?s)" + "\"" + "(?!.*?" + "\"" + ")", ""));
+                inputs.put(groupName, matcher.group(groupName).replaceFirst("\"", "").replaceFirst("(?s)" + "\"" + "(?!.*?" + "\"" + ")", "").trim());
             }
         }
 

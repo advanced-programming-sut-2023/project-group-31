@@ -19,6 +19,7 @@ public class Producer extends Building implements Working {
         this.type = type;
         owner.addBuilding(this);
         owner.getWorkingsBuildings().add(this);
+        name = type.getName();
     }
 
     public int getNumberOfProductsAvailable() {

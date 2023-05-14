@@ -58,14 +58,19 @@ public class ProfileController extends ControllerUtils {
         if(inputs.get("oldPassword").equals(inputs.get("newPassword"))){
             return UserMessages.OLD_PASSWORD_MATCHES_NEW_PASSWORD;
         }
-
+        currentUser.setPassword(inputs.get("newPassword"));
         return UserMessages.SUCCESS;
     }
     public static UserMessages profileChangeSlogan(){
         if(inputs.get("slogan").equals(currentUser.getSlogan())){
             return UserMessages.NO_CHANGE;
         }
+        currentUser.setSlogan(inputs.get("slogan"));
         return UserMessages.SUCCESS;
+    }
+
+    public static void removeSlogan(){
+        currentUser.setSlogan(null);
     }
 
 

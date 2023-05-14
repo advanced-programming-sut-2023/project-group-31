@@ -33,7 +33,7 @@ public class UnitMenu extends ViewUtils {
         }
     }
 
-    private void attack(Matcher matcher) {
+    private static void attack(Matcher matcher) {
         ControllerUtils.setInputs(ViewUtils.putInHashmap(matcher, UnitCommands.ATTACK.getRegex()));
         UnitMessages message = UnitController.setAttackTarget();
         if(message.equals(UnitMessages.SUCCESS)) {
@@ -45,7 +45,7 @@ public class UnitMenu extends ViewUtils {
         }
     }
 
-    private void selectSpecialTroops(Matcher matcher) {
+    private static void selectSpecialTroops(Matcher matcher) {
         String troopTypeString = fixDoubleQuotes(matcher.group("troop_type"));
         UnitMessages message = UnitController.selectSpecialTroops(troopTypeString);
         if(message.equals(UnitMessages.SUCCESS)) {
@@ -57,7 +57,7 @@ public class UnitMenu extends ViewUtils {
         }
     }
 
-    private void setMoveOrder(Matcher matcher) {
+    private static void setMoveOrder(Matcher matcher) {
         String moveOrderString = matcher.group("move_order").trim();
         UnitMessages message = UnitController.setMoveOrder(moveOrderString);
         if(message.equals(UnitMessages.SUCCESS)) {
@@ -69,7 +69,7 @@ public class UnitMenu extends ViewUtils {
         }
     }
 
-    private void setState(Matcher matcher) {
+    private static void setState(Matcher matcher) {
         String state = fixDoubleQuotes(matcher.group("state"));
         UnitMessages message = UnitController.setState(state);
         if(message.equals(UnitMessages.SUCCESS)) {

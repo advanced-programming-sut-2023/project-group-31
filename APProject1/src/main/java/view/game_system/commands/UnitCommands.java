@@ -10,7 +10,7 @@ public enum UnitCommands {
     SET_MOVE_ORDER("set move order to (?<move_order>[URDL]+)"),
     PATROL("patrol in order (?<move_order>IN)"),
     SET_STATE("set state to (?<state>IN)"),
-    ATTACK("attack (( -x (?<x>\\d+) )|( -y (?<y>\\d+) ))+"),
+    ATTACK("attack(( -x (?<x>\\d+) )|( -y (?<y>\\d+) ))+"),
     DIG_TUNNEL("dig tunnel"),
     SELECT_SPECIAL_TROOPS("select (?<troop_type>IN)"),
     ;

@@ -28,20 +28,24 @@ public class TurnController extends ControllerUtils {
             return TurnMessages.NOT_ENOUGH_REQUIREMENT;
         }
         Building building=createNewBuilding(inputs.get("type"));
-        for (int i = x; i < buildingType.getLength(); i++) {
-            for (int j = y; j < buildingType.getWidth(); j++) {
-                currentGame.getMap().getBlock(i, j).setBuilding(building);
-                building.addBlock(currentGame.getMap().getBlock(i, j));
+
+        for (int i = x; i < x+buildingType.getLength(); i++) {
+            for (int j = y; j < y+buildingType.getWidth(); j++) {
+                currentMap.getBlock(i, j).setBuilding(building);
+                building.addBlock(currentMap.getBlock(i, j));
             }
         }
+
         currentPlayer.addBuilding(building);
         decreaseRequirement(buildingType,1);
+
+
         return TurnMessages.SUCCESS;
     }
 
     private static TurnMessages isThereAPlaceForBuilding(int x, int y, Buildings buildingType) {
-        for (int i = x; i < buildingType.getLength(); i++) {
-            for (int j = y; j < buildingType.getWidth(); j++) {
+        for (int i = x; i < x + buildingType.getLength(); i++) {
+            for (int j = y; j < y + buildingType.getWidth(); j++) {
                 if (i >= currentGame.getMap().getSize() || j >= currentGame.getMap().getSize()) {
                     return TurnMessages.OUT_OF_MAP;
                 }

@@ -21,6 +21,7 @@ public class Tower extends Building {
         this.type = type;
         this.hp = type.getHp();
         owner.addBuilding(this);
+        name = type.getName();
     }
 
     public boolean isFull() {
