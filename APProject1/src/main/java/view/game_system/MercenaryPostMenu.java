@@ -13,13 +13,13 @@ import java.util.regex.Matcher;
 import static view.ViewUtils.putInHashmap;
 
 public class MercenaryPostMenu extends ViewUtils {
-    public static GameSwitcherMessages run(){
+    public static void run(){
         String command;
         Matcher matcher;
         while (true){
             command=scanner.nextLine().trim();
             if(command.matches("exit")){
-                return GameSwitcherMessages.GAME;
+                return ;
             }
             else if((matcher= BarracksCommand.getMatcher(command,BarracksCommand.CREATE_UNIT))!=null){
                 createUnit(matcher);

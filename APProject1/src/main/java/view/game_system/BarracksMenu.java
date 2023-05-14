@@ -4,17 +4,19 @@ package view.game_system;
 import controller.game_system.BarrackController;
 import view.game_system.messages.BarracksMessages;
 import view.game_system.commands.BarracksCommand;
+import view.game_system.messages.GameSwitcherMessages;
+
 import java.util.Scanner;
 import java.util.regex.Matcher;
 
 public class BarracksMenu extends view.ViewUtils {
-    public static view.game_system.messages.GameSwitcherMessages run(){
+    public static void run(){
         String command;
         Matcher matcher;
         while (true){
             command=scanner.nextLine().trim();
             if(command.matches("exit")){
-                return view.game_system.messages.GameSwitcherMessages.GAME;
+                return ;
             }
             else if((matcher= BarracksCommand.getMatcher(command,BarracksCommand.CREATE_UNIT))!=null){
                 createUnit(matcher);
