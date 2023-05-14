@@ -15,7 +15,6 @@ public enum UserMessages {
 
     EMAIL_EXITS("Email Exits."),
     RANDOM_PASSWORD(""),
-    //TODO: add enums
     USER_NOT_EXITS("user does not exits"),
     PASSWORD_IS_NOT_CORRECT("your password is not correct."),
 

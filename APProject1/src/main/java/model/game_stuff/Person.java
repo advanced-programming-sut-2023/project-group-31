@@ -12,6 +12,7 @@ public abstract class Person implements HasHp{
     protected Government owner;
     protected String name;
     protected int hp;
+    protected int speed;
     protected Block position;
     protected LinkedList<Direction> moveOrder;
 
@@ -32,37 +33,39 @@ public abstract class Person implements HasHp{
     }
 
     public boolean move() {
-        if(moveOrder.isEmpty()) {
-            return false;
-        }
-        Block target;
-        if((target = owner.getGame().getMap().getNeighbour(moveOrder.getFirst(), position)) == null) {
-            moveOrder.clear();
-            return false;
-        }
-        if(!target.isPermeable()) {
-            moveOrder.clear();
-            return false;
-        }
-        if(target.containsEnemyBuilding(owner.getColor()) || target.containsEnemyPerson(owner.getColor())) {
-            return false;
-        }
-        if(target.getBuilding().getOwner().equals(owner)) {
-            if(target.getBuilding() instanceof Tower) {
-                Tower tower = (Tower) target.getBuilding();
-                if (moveOrder.size() != 1 || !tower.canEnter(moveOrder.getFirst()) || !tower.isFull()) {
-                    moveOrder.clear();
-                    return false;
+        for(int i = 0; i < speed; i++) {
+            if (moveOrder.isEmpty()) {
+                return false;
+            }
+            Block target;
+            if ((target = owner.getGame().getMap().getNeighbour(moveOrder.getFirst(), position)) == null) {
+                moveOrder.clear();
+                return false;
+            }
+            if (!target.isPermeable()) {
+                moveOrder.clear();
+                return false;
+            }
+            if (target.containsEnemyBuilding(owner.getColor()) || target.containsEnemyPerson(owner.getColor())) {
+                return false;
+            }
+            if (target.getBuilding().getOwner().equals(owner)) {
+                if (target.getBuilding() instanceof Tower) {
+                    Tower tower = (Tower) target.getBuilding();
+                    if (moveOrder.size() != 1 || !tower.canEnter(moveOrder.getFirst()) || !tower.isFull()) {
+                        moveOrder.clear();
+                        return false;
+                    }
                 }
+                if (target.getBuilding() instanceof GateHouse) {
+
+                }
+                moveOrder.clear();
+                return false;
             }
-            if(target.getBuilding() instanceof GateHouse) {
-                
-            }
-            moveOrder.clear();
-            return false;
+            move(target);
+            moveOrder.removeFirst();
         }
-        move(target);
-        moveOrder.removeFirst();
         return true;
     }
 
