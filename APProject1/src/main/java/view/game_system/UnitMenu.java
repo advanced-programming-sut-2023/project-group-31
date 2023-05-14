@@ -3,11 +3,9 @@ package view.game_system;
 import controller.ControllerUtils;
 import controller.game_system.UnitController;
 import view.ViewUtils;
-import view.game_system.commands.StartGameCommands;
 import view.game_system.commands.UnitCommands;
 import view.game_system.messages.UnitMessages;
 
-import java.util.Scanner;
 import java.util.regex.Matcher;
 
 public class UnitMenu extends ViewUtils {
@@ -27,9 +25,37 @@ public class UnitMenu extends ViewUtils {
                 selectSpecialTroops(matcher);
             } else if ((matcher = UnitCommands.getMatcher(command, UnitCommands.ATTACK)) != null) {
                 attack(matcher);
+            } else if ((matcher = UnitCommands.getMatcher(command, UnitCommands.DIG_TUNNEL)) != null) {
+                digTunnel(matcher);
+            } else if ((matcher = UnitCommands.getMatcher(command, UnitCommands.FILL_TUNNEL)) != null) {
+                fillTunnel(matcher);
             } else {
                 System.out.println("invalid command!");
             }
+        }
+    }
+
+    private static void fillTunnel(Matcher matcher) {
+        String directionString = fixDoubleQuotes(matcher.group("direction"));
+        UnitMessages message = UnitController.fillTunnel(directionString);
+        if(message.equals(UnitMessages.SUCCESS)) {
+            System.out.println("dig tunnel successful!");
+        } else if(message.equals(UnitMessages.INVALID_COMMAND)) {
+            System.out.println("invalid command!");
+        } else {
+            System.out.println("dig tunnel failed: " + message.getTxt());
+        }
+    }
+
+    private static void digTunnel(Matcher matcher) {
+        String directionString = fixDoubleQuotes(matcher.group("direction"));
+        UnitMessages message = UnitController.digTunnel(directionString);
+        if(message.equals(UnitMessages.SUCCESS)) {
+            System.out.println("dig tunnel successful!");
+        } else if(message.equals(UnitMessages.INVALID_COMMAND)) {
+            System.out.println("invalid command!");
+        } else {
+            System.out.println("dig tunnel failed: " + message.getTxt());
         }
     }
 

@@ -120,7 +120,7 @@ public class KingdomController extends ControllerUtils {
          if(!current.getBuildings().isEmpty()){
              addToPopularityBuildings=1;
          }
-         addToPopularityFoods= current.getPossession().getMeat()+current.getPossession().getBread()+current.getPossession().getCheese()+current.getPossession().getApple()-1;
+         addToPopularityFoods= current.getPossession().getItem(Items.MEAT)+current.getPossession().getItem(Items.BREAD)+current.getPossession().getItem(Items.CHEESE)+current.getPossession().getItem(Items.APPLE)-1;
          current.setPopularity(current.getPopularity()+addToPopularityFoods+addToPopularityBuildings);
          if(current.getPopularity()>100){
              current.setPopularity(100);
@@ -207,23 +207,31 @@ public class KingdomController extends ControllerUtils {
         }
         while (toDecreaseFromStorage>0){
             for (Storage granary : currentPlayer.getGranaries()) {
+                if(currentPlayer.getPossession().getItem(Items.CHEESE)==0&&currentPlayer.getPossession().getItem(Items.BREAD)==0
+                &&currentPlayer.getPossession().getItem(Items.APPLE)==0&&currentPlayer.getPossession().getItem(Items.MEAT)==0){
+                    break;
+                }
                 if(granary.getProperties().get(Items.CHEESE)!=0) {
                     granary.removeProduct(Items.CHEESE, 1);
+                    currentPlayer.getPossession().setItem(Items.CHEESE,-1);
                     toDecreaseFromStorage--;
                     continue;
                 }
                 if(granary.getProperties().get(Items.BREAD)!=0){
                     granary.removeProduct(Items.BREAD,1);
+                    currentPlayer.getPossession().setItem(Items.BREAD,-1);
                     toDecreaseFromStorage--;
                     continue;
                 }
                 if(granary.getProperties().get(Items.APPLE)!=0){
                     granary.removeProduct(Items.APPLE,1);
+                    currentPlayer.getPossession().setItem(Items.APPLE,-1);
                     toDecreaseFromStorage--;
                     continue;
                 }
                 if(granary.getProperties().get(Items.MEAT)!=0){
                     granary.removeProduct(Items.MEAT,1);
+                    currentPlayer.getPossession().setItem(Items.MEAT,-1);
                     toDecreaseFromStorage--;
                     continue;
                 }
@@ -275,6 +283,10 @@ public class KingdomController extends ControllerUtils {
     }
 
     private static void getTax(double gold, int toChange) {
+//        if (currentPlayer.getPossession().getGold()==0) {
+//
+//            return;
+//        }
         currentPlayer.setPopularity(currentPlayer.getPopularity()+toChange);
         if(currentPlayer.getPopularity()>100){
             currentPlayer.setPopularity(100);

@@ -27,6 +27,7 @@ public class Worker extends Person {
         producingWaiter = new Waiter(type.getTurnsToWait());
         state = WorkerStates.HEADING_BACK;
         name = type.getName();
+        speed = type.getSpeed();
     }
     public boolean isInWorkHouse() {
         return position.equals(workHouse.getPosition());

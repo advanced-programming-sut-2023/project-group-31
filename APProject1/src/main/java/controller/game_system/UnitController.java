@@ -5,6 +5,7 @@ import model.game_stuff.Block;
 import model.game_stuff.Person;
 import model.game_stuff.people.Troop;
 import model.game_stuff.enums.Direction;
+import model.game_stuff.people.Tunneler;
 import model.game_stuff.people.enums.TroopState;
 import view.game_system.messages.UnitMessages;
 
@@ -99,6 +100,32 @@ public class UnitController extends ControllerUtils {
         }
         for (Troop troop : troops) {
             troop.setAttackTarget(target);
+        }
+        return UnitMessages.SUCCESS;
+    }
+
+    public static UnitMessages digTunnel(String directionString) {
+        Direction direction = Direction.getDirectionByName(directionString);
+        if(direction == null) {
+            return UnitMessages.INVALID_DIRECTION;
+        }
+        for (Troop troop : troops) {
+            if(troop instanceof Tunneler) {
+                ((Tunneler) troop).digTunnel(direction);
+            }
+        }
+        return UnitMessages.SUCCESS;
+    }
+
+    public static UnitMessages fillTunnel(String directionString) {
+        Direction direction = Direction.getDirectionByName(directionString);
+        if(direction == null) {
+            return UnitMessages.INVALID_DIRECTION;
+        }
+        for (Troop troop : troops) {
+            if(troop instanceof Tunneler) {
+                ((Tunneler) troop).fillTunnel(direction);
+            }
         }
         return UnitMessages.SUCCESS;
     }

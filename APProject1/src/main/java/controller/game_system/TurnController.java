@@ -4,6 +4,7 @@ import controller.ControllerUtils;
 import model.game_stuff.*;
 import model.game_stuff.buildings.*;
 import model.game_stuff.buildings.enums.*;
+import model.game_stuff.enums.Items;
 import model.game_stuff.people.Lord;
 import model.game_stuff.people.Troop;
 import model.game_stuff.types.Buildings;
@@ -90,13 +91,13 @@ public class TurnController extends ControllerUtils {
         if (Math.ceil(buildings.getGoldNeeded() * percent) > currentPlayer.getPossession().getGold()) {
             return false;
         }
-        if (Math.ceil(buildings.getIronNeeded() * percent) > currentPlayer.getPossession().getIron()) {
+        if (Math.ceil(buildings.getIronNeeded() * percent) > currentPlayer.getPossession().getItem(Items.IRON)) {
             return false;
         }
-        if (Math.ceil(buildings.getRockNeeded() * percent) > currentPlayer.getPossession().getStone()) { //stone ==rock
+        if (Math.ceil(buildings.getRockNeeded() * percent) > currentPlayer.getPossession().getItem(Items.STONE)) { //stone ==rock
             return false;
         }
-        if (Math.ceil(buildings.getWoodNeeded() * percent) > currentPlayer.getPossession().getWood()) { //stone ==rock
+        if (Math.ceil(buildings.getWoodNeeded() * percent) > currentPlayer.getPossession().getItem(Items.WOOD)) { //stone ==rock
             return false;
         }
         return true;
@@ -107,9 +108,9 @@ public class TurnController extends ControllerUtils {
         int amountToGet;
         currentPlayer.getPossession().setGold((int)Math.ceil(currentPlayer.getPossession().getGold()-buildings.getGoldNeeded() * percent));
         amountToGet=(int)Math.ceil(buildings.getIronNeeded() * percent);
-        currentPlayer.getPossession().setIron(currentPlayer.getPossession().getIron() - amountToGet);
-        currentPlayer.getPossession().setStone((int)Math.ceil(currentPlayer.getPossession().getStone()-buildings.getRockNeeded() * percent));
-        currentPlayer.getPossession().setWood((int)Math.ceil(currentPlayer.getPossession().getWood()-buildings.getWoodNeeded() * percent));
+        currentPlayer.getPossession().setItem(Items.IRON, - amountToGet);
+        currentPlayer.getPossession().setItem(Items.STONE,(int) -buildings.getRockNeeded() * (int)percent);
+        currentPlayer.getPossession().setItem(Items.WOOD,(int)(-buildings.getWoodNeeded() * percent));
         return true;
     }
 

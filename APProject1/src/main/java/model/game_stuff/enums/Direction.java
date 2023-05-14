@@ -35,4 +35,12 @@ public enum Direction {
     public String getName() {
         return name;
     }
+    public static Direction getDirectionByName(String name) {
+        for (Direction value : values()) {
+            if(value.name.equals(name)) {
+                return value;
+            }
+        }
+        return null;
+    }
 }

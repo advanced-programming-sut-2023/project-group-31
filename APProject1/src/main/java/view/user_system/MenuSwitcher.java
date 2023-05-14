@@ -29,7 +29,6 @@ public class MenuSwitcher extends ViewUtils {
                 case START_GAME:
                     command = StartGameMenu.run();
                     break;
-                // TODO :
             }
         }
     }

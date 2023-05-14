@@ -31,15 +31,4 @@ public class MainMenu extends ViewUtils {
         }
 
     }
-
-    private static boolean startNewGame(Matcher matcher) {
-        //TODO:
-        return false;
-    }
-
-    private static boolean logout(Matcher matcher) {
-        //TODO:
-        return false;
-    }
-
 }

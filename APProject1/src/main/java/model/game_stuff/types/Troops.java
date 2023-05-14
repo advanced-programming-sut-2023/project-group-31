@@ -20,7 +20,7 @@ public enum Troops{//assassins - fire towers - horseArchers,ladder man, ordinary
     ARCHERBOW("Archer Bow",Nationality.ARAB,10,"thrower",Items.BOW),
     SLAVES("Slaves",Nationality.ARAB,10,"kicker",Items.FIRE),
     SLINGERS("Slingers",Nationality.ARAB,10,"thrower",Items.BOW),
-    ASSASSINS("Assassins",Nationality.ARAB,10,"kicker",Items.SWORDS),
+    ASSASSINS("Assassins",Nationality.ARAB,10,"assassins",Items.SWORDS),
     HORSEARCHERS("Horse Archers",Nationality.ARAB,10,"thrower",Items.BOW),
     ARABIANSWORDSMEN("Arabian Swordsmen",Nationality.ARAB,10,"kicker",Items.SWORDS),
     FIRETHROWERS("Fire Throwers",Nationality.ARAB,10,"thrower",Items.BOW),

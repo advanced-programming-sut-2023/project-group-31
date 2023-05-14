@@ -7,11 +7,8 @@ import view.game_system.commands.StartGameCommands;
 import view.game_system.messages.StartGameMessages;
 import view.user_system.messages.MenuSwitcherMessages;
 import view.ViewUtils;
-import view.user_system.messages.UserMessages;
 import view.viewStyle.Colors;
 
-import java.util.ArrayList;
-import java.util.Scanner;
 import java.util.regex.Matcher;
 
 public class StartGameMenu extends ViewUtils{

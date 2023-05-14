@@ -18,7 +18,6 @@ public class Map {
     private int size;
     private ArrayList<Tree> trees;
     private ArrayList<Block> lordHouses;
-    //TODO: fire va stockpile ham payin va chapesh miran;
     private boolean saved;
     private ArrayList<ArrayList<Block>> blocks;
     private String description;

@@ -36,7 +36,7 @@ public class Government {
     private int fearRate;
     private double efficiency;
     private int maxPopulation;
-    private Waiter populationWater;
+    private Waiter populationWaiter;
     private ArrayList<Trade> tradeHistory;
 
     {
@@ -53,6 +53,7 @@ public class Government {
         taxRate=0;
         efficiency = 1; //TODO: rabete
         turnsToWaitForNewPeasant = 2;
+        maxPopulation = 16;
 
         stockpiles = new ArrayList<>();
         granaries = new ArrayList<>();
@@ -61,7 +62,7 @@ public class Government {
         buildings = new ArrayList<>();
         troops = new ArrayList<>();
         workingsBuildings = new ArrayList<>();
-        populationWater = new Waiter(2);
+        populationWaiter = new Waiter(2);
     }
 
     public Government(User owner, Colors color) {
@@ -107,18 +108,18 @@ public class Government {
 
     private void setTurnsToWaitForNewPeasant() {
         if(popularity >= 70 || popularity <= 30) {
-            populationWater.setTurnsToWait(2);
+            populationWaiter.setTurnsToWait(2);
         } else {
-            populationWater.setTurnsToWait(4);
+            populationWaiter.setTurnsToWait(4);
         }
     }
     private void fixPopularity() {
         if(popularity >= 55) {
-            if(populationWater.isTheTurn() && possession.getPeasant() < maxPopulation) {
+            if(populationWaiter.isTheTurn() && possession.getPeasant() < maxPopulation) {
                 possession.setPeasant(possession.getPeasant() + 1);
             }
         } else if(popularity <= 45) {
-            if(populationWater.isTheTurn() && possession.getPeasant() > 0) {
+            if(populationWaiter.isTheTurn() && possession.getPeasant() > 0) {
                 possession.setPeasant(possession.getPeasant() - 1);
             }
         }
