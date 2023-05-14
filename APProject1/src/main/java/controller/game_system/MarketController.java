@@ -54,11 +54,13 @@ public class MarketController extends ControllerUtils {
                     for (Storage weaponry : currentPlayer.getWeaponries()) {
                         if(weaponry.getCapacityLeft()>=number){
                             weaponry.addProduct(target,Integer.parseInt(inputs.get("amount")));
+                            currentPlayer.getPossession().setItem(target,number);
                             number=0;
                             done=true;
                             break;
                         }
                         if(weaponry.getCapacityLeft()<number){
+                            currentPlayer.getPossession().setItem(target,weaponry.getCapacityLeft());
                             weaponry.addProduct(target,weaponry.getCapacityLeft());
                             number=number-weaponry.getCapacityLeft();
                             continue;
@@ -75,11 +77,13 @@ public class MarketController extends ControllerUtils {
                     for (Storage weaponry : currentPlayer.getStockpiles()) {
                         if(weaponry.getCapacityLeft()>=number){
                             weaponry.addProduct(target,Integer.parseInt(inputs.get("amount")));
+                            currentPlayer.getPossession().setItem(target,number);
                             number=0;
                             done=true;
                             break;
                         }
                         if(weaponry.getCapacityLeft()<number){
+                            currentPlayer.getPossession().setItem(target,weaponry.getCapacityLeft());
                             weaponry.addProduct(target,weaponry.getCapacityLeft());
                             number=number-weaponry.getCapacityLeft();
                             continue;
@@ -96,11 +100,13 @@ public class MarketController extends ControllerUtils {
                     for (Storage weaponry : currentPlayer.getGranaries()) {
                         if(weaponry.getCapacityLeft()>=number){
                             weaponry.addProduct(target,Integer.parseInt(inputs.get("amount")));
+                            currentPlayer.getPossession().setItem(target,number);
                             number=0;
                             done=true;
                             break;
                         }
                         if(weaponry.getCapacityLeft()<number){
+                            currentPlayer.getPossession().setItem(target,weaponry.getCapacityLeft());
                             weaponry.addProduct(target,weaponry.getCapacityLeft());
                             number=number-weaponry.getCapacityLeft();
                             continue;
@@ -150,11 +156,13 @@ public class MarketController extends ControllerUtils {
                                 break;
                             }
                             weaponry.addProduct(target, newNum);
+                            currentPlayer.getPossession().setItem(target,-number);
                             done = true;
                             break;
                         }
                         if(weaponry.getProperties().get(target)<number){
                             weaponry.removeProduct(target,weaponry.getProperties().get(target));
+                            currentPlayer.getPossession().setItem(target,-weaponry.getProperties().get(target));
                             number=number-weaponry.getProperties().get(target);
                             continue;
                         }
@@ -168,11 +176,13 @@ public class MarketController extends ControllerUtils {
                             int newNum = granary.getProperties().get(target) - number;
                             granary.removeProduct(target, granary.getProperties().get(target));
                             granary.addProduct(target, newNum);
+                            currentPlayer.getPossession().setItem(target,-number);
                             done = true;
                             break;
                         }
                         if(granary.getProperties().get(target)<number){
                             granary.removeProduct(target,granary.getProperties().get(target));
+                            currentPlayer.getPossession().setItem(target,-granary.getProperties().get(target));
                             number=number-granary.getProperties().get(target);
                             continue;
                         }
@@ -186,11 +196,13 @@ public class MarketController extends ControllerUtils {
                             int newNum = stockpile.getProperties().get(target) - number;
                             stockpile.removeProduct(target, stockpile.getProperties().get(target));
                             stockpile.addProduct(target, newNum);
+                            currentPlayer.getPossession().setItem(target,-number);
                             done = true;
                             break;
                         }
                         if(stockpile.getProperties().get(target)<number){
                             stockpile.removeProduct(target, stockpile.getProperties().get(target));
+                            currentPlayer.getPossession().setItem(target,-stockpile.getProperties().get(target));
                             number=number-stockpile.getProperties().get(target);
                             continue;
                         }
