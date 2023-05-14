@@ -4,9 +4,9 @@ import model.game_stuff.enums.ItemTypes;
 import model.game_stuff.enums.Items;
 
 public enum StorageTypes {
-     STOCKPILE("Stockpile",400,ItemTypes.RAW_MATERIAL),
-     Granary("granary",400,ItemTypes.FOOD),
-     ARMOURY("Armoury",400,ItemTypes.WEAPON),
+     STOCKPILE("Stockpile",4000,ItemTypes.RAW_MATERIAL),
+     Granary("granary",4000,ItemTypes.FOOD),
+     ARMOURY("Armoury",4000,ItemTypes.WEAPON),
     ;
     private String name;
     private int capacity;
