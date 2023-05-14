@@ -38,7 +38,7 @@ public enum UserMessages {
     }
 
     public UserMessages setAndReturn(String txt){
-        this.txt+=txt;
+        this.txt=txt;
         return this;
     }
 

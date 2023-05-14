@@ -6,6 +6,7 @@ import view.ViewUtils;
 import view.user_system.commands.LoginCommands;
 import view.user_system.messages.MenuSwitcherMessages;
 import view.user_system.messages.UserMessages;
+import view.viewStyle.Colors;
 
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -17,7 +18,7 @@ public class LoginMenu extends ViewUtils {
         if (ControllerUtils.isUserLoggedIn()) {
             return MenuSwitcherMessages.MAIN;
         }
-        System.out.println("--------login menu-------");
+        System.out.println(Colors.RED +"--------login menu-------"+Colors.RESET);
         String input;
         Matcher matcher;
         while (true) {

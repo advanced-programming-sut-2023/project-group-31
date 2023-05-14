@@ -26,7 +26,7 @@ public enum StartGameCommands {
     SET_PLAYERS_TEAM("set team (?<color>IN) to (?<username>IN)"),
     START("start"),
     GOTO_MAP_MENU("goto map menu"),
-    SAVE_MAP("save map");
+    SAVE_MAP("save map"), SHOW_WHOLE_MAP("show whole map");
     private String regex;
     StartGameCommands(String regex) {
         this.regex = ViewUtils.editRegex(regex);

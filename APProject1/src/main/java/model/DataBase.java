@@ -103,7 +103,6 @@ public class DataBase {
 
     public static void loadApp() {
         connectToDatabase();
-        //System.exit(0);
         if(dataBase.loggedInUser!=null){
             ControllerUtils.setCurrentUser(dataBase.loggedInUser);
         }
@@ -202,8 +201,8 @@ public class DataBase {
     }
 
 
-    public ArrayList<String> getRecoveryQuestions() {
-        return recoveryQuestions;
+    public static ArrayList<String> getRecoveryQuestions() {
+        return dataBase.recoveryQuestions;
     }
 
     public static ArrayList<Map> getMaps() {

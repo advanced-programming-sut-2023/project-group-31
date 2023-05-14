@@ -23,7 +23,7 @@ public class StartGameMenu extends ViewUtils{
             if (StartGameCommands.getMatcher(command, StartGameCommands.EXIT) != null) {
                 return MenuSwitcherMessages.MAIN;
             } else if (StartGameCommands.getMatcher(command, StartGameCommands.GOTO_MAP_MENU) != null) {
-                gotoMapMenu();
+                MapMenu.run();
             } else if (StartGameCommands.getMatcher(command, StartGameCommands.SHOW_PLAYERS) != null) {
                 System.out.println(StartGameController.showAllPlayers());
             } else if (StartGameCommands.getMatcher(command, StartGameCommands.SHOW_CHOSEN_PLAYERS) != null) {
@@ -52,6 +52,10 @@ public class StartGameMenu extends ViewUtils{
                 saveMap();
             } else if ((matcher = StartGameCommands.getMatcher(command, StartGameCommands.DROP_TREE)) != null) {
                 dropTree(matcher);
+            } else if ((matcher = StartGameCommands.getMatcher(command, StartGameCommands.SHOW_MAP)) != null) {
+                MapMenu.showMapByXY(matcher);
+            } else if ((matcher = StartGameCommands.getMatcher(command, StartGameCommands.SHOW_WHOLE_MAP)) != null) {
+                MapMenu.showHoleMap();
             } else if ((matcher = StartGameCommands.getMatcher(command, StartGameCommands.START)) != null) {
                 if(startTheGame()) {
                     TurnMenu.run();
@@ -159,10 +163,7 @@ public class StartGameMenu extends ViewUtils{
         System.out.println("add player failed: " + message.getTxt());
     }
 
-    private static void gotoMapMenu() {
-        MapMenu mapMenu=new MapMenu();
-        mapMenu.run();
-    }
+
 
     private static void showDetails(Matcher matcher) {
         ControllerUtils.setInputs(ViewUtils.putInHashmap(matcher, StartGameCommands.SET_A_BLOCK_TEXTURE.getRegex()));

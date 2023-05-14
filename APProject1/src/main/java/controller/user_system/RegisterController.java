@@ -106,7 +106,7 @@ public class RegisterController extends ControllerUtils {
     public static UserMessages getForgotPasswordQuestions() {
         int index=0;
         String output="";
-        for(String question: DataBase.getDataBase().getRecoveryQuestions()){
+        for(String question: DataBase.getRecoveryQuestions()){
             index++;
             output+=(index+". "+question+"\n");
         }

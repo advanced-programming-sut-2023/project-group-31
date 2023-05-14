@@ -3,22 +3,20 @@ package view.game_system;
 import controller.game_system.MapController;
 import view.ViewUtils;
 import view.game_system.commands.MapCommands;
+import view.viewStyle.Colors;
 
 import java.util.HashMap;
 import java.util.regex.Matcher;
 
 public class MapMenu extends ViewUtils {
 
-    private static MapController mapController;
+    private final static MapController mapController=new MapController();
 
-    public MapMenu() {
-        mapController=new MapController();
-    }
 
-    public void run() {
+    public static void run() {
         String input;
         Matcher matcher;
-
+        System.out.println(Colors.RED+"----map menu---"+Colors.RESET);
         while (true) {
             input = scanner.nextLine().trim();
             if ((matcher = MapCommands.getMatcher(input, MapCommands.SHOW_MAP)) != null) {
@@ -42,16 +40,16 @@ public class MapMenu extends ViewUtils {
         }
     }
 
-    private void showMoreDetails(int x, int y) {
+    public static void showMoreDetails(int x, int y) {
         System.out.println(mapController.detailedMap(x,y));
     }
 
-    private void showMapByXY(Matcher matcher){
+    public static void showMapByXY(Matcher matcher){
         mapController.setXy(Integer.parseInt(matcher.group("x")),Integer.parseInt(matcher.group("y")));
         System.out.println(mapController.showMapByXY());
     }
 
-    private void showDetails(int x,int y){
+    public static void showDetails(int x,int y){
         System.out.println(mapController.showDetails(x,y,false));
     }
 
@@ -63,7 +61,7 @@ public class MapMenu extends ViewUtils {
         RIGHT, UP;
     }
 
-    private HashMap<Directions, Integer> setDirections(String directionsString) {
+    private static HashMap<Directions, Integer> setDirections(String directionsString) {
         int rights=0,ups=0;
         String[] directionsArray = directionsString.trim().split(" ");
         for (String direction : directionsArray) {
@@ -84,7 +82,7 @@ public class MapMenu extends ViewUtils {
         return enumDirections;
     }
 
-    private void moveOnMap(String directionString) {
+    private static void moveOnMap(String directionString) {
         int rights=setDirections(directionString).get(Directions.RIGHT);
         int ups=setDirections(directionString).get(Directions.UP);
         mapController.moveOnMap(rights,ups);
@@ -92,7 +90,7 @@ public class MapMenu extends ViewUtils {
     }
 
 
-    private void showHoleMap(){
+    public static void showHoleMap(){
         System.out.println(mapController.showWholeTheMap());
     }
 
