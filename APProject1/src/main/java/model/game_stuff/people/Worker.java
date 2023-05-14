@@ -126,4 +126,9 @@ public class Worker extends Person {
     public String toString() {
         return type.getName() + ":" + (100 * hp / type.getHp());
     }
+
+    public void die() {
+        position.removePerson(this);
+        workHouse.setWorker(null);
+    }
 }

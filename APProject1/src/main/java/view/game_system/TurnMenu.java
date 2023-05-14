@@ -1,5 +1,6 @@
 package view.game_system;
 
+import controller.ControllerUtils;
 import controller.game_system.TurnController;
 import view.ViewUtils;
 import view.game_system.commands.TurnCommands;
@@ -27,12 +28,65 @@ public class TurnMenu extends ViewUtils {
             } else if ((matcher = TurnCommands.getMatcher(command, TurnCommands.SELECT_BUILDING)) != null) {
                 putInHashmap(matcher, TurnCommands.SELECT_BUILDING.getRegex());
                 selectBuilding();
+            } else if (TurnCommands.getMatcher(command, TurnCommands.NEXT_TURN) != null) {
+                if(nextTurn()) {
+                    return;
+                }
+            } else if (TurnCommands.getMatcher(command, TurnCommands.EXIT) != null) {
+                System.out.println("narrow!\tto ham mese man nemitooni davoom biari... my lord!");
+                return;
+            }  else if ((matcher = TurnCommands.getMatcher(command, TurnCommands.SELECT_UNIT)) != null) {
+                selectUnit(matcher);
+            } else if ((matcher = TurnCommands.getMatcher(command, TurnCommands.SELECT_MULTIPLE_UNITS)) != null) {
+                selectMultipleUnit(matcher);
+            } else if (TurnCommands.getMatcher(command, TurnCommands.GOVERNMENT_MENU) != null) {
+                KingdomMenu.run(scanner);
+            } else if (TurnCommands.getMatcher(command, TurnCommands.TRADE_MENU) != null) {
+                TradeMenu.run();
             } else if (command.equalsIgnoreCase("goto map menu")) {
                 MapMenu.run();
             } else {
                 System.out.println("Invalid command");
             }
         }
+    }
+
+    private static void selectMultipleUnit(Matcher matcher) {
+        ControllerUtils.setInputs(putInHashmap(matcher, TurnCommands.SELECT_MULTIPLE_UNITS.getRegex()));
+        TurnMessages message = TurnController.selectMultipleUnits();
+        if(message == TurnMessages.SUCCESS) {
+            UnitMenu.run();
+        } else if(message == TurnMessages.INVALID_COMMAND){
+            System.out.println("invalid command!");
+        } else {
+            System.out.println("select unit failed: " + message.getTxt());
+        }
+    }
+
+    private static void selectUnit(Matcher matcher) {
+        ControllerUtils.setInputs(putInHashmap(matcher, TurnCommands.SELECT_UNIT.getRegex()));
+        TurnMessages message = TurnController.selectUnit();
+        if(message == TurnMessages.SUCCESS) {
+            UnitMenu.run();
+        } else if(message == TurnMessages.INVALID_COMMAND){
+            System.out.println("invalid command!");
+        } else {
+            System.out.println("select unit failed: " + message.getTxt());
+        }
+    }
+
+    private static boolean nextTurn() {
+        TurnMessages message = TurnController.nextTurn();
+        if(message == TurnMessages.GAME_FINISHED) {
+            System.out.println(TurnMessages.GAME_FINISHED.getTxt());
+            return true;
+        }
+        if(message == TurnMessages.SUCCESS) {
+            announceCurrentPlayer();
+            return false;
+        }
+        System.out.println("next turn failed: " + message.getTxt());
+        return false;
     }
 
     private static void announceCurrentPlayer() {

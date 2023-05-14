@@ -11,7 +11,7 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 
 public class UnitMenu extends ViewUtils {
-    public void run() {
+    public static void run() {
         Matcher matcher;
         String command;
         // TODO: patrol va digTunnel va piade sazi kar ladderMan

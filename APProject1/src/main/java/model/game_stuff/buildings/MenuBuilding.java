@@ -9,6 +9,7 @@ public class MenuBuilding extends Building {
     public MenuBuilding(Government government, BuildingMenus menu) {
         super(government);
         this.type = menu;
+        owner.addBuilding(this);
     }
 
     public String getMenu() {

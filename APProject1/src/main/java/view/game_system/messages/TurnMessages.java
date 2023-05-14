@@ -10,7 +10,13 @@ public enum TurnMessages {
     MESSAGE(""),
     MERCENARY_POST(""),
     BARRACK(""),
-    ENEMY_IS_CLOSE("Enemy soldiers are very close to the wall."), NOT_ENOUGH_REQUIREMENT("not enough requirement");
+    ENEMY_IS_CLOSE("Enemy soldiers are very close to the wall."),
+    NOT_ENOUGH_REQUIREMENT("not enough requirement"),
+    GAME_FINISHED("game finished!"),
+    INVALID_COMMAND("invalid command!"),
+    COORDINATE_OUT_OF_BOUND("coordinate out of bounds!"),
+    NO_UNIT_FOUND("no unit found!"),
+    ;
     private String txt;
     TurnMessages(String txt) {
         this.txt = txt;

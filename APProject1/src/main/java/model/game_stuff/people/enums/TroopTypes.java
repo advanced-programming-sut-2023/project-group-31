@@ -2,11 +2,12 @@ package model.game_stuff.people.enums;
 
 public enum TroopTypes {
 
+    LORD("lord", 3000,200,3,1,3),
     ARCHER("Archer",300,2250,4,4,6),
     CROSSBOWMEN("Crossbowmen",300,300,2,4,6),
-    ARCHERBOW("Archer Bow",300,2250,4,4,6),
-    HORSEARCHERS("Horse Archers",300,3000,5,4,6),
-    FIRETHROWERS("Fire Throwers",500,2250,5,4,6),
+    ARCHER_BOW("Archer Bow",300,2250,4,4,6),
+    HORSE_ARCHERS("Horse Archers",300,3000,5,4,6),
+    FIRE_THROWERS("Fire Throwers",500,2250,5,4,6),
     SPEARMEN("Spearmen",400,1500,3,1,2),
     PIKEMEN("Pikemen",400,3750,2,1,2),
     MACEMEN("Macemen",500,3000,3,1,2),

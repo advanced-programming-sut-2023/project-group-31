@@ -99,4 +99,5 @@ public abstract class Person implements HasHp{
     public abstract void work();
     abstract public String toString();
 
+    public abstract void die();
 }

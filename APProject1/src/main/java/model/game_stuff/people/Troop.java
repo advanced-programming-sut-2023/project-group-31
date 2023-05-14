@@ -25,6 +25,7 @@ public class Troop extends Person {
         this.type = type;
         damage = type.getDamage();
         name = type.getName();
+        owner.getTroops().add(this);
     }
 
     public TroopState getState() {
@@ -128,5 +129,10 @@ public class Troop extends Person {
     @Override
     public String toString() {
         return type.getName() + ":" + (100 * hp / type.getHp());
+    }
+
+    public void die() {
+        position.removePerson(this);
+        owner.getTroops().remove(this);
     }
 }

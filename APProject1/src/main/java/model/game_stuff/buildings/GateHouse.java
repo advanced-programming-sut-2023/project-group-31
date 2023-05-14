@@ -20,6 +20,7 @@ public class GateHouse extends Building implements Working {
         this.type=type;
         this.isHorizontal = isHorizontal;
         hp = type.getHp();
+        owner.addBuilding(this);
     }
     public void work() {
         if (isOpen && closerWaiter.isTheTurn()) {

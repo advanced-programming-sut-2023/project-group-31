@@ -12,14 +12,15 @@ import java.util.ArrayList;
 public class Government {
     private Game game;
     private final User owner;
+    private Troop lord;
     private String name;
     private Possession possession;
     private final ArrayList<Storage> stockpiles;
     private final ArrayList<Storage > granaries;
     private final ArrayList<Storage> weaponries;
     private ArrayList<Building> buildings;
+    private ArrayList<Working> workingsBuildings;
     private ArrayList<Troop> troops;
-    private ArrayList<Worker> workers;
     private Block LordsHouse;
     private Colors color;
     //private int gold;
@@ -58,8 +59,8 @@ public class Government {
         weaponries = new ArrayList<>();
         tradeHistory = new ArrayList<>();
         buildings = new ArrayList<>();
-        workers = new ArrayList<>();
         troops = new ArrayList<>();
+        workingsBuildings = new ArrayList<>();
         populationWater = new Waiter(2);
     }
 
@@ -67,6 +68,18 @@ public class Government {
         this.owner = owner;
         this.name = owner.getUsername();
         this.color = color;
+    }
+
+    public ArrayList<Working> getWorkingsBuildings() {
+        return workingsBuildings;
+    }
+
+    public void setLord(Troop lord) {
+        this.lord = lord;
+    }
+
+    public Troop getLord() {
+        return lord;
     }
 
     public void giveWorker(Producer producer) {
@@ -124,10 +137,6 @@ public class Government {
 
     public ArrayList<Troop> getTroops() {
         return troops;
-    }
-
-    public ArrayList<Worker> getWorkers() {
-        return workers;
     }
 
     public model.game_stuff.Possession getPossession() {
@@ -297,5 +306,15 @@ public class Government {
     }
     public int getNumberOfAnItem(Items item) {
         return possession.getItem(item);
+    }
+
+    public void terminate() {
+        for (Building building : buildings) {
+            building.terminate();
+        }
+        for (Troop troop : troops) {
+            troop.die();
+        }
+        game.getPlayers().remove(this);
     }
 }
