@@ -130,6 +130,12 @@ public class TurnController extends ControllerUtils {
         if (((MenuBuilding) building).getType().equals(BuildingMenus.MERCENARY_POST)) {
             return TurnMessages.MERCENARY_POST.setAndGetTxt(building.toString());
         }
+        if (((MenuBuilding) building).getType().equals(BuildingMenus.LORD_HOUSE)) {
+            return TurnMessages.LORD_HOUSE.setAndGetTxt(building.toString());
+        }
+        if (((MenuBuilding) building).getType().equals(BuildingMenus.MARKET)) {
+            return TurnMessages.MARKET.setAndGetTxt(building.toString());
+        }
         return null;
     }
 
