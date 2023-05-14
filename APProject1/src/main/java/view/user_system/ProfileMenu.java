@@ -6,16 +6,17 @@ import view.ViewUtils;
 import view.user_system.commands.ProfileCommands;
 import view.user_system.messages.MenuSwitcherMessages;
 import view.user_system.messages.UserMessages;
+import view.viewStyle.Colors;
 
 import java.util.Scanner;
 import java.util.regex.Matcher;
 
 public class ProfileMenu extends ViewUtils {
     public static MenuSwitcherMessages run(Scanner scanner) {
-        if(!ControllerUtils.isUserLoggedIn()){
+        if (!ControllerUtils.isUserLoggedIn()) {
             return MenuSwitcherMessages.LOGIN;
         }
-        System.out.println("_________Profile Menu_______");
+        System.out.println(Colors.RED+"_________Profile Menu_______"+Colors.RESET);
         String input;
         Matcher matcher;
         while (true) {
@@ -60,7 +61,7 @@ public class ProfileMenu extends ViewUtils {
     }
 
     private static void changePassword() {
-        if(!CaptchaMenu.getObject().run()){
+        if (!CaptchaMenu.getObject().run()) {
             System.out.println("change password failed: wrong captcha.");
             return;
         }

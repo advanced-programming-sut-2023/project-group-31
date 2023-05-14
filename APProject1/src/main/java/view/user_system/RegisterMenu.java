@@ -6,6 +6,7 @@ import view.ViewUtils;
 import view.user_system.commands.RegisterCommands;
 import view.user_system.messages.MenuSwitcherMessages;
 import view.user_system.messages.UserMessages;
+import view.viewStyle.Colors;
 
 import java.util.regex.Matcher;
 
@@ -13,10 +14,10 @@ public class RegisterMenu extends ViewUtils {
 
 
     public static MenuSwitcherMessages run() {
-        if(ControllerUtils.isUserLoggedIn()){
+        if (ControllerUtils.isUserLoggedIn()) {
             return MenuSwitcherMessages.MAIN;
         }
-        System.out.println("_________Register Menu_______");
+        System.out.println(Colors.RED +"_________Register Menu_______"+Colors.RESET);
         String input;
         Matcher matcher;
         while (true) {
@@ -25,9 +26,9 @@ public class RegisterMenu extends ViewUtils {
             if ((matcher = RegisterCommands.getMatcher(input, RegisterCommands.REGISTER)) != null) {
                 putInHashmap(matcher, RegisterCommands.REGISTER.getRegex());
                 userCreate();
-            }else if(input.matches("goto[\\s]+login[\\s]+menu")){
+            } else if (input.matches("goto[\\s]+login[\\s]+menu")) {
                 return MenuSwitcherMessages.LOGIN;
-            }else {
+            } else {
                 System.out.println("Invalid command!");
             }
 
@@ -36,7 +37,7 @@ public class RegisterMenu extends ViewUtils {
     }
 
     private static void userCreate() {
-        if(!CaptchaMenu.getObject().run()){
+        if (!CaptchaMenu.getObject().run()) {
             System.out.println("register failed: wrong captcha.");
             return;
         }
@@ -50,7 +51,7 @@ public class RegisterMenu extends ViewUtils {
         } else if (result.equals(UserMessages.USER_EXITS_BEFORE)) {
             System.out.println("create user failed: " + result.getTxt());
             confirmUsernameOrPasswordMenu();
-        }else {
+        } else {
             System.out.println("create user failed: " + result.getTxt());
         }
     }
@@ -73,21 +74,19 @@ public class RegisterMenu extends ViewUtils {
     }
 
 
-
-
     private static void pickQuestionMenu() {
         String input;
         Matcher matcher;
         System.out.println("pick one of these questions.");
-        int index=0;
+        int index = 0;
         System.out.println(RegisterController.getForgotPasswordQuestions());
         while (true) {
             input = scanner.nextLine().trim();
             if ((matcher = RegisterCommands.getMatcher(input, RegisterCommands.PICK_QUESTION)) != null) {
-                String username=ControllerUtils.getInputs().get("username");
+                String username = ControllerUtils.getInputs().get("username");
                 ControllerUtils.setInputs(putInHashmap(matcher, RegisterCommands.PICK_QUESTION.getRegex()));
                 pickQuestion(username);
-                if(userResult.equals(UserMessages.SUCCESS)) return;
+                if (userResult.equals(UserMessages.SUCCESS)) return;
             } else {
                 System.out.println("Invalid command!");
             }

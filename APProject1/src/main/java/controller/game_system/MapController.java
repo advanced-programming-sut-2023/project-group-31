@@ -29,7 +29,8 @@ public class MapController extends ControllerUtils {
 
     public String showMapByXY() {
         String output="";
-        if(currentMap.getSize()<=(x+length/2)|| currentMap.getSize()<=(y+width/2)){
+        if(currentMap.getSize()<=(x+length/2)|| currentMap.getSize()<=(y+width/2)
+                ||(x-length/2)<0||(y-width/2)<0){
             return "show map failed: invalid position.";
         }
         output += showLine();
