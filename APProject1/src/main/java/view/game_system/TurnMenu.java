@@ -110,7 +110,7 @@ public class TurnMenu extends ViewUtils {
         } else if (result.equals(TurnMessages.ENGINEER_GUID)) {
             EngineerGuildMenu.run();
         } else{
-            System.out.println(result.getTxt());
+            System.out.println("select building failed: " + result.getTxt());
         }
     }
 

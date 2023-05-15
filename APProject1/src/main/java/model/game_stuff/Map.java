@@ -59,10 +59,10 @@ public class Map {
     }
 
     public Block getBlock(int x, int y) {
-        return blocks.get(x).get(y);
+        return blocks.get(y).get(x);
     }
     public void setBlock(int x, int y, Block block) {
-        blocks.get(x).set(y, block);
+        blocks.get(y).set(x, block);
     }
 
     public boolean isSaved() {
@@ -115,11 +115,13 @@ public class Map {
     }
 
     public Block getNeighbour(Direction direction, Block block) {
+        //System.out.println("getNeighbour " + block + "direction " + direction);
         int x = block.getX() + direction.getX();
         int y = block.getY() + direction.getY();
         if (!isInMap(x, y)) {
             return null;
         }
+        System.out.println(getBlock(x, y));
         return getBlock(x, y);
     }
 

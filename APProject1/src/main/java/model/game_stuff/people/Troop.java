@@ -73,7 +73,7 @@ public class Troop extends Person {
             hit(enemyTroops.get(random.nextInt(enemyTroops.size())));
         } else if(attackTarget.containsEnemyPerson(owner.getColor())) {
             hit(attackTarget.getPeople().get(random.nextInt(attackTarget.getPeople().size())));
-        } else {
+        } else if(attackTarget.containsEnemyBuilding(owner.getColor())){
             hit(attackTarget.getBuilding());
         }
         return true;

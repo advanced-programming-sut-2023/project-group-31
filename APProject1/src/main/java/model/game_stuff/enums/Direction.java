@@ -1,8 +1,8 @@
 package model.game_stuff.enums;
 
 public enum Direction {
-    UP(0, 1, "up"),
-    DOWN(0, -1, "down"),
+    UP(0, -1, "up"),
+    DOWN(0, 1, "down"),
     RIGHT(1, 0, "right"),
     LEFT(-1, 0, "left"),
     ;

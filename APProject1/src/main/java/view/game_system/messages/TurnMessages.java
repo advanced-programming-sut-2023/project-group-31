@@ -16,7 +16,7 @@ public enum TurnMessages {
     INVALID_COMMAND("invalid command!"),
     COORDINATE_OUT_OF_BOUND("coordinate out of bounds!"),
     NO_UNIT_FOUND("no unit found!"),
-    LORD_HOUSE(""), MARKET(""), ENGINEER_GUID("");
+    LORD_HOUSE(""), MARKET(""), ENGINEER_GUID(""), NOT_YOUR_BUILDING("it is not your building!");
     private String txt;
     TurnMessages(String txt) {
         this.txt = txt;

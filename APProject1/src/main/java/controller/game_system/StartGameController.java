@@ -297,7 +297,6 @@ public class StartGameController extends ControllerUtils {
             storage = new Storage(player, StorageTypes.Granary);
             setBlockForBuilding(currentMap.getBlock(block.getX(), block.getY() + 2), storage, 2, 2);
             player.addGranary(storage);
-            System.out.println(player.getGranaries());
             storage.addProduct(Items.BREAD, 100);
         }
         currentGame.setPlayers(players);
@@ -308,8 +307,8 @@ public class StartGameController extends ControllerUtils {
     private static void setBlockForBuilding(Block block, Building building, int length, int width) {
         int x = block.getX();
         int y = block.getY();
-        for (int i = x; i < length; i++) {
-            for (int j = y; j < width; j++) {
+        for (int i = x; i < x + length; i++) {
+            for (int j = y; j < y + width; j++) {
                 currentGame.getMap().getBlock(i, j).setBuilding(building);
                 building.addBlock(currentGame.getMap().getBlock(i, j));
             }

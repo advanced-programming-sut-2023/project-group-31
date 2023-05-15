@@ -68,6 +68,9 @@ public class TurnController extends ControllerUtils {
             return new MenuBuilding(currentPlayer, BuildingMenus.getEnumByName(type));
         }
         if (FactorRiserTypes.getEnumByName(type) != null) {
+            if(!type.equals("wall") && currentPlayer.getReligionRate() == 0) {
+                currentPlayer.setReligionRate(2);
+            }
             return new FactorRiser(currentPlayer, FactorRiserTypes.getEnumByName(type));
         }
         if (GateHouseTypes.getEnumByName(type) != null) {
@@ -125,6 +128,9 @@ public class TurnController extends ControllerUtils {
         Building building;
         if ((building = currentGame.getMap().getBlock(x, y).getBuilding()) == null) {
             return TurnMessages.EMPTY_PLACE;
+        }
+        if(!building.getOwner().equals(currentPlayer)) {
+            return TurnMessages.NOT_YOUR_BUILDING;
         }
         if (!(building instanceof MenuBuilding)) {
             return TurnMessages.MESSAGE.setAndGetTxt(building.toString());

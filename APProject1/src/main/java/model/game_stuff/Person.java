@@ -33,6 +33,7 @@ public abstract class Person implements HasHp{
 
     public boolean move() {
         for(int i = 0; i < speed; i++) {
+            System.out.println("start\n" + position);
             if (moveOrder.isEmpty()) {
                 return false;
             }
@@ -48,20 +49,23 @@ public abstract class Person implements HasHp{
             if (target.containsEnemyBuilding(owner.getColor()) || target.containsEnemyPerson(owner.getColor())) {
                 return false;
             }
-            if (target.getBuilding() != null && target.getBuilding().getOwner().equals(owner)) {
-                if (target.getBuilding() instanceof Tower) {
-                    Tower tower = (Tower) target.getBuilding();
-                    if (moveOrder.size() != 1 || !tower.canEnter(moveOrder.getFirst()) || !tower.isFull()) {
-                        moveOrder.clear();
-                        return false;
+            if (target.getBuilding() != null)
+                if (target.getBuilding().getOwner().equals(owner)) {
+                    if (target.getBuilding() instanceof Tower) {
+                        Tower tower = (Tower) target.getBuilding();
+                        if (moveOrder.size() != 1 || !tower.canEnter(moveOrder.getFirst()) || !tower.isFull()) {
+                            moveOrder.clear();
+                            return false;
+                        }
                     }
+                    if (target.getBuilding() instanceof GateHouse) {
+                        if (!((GateHouse)target.getBuilding()).isOpen()) {
+                            return false;
+                        }
+                    }
+                    moveOrder.clear();
+                    return false;
                 }
-                if (target.getBuilding() instanceof GateHouse) {
-
-                }
-                moveOrder.clear();
-                return false;
-            }
             move(target);
             moveOrder.removeFirst();
         }
@@ -97,6 +101,7 @@ public abstract class Person implements HasHp{
     public void move(Block destination) {
         position.removePerson(this);
         destination.addPerson(this);
+        position = destination;
     }
     public abstract void work();
     abstract public String toString();

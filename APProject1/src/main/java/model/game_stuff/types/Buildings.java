@@ -52,7 +52,8 @@ public enum Buildings {
     HUNTINGPOST(2, 2, "Hunting post", 0, 5, 1, 0, 0),
     WHEATFARM(3, 3, "Wheat farm", 0, 15, 1, 0, 0, Textures.GROSS),
     BAKERY(2, 2, "Bakery", 0, 10, 1, 0, 0),
-    BREWERY(2, 2, "Brewery", 0, 10, 0, 0, 0);
+    BREWERY(2, 2, "Brewery", 0, 10, 0, 0, 0),
+    WALL(1, 1,"wall", 5, 0, 0, 0 , 0);
     private String name;
     private double rockNeeded;
     private double woodNeeded;
