@@ -297,6 +297,7 @@ public class StartGameController extends ControllerUtils {
             storage = new Storage(player, StorageTypes.Granary);
             setBlockForBuilding(currentMap.getBlock(block.getX(), block.getY() + 2), storage, 2, 2);
             player.addGranary(storage);
+            System.out.println(player.getGranaries());
             storage.addProduct(Items.BREAD, 100);
         }
         currentGame.setPlayers(players);

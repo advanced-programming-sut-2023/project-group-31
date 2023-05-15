@@ -250,22 +250,22 @@ public class Government {
     }
 
     public void addGranary(Storage storage) {
-        stockpiles.add(storage);
+        granaries.add(storage);
     }
 
     public void addWeaponry(Storage storage) {
-        stockpiles.add(storage);
+        weaponries.add(storage);
     }
     public void removeStockpile(Storage storage) {
         stockpiles.remove(storage);
     }
 
     public void removeGranary(Storage storage) {
-        stockpiles.remove(storage);
+        granaries.remove(storage);
     }
 
     public void removeWeaponry(Storage storage) {
-        stockpiles.remove(storage);
+        weaponries.remove(storage);
     }
 
     public Block getLordsHouse() {
