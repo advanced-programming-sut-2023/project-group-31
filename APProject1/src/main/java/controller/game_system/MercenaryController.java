@@ -28,8 +28,9 @@ public class MercenaryController extends ControllerUtils {
         if(troop.getCost()*Integer.parseInt(inputs.get("amount"))> currentPlayer.getPossession().getGold()){
             return BarracksMessages.NOT_ENOUGH_GOLD;
         }
-        if (!currentPlayer.getWeaponries().contains(troop.getWeapon())){
-            return BarracksMessages.NOT_ENOUGH_WEAPON;}
+//        if (!currentPlayer.getWeaponries().contains(troop.getWeapon())){
+//            if(!troop.getName().equals("Slaves"))
+//            return BarracksMessages.NOT_ENOUGH_WEAPON;}
         if(currentPlayer.getPossession().getPeasant()<amount){
             return BarracksMessages.PEOPLE_NEEDED;
         }

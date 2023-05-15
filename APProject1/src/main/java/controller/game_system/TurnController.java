@@ -235,8 +235,8 @@ public class TurnController extends ControllerUtils {
         if(!inputs.containsKey("x") || !inputs.containsKey("y")) {
             return TurnMessages.INVALID_COMMAND;
         }
-        int x = Integer.parseInt(inputs.get("x").trim()) - 1;
-        int y = Integer.parseInt(inputs.get("y").trim()) - 1;
+        int x = Integer.parseInt(inputs.get("x").trim()) ;
+        int y = Integer.parseInt(inputs.get("y").trim()) ;
         if(!currentMap.isInMap(x, y)) {
             return TurnMessages.COORDINATE_OUT_OF_BOUND;
         }
@@ -257,6 +257,7 @@ public class TurnController extends ControllerUtils {
                 break;
             }
         }
+        UnitController.setTroops(troops);
         return TurnMessages.SUCCESS;
     }
     private static ArrayList<Troop> getMyTroopsIn(ArrayList<Block> blocks) {

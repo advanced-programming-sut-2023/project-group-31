@@ -17,12 +17,13 @@ public class UnitController extends ControllerUtils {
     static private ArrayList<Troop> troops;
     private static HashMap<String, Integer> numberOfEachTroop;
 
-    {
+    static {
         troops = new ArrayList<>();
         numberOfEachTroop = new HashMap<>();
     }
 
     public static UnitMessages setState(String state) {
+        //System.out.println(troops.size());
         switch (state) {
             case "aggressive":
                 for (Troop troop : troops) {
@@ -70,7 +71,14 @@ public class UnitController extends ControllerUtils {
     }
 
     public static UnitMessages selectSpecialTroops(String troopTypeString) {
-        if (!numberOfEachTroop.containsKey(troopTypeString)) {
+        //System.out.println(troops.size());
+        boolean hasSpecial=false;
+        for (Troop troop : troops) {
+          //  System.out.println(troop.getName());
+            troop.getName().equals(troopTypeString);
+            hasSpecial=true;
+        }
+        if (hasSpecial==false) {
             return UnitMessages.NO_SUCH_TROOP;
         }
         for (int i = 0; i < troops.size(); i++) {

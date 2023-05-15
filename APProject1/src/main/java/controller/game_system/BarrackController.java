@@ -36,6 +36,9 @@ public class BarrackController extends ControllerUtils {
             if(currentPlayer.getPossession().getPeasant()<number){
                 return BarracksMessages.PEOPLE_NEEDED;
             }
+        if(currentPlayer.getWeaponries().contains(target.getWeapon())){
+            return BarracksMessages.NOT_ENOUGH_WEAPON;
+        }
         switch (target.getType()){
             case "kicker":
                 TroopTypes Troops = TroopTypes.getTroopByName(target.getName());
