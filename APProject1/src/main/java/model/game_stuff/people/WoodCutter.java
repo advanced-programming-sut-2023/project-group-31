@@ -27,6 +27,7 @@ public class WoodCutter extends Worker{
         if( bestTree == null) {
             return null;
         }
+        bestTree.setMark(true);
         return bestTree;
     }
     private void setBestTree() {

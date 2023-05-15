@@ -16,7 +16,7 @@ public enum StartGameCommands {
     SET_A_BLOCK_TEXTURE("set texture ((-x (?<x>\\d+))|(-y (?<y>\\d+) )|(-type (?<type>IN)))+"),
     SET_TEXTURE("set texture(( -x1 (?<x1>\\d+))|( -y1 (?<y1>\\d+))|( -x2 (?<x2>\\d+))|( -y2 (?<y2>\\d+))|( -type (?<type>IN)))+"),
     CLEAR_BLOCK("clear block(( -x (?<x>\\d+))|( -y (?<y>\\d+)))+"),
-    DROP_TREE("drop tree(( -x (?<x>\\d+))|( -y (?<y>\\d+)))+"),
+    DROP_TREE("drop tree(( -x (?<x>\\d+))|( -y (?<y>\\d+))|( -type (?<type>IN)))+"),
     //DROP_LORD_HOUSE("drop lord house(( -x (?<x>\\d+))|( -y (?<y>\\d+)))+"),
     SHOW_CHOSEN_PLAYERS("show chosen players"),
     ADD_PLAYER("add player (?<username>IN)"),

@@ -161,6 +161,10 @@ public class Block {
         for (String personName : numberOfEachPeople.keySet()) {
             output += "\t" + personName + ":" + numberOfEachPeople.get(personName);
         }
+        output += "\n trees:";
+        for (Tree tree : trees) {
+            output += "\t" + tree.getType().getName();
+        }
         return output;
     }
 

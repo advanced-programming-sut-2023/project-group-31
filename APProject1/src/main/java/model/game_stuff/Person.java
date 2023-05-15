@@ -33,7 +33,6 @@ public abstract class Person implements HasHp{
 
     public boolean move() {
         for(int i = 0; i < speed; i++) {
-            System.out.println("start\n" + position);
             if (moveOrder.isEmpty()) {
                 return false;
             }

@@ -115,13 +115,11 @@ public class Map {
     }
 
     public Block getNeighbour(Direction direction, Block block) {
-        //System.out.println("getNeighbour " + block + "direction " + direction);
         int x = block.getX() + direction.getX();
         int y = block.getY() + direction.getY();
         if (!isInMap(x, y)) {
             return null;
         }
-        System.out.println(getBlock(x, y));
         return getBlock(x, y);
     }
 

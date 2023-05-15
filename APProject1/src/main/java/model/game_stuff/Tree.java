@@ -12,6 +12,10 @@ public class Tree {
         this.type = type;
     }
 
+    public TreeTypes getType() {
+        return type;
+    }
+
     public void setMark(boolean mark) {
         this.mark = mark;
     }
