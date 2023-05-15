@@ -48,7 +48,7 @@ public abstract class Person implements HasHp{
             if (target.containsEnemyBuilding(owner.getColor()) || target.containsEnemyPerson(owner.getColor())) {
                 return false;
             }
-            if (target.getBuilding().getOwner().equals(owner)) {
+            if (target.getBuilding() != null && target.getBuilding().getOwner().equals(owner)) {
                 if (target.getBuilding() instanceof Tower) {
                     Tower tower = (Tower) target.getBuilding();
                     if (moveOrder.size() != 1 || !tower.canEnter(moveOrder.getFirst()) || !tower.isFull()) {
