@@ -24,7 +24,7 @@ public abstract class Person implements HasHp{
     }
 
     public void setMoveOrder(LinkedList<Direction> moveOrder) {
-        this.moveOrder = moveOrder;
+        this.moveOrder = new LinkedList<>(moveOrder);
     }
 
     public LinkedList<Direction> getMoveOrder() {
@@ -33,19 +33,25 @@ public abstract class Person implements HasHp{
 
     public boolean move() {
         for(int i = 0; i < speed; i++) {
+            //TODO: replace s outs
+            System.out.println(name + " move step" + i + " " + position);
             if (moveOrder.isEmpty()) {
+                System.out.println("1");
                 return false;
             }
             Block target;
             if ((target = owner.getGame().getMap().getNeighbour(moveOrder.getFirst(), position)) == null) {
                 moveOrder.clear();
+                System.out.println("2");
                 return false;
             }
             if (!target.isPermeable()) {
                 moveOrder.clear();
+                System.out.println("3");
                 return false;
             }
             if (target.containsEnemyBuilding(owner.getColor()) || target.containsEnemyPerson(owner.getColor())) {
+                System.out.println("4");
                 return false;
             }
             if (target.getBuilding() != null)
@@ -54,15 +60,18 @@ public abstract class Person implements HasHp{
                         Tower tower = (Tower) target.getBuilding();
                         if (moveOrder.size() != 1 || !tower.canEnter(moveOrder.getFirst()) || !tower.isFull()) {
                             moveOrder.clear();
+                            System.out.println("5");
                             return false;
                         }
                     }
                     if (target.getBuilding() instanceof GateHouse) {
                         if (!((GateHouse)target.getBuilding()).isOpen()) {
+                            System.out.println("6");
                             return false;
                         }
                     }
                     moveOrder.clear();
+                    System.out.println("7");
                     return false;
                 }
             move(target);
@@ -76,6 +85,9 @@ public abstract class Person implements HasHp{
     }
     public void getDamaged(int damage) {
         this.hp -= damage;
+        if(hp < 0) {
+            die();
+        }
     }
 
     public int getHp() {

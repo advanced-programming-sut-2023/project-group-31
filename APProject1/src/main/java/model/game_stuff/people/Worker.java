@@ -25,7 +25,7 @@ public class Worker extends Person {
         this.workHouse = workHouse;
         this.type = type;
         producingWaiter = new Waiter(type.getTurnsToWait());
-        state = WorkerStates.HEADING_BACK;
+        state = WorkerStates.PRODUCING;
         name = type.getName();
         speed = type.getSpeed();
     }
@@ -76,7 +76,7 @@ public class Worker extends Person {
                 }
                 break;
             case PRODUCING:
-                if(!workHouse.isFull() && producingWaiter.isTheTurn()) {
+                if(producingWaiter.isTheTurn()) {
                     produce();
                 }
                 break;

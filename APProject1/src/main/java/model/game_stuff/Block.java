@@ -4,6 +4,7 @@ package model.game_stuff;
 import model.game_stuff.buildings.Trap;
 import model.game_stuff.enums.Textures;
 import model.game_stuff.people.Fighter;
+import model.game_stuff.people.Troop;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -116,7 +117,7 @@ public class Block {
     }
     public boolean containsEnemyTroop(Colors color) {
         for (Person person : people) {
-            if((person instanceof Fighter) && person.getOwner().getColor() != color)
+            if((person instanceof Troop) && person.getOwner().getColor() != color)
                 return true;
         }
         return false;
