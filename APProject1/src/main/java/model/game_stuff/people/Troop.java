@@ -61,7 +61,6 @@ public class Troop extends Person {
         Random random = new Random();
         if(attackTarget == null || (!attackTarget.containsEnemyPerson(owner.getColor()) && !attackTarget.containsEnemyBuilding(owner.getColor()))) {
             if(!findEnemyBlockToAttack()) {
-                System.out.println("attack 1");
                 return false;
             }
         }
@@ -73,13 +72,10 @@ public class Troop extends Person {
                 }
             }
             hit(enemyTroops.get(random.nextInt(enemyTroops.size())));
-            System.out.println("attack 2");
         } else if(attackTarget.containsEnemyPerson(owner.getColor())) {
             hit(attackTarget.getPeople().get(random.nextInt(attackTarget.getPeople().size())));
-            System.out.println("attack 3");
         } else if(attackTarget.containsEnemyBuilding(owner.getColor())){
             hit(attackTarget.getBuilding());
-            System.out.println("attack 4");
         }
         return true;
     }

@@ -51,7 +51,7 @@ public class Worker extends Person {
     protected void produce() {
         workHouse.addProduct(type.getAmountOfProductToProduce());
         if(workHouse.getNumberOfProductsAvailable() >= type.getNumberOfProductsToCarry()) {
-            workHouse.addProduct(-1 * type.getAmountOfProductToProduce());
+            workHouse.addProduct(-1 * type.getNumberOfProductsToCarry());
             numberOfProductsCarrying = type.getNumberOfProductsToCarry();
             state = WorkerStates.HEADING_STORAGE;
             setAppropriateStorage();
@@ -76,7 +76,12 @@ public class Worker extends Person {
                 }
                 break;
             case PRODUCING:
-                if(producingWaiter.isTheTurn()) {
+                if(workHouse.getNumberOfProductsAvailable() >= type.getNumberOfProductsToCarry()) {
+                    workHouse.addProduct(-1 * type.getNumberOfProductsToCarry());
+                    numberOfProductsCarrying = type.getNumberOfProductsToCarry();
+                    state = WorkerStates.HEADING_STORAGE;
+                    setAppropriateStorage();
+                } else if(producingWaiter.isTheTurn()) {
                     produce();
                 }
                 break;

@@ -12,46 +12,47 @@ import java.util.regex.Pattern;
 
 public class TradeController extends ControllerUtils {
     public static TradeMessages addRequest() {
-        if(inputs.get("give") == null || inputs.get("get") == null) {
+        if (inputs.get("give") == null || inputs.get("get") == null) {
             return TradeMessages.INVALID_COMMAND;
         }
-        if(inputs.get("player") == null) {
+        if (inputs.get("player") == null) {
             return TradeMessages.CHOOSE_YOUR_AUDIENCE;
         }
         Government audience = currentGame.getPlayerByNickname(inputs.get("player"));
-        if(audience == null) {
+        if (audience == null) {
             return TradeMessages.NO_SUCH_PLAYER;
         }
-        if(audience.equals(currentPlayer)) {
+        if (audience.equals(currentPlayer)) {
             return TradeMessages.YOU_CAN_NOT_TRADE_WITH_YOURSELF;
         }
         HashMap<String, Integer> stringResourcesToGet = takeItemsOutFromString(inputs.get("get"));
         HashMap<String, Integer> stringResourcesToGive = takeItemsOutFromString(inputs.get("give"));
-        if(stringResourcesToGive.isEmpty() && stringResourcesToGet.isEmpty()) {
+        if (stringResourcesToGive.isEmpty() && stringResourcesToGet.isEmpty()) {
             return TradeMessages.INVALID_TRADE;
         }
         HashMap<Items, Integer> resourcesToGet = new HashMap<>();
         HashMap<Items, Integer> resourcesToGive = new HashMap<>();
-        if(stringHashmapToItemHashmapFailed(stringResourcesToGet, resourcesToGet)) {
+        if (stringHashmapToItemHashmapFailed(stringResourcesToGet, resourcesToGet)) {
             return TradeMessages.INVALID_RESOURCE_TYPE;
         }
-        if(stringHashmapToItemHashmapFailed(stringResourcesToGive, resourcesToGive)) {
+        if (stringHashmapToItemHashmapFailed(stringResourcesToGive, resourcesToGive)) {
             return TradeMessages.INVALID_RESOURCE_TYPE;
         }
-        Trade trade = new Trade(currentPlayer,audience);
+        Trade trade = new Trade(currentPlayer, audience);
         trade.setProvidedItems(resourcesToGet);
         trade.setAskedItems(resourcesToGive);
-        if(inputs.get("message") != null) {
+        if (inputs.get("message") != null) {
             trade.setOwnersMessage(inputs.get("message"));
         }
         currentPlayer.addTrade(trade);
         audience.addTrade(trade);
         return TradeMessages.SUCCESS;
     }
+
     private static boolean stringHashmapToItemHashmapFailed(HashMap<String, Integer> stringResources, HashMap<Items, Integer> resources) {
         Items item;
         for (String string : stringResources.keySet()) {
-            if((item = Items.getItemByName(string)) == null) {
+            if ((item = Items.getItemByName(string)) == null) {
                 TradeMessages.INVALID_RESOURCE_TYPE.setInput(string);
                 return false;
             }
@@ -59,15 +60,16 @@ public class TradeController extends ControllerUtils {
         }
         return true;
     }
+
     public static HashMap<String, Integer> takeItemsOutFromString(String input) {
         HashMap<String, Integer> output = new HashMap<>();
         Matcher matcher = Pattern.compile(input.trim()).matcher("-t\\s+(?<resourceType>I)\\s+-a\\s+(?<resourceAmount>\\d+)");
         String resource;
         int amount;
-        while(matcher.find()) {
+        while (matcher.find()) {
             resource = matcher.group("resourceType").trim();
-            if(resource.matches("\"[^\"]*\"")) {
-                resource = resource.replaceAll("\"","");
+            if (resource.matches("\"[^\"]*\"")) {
+                resource = resource.replaceAll("\"", "");
             }
             amount = Integer.parseInt(matcher.group("resourceAmount"));
             output.put(resource, amount);
@@ -76,56 +78,56 @@ public class TradeController extends ControllerUtils {
     }
 
     public static String showMyTradeHistory() {
-        /*if(currentPlayer.getTradeHistory().isEmpty()) {
+        if(currentPlayer.getTradeHistory().isEmpty()) {
             return "You have not any trade yet!";
-        }*/
-        String output = "TRADE HISTORY:";
-        for (Trade trade : currentPlayer.getTradeHistory()) {
-            output += "\n" + trade;
         }
-        return output;
+        StringBuilder output = new StringBuilder("TRADE HISTORY:");
+        for (Trade trade : currentPlayer.getTradeHistory()) {
+            output.append("\n").append(trade);
+        }
+        return output.toString();
     }
 
     public static String showMyTradeList() {
-        String output = "TRADES:";
+        StringBuilder output = new StringBuilder("TRADES:");
         for (Trade liveTrade : Trade.getLiveTrades()) {
-            if(liveTrade.getAskedPlayer().equals(currentPlayer)) {
-                output += "\n" + liveTrade;
+            if (liveTrade.getAskedPlayer().equals(currentPlayer)) {
+                output.append("\n").append(liveTrade);
             }
         }
-        return output;
+        return output.toString();
     }
 
     public static String showNewTrades() {
-        String output = "NEW TRADES:";
+        StringBuilder output = new StringBuilder("NEW TRADES:");
         for (Trade liveTrade : Trade.getLiveTrades()) {
-            if(liveTrade.getAskedPlayer().equals(currentPlayer) && !liveTrade.isWatched()) {
-                output += "\n" + liveTrade;
+            if (liveTrade.getAskedPlayer().equals(currentPlayer) && !liveTrade.isWatched()) {
+                output.append("\n").append(liveTrade);
             }
         }
-        return output;
+        return output.toString();
     }
 
     public static TradeMessages acceptRequest() {
-        if(inputs.get("id") == null) {
+        if (inputs.get("id") == null) {
             return TradeMessages.INVALID_COMMAND;
         }
         Trade trade = Trade.getTradeById(Integer.parseInt(inputs.get("id")));
-        if(trade == null) {
+        if (trade == null) {
             return TradeMessages.NO_SUCH_TRADE_ID;
         }
         for (Items item : trade.getAskedItems().keySet()) {
-            if(currentPlayer.getNumberOfAnItem(item) < trade.getAskedItems().get(item)) {
+            if (currentPlayer.getNumberOfAnItem(item) < trade.getAskedItems().get(item)) {
                 TradeMessages.NOT_ENOUGH_RESOURCE.setInput(item.getName());
                 return TradeMessages.NOT_ENOUGH_RESOURCE;
             }
         }
         for (Items item : trade.getProvidedItems().keySet()) {
-            if(currentPlayer.getNumberOfAnItem(item) < trade.getProvidedItems().get(item)) {
+            if (currentPlayer.getNumberOfAnItem(item) < trade.getProvidedItems().get(item)) {
                 return TradeMessages.OTHER_ONE_RESOURCE_SHORTAGE;
             }
         }
-        if(inputs.get("message") != null) {
+        if (inputs.get("message") != null) {
             trade.setOthersMessage(inputs.get("message"));
         }
         for (Items item : trade.getProvidedItems().keySet()) {

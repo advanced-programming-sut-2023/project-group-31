@@ -95,7 +95,10 @@ public class Government {
     public void giveWorker(Producer producer) {
         if(possession.getPeasant() > 0) {
             possession.setPeasant(possession.getPeasant() - 1);
-            producer.setWorker(new Worker(producer, producer.getWorkerType()));
+            Worker worker = new Worker(producer, producer.getWorkerType());
+            worker.setPosition(producer.getPosition());
+            producer.getPosition().addPerson(worker);
+            producer.setWorker(worker);
         }
     }
 

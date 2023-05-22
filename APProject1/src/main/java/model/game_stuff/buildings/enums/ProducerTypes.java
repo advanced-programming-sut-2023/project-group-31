@@ -5,7 +5,7 @@ import model.game_stuff.people.enums.WorkerTypes;
 
 public enum ProducerTypes {
     BREWERY(200,2,"Brewery",WorkerTypes.BREWERY),
-    BAKERY(300,2, "Bakery",WorkerTypes.BAKER),
+    BAKERY(300,4, "Bakery",WorkerTypes.BAKER),
     WHEAT_FARM(100,1,"Wheat farm",WorkerTypes.WHEAT_FARMER),
     HUNTING_POST(100,1,"Hunting post",WorkerTypes.HUNTER),
     GRAIN_FARM(100,1,"Grain farm",WorkerTypes.GRAIN_FARMER),

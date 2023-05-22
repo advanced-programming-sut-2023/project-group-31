@@ -66,7 +66,7 @@ public class Block {
 
     public void removePerson(Person person) {
         people.remove(person);
-        numberOfEachPeople.replace(person.getName() , numberOfEachPeople.get(person.getName()) -1);
+        numberOfEachPeople.replace(person.getName(), numberOfEachPeople.get(person.getName()) -1);
         if(numberOfEachPeople.get(person.getName()) == 0) {
             numberOfEachPeople.remove(person.getName());
         }
