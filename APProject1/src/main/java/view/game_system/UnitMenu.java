@@ -39,7 +39,7 @@ public class UnitMenu extends ViewUtils {
 
     private static void move(Matcher matcher) {
         if(matcher.group("x") == null || matcher.group("y") == null) {
-            System.out.println("invalid Command!");
+            System.out.println("invalid command!");
         }
         int destinationX = Integer.parseInt(matcher.group("x"));
         int destinationY = Integer.parseInt(matcher.group("y"));

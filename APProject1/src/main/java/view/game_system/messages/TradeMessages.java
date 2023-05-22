@@ -17,6 +17,7 @@ public enum TradeMessages {
     NO_SUCH_ITEM("no such item!"),
     ITEM_IS_ALREADY_ADDED("item is already added!"),
     NO_SUCH_ITEM_ADDED_BEFORE("no such item added before!"),
+    NO_AUDIENCE("there is no audience!"),
     ;
     private String txt;
     private String input;

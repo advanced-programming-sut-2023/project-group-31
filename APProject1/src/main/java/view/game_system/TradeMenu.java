@@ -18,8 +18,6 @@ public class TradeMenu extends ViewUtils {
             command = scanner.nextLine().trim();
             if (command.matches("exit")) {
                 return GameSwitcherMessages.GAME;
-            } else if ((matcher = TradeCommands.getMatcher(command, TradeCommands.ADD_REQUEST)) != null) {
-                addRequest(matcher);
             } else if (TradeCommands.getMatcher(command, TradeCommands.SHOW_MY_TRADE_HISTORY) != null) {
                 System.out.println(TradeController.showMyTradeHistory());
             } else if (TradeCommands.getMatcher(command, TradeCommands.SHOW_TRADE_LIST) != null) {
@@ -38,12 +36,31 @@ public class TradeMenu extends ViewUtils {
                 addItem(matcher, false);
             } else if ((matcher = TradeCommands.getMatcher(command, TradeCommands.REMOVE_ITEM_FROM_GIVE)) != null) {
                 removeItem(matcher, false);
+            } else if ((matcher = TradeCommands.getMatcher(command, TradeCommands.SUBMIT)) != null) {
+                submit(matcher);
             } else if (TradeCommands.getMatcher(command, TradeCommands.SHOW_CURRENT_TRADE) != null) {
                 System.out.println(TradeController.showCurrentTrade());
             } else {
                 System.out.println("Invalid command!");
             }
         }
+    }
+
+    private static void submit(Matcher matcher) {
+        String tradeMessage = null;
+        if(matcher.group("message") != null) {
+            tradeMessage = fixDoubleQuotes(matcher.group("message"));
+        }
+        TradeMessages message = TradeController.submit(tradeMessage);
+        if (message == TradeMessages.SUCCESS) {
+            System.out.println("submit successful!");
+            return;
+        }
+        if (message == TradeMessages.INVALID_COMMAND) {
+            System.out.println("invalid command!");
+            return;
+        }
+        System.out.println("submit failed: " + message.getTxt());
     }
 
     private static void removeItem(Matcher matcher, boolean toGet) {
@@ -115,19 +132,5 @@ public class TradeMenu extends ViewUtils {
             return;
         }
         System.out.println("accept request failed: " + message.getTxt());
-    }
-
-    private static void addRequest(Matcher matcher) {
-        ControllerUtils.setInputs(putInHashmap(matcher, TradeCommands.ADD_REQUEST.getRegex()));
-        TradeMessages message = TradeController.addRequest();
-        if (message == TradeMessages.SUCCESS) {
-            System.out.println("add trade successful!");
-            return;
-        }
-        if (message == TradeMessages.INVALID_COMMAND) {
-            System.out.println("invalid command!");
-            return;
-        }
-        System.out.println("add trade failed: " + message.getTxt());
     }
 }

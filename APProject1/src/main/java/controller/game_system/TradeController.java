@@ -147,6 +147,7 @@ public class TradeController extends ControllerUtils {
         for (Items item : trade.getAskedItems().keySet()) {
             trade.getOwner().addItem(item, trade.getAskedItems().get(item));
         }
+        trade.removeTrade();
         return TradeMessages.SUCCESS;
     }
 
@@ -157,6 +158,9 @@ public class TradeController extends ControllerUtils {
         }
         if (currentAudiences.contains(player)) {
             return TradeMessages.PLAYER_IS_ALREADY_ADDED;
+        }
+        if (player.equals(currentPlayer)) {
+            return TradeMessages.YOU_CAN_NOT_TRADE_WITH_YOURSELF;
         }
         currentAudiences.add(player);
         return TradeMessages.SUCCESS;
@@ -192,7 +196,7 @@ public class TradeController extends ControllerUtils {
         if (items.containsKey(item)) {
             return TradeMessages.ITEM_IS_ALREADY_ADDED;
         }
-        currentAskedItems.put(item, amount);
+        items.put(item, amount);
         return TradeMessages.SUCCESS;
     }
 
@@ -210,7 +214,7 @@ public class TradeController extends ControllerUtils {
         if (!items.containsKey(item)) {
             return TradeMessages.NO_SUCH_ITEM_ADDED_BEFORE;
         }
-        currentAskedItems.remove(item);
+        items.remove(item);
         return TradeMessages.SUCCESS;
     }
 
@@ -232,7 +236,7 @@ public class TradeController extends ControllerUtils {
                 output.append("\t").append(item.getName()).append(" : ").append(currentAskedItems.get(item));
             }
         }
-        if (currentAskedItems.isEmpty()) {
+        if (currentProvidedItems.isEmpty()) {
             output.append("\nno provided item");
         } else {
             output.append("\nCURRENT PROVIDED ITEMS:");
@@ -241,5 +245,27 @@ public class TradeController extends ControllerUtils {
             }
         }
         return output.toString();
+    }
+
+    public static TradeMessages submit(String message) {
+        if(currentAudiences.isEmpty()) {
+            return TradeMessages.NO_AUDIENCE;
+        }
+        if(currentAskedItems.isEmpty() && currentProvidedItems.isEmpty()) {
+            return TradeMessages.INVALID_TRADE;
+        }
+        Trade trade;
+        for (Government audience : currentAudiences) {
+            trade = new Trade(currentPlayer, audience);
+            trade.setAskedItems(currentAskedItems);
+            trade.setProvidedItems(currentProvidedItems);
+            trade.setOwnersMessage(message);
+            currentPlayer.addTrade(trade);
+            audience.addTrade(trade);
+        }
+        currentProvidedItems.clear();
+        currentAskedItems.clear();
+        currentAudiences.clear();
+        return TradeMessages.SUCCESS;
     }
 }

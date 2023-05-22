@@ -29,7 +29,7 @@ public class Game {
     }
     public Government getPlayerByNickname(String name) {
         for (Government player : players) {
-            if(player.getGame().equals(name))
+            if(player.getName().equals(name))
                 return player;
         }
         return null;
