@@ -6,11 +6,15 @@ import model.game_stuff.Trade;
 import model.game_stuff.enums.Items;
 import view.game_system.messages.TradeMessages;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class TradeController extends ControllerUtils {
+    private static ArrayList<Government> currentAudiences = new ArrayList<>();
+    private static HashMap<Items, Integer> currentProvidedItems = new HashMap<>();
+    private static HashMap<Items, Integer> currentAskedItems = new HashMap<>();
     public static TradeMessages addRequest() {
         if (inputs.get("give") == null || inputs.get("get") == null) {
             return TradeMessages.INVALID_COMMAND;
@@ -143,5 +147,98 @@ public class TradeController extends ControllerUtils {
             trade.getOwner().addItem(item, trade.getAskedItems().get(item));
         }
         return TradeMessages.SUCCESS;
+    }
+
+    public static TradeMessages addAudience(String playerString) {
+        Government player = currentGame.getPlayerByNickname(playerString);
+        if(player == null) {
+            return TradeMessages.NO_SUCH_PLAYER;
+        }
+        if(currentAudiences.contains(player)) {
+            return TradeMessages.PLAYER_IS_ALREADY_ADDED;
+        }
+        currentAudiences.add(player);
+        return TradeMessages.SUCCESS;
+    }
+
+    public static TradeMessages removeAudience(String playerString) {
+        Government player = currentGame.getPlayerByNickname(playerString);
+        if(player == null) {
+            return TradeMessages.NO_SUCH_PLAYER;
+        }
+        if(!currentAudiences.contains(player)) {
+            return TradeMessages.NO_SUCH_PLAYER_ADDED_BEFORE;
+        }
+        currentAudiences.remove(player);
+        return TradeMessages.SUCCESS;
+    }
+
+    public static TradeMessages addItem(String itemString, int amount, Boolean toGet) {
+        Items item = Items.getItemByName(itemString);
+        if(item == null) {
+            return TradeMessages.NO_SUCH_ITEM;
+        }
+        if (toGet && currentPlayer.getNumberOfAnItem(item) < amount) {
+            TradeMessages.NOT_ENOUGH_RESOURCE.setInput(item.getName());
+            return TradeMessages.NOT_ENOUGH_RESOURCE;
+        }
+        HashMap<Items, Integer> items;
+        if(toGet) {
+            items = currentAskedItems;
+        } else {
+            items = currentProvidedItems;
+        }
+        if(items.containsKey(item)) {
+            return TradeMessages.ITEM_IS_ALREADY_ADDED;
+        }
+        currentAskedItems.put(item,amount);
+        return TradeMessages.SUCCESS;
+    }
+
+    public static TradeMessages removeItem(String itemString, int amount, boolean toGet) {
+        Items item = Items.getItemByName(itemString);
+        if(item == null) {
+            return TradeMessages.NO_SUCH_ITEM;
+        }
+        HashMap<Items, Integer> items;
+        if(toGet) {
+            items = currentAskedItems;
+        } else {
+            items = currentProvidedItems;
+        }
+        if(!items.containsKey(item)) {
+            return TradeMessages.NO_SUCH_ITEM_ADDED_BEFORE;
+        }
+        currentAskedItems.remove(item);
+        return TradeMessages.SUCCESS;
+    }
+
+    private static String showCurrentTrade() {
+        String output = "";
+        if(currentAudiences.isEmpty()) {
+            output += "no audience";
+        } else {
+            output += "CURRENT AUDIENCES:";
+            for (Government government : currentAudiences) {
+                output += "\t" + government.getName();
+            }
+        }
+        if(currentAskedItems.isEmpty()) {
+            output += "\nno asked item";
+        } else {
+            output += "\nCURRENT ASKED ITEMS:";
+            for (Items item : currentAskedItems.keySet()) {
+                output += "\t" + item.getName() + " : " + currentAskedItems.get(item);
+            }
+        }
+        if(currentAskedItems.isEmpty()) {
+            output += "\nno provided item";
+        } else {
+            output += "\nCURRENT PROVIDED ITEMS:";
+            for (Items item : currentProvidedItems.keySet()) {
+                output += "\t" + item.getName() + " : " + currentProvidedItems.get(item);
+            }
+        }
+        return output;
     }
 }
