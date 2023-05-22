@@ -106,8 +106,9 @@ public class UnitController extends ControllerUtils {
         if (!target.containsEnemyBuilding(currentPlayer.getColor()) && !target.containsEnemyPerson(currentPlayer.getColor())) {
             return UnitMessages.NOTHING_TO_ATTACK_TO;
         }
+        move(x, y);
         for (Troop troop : troops) {
-            troop.setAttackTarget(target);
+            troop.setAttackPurpose(target);
         }
         return UnitMessages.SUCCESS;
     }
@@ -136,6 +137,39 @@ public class UnitController extends ControllerUtils {
             }
         }
         return UnitMessages.SUCCESS;
+    }
+
+    public static UnitMessages setDestination(int destinationX, int destinationY) {
+        if(!currentMap.isInMap(destinationX, destinationY)) {
+            return UnitMessages.COORDINATE_OUT_OF_BOUND;
+        }
+        move(destinationX, destinationY);
+        return UnitMessages.SUCCESS;
+    }
+
+    private static void move(int destinationX, int destinationY) {
+        ArrayList<Direction> moveOrderArrayList = new ArrayList<>();
+        ArrayList<Block> blocksContainingUnit = new ArrayList<>();
+        for (Troop troop : troops) {
+            if(!blocksContainingUnit.contains(troop.getPosition())) {
+                blocksContainingUnit.add(troop.getPosition());
+                if(moveOrderArrayList != null) {
+                    moveOrderArrayList.clear();
+                }
+                moveOrderArrayList = routUnit(troop.getPosition().getX(), troop.getPosition().getY(),moveOrderArrayList,
+                    destinationX - troop.getPosition().getX(),
+                    destinationY - troop.getPosition().getY());
+                if(moveOrderArrayList == null) {
+                    continue;
+                }
+                LinkedList<Direction> moveOrder = new LinkedList<>(moveOrderArrayList);
+                for (Person person : troop.getPosition().getPeople()) {
+                    if((person instanceof Troop) ) {
+                        ((Troop) person).setMoveOrder(moveOrder);
+                    }
+                }
+            }
+        }
     }
 
     public void addTroop(Troop troop) {
@@ -168,28 +202,28 @@ public class UnitController extends ControllerUtils {
         return UnitMessages.SUCCESS;
     }
 
-    private static ArrayList<Direction> routUnit(int x, int y, ArrayList<Direction> directions, int i, int j) {
-        if(i==0&&j==0){
+    private static ArrayList<Direction> routUnit(int thisX, int thisY, ArrayList<Direction> directions, int xDistanceTo, int yDistance) {
+        if(xDistanceTo==0&&yDistance==0){
             return directions;
         }
         int dirX = 0, dirY = 0;
-        if (i > 0) {
+        if (xDistanceTo > 0) {
             dirX = 1;
-        } else if (i < 0) {
+        } else if (xDistanceTo < 0) {
             dirX = -1;
         }
-        if (j > 0) {
+        if (yDistance > 0) {
             dirY = 1;
-        } else if (j < 0) {
+        } else if (yDistance < 0) {
             dirY = -1;
         }
-        if (dirX != 0 && isPossibleToGo(currentGame.getMap().getBlock(x+dirX, y))) {
+        if (dirX != 0 && isPossibleToGo(currentGame.getMap().getBlock(thisX+dirX, thisY))) {
             directions.add(Direction.getDirectionByXY(dirX,0));
-            return routUnit( x+dirX,  y, directions, i-dirX, j);
+            return routUnit( thisX+dirX,  thisY, directions, xDistanceTo-dirX, yDistance);
         }
-        if (dirY != 0 && isPossibleToGo(currentGame.getMap().getBlock(x, y+dirY))) {
+        if (dirY != 0 && isPossibleToGo(currentGame.getMap().getBlock(thisX, thisY+dirY))) {
             directions.add(Direction.getDirectionByXY(0,dirY));
-            return routUnit( x,  y+dirY, directions, i, j-dirY);
+            return routUnit( thisX,  thisY+dirY, directions, xDistanceTo, yDistance-dirY);
         }
         if(dirX==0){
             dirX=-1;
@@ -197,13 +231,13 @@ public class UnitController extends ControllerUtils {
         if(dirY==0){
             dirY=-1;
         }
-        if ( isPossibleToGo(currentGame.getMap().getBlock(x-dirX, y))) {
+        if ( isPossibleToGo(currentGame.getMap().getBlock(thisX-dirX, thisY))) {
             directions.add(Direction.getDirectionByXY(-dirX,0));
-            return routUnit( x-dirX,  y, directions, i+dirX, j);
+            return routUnit( thisX-dirX,  thisY, directions, xDistanceTo+dirX, yDistance);
         }
-        if ( isPossibleToGo(currentGame.getMap().getBlock(x, y-dirY))) {
+        if ( isPossibleToGo(currentGame.getMap().getBlock(thisX, thisY-dirY))) {
             directions.add(Direction.getDirectionByXY(0,-dirY));
-            return routUnit( x,  y+dirY, directions, i, j+dirY);
+            return routUnit( thisX,  thisY+dirY, directions, xDistanceTo, yDistance+dirY);
         }
         return null;
 

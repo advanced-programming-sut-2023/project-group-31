@@ -21,6 +21,8 @@ public class UnitMenu extends ViewUtils {
                 setState(matcher);
             } else if ((matcher = UnitCommands.getMatcher(command, UnitCommands.SET_MOVE_ORDER)) != null) {
                 setMoveOrder(matcher);
+            } else if ((matcher = UnitCommands.getMatcher(command, UnitCommands.MOVE)) != null) {
+                move(matcher);
             } else if ((matcher = UnitCommands.getMatcher(command, UnitCommands.SELECT_SPECIAL_TROOPS)) != null) {
                 selectSpecialTroops(matcher);
             } else if ((matcher = UnitCommands.getMatcher(command, UnitCommands.ATTACK)) != null) {
@@ -32,6 +34,22 @@ public class UnitMenu extends ViewUtils {
             } else {
                 System.out.println("invalid command!");
             }
+        }
+    }
+
+    private static void move(Matcher matcher) {
+        if(matcher.group("x") == null || matcher.group("y") == null) {
+            System.out.println("invalid Command!");
+        }
+        int destinationX = Integer.parseInt(matcher.group("x"));
+        int destinationY = Integer.parseInt(matcher.group("y"));
+        UnitMessages message = UnitController.setDestination(destinationX, destinationY);
+        if(message.equals(UnitMessages.SUCCESS)) {
+            System.out.println("move successful!");
+        } else if(message.equals(UnitMessages.INVALID_COMMAND)) {
+            System.out.println("invalid command!");
+        } else {
+            System.out.println("move failed: " + message.getTxt());
         }
     }
 
