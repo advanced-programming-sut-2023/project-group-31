@@ -6,11 +6,16 @@ import model.game_stuff.Trade;
 import model.game_stuff.enums.Items;
 import view.game_system.messages.TradeMessages;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class TradeController extends ControllerUtils {
+    private static final ArrayList<Government> currentAudiences = new ArrayList<>();
+    private static final HashMap<Items, Integer> currentProvidedItems = new HashMap<>();
+    private static final HashMap<Items, Integer> currentAskedItems = new HashMap<>();
+
     public static TradeMessages addRequest() {
         if (inputs.get("give") == null || inputs.get("get") == null) {
             return TradeMessages.INVALID_COMMAND;
@@ -78,7 +83,7 @@ public class TradeController extends ControllerUtils {
     }
 
     public static String showMyTradeHistory() {
-        if(currentPlayer.getTradeHistory().isEmpty()) {
+        if (currentPlayer.getTradeHistory().isEmpty()) {
             return "You have not any trade yet!";
         }
         StringBuilder output = new StringBuilder("TRADE HISTORY:");
@@ -143,5 +148,98 @@ public class TradeController extends ControllerUtils {
             trade.getOwner().addItem(item, trade.getAskedItems().get(item));
         }
         return TradeMessages.SUCCESS;
+    }
+
+    public static TradeMessages addAudience(String playerString) {
+        Government player = currentGame.getPlayerByNickname(playerString);
+        if (player == null) {
+            return TradeMessages.NO_SUCH_PLAYER;
+        }
+        if (currentAudiences.contains(player)) {
+            return TradeMessages.PLAYER_IS_ALREADY_ADDED;
+        }
+        currentAudiences.add(player);
+        return TradeMessages.SUCCESS;
+    }
+
+    public static TradeMessages removeAudience(String playerString) {
+        Government player = currentGame.getPlayerByNickname(playerString);
+        if (player == null) {
+            return TradeMessages.NO_SUCH_PLAYER;
+        }
+        if (!currentAudiences.contains(player)) {
+            return TradeMessages.NO_SUCH_PLAYER_ADDED_BEFORE;
+        }
+        currentAudiences.remove(player);
+        return TradeMessages.SUCCESS;
+    }
+
+    public static TradeMessages addItem(String itemString, int amount, Boolean toGet) {
+        Items item = Items.getItemByName(itemString);
+        if (item == null) {
+            return TradeMessages.NO_SUCH_ITEM;
+        }
+        if (toGet && currentPlayer.getNumberOfAnItem(item) < amount) {
+            TradeMessages.NOT_ENOUGH_RESOURCE.setInput(item.getName());
+            return TradeMessages.NOT_ENOUGH_RESOURCE;
+        }
+        HashMap<Items, Integer> items;
+        if (toGet) {
+            items = currentAskedItems;
+        } else {
+            items = currentProvidedItems;
+        }
+        if (items.containsKey(item)) {
+            return TradeMessages.ITEM_IS_ALREADY_ADDED;
+        }
+        currentAskedItems.put(item, amount);
+        return TradeMessages.SUCCESS;
+    }
+
+    public static TradeMessages removeItem(String itemString, boolean toGet) {
+        Items item = Items.getItemByName(itemString);
+        if (item == null) {
+            return TradeMessages.NO_SUCH_ITEM;
+        }
+        HashMap<Items, Integer> items;
+        if (toGet) {
+            items = currentAskedItems;
+        } else {
+            items = currentProvidedItems;
+        }
+        if (!items.containsKey(item)) {
+            return TradeMessages.NO_SUCH_ITEM_ADDED_BEFORE;
+        }
+        currentAskedItems.remove(item);
+        return TradeMessages.SUCCESS;
+    }
+
+    public static String showCurrentTrade() {
+        StringBuilder output = new StringBuilder();
+        if (currentAudiences.isEmpty()) {
+            output.append("no audience");
+        } else {
+            output.append("CURRENT AUDIENCES:");
+            for (Government government : currentAudiences) {
+                output.append("\t").append(government.getName());
+            }
+        }
+        if (currentAskedItems.isEmpty()) {
+            output.append("\nno asked item");
+        } else {
+            output.append("\nCURRENT ASKED ITEMS:");
+            for (Items item : currentAskedItems.keySet()) {
+                output.append("\t").append(item.getName()).append(" : ").append(currentAskedItems.get(item));
+            }
+        }
+        if (currentAskedItems.isEmpty()) {
+            output.append("\nno provided item");
+        } else {
+            output.append("\nCURRENT PROVIDED ITEMS:");
+            for (Items item : currentProvidedItems.keySet()) {
+                output.append("\t").append(item.getName()).append(" : ").append(currentProvidedItems.get(item));
+            }
+        }
+        return output.toString();
     }
 }
