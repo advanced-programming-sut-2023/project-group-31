@@ -245,7 +245,7 @@ public class UnitController extends ControllerUtils {
 
     private static boolean isPossibleToGo(Block block) {
         return block.isPermeable() &&
-            !block.containsEnemyBuilding(currentPlayer.getColor()) &&
+            block.getBuilding() == null &&
             !block.containsEnemyPerson(currentPlayer.getColor());
     }
 
@@ -257,7 +257,6 @@ public class UnitController extends ControllerUtils {
         int i=x-troops.get(0).getPosition().getX();
         int j=y-troops.get(0).getPosition().getY();
         routUnit(troops.get(0).getPosition().getX(),troops.get(0).getPosition().getY(),directions,i,j);
-
         return UnitMessages.SUCCESS;
     }
 
