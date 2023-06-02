@@ -6,7 +6,6 @@ import view.user_system.commands.MainMenuCommands;
 import view.user_system.messages.MenuSwitcherMessages;
 import view.viewStyle.Colors;
 
-import java.awt.*;
 import java.util.regex.Matcher;
 
 public class MainMenu extends ViewUtils {

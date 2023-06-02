@@ -4,10 +4,10 @@ import model.DataBase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import view.ViewUtils;
-import view.user_system.commands.LoginCommands;
-import view.user_system.commands.RegisterCommands;
-import view.user_system.messages.UserMessages;
+import consuleview.ViewUtils;
+import consuleview.user_system.commands.LoginCommands;
+import consuleview.user_system.commands.RegisterCommands;
+import consuleview.user_system.messages.UserMessages;
 
 import java.util.regex.Matcher;
 

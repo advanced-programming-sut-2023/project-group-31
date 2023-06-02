@@ -1,6 +1,7 @@
 package view;
 
 import controller.ControllerUtils;
+import javafx.stage.Stage;
 import view.user_system.messages.UserMessages;
 
 import java.util.HashMap;
@@ -9,6 +10,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ViewUtils {
+    public static Stage stage;
     protected static Scanner scanner;
     protected static UserMessages userResult;
 
