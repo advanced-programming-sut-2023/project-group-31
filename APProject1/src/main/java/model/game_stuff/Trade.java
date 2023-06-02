@@ -104,11 +104,11 @@ public class Trade {
     }
 
     public void setProvidedItems(HashMap<Items, Integer> providedItems) {
-        this.providedItems = providedItems;
+        this.providedItems = new HashMap<>(providedItems);
     }
 
     public void setAskedItems(HashMap<Items, Integer> askedItems) {
-        this.askedItems = askedItems;
+        this.askedItems = new HashMap<>(askedItems);
     }
 
     public static ArrayList<Trade> getLiveTrades() {
@@ -126,10 +126,10 @@ public class Trade {
     @Override
     public String toString() {
         return "Trade :" + id + "{\n" +
-                owner.getName() + " " + owner.getColor().getName() + (ownersMessage == null ? "" : (": " + ownersMessage)) + "\n" +
+                "from :" + owner.getName() + " " + owner.getColor().getName() + (ownersMessage == null ? "" : (": " + ownersMessage)) + "\n" +
                 "providedItems=" + providedItems + "\n" +
                 "askedItems=" + askedItems + "\n" +
-                askedGovernment.getName() + " " + askedGovernment.getColor().getName() + (othersMessage == null ? "" : (": " + othersMessage)) + "\n" +
+                "to :" + askedGovernment.getName() + " " + askedGovernment.getColor().getName() + (othersMessage == null ? "" : (": " + othersMessage)) + "\n" +
                 "}\n";
     }
 }

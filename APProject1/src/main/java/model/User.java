@@ -30,7 +30,7 @@ public class User {
         this.email = email;
         this.slogan = slogan;
         this.scores = new ArrayList<Score>();
-        this.highScore = 0;
+        this.highScore = 100;
     }
 
 

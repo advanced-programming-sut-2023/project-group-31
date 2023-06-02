@@ -24,7 +24,7 @@ public abstract class Person implements HasHp{
     }
 
     public void setMoveOrder(LinkedList<Direction> moveOrder) {
-        this.moveOrder = moveOrder;
+        this.moveOrder = new LinkedList<>(moveOrder);
     }
 
     public LinkedList<Direction> getMoveOrder() {
@@ -76,6 +76,9 @@ public abstract class Person implements HasHp{
     }
     public void getDamaged(int damage) {
         this.hp -= damage;
+        if(hp < 0) {
+            die();
+        }
     }
 
     public int getHp() {

@@ -48,7 +48,7 @@ public class Storage extends Building {
         return amountOfProducts >= type.getCapacity();
     }
     public int getCapacityLeft() {
-        return amountOfProducts - type.getCapacity();
+        return type.getCapacity() - amountOfProducts;
     }
     public void addProduct(Items product, int amount) {
         if (properties.containsKey(product)){

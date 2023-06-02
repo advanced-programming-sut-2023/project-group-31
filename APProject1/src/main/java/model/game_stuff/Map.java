@@ -138,7 +138,7 @@ public class Map {
         ArrayList<Block> neighbours = new ArrayList<>();
         Block block1;
         int x, y;
-        for (int i = 0; i < distance; i++) {
+        for (int i = 1; i <= distance; i++) {
             int j = distance - i;
             if (isInMap((x = block.getX() + i), (y = block.getY() + j)) && !neighbours.contains((block1 = getBlock(x, y)))) {
                 neighbours.add(block1);

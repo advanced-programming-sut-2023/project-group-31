@@ -15,9 +15,11 @@ public class Troop extends Person {
     protected TroopTypes type;
     protected TroopState state;
     protected Block attackTarget;
+    protected Block attackPurpose;
 
     {
         attackTarget = null;
+        attackPurpose = null;
         state = TroopState.DEFENCIVE;
     }
     public Troop(Government owner, TroopTypes type) {
@@ -27,6 +29,10 @@ public class Troop extends Person {
         name = type.getName();
         owner.getTroops().add(this);
         speed = type.getSpeed();
+    }
+
+    public void setAttackPurpose(Block attackPurpose) {
+        this.attackPurpose = attackPurpose;
     }
 
     public TroopState getState() {
@@ -59,9 +65,14 @@ public class Troop extends Person {
     }
     public boolean attack() {
         Random random = new Random();
+        if(attackPurpose != null && attackPurpose.getDistanceTo(position) <= type.getFightingRange()) {
+            attackTarget = attackPurpose;
+            attackPurpose = null;
+        }
         if(attackTarget == null || (!attackTarget.containsEnemyPerson(owner.getColor()) && !attackTarget.containsEnemyBuilding(owner.getColor()))) {
-            if(!findEnemyBlockToAttack())
+            if(!findEnemyBlockToAttack()) {
                 return false;
+            }
         }
         if(attackTarget.containsEnemyTroop(owner.getColor())) {
             ArrayList<Person> enemyTroops = new ArrayList<>();
