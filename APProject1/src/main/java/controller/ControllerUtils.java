@@ -18,6 +18,7 @@ public abstract class ControllerUtils {
 
     static {
         currentMap = Map.getDefaultMap();
+        inputs=new HashMap<>();
     }
 
     public static Map getCurrentMap() {

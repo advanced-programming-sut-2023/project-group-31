@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.SplitMenuButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.RadioButton?>
+<BorderPane id="register-menu" prefHeight="650" prefWidth="1200" stylesheets="@../CSS/registerstyle.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.user_system.pages.RegisterPage">
+   <center>
+      <VBox alignment="CENTER" spacing="10">
+         <Label layoutX="414.0" layoutY="28.0" text="username" />
+         <HBox alignment="CENTER" spacing="20">
+            <TextField layoutX="382.0" layoutY="51.0" fx:id="usernameField"/>
+            <Label text="Fill username field" fx:id="usernameLabel"/>
+         </HBox>
+         <Label layoutX="415.0" layoutY="101.0" text="password" />
+         <HBox alignment="CENTER" spacing="20">
+            <PasswordField layoutX="382.0" layoutY="132.0" fx:id="passwordOfPassword1"/>
+            <TextField layoutX="382.0" layoutY="132.0" fx:id="passwordOfPassword2"/>
+            <CheckBox text="show/hide password" fx:id="passwordProperty"/>
+            <Button text="random password" onMouseClicked="#randomPassword" fx:id="randomPass"/>
+            <Label textAlignment="CENTER" fx:id="passwordState" text=""/>
+         </HBox>
+         <PasswordField promptText="enter password again" fx:id="enterAgain"/>
+         <Label layoutX="429.0" layoutY="157.0" text="Email" />
+         <TextField layoutX="381.0" layoutY="187.0" promptText="your email@gmail.com" fx:id="email"/>
+         <Label layoutX="421.0" layoutY="234.0" text="nickname" />
+         <TextField layoutX="382.0" layoutY="257.0" fx:id="nickname"/>
+         <HBox alignment="CENTER" spacing="20">
+            <CheckBox fx:id="popularSlogans" onMouseClicked="#showPopularSlogan" text="popular slogans"/>
+            <CheckBox fx:id="randomSlogan" onMouseClicked="#randomSlogan" text="select random"/>
+            <TextField layoutX="323.0" layoutY="370.0" fx:id="sloganField"/>
+            <CheckBox layoutX="522.0" layoutY="378.0" mnemonicParsing="false" text="slogan"  fx:id="slogan" onMouseClicked="#show"/>
+         </HBox>
+         <Label id="error" text="" alignment="CENTER" textAlignment="CENTER" prefHeight="55.0" prefWidth="438.0" fx:id="error"/>
+         <HBox alignment="CENTER" spacing="20">
+            <Button layoutX="142.0" layoutY="536.0" mnemonicParsing="false" text="register" onMouseClicked="#register"/>
+            <Button layoutX="332.0" layoutY="587.0" mnemonicParsing="false" text="back" onMouseClicked="#back"/>
+         </HBox>
+      </VBox>
+   </center>
+</BorderPane>

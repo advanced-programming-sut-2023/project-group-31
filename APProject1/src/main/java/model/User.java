@@ -2,6 +2,7 @@ package model;
 
 import model.user_stuff.Score;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -12,6 +13,7 @@ public class User {
     private String nickname;
     private String email;
     private String slogan;
+    private URL url;
     private String passwordRecoveryQuestion;
     private String passwordRecoveryAnswer;
     private ArrayList<Score> scores;
@@ -29,9 +31,11 @@ public class User {
         }
         this.email = email;
         this.slogan = slogan;
+        this.url=User.class.getResource("/Media/Avatars/avatar1.png");
         this.scores = new ArrayList<Score>();
         this.highScore = 100;
     }
+
 
 
     //getter setter
@@ -125,7 +129,7 @@ public class User {
     //static methods
     public static void addUser(User user) {
         users.put(user.username, user);
-        DataBase.getDataBase().addUser(user);
+        //DataBase.getDataBase().addUser(user);
     }
 
     public static void removeUser(User user) {
@@ -178,4 +182,12 @@ public class User {
                 "rank=" + getRank() + "\n" +
                 "slogan: " + slogan;
     }
+    public URL getUrl() {
+        return url;
+    }
+
+    public void setUrl(URL url) {
+        this.url = url;
+    }
+
 }
