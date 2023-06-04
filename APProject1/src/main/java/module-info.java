@@ -1,8 +1,10 @@
+
 module APProject1 {
     requires javafx.controls;
     requires javafx.fxml;
     requires com.google.gson;
     requires java.desktop;
+
 
     exports  view;
     exports  view.user_system;
@@ -28,4 +30,5 @@ module APProject1 {
     opens model.game_stuff.enums to com.google.gson;
     opens model.game_stuff.buildings to com.google.gson;
     opens model.Popups to javafx.fxml;
+    opens view.user_system.menu_controller to javafx.fxml;
 }
