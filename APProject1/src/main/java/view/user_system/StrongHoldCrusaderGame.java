@@ -13,14 +13,15 @@ import java.net.URL;
 
 public class StrongHoldCrusaderGame extends Application {
     public static Stage stage;
+
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root=loadFXML(Menus.LOGIN);
-         this.stage=stage;
-assert root!=null;
-Scene scene=new Scene(root);
-stage.setScene(scene);
-stage.show();
+        Parent root = loadFXML(Menus.LOGIN);
+        this.stage = stage;
+        assert root != null;
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
     private static Parent loadFXML(Menus menus) {
@@ -33,6 +34,7 @@ stage.show();
         }
         return null;
     }
+
     public static void changeMenu(Menus menuName) {
 
 
