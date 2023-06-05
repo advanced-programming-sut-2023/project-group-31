@@ -1,23 +1,29 @@
 package view.user_system;
 
 
+import com.google.gson.Gson;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import model.DataBase;
 import view.enums.Menus;
 
 import java.io.IOException;
 import java.net.URL;
 
 public class StrongHoldCrusaderGame extends Application {
+    public static void main(String[] args) {
+        DataBase.loadApp();
+        launch(args);
+    }
     public static Stage stage;
 
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = loadFXML(Menus.LOGIN);
-        this.stage = stage;
+        StrongHoldCrusaderGame.stage = stage;
         assert root != null;
         Scene scene = new Scene(root);
         stage.setScene(scene);
@@ -46,8 +52,5 @@ public class StrongHoldCrusaderGame extends Application {
         stage.setScene(scene);
     }
 
-    public static void main(String[] args) {
-        //DataBase.loadApp();
-        launch(args);
-    }
+
 }
