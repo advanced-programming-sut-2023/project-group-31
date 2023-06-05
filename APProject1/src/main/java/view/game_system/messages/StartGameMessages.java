@@ -1,5 +1,7 @@
 package view.game_system.messages;
 
+import javafx.scene.control.Alert;
+
 public enum StartGameMessages {
     SUCCESS("successful!"),
     MAP_NOT_FOUND("map not found!"),
@@ -16,10 +18,14 @@ public enum StartGameMessages {
     INVALID_LORD_HOUSE_NUMBER("invalid lord house number!"),
     TOO_FEW_PLAYERS("too few players"),
     OUT_OF_MAP("The position is out of map"),
-    THE_MAP_IS_ALREADY_SAVED("the map is already saved!");
+    THE_MAP_IS_ALREADY_SAVED("the map is already saved!"),
+
+    CHOOSE_COLOR("choose all colors")
     ;
     private String txt;
     private String input;
+
+    private Alert.AlertType alertType;
 
     public void setInput(String input) {
         this.input = input;
@@ -36,6 +42,22 @@ public enum StartGameMessages {
 
     public void setTxt(String txt) {
         this.txt = txt;
+    }
+
+    public Alert.AlertType getAlertType() {
+        return alertType;
+    }
+
+    public static void showAlert(StartGameMessages message){
+        Alert.AlertType alertType;
+        if(message.getAlertType()==null){
+            alertType = Alert.AlertType.ERROR;
+        }else alertType = message.alertType;
+        Alert alert = new Alert(alertType);
+        alert.setTitle(alertType.name());
+        alert.setHeaderText("start game failed");
+        alert.setContentText(message.getTxt());
+        alert.showAndWait();
     }
 
     public String getTxt() {

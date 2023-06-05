@@ -1,11 +1,11 @@
 package view.game_system.pages;
 
+import controller.ControllerUtils;
+import controller.game_system.StartGameController;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -16,49 +16,73 @@ import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import model.DataBase;
 import model.User;
+import model.game_stuff.Colors;
+import view.game_system.messages.StartGameMessages;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class StartGame {
-    private int playersCount;
-    private int playersStart;
+    private int usersCount;
+    private int usersStart;
+
+    private ArrayList<String> players;
 
     public StartGame() {
-        playersStart = 0;
-        playersCount = 8;
+        usersStart = 0;
+        usersCount = 8;
+        players = new ArrayList<>();
+        if(ControllerUtils.getCurrentUser()!=null){
+            players.add(ControllerUtils.getCurrentUser().getUsername());
+        }
     }
 
     @FXML
-    private VBox playersVbox;
+    private VBox usersVbox;
     @FXML
-    private ScrollPane playerScroll;
+    private ScrollPane usersScroll;
+
+    @FXML
+    private ScrollPane playersScroll;
+
+    @FXML
+    private VBox playersList;
 
     @FXML
     public void initialize() throws IOException{
+        if(ControllerUtils.getCurrentUser() != null){
+            setFirstPlayer();
+        }
         setPlayersList();
     }
 
 
-
+    public void setFirstPlayer(){
+        HBox hBox =(HBox)createPlayerRow(ControllerUtils.getCurrentUser());
+        ChoiceBox choiceBox = new ChoiceBox();
+        for(Colors color:Colors.values()){
+            choiceBox.getItems().add(color.getName());
+        }
+        choiceBox.setValue("choose color");
+        hBox.getChildren().add(choiceBox);
+        playersList.getChildren().add(hBox);
+    }
 
     private void setPlayersList() {
-//        for(int i=0;i<playersVbox.getChildren().size();i++){
-//            playersVbox.getChildren().remove(i);
-//            i--;
-//        }
-        for (int i = playersStart; i < playersStart + playersCount; i++) {
+        System.out.println(DataBase.getDataBase().getUsers().size());
+        for (int i = usersStart; i < usersStart + usersCount; i++) {
             if (i >= DataBase.getDataBase().getUsers().size()) {
                 return;
             }
-            playersVbox.getChildren().add(createPlayerRow(i));
+            usersVbox.getChildren().add(createPlayerRow(DataBase.getDataBase().getUsers().get(i)));
         }
     }
 
-    private HBox createPlayerRow(int index) {
-        User user = DataBase.getDataBase().getUsers().get(index);
+    private HBox createPlayerRow(User user) {
         HBox hBox = new HBox();
         hBox.setStyle("-fx-start-margin: 20");
-        ImageView imageView = new ImageView(new Image(user.getUrl()));
+        System.out.println(StartGame.class.getResource(user.getUrl()).toExternalForm());
+        ImageView imageView = new ImageView(new Image(StartGame.class.getResource(user.getUrl()).toExternalForm()));
         imageView.setFitHeight(43.0);
         imageView.setFitWidth(58.0);
         Label label1 = new Label();
@@ -90,6 +114,18 @@ public class StartGame {
         button.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
+                HBox hBox =(HBox) ((Button)(mouseEvent.getSource())).getParent();
+                players.add(((Button)(mouseEvent.getSource())).getId());
+                hBox.getChildren().remove(3);
+                ChoiceBox choiceBox = new ChoiceBox();
+                for(Colors color:Colors.values()){
+                    choiceBox.getItems().add(color.getName());
+                }
+                choiceBox.setValue("choose color");
+                choiceBox.setPrefWidth(100);
+                choiceBox.setPrefHeight(40);
+                hBox.getChildren().add(choiceBox);
+                playersList.getChildren().add(hBox);
 
             }
         });
@@ -99,5 +135,26 @@ public class StartGame {
     public void checkScroll(ScrollEvent event) {
             System.out.println(event.getDeltaY());
 
+    }
+
+    public void startGame(MouseEvent mouseEvent) {
+        ArrayList<String> colors = new ArrayList<>();
+        for(Object hBox: playersList.getChildren()){
+            hBox = (HBox) hBox;
+            if(((ChoiceBox)(((HBox) hBox).getChildren().get(3))).getValue().equals("choose color")){
+                StartGameMessages.showAlert(StartGameMessages.CHOOSE_COLOR);
+                return;
+            }
+            colors.add((String)(((ChoiceBox)(((HBox) hBox).getChildren().get(3))).getValue()));
+        }
+        for(int i=0;i<players.size();i++){
+            StartGameController.addPlayer(players.get(i));
+            StartGameController.setPlayersLordHouse(players.get(i), i);
+            StartGameController.setPlayersTeam(players.get(i),colors.get(i));
+        }
+        StartGameMessages message;
+        if(!(message=StartGameController.start()).equals(StartGameMessages.SUCCESS)){
+            StartGameMessages.showAlert(message);
+        }
     }
 }

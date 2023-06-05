@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import model.DataBase;
 import view.enums.Menus;
 import view.user_system.StrongHoldCrusaderGame;
 import java.io.IOException;
@@ -12,6 +13,7 @@ import java.net.URL;
 
 public class GameSwitcher extends Application {
     public static void main(String[] args) {
+        DataBase.loadApp();
         launch(args);
     }
     public static Stage stage;
