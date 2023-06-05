@@ -4,6 +4,7 @@ import controller.ControllerUtils;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.input.MouseEvent;
+import model.DataBase;
 import model.User;
 import view.enums.Menus;
 import view.user_system.StrongHoldCrusaderGame;
@@ -31,8 +32,7 @@ public class MainMenuPage {
     }
 
     public void exit(MouseEvent mouseEvent) {
-        //TODO
-        //save users
+        DataBase.saveDataBase();
         System.exit(0);
     }
 

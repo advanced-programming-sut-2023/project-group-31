@@ -4,10 +4,12 @@ package view.user_system.pages;
 import controller.ControllerUtils;
 import controller.user_system.LoginController;
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import model.DataBase;
 import model.Popups.Popup1;
 import model.User;
 import view.enums.Menus;
@@ -19,6 +21,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static view.ViewUtils.putInHashmap;
 
@@ -98,8 +101,14 @@ public class LoginPage {
             // error.setStyle("-fx-text-fill: #ff0066;");
             return;
         }
-        String Url=captcha.getImage().getUrl().substring(93,97);
+        String regex=".+(?<number>\\d\\d\\d\\d)\\.png";
+        Pattern pattern=Pattern.compile(regex);
+        Matcher matcher2= pattern.matcher(captcha.getImage().getUrl());
+        String Url=matcher2.group("number");
+        System.out.println(Url);
+//        String Url=captcha.getImage().getUrl().substring(93,97);
         if (!Url.equals(captchaText.getText())){
+            error.setText("Fill captcha correctly!");
             resetCaptchaFailLogin();
             return;
         }
@@ -143,7 +152,7 @@ public class LoginPage {
     }
     public void exit(MouseEvent mouseEvent)
     {
-        //datebase save user
+        DataBase.saveDataBase();
         System.exit(0);
 
     }
