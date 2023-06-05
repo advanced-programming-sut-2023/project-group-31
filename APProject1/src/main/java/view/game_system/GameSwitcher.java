@@ -7,7 +7,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import view.enums.Menus;
 import view.user_system.StrongHoldCrusaderGame;
-
 import java.io.IOException;
 import java.net.URL;
 
