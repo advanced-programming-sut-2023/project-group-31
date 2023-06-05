@@ -18,7 +18,6 @@ import java.net.URL;
 
 public class WelcomeMenu extends Application {
     public static void main(String[] args) {
-        DataBase.loadApp();
         launch(args);
     }
 
