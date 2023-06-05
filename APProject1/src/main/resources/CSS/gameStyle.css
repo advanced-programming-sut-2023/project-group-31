@@ -3,8 +3,6 @@ Button {
     -fx-font-weight: bold;
     -fx-font-family: "Viner Hand ITC";
     -fx-text-fill: #d3bb16;
-    -fx-pref-width: 330;
-    -fx-pref-height: 35;
     -fx-border-radius: 5;
     -fx-background-color: rgba(0, 0, 0, 0.39);
 }
@@ -33,7 +31,7 @@ Button:hover{
     -fx-font-weight: bold;
     -fx-font-family: "Viner Hand ITC";
     -fx-text-fill: #d3bb16;
-    -fx-pref-width: 330;
+    -fx-pref-width: 120;
     -fx-pref-height: 35;
     -fx-border-radius: 5;
     -fx-background-color: rgba(0, 0, 0, 0.733);
@@ -52,12 +50,8 @@ PasswordField{
 Label{
 
 
-
-    -fx-font-size: 20;
     -fx-border-radius: 100;
     -fx-font-weight: bold;
-    -fx-font-family: "Times New Roman";
-    -fx-text-fill:  #FFA07A;
 
 }
 #pane{
@@ -96,6 +90,10 @@ Label{
 }
 #pick-question{
     -fx-background-image: url("../Media/MenuBackground/background3.jpg");
+    -fx-background-size: 1200 650;
+}
+#start-game{
+    -fx-background-image: url("../Media/MenuBackground/startgame.jpg");
     -fx-background-size: 1200 650;
 }
 /*.menu-bar{*/

@@ -173,6 +173,15 @@ public class User {
         return rank;
     }
 
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
     @Override
     public String toString() {
         return "username: " +username + "\n" +
@@ -181,13 +190,6 @@ public class User {
                 "highScore=" + getHighScore() + "\n" +
                 "rank=" + getRank() + "\n" +
                 "slogan: " + slogan;
-    }
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
     }
 
 }

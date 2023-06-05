@@ -29,7 +29,7 @@ public class GameSwitcher extends Application {
 
     private static Parent loadFXML(Menus menus) {
         try {
-            URL address = new URL(StrongHoldCrusaderGame.class.getResource("/FXML/user_system/" + menus.getName() + ".fxml").toExternalForm());
+            URL address = new URL(StrongHoldCrusaderGame.class.getResource("/FXML/game_system/" + menus.getName() + ".fxml").toExternalForm());
             FXMLLoader loader = new FXMLLoader(address);
             return loader.load();
         } catch (IOException e) {

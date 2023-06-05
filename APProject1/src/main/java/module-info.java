@@ -12,6 +12,7 @@ module APProject {
     exports  view.game_system;
     exports  model.game_stuff;
     exports  model.user_stuff;
+    exports view.game_system.pages;
     exports view.user_system.pages;
     exports model.game_stuff.people;
     exports model.game_stuff.people.enums;
@@ -29,6 +30,7 @@ module APProject {
     opens model.game_stuff.people to com.google.gson;
     opens model.game_stuff.buildings to com.google.gson;
     opens view.user_system.pages to javafx.fxml;
+    opens view.game_system.pages to javafx.fxml;
 
     opens model.Popups to javafx.fxml;
 }
