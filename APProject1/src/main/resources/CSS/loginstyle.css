@@ -94,6 +94,10 @@ Label{
     -fx-background-image: url("../Media/MenuBackground/background2.jpg");
     -fx-background-size: 1200 650;
 }
+#profile-menu{
+    -fx-background-image: url("../Media/MenuBackground/background5.jpg");
+    -fx-background-size: 1200 650;
+}
 #register-menu{
     -fx-background-image: url("../Media/MenuBackground/background.jpg");
     -fx-background-size: 1200 650;
@@ -140,6 +144,6 @@ Text{
     -fx-background-color: #2f342f;
 }
 /*.chart-plot-background{*/
-/*    -fx-background-image: url("../Media/background.jpg");*/
+/*    -fx-background-image: url("../Media/background4.jpg");*/
 /*    -fx-padding: 10px;*/
 /*}*/

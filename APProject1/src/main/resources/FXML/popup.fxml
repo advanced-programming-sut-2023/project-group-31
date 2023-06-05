@@ -19,7 +19,7 @@
       <Label layoutX="152.0" layoutY="286.0" prefHeight="17.0" prefWidth="317.0" alignment="CENTER" textAlignment="CENTER" text="enter new password again" fx:id="label2"/>
       <PasswordField layoutX="236.0" layoutY="310.0" promptText="new password " fx:id="second"/>
       <Button layoutX="245.0" layoutY="352.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="49.0" text="save" onMouseClicked="#save"/>
-      <Button layoutX="319.0" layoutY="352.0" mnemonicParsing="false" text="cancel" fx:id="cancel"/>
+      <Button layoutX="319.0" layoutY="352.0" mnemonicParsing="false" text="cancel" onMouseClicked="#cancel"/>
    </VBox>
   </center>
 </BorderPane>

@@ -13,7 +13,7 @@ public class User {
     private String nickname;
     private String email;
     private String slogan;
-    private URL url;
+    private String url;
     private String passwordRecoveryQuestion;
     private String passwordRecoveryAnswer;
     private ArrayList<Score> scores;
@@ -31,7 +31,7 @@ public class User {
         }
         this.email = email;
         this.slogan = slogan;
-        this.url=User.class.getResource("/Media/Avatars/avatar1.png");
+        this.url="/Media/Avatars/avatar1.png";
         this.scores = new ArrayList<Score>();
         this.highScore = 100;
     }
@@ -182,11 +182,11 @@ public class User {
                 "rank=" + getRank() + "\n" +
                 "slogan: " + slogan;
     }
-    public URL getUrl() {
+    public String getUrl() {
         return url;
     }
 
-    public void setUrl(URL url) {
+    public void setUrl(String url) {
         this.url = url;
     }
 

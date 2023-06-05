@@ -179,6 +179,9 @@ public class RegisterPage {
             error.setText("Fill all fields");
             return;
         }
+        if (sloganField.getText().equals("")){
+            sloganField.setText("slogan is empty");
+        }
         UserMessages result;
         ControllerUtils.putInput("username",usernameField.getText());
         ControllerUtils.putInput("password",passwordOfPassword1.getText());

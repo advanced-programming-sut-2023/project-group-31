@@ -6,7 +6,6 @@ public enum Menus {
   MAIN("mainmenu"),
   PROFILE("profilemenu"),
   PICKQUESION("pickquestion"),
-  SCOREBOARD("scoreboard")
  ;
       private final String name;
      Menus(String name){

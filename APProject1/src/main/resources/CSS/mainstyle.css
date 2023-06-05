@@ -72,6 +72,10 @@ Label{
     -fx-background-color:transparent;
     -fx-background-position: center center;
 }
+#profile-menu{
+    -fx-background-image: url("../Media/MenuBackground/background4.jpg");
+    -fx-background-size: 1200 650;
+}
 #title{
     -fx-font-size: 50;
     -fx-font-weight: bold;

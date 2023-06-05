@@ -24,7 +24,7 @@ import static view.ViewUtils.putInHashmap;
 
 public class LoginPage {
     @FXML
-    private CheckBox Fpassword;
+    private Button Fpassword;
     @FXML
     private TextField captchaText;
     @FXML
@@ -160,8 +160,6 @@ public class LoginPage {
     }
 
     public void forgotPassword(MouseEvent mouseEvent) {
-        System.out.println(Fpassword.isSelected());
-        if (Fpassword.isSelected()) {
             User user=User.getUserByUsername(username.getText());
             if (!username.getText().equals("") && user != null) {
                 Fpassword.setOnAction(e -> {
@@ -175,7 +173,7 @@ public class LoginPage {
             else
                 return;
         }
-    }
+
 
     public static ArrayList<Integer> getCaptchaImage() {
         return captchaImage;

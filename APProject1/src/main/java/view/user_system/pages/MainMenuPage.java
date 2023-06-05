@@ -16,9 +16,7 @@ public class MainMenuPage {
            StrongHoldCrusaderGame.changeMenu(Menus.PROFILE);
     }
 
-    public void scoreBoard(MouseEvent mouseEvent) {
-        StrongHoldCrusaderGame.changeMenu(Menus.SCOREBOARD);
-    }
+
 
     public void logout(MouseEvent mouseEvent) { Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to logout?", ButtonType.YES, ButtonType.NO);
         alert.showAndWait();

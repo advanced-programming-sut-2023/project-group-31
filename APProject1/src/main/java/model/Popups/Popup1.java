@@ -17,7 +17,6 @@ import java.io.IOException;
 import java.net.URL;
 
 public class Popup1 {
-    public static Button cancel=new Button("Cancel");
     @FXML
     private Label Header;
     @FXML
@@ -38,7 +37,6 @@ public class Popup1 {
         popupStage.initModality(Modality.APPLICATION_MODAL);
         URL url= Popup1.class.getResource("/FXML/popup.fxml");
         Pane pane= FXMLLoader.load(url);
-        cancel.setOnAction(event -> popupStage.close());
         Scene scene=new Scene(pane);
         popupStage.setScene(scene);
         popupStage.show();
@@ -69,6 +67,9 @@ public class Popup1 {
         });
     }
     public void save(MouseEvent mouseEvent) {
+        if (second.getText().equals("")||first.getText().equals("")){
+            return;
+        }
         if (second.getText().equals(first.getText())&&answer.getText().equals(tologgedIn.getPasswordRecoveryAnswer())){
             tologgedIn.setPassword(first.getText());
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "are you sure to change your password?", ButtonType.YES, ButtonType.NO);
@@ -80,5 +81,9 @@ public class Popup1 {
             }
 
         }
+    }
+
+    public void cancel(MouseEvent mouseEvent) {
+        popupStage.close();
     }
 }
