@@ -9,7 +9,6 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
-import javafx.stage.Popup;
 import javafx.stage.Stage;
 import model.User;
 
@@ -35,7 +34,7 @@ public class Popup1 {
         tologgedIn=user;
          popupStage= new Stage();
         popupStage.initModality(Modality.APPLICATION_MODAL);
-        URL url= Popup1.class.getResource("/FXML/popup.fxml");
+        URL url= Popup1.class.getResource("/FXML/user_system/popup.fxml");
         Pane pane= FXMLLoader.load(url);
         Scene scene=new Scene(pane);
         popupStage.setScene(scene);

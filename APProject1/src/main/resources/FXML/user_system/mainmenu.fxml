@@ -12,7 +12,7 @@
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="view.user_system.pages.MainMenuPage"
             prefHeight="650" prefWidth="1200" id="main-menu"
-stylesheets="@../CSS/mainstyle.css">
+stylesheets="@../../CSS/mainstyle.css">
         <Rectangle opacity="0.7" fill="black" height="430" width="400" x="400" y="150"/>
         <center>
 

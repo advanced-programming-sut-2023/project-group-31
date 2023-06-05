@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.control.CheckBox?>
-<BorderPane id="login-menu" prefHeight="650.0" prefWidth="1200.0" stylesheets="@../CSS/loginstyle.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.user_system.pages.LoginPage" >
+<BorderPane id="login-menu" prefHeight="650.0" prefWidth="1200.0" stylesheets="@../../CSS/loginstyle.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.user_system.pages.LoginPage" >
     <center>
 
         <VBox alignment="CENTER" maxWidth="350" spacing="10">

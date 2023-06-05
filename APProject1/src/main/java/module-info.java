@@ -31,5 +31,4 @@ module APProject {
     opens view.user_system.pages to javafx.fxml;
 
     opens model.Popups to javafx.fxml;
-    opens view.user_system.menu_controller to javafx.fxml;
 }

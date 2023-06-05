@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.RadioButton?>
-<BorderPane id="register-menu" prefHeight="650" prefWidth="1200" stylesheets="@../CSS/registerstyle.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.user_system.pages.RegisterPage">
+<BorderPane id="register-menu" prefHeight="650" prefWidth="1200" stylesheets="@../../CSS/registerstyle.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.user_system.pages.RegisterPage">
    <center>
       <VBox alignment="CENTER" spacing="10">
          <Label layoutX="414.0" layoutY="28.0" text="username" />

@@ -9,7 +9,7 @@
 <?import javafx.scene.image.ImageView?>
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            stylesheets="@../CSS/registerstyle.css"
+            stylesheets="@../../CSS/registerstyle.css"
             fx:controller="view.user_system.pages.PickQuestion"
             prefHeight="650" prefWidth="1200"
 id="pick-question">

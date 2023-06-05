@@ -9,7 +9,7 @@
 <?import javafx.scene.image.ImageView?>
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            stylesheets="@../CSS/loginstyle.css"
+            stylesheets="@../../CSS/loginstyle.css"
             id="profile-menu"
             fx:controller="view.user_system.pages.ProfileMenuPage"
             prefHeight="650" prefWidth="1200">
