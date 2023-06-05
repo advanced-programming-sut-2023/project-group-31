@@ -129,7 +129,7 @@ public class User {
     //static methods
     public static void addUser(User user) {
         users.put(user.username, user);
-        //DataBase.getDataBase().addUser(user);
+        DataBase.getDataBase().addUser(user);
     }
 
     public static void removeUser(User user) {
