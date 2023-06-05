@@ -65,6 +65,7 @@ public class PickQuestion {
     }
 
     private void resetCaptchaFailRegister() {
+        captchaText.setText("");
         Random random=new Random();
         int num=random.nextInt();
         if (num<0){
@@ -76,6 +77,7 @@ public class PickQuestion {
     }
 
     public void resetCaptcha(MouseEvent mouseEvent) {
+        captchaText.setText("");
         Random random=new Random();
         int num=random.nextInt();
         if (num<0){

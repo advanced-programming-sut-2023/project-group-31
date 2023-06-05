@@ -22,7 +22,6 @@ stylesheets="@../CSS/mainstyle.css">
                         <Insets top="70.0" />
                     </VBox.margin></Button>
                 <Button fx:id="profile" onMouseClicked="#profile" prefHeight="39.0" text="Profile" />
-                <Button onMouseClicked="#scoreBoard" prefHeight="10.0" text="Score Board" />
                 <Button onMouseClicked="#logout" prefHeight="10.0" text="Logout" />
                 <Button onMouseClicked="#exit" prefHeight="0.0" text="Exit" />
 
