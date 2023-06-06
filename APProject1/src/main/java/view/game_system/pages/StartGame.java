@@ -114,22 +114,57 @@ public class StartGame {
         button.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                HBox hBox =(HBox) ((Button)(mouseEvent.getSource())).getParent();
-                players.add(((Button)(mouseEvent.getSource())).getId());
-                hBox.getChildren().remove(3);
-                ChoiceBox choiceBox = new ChoiceBox();
-                for(Colors color:Colors.values()){
-                    choiceBox.getItems().add(color.getName());
-                }
-                choiceBox.setValue("choose color");
-                choiceBox.setPrefWidth(100);
-                choiceBox.setPrefHeight(40);
-                hBox.getChildren().add(choiceBox);
-                playersList.getChildren().add(hBox);
-
+                addNewPlayer(mouseEvent);
             }
         });
         return hBox;
+    }
+
+    private void addNewPlayer(MouseEvent mouseEvent){
+        HBox hBox =(HBox) ((Button)(mouseEvent.getSource())).getParent();
+        players.add(((Button)(mouseEvent.getSource())).getId());
+        hBox.getChildren().remove(3);
+        ChoiceBox choiceBox = new ChoiceBox();
+        for(Colors color:Colors.values()){
+            choiceBox.getItems().add(color.getName());
+        }
+        choiceBox.setValue("choose color");
+        choiceBox.setPrefWidth(100);
+        choiceBox.setPrefHeight(50);
+        hBox.getChildren().add(choiceBox);
+        Button button = new Button();
+        button.setStyle("-fx-background-color: red;");
+        button.setText("remove");
+        button.setId(((Button)(mouseEvent.getSource())).getId());
+        button.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                removePlayer(mouseEvent);
+            }
+        });
+        hBox.getChildren().add(button);
+        playersList.getChildren().add(hBox);
+    }
+
+    private void removePlayer(MouseEvent mouseEvent){
+        HBox hBox =(HBox) ((Button)(mouseEvent.getSource())).getParent();
+        players.remove(((Button)(mouseEvent.getSource())).getId());
+        hBox.getChildren().remove(3);
+        hBox.getChildren().remove(3);
+        Button button = new Button();
+        button.setMnemonicParsing(false);
+        button.setPrefHeight(52);
+        button.setPrefWidth(113);
+        button.setText("add");
+        button.setId(((Button)(mouseEvent.getSource())).getId());
+        button.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                addNewPlayer(mouseEvent);
+            }
+        });
+        hBox.getChildren().add(button);
+        usersVbox.getChildren().add(hBox);
     }
 
     public void checkScroll(ScrollEvent event) {

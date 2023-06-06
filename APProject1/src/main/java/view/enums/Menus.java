@@ -7,7 +7,9 @@ public enum Menus {
   PROFILE("profilemenu"),
   PICKQUESION("pickquestion"),
 
-  START_GAME("startgame")
+  START_GAME("startgame"),
+
+  CHANGE_MAP("changeMapMenu")
  ;
       private final String name;
      Menus(String name){

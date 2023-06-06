@@ -14,10 +14,12 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane id="pick-question" prefHeight="650.0" prefWidth="1200.0" stylesheets="@../../CSS/gameStyle.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.game_system.pages.StartGame">
+<BorderPane id="pick-question" prefHeight="650.0" prefWidth="1200.0" stylesheets="@../../CSS/gameStyle.css" xmlns="http://javafx.com/javafx/19"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.game_system.pages.StartGame">
     <center>
+<!-- set Vbox width 100 px and put it ceter -->
         <VBox>
-            <TextField  promptText="map number" />
+            <TextField  />
         </VBox>
 
         <VBox alignment="CENTER_RIGHT" maxHeight="400" maxWidth="600" spacing="10">

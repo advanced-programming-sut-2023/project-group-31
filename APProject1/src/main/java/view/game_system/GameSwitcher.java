@@ -17,6 +17,7 @@ public class GameSwitcher extends Application {
         launch(args);
     }
     public static Stage stage;
+    public static Stage stage2;
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -48,5 +49,16 @@ public class GameSwitcher extends Application {
 
 
         stage.setScene(scene);
+    }
+
+    public static Stage startMenu(Menus menuName){
+        Stage stage = new Stage();
+        Parent root = loadFXML(menuName);
+        assert root != null;
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+        stage2= stage;
+        return stage;
     }
 }
