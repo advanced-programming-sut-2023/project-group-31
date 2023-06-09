@@ -9,8 +9,7 @@ public enum Menus {
 
   START_GAME("startgame"),
 
-  CHANGE_MAP("changeMapMenu")
- ;
+  CHANGE_MAP("changeMapMenu");
       private final String name;
      Menus(String name){
          this.name=name;

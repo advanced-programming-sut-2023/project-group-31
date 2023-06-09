@@ -1,6 +1,7 @@
 package controller.game_system;
 
 import controller.ControllerUtils;
+import model.DataBase;
 import model.User;
 import model.game_stuff.*;
 import model.game_stuff.buildings.MenuBuilding;
@@ -53,6 +54,9 @@ public class StartGameController extends ControllerUtils {
         if ((treeType = TreeTypes.getTreeType(tree)) == null) {
             return StartGameMessages.INVALID_COMMAND;
         }
+        if(Tree.getNotPossibleTextures().contains(currentMap.getBlock(x,y).getType())){
+            return StartGameMessages.NOT_SUITABLE_TEXTURE;
+        }
         currentMap.getBlocks().get(x).get(y).addTree(new Tree(currentMap.getBlocks().get(x).get(y), treeType));
         return StartGameMessages.SUCCESS;
     }
@@ -61,7 +65,7 @@ public class StartGameController extends ControllerUtils {
         StartGameMessages message;
         for (int i = x1 - 1; i < x2; i++) {
             for (int j = y1 - 1; j < y2; j++) {
-                if (!(message= dropTree(i,i,tree)).equals(StartGameMessages.SUCCESS)){
+                if (!(message= dropTree(i,j,tree)).equals(StartGameMessages.SUCCESS)){
                     return message;
                 }
             }
@@ -89,10 +93,12 @@ public class StartGameController extends ControllerUtils {
     }
 
     public static StartGameMessages chooseMap(String name) {
-        for (Map map : Map.getMaps()) {
+
+        for (Map map : DataBase.getMaps()) {
             if (map.getName().equals(name)) {
                 currentMap = map.clone();
                 baseMap = map;
+                StartGameMessages.SUCCESS.setTxt("success");
                 return StartGameMessages.SUCCESS;
             }
         }

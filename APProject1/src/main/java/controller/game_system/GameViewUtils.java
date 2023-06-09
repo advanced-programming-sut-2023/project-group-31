@@ -48,7 +48,7 @@ public class GameViewUtils {
         mapPane.setScaleX(blockSize);
         mapPane.setScaleY(blockSize);
         int size = map.getSize();
-        mapPane.setPrefWidth(size);
+        mapPane.setPrefWidth( size);
         mapPane.setPrefHeight(size);
         Rectangle rectangle;
         for (ArrayList<Block> rows : map.getBlocks()) {

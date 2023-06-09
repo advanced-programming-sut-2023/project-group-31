@@ -1,11 +1,21 @@
 package model.game_stuff;
 
+import model.game_stuff.enums.Textures;
 import model.game_stuff.enums.TreeTypes;
+
+import java.util.ArrayList;
 
 public class Tree {
     private Block position;
     private TreeTypes type;
     private boolean mark;
+    private static ArrayList<Textures> notPossibleTextures;
+    static {
+        notPossibleTextures.add(Textures.CLIFF);
+        notPossibleTextures.add(Textures.WATER);
+        notPossibleTextures.add(Textures.IRON);
+    }
+
 
     public Tree(Block position, TreeTypes type) {
         this.position = position;
@@ -30,5 +40,9 @@ public class Tree {
 
     public void terminate() {
         position.removeTree(this);
+    }
+
+    public static ArrayList<Textures> getNotPossibleTextures() {
+        return notPossibleTextures;
     }
 }

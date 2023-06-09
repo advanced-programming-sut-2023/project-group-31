@@ -21,6 +21,7 @@ public class GameMainPage extends Application {
         stage.setScene(scene);
         stage.show();
         Pane mapPane = GameViewUtils.createMapPane(ControllerUtils.getCurrentMap());
+        System.out.println(mapPane.getPrefWidth());
         root.getChildren().add(mapPane);
         mapPane.requestFocus();
 
