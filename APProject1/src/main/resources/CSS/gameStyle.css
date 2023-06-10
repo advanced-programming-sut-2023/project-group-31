@@ -98,7 +98,7 @@ Label{
 
 #gameBottomBar{
     -fx-background-image: url("../Media/MenuBackground/bottommenu.png");
-    -fx-background-size: 90 130;
+    -fx-background-size: 90 150;
 }
 /*.menu-bar{*/
 /*    -fx-background-color:transparent;*/

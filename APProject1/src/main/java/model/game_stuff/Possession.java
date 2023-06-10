@@ -9,30 +9,6 @@ public class Possession {
     private HashMap<Items, Integer> items;
     private int gold=1000;
     private int peasant;
-//
-//    private int meat;
-//    private int apple;
-//    private int cheese;
-//    private int bread;
-//    private int hops;
-//    private int ale;
-//    private int wheat;
-//    private int flour;
-//
-//    private int wood;
-//    private int stone;
-//    private int iron;
-//    private int pitch;
-//
-//    private int bow;
-//    private int crossbow;
-//    private int spear;
-//    private int pike;
-//    private int swords;
-//    private int mace;
-//    private int leatherArmor;
-//    private int metalArmor;
-//    private int horse;
 
     {
         items = new HashMap<>();

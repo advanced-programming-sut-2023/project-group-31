@@ -6,13 +6,13 @@
 <?import javafx.scene.layout.Pane?>
 
 <Pane prefHeight="900" prefWidth="1500.0" stylesheets="@../../CSS/gameStyle.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.game_system.pages.GamePage">
-   <HBox id="gameBottomBar" layoutY="770" prefHeight="130" prefWidth="1500" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
+   <HBox id="gameBottomBar" layoutY="752.0" prefHeight="150" prefWidth="1500" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
 
    </HBox>
-   <Pane fx:id="minimap" layoutX="835.0" layoutY="768.0" prefHeight="130.0" prefWidth="129.0">
+   <Pane fx:id="minimap" layoutX="812.0" layoutY="719.0" prefHeight="163.0" prefWidth="173.0">
 
    </Pane>
-   <ImageView fitHeight="153.0" fitWidth="408.0" layoutX="452.0" layoutY="745.0">
+   <ImageView fitHeight="180.0" fitWidth="408.0" layoutX="452.0" layoutY="724.0">
       <Image url="@../../Media/game/menus/bottomMenu/scroll.png">
 
       </Image>

@@ -28,7 +28,8 @@ public class GameMainPage extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         DataBase.loadApp();
-        URL address = new URL(GameMainPage.class.getResource("/FXML/game_system/gameMainPage.fxml").toExternalForm());
+        URL address = new URL(GameMainPage.class.getResource("/FXML/game_system/gameMain" +
+                "Page.fxml").toExternalForm());
         FXMLLoader loader = new FXMLLoader(address);
         root = loader.load();
         root.setPrefHeight(900);

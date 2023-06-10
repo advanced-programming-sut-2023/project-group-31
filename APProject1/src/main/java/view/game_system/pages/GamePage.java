@@ -25,8 +25,8 @@ public class GamePage {
 
     private void addMiniMap() {
         Pane pane = GameViewUtils.createMapPane(ControllerUtils.getCurrentMap());
-        pane.setScaleX(1);
-        pane.setScaleY(1);
+            pane.setScaleX((double) 150/ControllerUtils.getCurrentMap().getSize());
+        pane.setScaleY((double) 150/ControllerUtils.getCurrentMap().getSize());
         Rectangle rectangle = new Rectangle(20,20);
 
         rectangle.setFill(Color.TRANSPARENT);
@@ -34,11 +34,11 @@ public class GamePage {
         wholeMapPane.setOnMouseMoved(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                rectangle.setLayoutX(-GameMainPage.getMapPane().getLayoutX()/GameMainPage.getMapPane().getScaleX());
-                rectangle.setLayoutY(-GameMainPage.getMapPane().getLayoutY()/GameMainPage.getMapPane().getScaleY());
-                //System.out.println(rectangle.getLayoutX());
-                //rectangle.setLayoutX(GameMainPage.getMapPane().getLayoutX());
-               // rectangle.setLayoutY(GameMainPage.getMapPane().getLayoutY());
+                rectangle.setLayoutX((double) ControllerUtils.getCurrentMap().getSize()/2+
+                        (-GameMainPage.getMapPane().getLayoutX()/GameMainPage.getMapPane().getScaleX()));
+                rectangle.setLayoutY((double) ControllerUtils.getCurrentMap().getSize()/2+
+                        (-GameMainPage.getMapPane().getLayoutY()/GameMainPage.getMapPane().getScaleY()));
+
             }
         });
         pane.getChildren().add(rectangle);
