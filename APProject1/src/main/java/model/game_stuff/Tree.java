@@ -9,8 +9,9 @@ public class Tree {
     private Block position;
     private TreeTypes type;
     private boolean mark;
-    private static ArrayList<Textures> notPossibleTextures;
+    private final static ArrayList<Textures> notPossibleTextures;
     static {
+        notPossibleTextures = new ArrayList<>();
         notPossibleTextures.add(Textures.CLIFF);
         notPossibleTextures.add(Textures.WATER);
         notPossibleTextures.add(Textures.IRON);

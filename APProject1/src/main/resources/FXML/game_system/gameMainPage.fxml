@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="view.game_system.GameMainPage"
-            prefHeight="800.0" prefWidth="1200.0">
+<Pane prefHeight="900" prefWidth="1500.0" stylesheets="@../../CSS/gameStyle.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.game_system.pages.GamePage">
+   <HBox id="gameBottomBar" layoutY="770" prefHeight="130" prefWidth="1500" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
 
-</AnchorPane>
+   </HBox>
+   <Pane fx:id="minimap" layoutX="835.0" layoutY="768.0" prefHeight="130.0" prefWidth="129.0">
+
+   </Pane>
+   <ImageView fitHeight="153.0" fitWidth="408.0" layoutX="452.0" layoutY="745.0">
+      <Image url="@../../Media/game/menus/bottomMenu/scroll.png">
+
+      </Image>
+   </ImageView>
+   <Pane layoutX="954.0" layoutY="714.0" prefHeight="194.0" prefWidth="129.0" />
+   <Pane fx:id="wholeMapPane" layoutY="2.0" prefHeight="766.0" prefWidth="1338.0" />
+</Pane>
