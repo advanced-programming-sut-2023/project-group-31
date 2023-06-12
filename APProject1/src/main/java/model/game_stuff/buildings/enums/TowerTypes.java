@@ -6,8 +6,8 @@ public enum TowerTypes {
     TURRET("Turret",1500,150,180,10),
     SQUARE_TURRET("Square turret",2000,180,200,15),
     CIRCULAR_TURRET("Circular turret",2000,180,200,15),
-    DRAWBRIDGE("Drawbridge",1200,120,150,4
-    );
+    DRAWBRIDGE("Drawbridge",1200,120,150,4),
+    WALL("wall", 1000,100, 100, 1);
     private String name;
     private int hp;
     private int fireRange;

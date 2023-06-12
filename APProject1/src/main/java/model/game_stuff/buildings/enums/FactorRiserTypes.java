@@ -2,8 +2,7 @@ package model.game_stuff.buildings.enums;
 
 public enum FactorRiserTypes {
     CATHEDRAL("Cathedral",1,2,2000),
-    CHURCH("Church",1,2,1200),
-    WALL("wall", 0,0,2000);
+    CHURCH("Church",1,2,1200);
     //TODO rast o rist kardan factor haye government
     private String name;
     private int turnsToWait;

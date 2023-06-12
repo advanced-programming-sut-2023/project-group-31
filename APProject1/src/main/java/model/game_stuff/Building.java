@@ -9,6 +9,7 @@ public abstract class Building implements HasHp{
     protected String name;
     private boolean isUnderAttack;
     protected ArrayList<Block> blocks;
+    protected String imagePath;
 
     {
         blocks = new ArrayList<>();
@@ -33,6 +34,15 @@ public abstract class Building implements HasHp{
             terminate();
         }
     }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
     public abstract String toString();
 
     public Government getOwner() {

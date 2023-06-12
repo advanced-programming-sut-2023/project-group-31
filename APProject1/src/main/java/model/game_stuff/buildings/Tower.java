@@ -22,6 +22,7 @@ public class Tower extends Building {
         this.hp = type.getHp();
         owner.addBuilding(this);
         name = type.getName();
+        imagePath = "/Media/Buildings/Castle/" + name + "/" + name + ".png";
     }
 
     public boolean isFull() {
