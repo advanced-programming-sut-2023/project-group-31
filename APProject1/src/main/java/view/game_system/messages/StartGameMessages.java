@@ -3,7 +3,7 @@ package view.game_system.messages;
 import javafx.scene.control.Alert;
 
 public enum StartGameMessages {
-    SUCCESS("successful!"),
+    SUCCESS("successful!",Alert.AlertType.CONFIRMATION),
     MAP_NOT_FOUND("map not found!"),
     INVALID_COMMAND("invalid command!"),
     COORDINATE_OUT_OF_BOUND("coordinate out of bound!"),
@@ -20,25 +20,35 @@ public enum StartGameMessages {
     OUT_OF_MAP("The position is out of map"),
     THE_MAP_IS_ALREADY_SAVED("the map is already saved!"),
 
-    CHOOSE_COLOR("choose all colors")
-    ;
+    CHOOSE_COLOR("choose all colors"),
+    NOT_SUITABLE_TEXTURE("you can not put it here");
     private String txt;
     private String input;
 
     private Alert.AlertType alertType;
 
-    public void setInput(String input) {
-        this.input = input;
-    }
-
-    public String getInput() {
-        return input;
-    }
 
     StartGameMessages(String txt) {
         this.txt = txt;
         this.input = "";
     }
+
+    StartGameMessages(String input, Alert.AlertType alertType) {
+        this.input = input;
+        this.alertType =alertType;
+    }
+
+
+
+    public String getInput() {
+        return input;
+    }
+
+    public void setInput(String input) {
+        this.input = input;
+    }
+
+
 
     public void setTxt(String txt) {
         this.txt = txt;
@@ -55,7 +65,7 @@ public enum StartGameMessages {
         }else alertType = message.alertType;
         Alert alert = new Alert(alertType);
         alert.setTitle(alertType.name());
-        alert.setHeaderText("start game failed");
+        alert.setHeaderText("start game" +((message.getAlertType() ==null||message.getAlertType().equals(Alert.AlertType.ERROR))?"failed":""));
         alert.setContentText(message.getTxt());
         alert.showAndWait();
     }

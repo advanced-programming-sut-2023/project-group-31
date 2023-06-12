@@ -1,6 +1,7 @@
 package view.game_system.pages;
 
 import controller.ControllerUtils;
+import controller.game_system.GameViewUtils;
 import controller.game_system.StartGameController;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -10,15 +11,23 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import model.DataBase;
 import model.User;
 import model.game_stuff.Colors;
+import model.game_stuff.Map;
+import view.ViewUtils;
+import view.enums.Menus;
+import view.game_system.GameSwitcher;
 import view.game_system.messages.StartGameMessages;
+import view.user_system.MenuSwitcher;
 
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -28,11 +37,13 @@ public class StartGame {
 
     private ArrayList<String> players;
 
+    private int mapIndex = 0;
+
     public StartGame() {
         usersStart = 0;
         usersCount = 8;
         players = new ArrayList<>();
-        if(ControllerUtils.getCurrentUser()!=null){
+        if (ControllerUtils.getCurrentUser() != null) {
             players.add(ControllerUtils.getCurrentUser().getUsername());
         }
     }
@@ -49,18 +60,29 @@ public class StartGame {
     private VBox playersList;
 
     @FXML
-    public void initialize() throws IOException{
-        if(ControllerUtils.getCurrentUser() != null){
+    private Pane mapPane;
+
+    @FXML
+    public void initialize() throws IOException {
+        if (ControllerUtils.getCurrentUser() != null) {
             setFirstPlayer();
         }
         setPlayersList();
+        setMapPain(ControllerUtils.getCurrentMap());
+    }
+
+    private void setMapPain(Map map) {
+        Pane pane = GameViewUtils.createMapPane(map);
+        pane.setScaleX((double) 200 / map.getSize());
+        pane.setScaleY((double) 200 / map.getSize());
+        mapPane.getChildren().add(pane);
     }
 
 
-    public void setFirstPlayer(){
-        HBox hBox =(HBox)createPlayerRow(ControllerUtils.getCurrentUser());
+    public void setFirstPlayer() {
+        HBox hBox = (HBox) createPlayerRow(ControllerUtils.getCurrentUser());
         ChoiceBox choiceBox = new ChoiceBox();
-        for(Colors color:Colors.values()){
+        for (Colors color : Colors.values()) {
             choiceBox.getItems().add(color.getName());
         }
         choiceBox.setValue("choose color");
@@ -120,12 +142,12 @@ public class StartGame {
         return hBox;
     }
 
-    private void addNewPlayer(MouseEvent mouseEvent){
-        HBox hBox =(HBox) ((Button)(mouseEvent.getSource())).getParent();
-        players.add(((Button)(mouseEvent.getSource())).getId());
+    private void addNewPlayer(MouseEvent mouseEvent) {
+        HBox hBox = (HBox) ((Button) (mouseEvent.getSource())).getParent();
+        players.add(((Button) (mouseEvent.getSource())).getId());
         hBox.getChildren().remove(3);
         ChoiceBox choiceBox = new ChoiceBox();
-        for(Colors color:Colors.values()){
+        for (Colors color : Colors.values()) {
             choiceBox.getItems().add(color.getName());
         }
         choiceBox.setValue("choose color");
@@ -135,7 +157,7 @@ public class StartGame {
         Button button = new Button();
         button.setStyle("-fx-background-color: red;");
         button.setText("remove");
-        button.setId(((Button)(mouseEvent.getSource())).getId());
+        button.setId(((Button) (mouseEvent.getSource())).getId());
         button.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -146,9 +168,9 @@ public class StartGame {
         playersList.getChildren().add(hBox);
     }
 
-    private void removePlayer(MouseEvent mouseEvent){
-        HBox hBox =(HBox) ((Button)(mouseEvent.getSource())).getParent();
-        players.remove(((Button)(mouseEvent.getSource())).getId());
+    private void removePlayer(MouseEvent mouseEvent) {
+        HBox hBox = (HBox) ((Button) (mouseEvent.getSource())).getParent();
+        players.remove(((Button) (mouseEvent.getSource())).getId());
         hBox.getChildren().remove(3);
         hBox.getChildren().remove(3);
         Button button = new Button();
@@ -156,7 +178,7 @@ public class StartGame {
         button.setPrefHeight(52);
         button.setPrefWidth(113);
         button.setText("add");
-        button.setId(((Button)(mouseEvent.getSource())).getId());
+        button.setId(((Button) (mouseEvent.getSource())).getId());
         button.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -168,28 +190,46 @@ public class StartGame {
     }
 
     public void checkScroll(ScrollEvent event) {
-            System.out.println(event.getDeltaY());
+        System.out.println(event.getDeltaY());
 
     }
 
     public void startGame(MouseEvent mouseEvent) {
         ArrayList<String> colors = new ArrayList<>();
-        for(Object hBox: playersList.getChildren()){
+        for (Object hBox : playersList.getChildren()) {
             hBox = (HBox) hBox;
-            if(((ChoiceBox)(((HBox) hBox).getChildren().get(3))).getValue().equals("choose color")){
+            if (((ChoiceBox) (((HBox) hBox).getChildren().get(3))).getValue().equals("choose color")) {
                 StartGameMessages.showAlert(StartGameMessages.CHOOSE_COLOR);
                 return;
             }
-            colors.add((String)(((ChoiceBox)(((HBox) hBox).getChildren().get(3))).getValue()));
+            colors.add((String) (((ChoiceBox) (((HBox) hBox).getChildren().get(3))).getValue()));
         }
-        for(int i=0;i<players.size();i++){
+        for (int i = 0; i < players.size(); i++) {
             StartGameController.addPlayer(players.get(i));
             StartGameController.setPlayersLordHouse(players.get(i), i);
-            StartGameController.setPlayersTeam(players.get(i),colors.get(i));
+            StartGameController.setPlayersTeam(players.get(i), colors.get(i));
         }
         StartGameMessages message;
-        if(!(message=StartGameController.start()).equals(StartGameMessages.SUCCESS)){
+        if (!(message = StartGameController.start()).equals(StartGameMessages.SUCCESS)) {
             StartGameMessages.showAlert(message);
         }
+    }
+
+    public void showNextMap(MouseEvent mouseEvent) {
+        mapPane.getChildren().remove(0);
+        mapIndex =((mapIndex+1)%DataBase.getMaps().size());
+        setMapPain(DataBase.getMaps().get(mapIndex));
+        StartGameMessages message = StartGameController.chooseMap(DataBase.getMaps().get(mapIndex).getName());
+    }
+
+    public void showPreviousMap(MouseEvent mouseEvent) {
+        mapPane.getChildren().remove(0);
+        mapIndex = ((mapIndex-1)%DataBase.getMaps().size());
+        setMapPain(DataBase.getMaps().get(mapIndex));
+        StartGameMessages message = StartGameController.chooseMap(DataBase.getMaps().get(mapIndex).getName());
+    }
+
+    public void editMap(MouseEvent mouseEvent) {
+        GameSwitcher.startMenu(Menus.CHANGE_MAP);
     }
 }

@@ -103,7 +103,7 @@ public class changeMapMenu {
             x1 = Integer.parseInt(this.x1.getText());
             y1 = Integer.parseInt(this.y1.getText());
             x2 = Integer.parseInt(this.x2.getText());
-            y2 = Integer.parseInt(this.y1.getText());
+            y2 = Integer.parseInt(this.y2.getText());
         } else {
             if ((!this.x.getText().matches("[\\d]+")
                     || !this.y.getText().matches("[\\d]+"))) {
@@ -128,6 +128,7 @@ public class changeMapMenu {
             ControllerUtils.putInput("y1",String.valueOf(y1));
             ControllerUtils.putInput("x2",String.valueOf(x2));
             ControllerUtils.putInput("y2",String.valueOf(y2));
+
             ControllerUtils.putInput("type",texture.getValue().toString());
             if (!(message = StartGameController.setARectanglesTexture()).equals(StartGameMessages.SUCCESS)) {
                 StartGameMessages.showAlert(message);
