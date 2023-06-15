@@ -1,25 +1,36 @@
 package model.game_stuff.buildings.enums;
 
+import model.game_stuff.ImagePackage;
+import model.game_stuff.enums.BuildingCategories;
+import model.game_stuff.types.Buildings;
+
 public enum TowerTypes {
-    LOOKOUT_TOWER("lookout tower",1200,300,350,6),
-    PREMITER_TOWER("Premiter tower",1200,250,300,6),
-    TURRET("Turret",1500,150,180,10),
-    SQUARE_TURRET("Square turret",2000,180,200,15),
-    CIRCULAR_TURRET("Circular turret",2000,180,200,15),
-    DRAWBRIDGE("Drawbridge",1200,120,150,4),
-    WALL("wall", 1000,100, 100, 1);
+    LOOKOUT_TOWER(Buildings.LOOKOUT_TOWER,1200,300,350,6),
+    PERIMETER_TOWER(Buildings.PERIMETER_TOWER,1200,250,300,6),
+    DEFENCE_TURRET(Buildings.DEFENCE_TURRET,1500,150,180,10),
+    SQUARE_TOWER(Buildings.SQUARE_TOWER,2000,180,200,15),
+    ROUND_TOWER(Buildings.ROUND_TOWER,2000,180,200,15),
+    WALL(Buildings.WALL, 1000,100, 100, 1);
     private String name;
+    private Buildings buildingCost;
+    private ImagePackage imagePackage;
     private int hp;
     private int fireRange;
     private int defendRange;
     private int capacity;
 
-    TowerTypes(String name, int hp, int fireRange, int defendRange, int capacity) {
-        this.name = name;
+    TowerTypes(Buildings building, int hp, int fireRange, int defendRange, int capacity) {
+        this.name = building.getName();
+        buildingCost = building;
+        imagePackage = new ImagePackage("Media/Buildings/" + building.getCategory() + "/" + name + "/" + name);
         this.hp = hp;
         this.fireRange = fireRange;
         this.defendRange = defendRange;
         this.capacity = capacity;
+    }
+
+    public ImagePackage getImagePackage() {
+        return imagePackage;
     }
 
     public int getHp() {

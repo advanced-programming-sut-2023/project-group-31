@@ -20,7 +20,6 @@ public class Producer extends Building implements Working {
         owner.addBuilding(this);
         owner.getWorkingsBuildings().add(this);
         name = type.getName();
-        imagePath = type.getImagePath();
     }
 
     public int getNumberOfProductsAvailable() {

@@ -11,7 +11,6 @@ public class Trap extends Building implements Working {
         owner.addBuilding(this);
         owner.getWorkingsBuildings().add(this);
         name = type.getName();
-        imagePath = "/Media/Buildings/Castle/" + name;
     }
     public void work() {
         if(getPosition().containsEnemyPerson(owner.getColor())) {

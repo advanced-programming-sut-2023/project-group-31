@@ -8,8 +8,8 @@ public abstract class Building implements HasHp{
     protected Government owner;
     protected String name;
     private boolean isUnderAttack;
+    protected ImagePackage imagePackage;
     protected ArrayList<Block> blocks;
-    protected String imagePath;
 
     {
         blocks = new ArrayList<>();
@@ -24,6 +24,10 @@ public abstract class Building implements HasHp{
         return (double)(maxHp - hp) / ((double) maxHp);
     }
 
+    public ImagePackage getImagePackage() {
+        return imagePackage;
+    }
+
     public void setBlocks(ArrayList<Block> blocks) {
         this.blocks = blocks;
     }
@@ -35,12 +39,8 @@ public abstract class Building implements HasHp{
         }
     }
 
-    public String getImagePath() {
-        return imagePath;
-    }
-
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
+    public String getMainImagePath() {
+        return imagePackage.getMainImagePath();
     }
 
     public abstract String toString();

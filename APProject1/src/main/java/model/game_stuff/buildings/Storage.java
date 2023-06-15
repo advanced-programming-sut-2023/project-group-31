@@ -22,15 +22,12 @@ public class Storage extends Building {
         switch (type.getProductType()) {
             case FOOD:
                 owner.addGranary(this);
-                imagePath = "/Media/Buildings/Food processors/granary/granary.png";
                 break;
             case RAW_MATERIAL:
                 owner.addStockpile(this);
-                imagePath = "/Media/Buildings/Castle/stockpile/stockpile.png";
                 break;
             case WEAPON:
                 owner.addWeaponry(this);
-                imagePath = "/Media/Buildings/Weapons/armoury/armoury.png";
                 break;
         }
         name = type.getName();

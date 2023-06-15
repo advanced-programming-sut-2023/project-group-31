@@ -12,7 +12,6 @@ public class FactorRiser extends Building {
         this.type = type;
         owner.addBuilding(this);
         name = type.getName();
-        imagePath = "/Media/Buildings/Town/" + name + "/" + name + ".png";
     }
 
     public FactorRiserTypes getType() {

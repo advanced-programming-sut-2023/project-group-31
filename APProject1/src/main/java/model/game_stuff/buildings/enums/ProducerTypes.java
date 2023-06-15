@@ -1,46 +1,46 @@
 package model.game_stuff.buildings.enums;
 
+import model.game_stuff.ImagePackage;
+import model.game_stuff.enums.ImageItem;
 import model.game_stuff.enums.Items;
 import model.game_stuff.people.enums.WorkerTypes;
+import model.game_stuff.types.Buildings;
 
 public enum ProducerTypes {
-    BREWERY(200,2,"Brewery",WorkerTypes.BREWERY, "Food processors"),
-    BAKERY(300,4, "Bakery",WorkerTypes.BAKER, "Food processors"),
-    WHEAT_FARM(100,1,"Wheat farm",WorkerTypes.WHEAT_FARMER, "Farm"),
-    HUNTING_POST(100,1,"Hunting post",WorkerTypes.HUNTER, "Farm"),
-    GRAIN_FARM(100,1,"Grain farm",WorkerTypes.GRAIN_FARMER, "Farm"),
-    DIARY_PRODUCTS(100,1,"Diary products",WorkerTypes.DIARY_PRODUCER, "Farm"),
-    APPLE_GARDEN(100,1,"Apple garden", WorkerTypes.APPLE_GARDENER, "Farm"),
-    WOOD_CUTTER(100,1,"Wood cutter",WorkerTypes.WOOD_CUTTER, "Industry"),
-    IRON_MINE(300,3,"Iron mine",WorkerTypes.IRON_MINER, "Industry"),
-    QUARRY(500,3,"Quarry",WorkerTypes.QUARRY_WORKER, "Industry"),
-    BLACKSMITH(200,2,"Black smith",WorkerTypes.BLACKSMITH, "Weapons"),
-    FLETCHER(200,2,"Fletcher",WorkerTypes.FLETCHER, "Weapons"),
-    CROSSBOW_MAKER(200,2, "Crossbow maker",WorkerTypes.CROSSBOW_MAKER, "Weapons"),
-    POLE_TURNER(200,2,"PoleTurner",WorkerTypes.POLE_TURNER, "Weapons"),
-    ARMOURER(200,2,"Armourer",WorkerTypes.ARMOURER, "Weapons"),
-    LEATHER_ARMOURER(200,2,"Leather armourer",WorkerTypes.LEATHER_ARMOURER, "Weapons"),
-    STABLE(200,2,"Stable",WorkerTypes.STABLE_WORKER, "Castle"),
-    PIKE_MAKER(200,2,"Pike maker",WorkerTypes.PIKE_MAKER, "Weapons"),
-    MACE_MAKER(200,2,"Mace maker",WorkerTypes.MACE_MAKER, "Weapons");
+    BREWER(200,2,Buildings.BREWER,WorkerTypes.BREWERY),
+    BAKERY(300,4, Buildings.BAKERY,WorkerTypes.BAKER),
+    WHEAT_FARMER(100,1,Buildings.WHEAT_FARMER,WorkerTypes.WHEAT_FARMER),
+    HUNTING_POST(100,1, Buildings.HUNTER_POST,WorkerTypes.HUNTER),
+    HOPS_FARMER(100,1,Buildings.HOPS_FARMER,WorkerTypes.GRAIN_FARMER),
+    DIARY_FARMER(100,1,Buildings.DIARY_FARMER,WorkerTypes.DIARY_PRODUCER),
+    APPLE_ORCHARD(100,1,Buildings.APPLE_ORCHARD, WorkerTypes.APPLE_GARDENER),
+    WOODCUTTER(100,1,Buildings.WOODCUTTER,WorkerTypes.WOOD_CUTTER),
+    IRON_MINE(300,3,Buildings.IRON_MINE,WorkerTypes.IRON_MINER),
+    QUARRY(500,3, Buildings.QUARRY,WorkerTypes.QUARRY_WORKER),
+    BLACKSMITH(200,2, Buildings.BLACKSMITH,WorkerTypes.BLACKSMITH),
+    FLETCHER(200,2,Buildings.FLETCHER,WorkerTypes.FLETCHER),
+    CROSSBOW_MAKER(200,2, Buildings.CROSSBOW_MAKER,WorkerTypes.CROSSBOW_MAKER),
+    POLE_TURNER(200,2, Buildings.CROSSBOW_MAKER,WorkerTypes.POLE_TURNER),
+    ARMOURER(200,2,Buildings.ARMOURER,WorkerTypes.ARMOURER),
+    LEATHER_ARMOURER(200,2,Buildings.LEATHER_ARMOURER,WorkerTypes.LEATHER_ARMOURER),
+    STABLE(200,2,Buildings.STABLE,WorkerTypes.STABLE_WORKER),
+    PIKE_MAKER(200,2,Buildings.PIKE_MAKER,WorkerTypes.PIKE_MAKER),
+    MACE_MAKER(200,2,Buildings.MACE_MAKER,WorkerTypes.MACE_MAKER);
     private String name;
+    private Buildings buildingCost;
+    private ImagePackage imagePackage;
     private int hp;
     private int capacity;
     private WorkerTypes workerType;
-    private String imagePath;
 
-    ProducerTypes(int hp, int capacity, String name, WorkerTypes workerType, String category) {
-        this.name = name;
+    ProducerTypes(int hp, int capacity, Buildings building, WorkerTypes workerType) {
+        this.name = building.getName();
+        buildingCost = building;
+        imagePackage = new ImagePackage("Media/Buildings/" + building.getCategory() + "/" + name + "/" + name);
         this.hp = hp;
         this.capacity = capacity;
         this.workerType = workerType;
-        imagePath = "/Media/Buildings/" + category + "/" + name + "/" + name + ".png";
     }
-
-    public String getImagePath() {
-        return imagePath;
-    }
-
     public int getHp() {
         return hp;
     }
@@ -64,5 +64,9 @@ public enum ProducerTypes {
             }
         }
         return null;
+    }
+
+    public ImagePackage getImagePackage() {
+        return imagePackage;
     }
 }

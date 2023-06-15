@@ -11,7 +11,6 @@ public class MenuBuilding extends Building {
         this.type = menu;
         owner.addBuilding(this);
         name = type.getName();
-        imagePath = type.getImagePath();
     }
 
     public String getMenu() {
