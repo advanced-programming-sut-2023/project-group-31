@@ -1,5 +1,6 @@
 package model.game_stuff;
 
+import javafx.scene.image.ImageView;
 import model.game_stuff.buildings.GateHouse;
 import model.game_stuff.buildings.Tower;
 import model.game_stuff.enums.Direction;
@@ -7,12 +8,15 @@ import model.game_stuff.enums.Direction;
 
 import java.util.LinkedList;
 
-public abstract class Person implements HasHp{
+public abstract class Person extends ImageView implements HasHp{
+    //TODO : FILL PEOPLE WITH IMAGES
     protected Government owner;
     protected String name;
     protected int hp;
     protected int speed;
     protected Block position;
+    protected ImagePackage imagePackage;
+    //TODO: set image packages for people
     protected LinkedList<Direction> moveOrder;
 
     {
@@ -29,6 +33,14 @@ public abstract class Person implements HasHp{
 
     public LinkedList<Direction> getMoveOrder() {
         return moveOrder;
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    public ImagePackage getImagePackage() {
+        return imagePackage;
     }
 
     public boolean move() {

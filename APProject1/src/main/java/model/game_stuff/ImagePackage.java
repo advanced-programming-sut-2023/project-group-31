@@ -33,15 +33,12 @@ public class ImagePackage {
     }
 
     public void addSubject(ImageSubjects subject, ImageItem imageItem) {
+        imageItem.setImagePath(imagePath);
         subjects.put(subject, imageItem);
     }
 
     public ImageItem getSubject(ImageSubjects subject) {
         return subjects.get(subject);
-    }
-
-    public Image getImage(int number) throws Exception {
-        return new Image(imagePath + number + ".pnj");
     }
 
     public Image getMainImage() throws Exception{
