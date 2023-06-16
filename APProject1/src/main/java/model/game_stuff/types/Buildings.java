@@ -1,64 +1,67 @@
 package model.game_stuff.types;
 
+import model.game_stuff.enums.BuildingCategories;
 import model.game_stuff.enums.Textures;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public enum Buildings {
-    SMALLSTONEGATEHOUSE(2, 1, "small stone gatehouse", 0, 0, 0, 0, 2000),
-    BIGSTONEGATEHOUSE(2, 3, "big stone gatehouse", 20, 0, 0, 0, 2000),
-    DRAWBRIDGE(1, 2, "drawbridge", 0, 10, 0, 0, 1000),
-    LOOKOUTTOWER(2, 2, "Lookout tower", 10, 0, 0, 0, 1200),
-    PREMITERTOWER(2, 2, "Premiter tower", 10, 0, 0, 0, 1000),
-    TURRET(2, 2, "Turret", 15, 0, 0, 0, 1200),
-    SQUARETURRET(2, 2, "Square turret", 35, 0, 0, 0, 2500),
-    CIRCULARTURRET(2, 2, "Circular turret", 40, 0, 0, 0, 3000),
-    ARMOURY(2, 2, "Armoury", 0, 5, 0, 0, 200),
-    BARRACK(2, 2, "Barrack", 15, 0, 0, 0, 200),
-    MERCENARYPOST(2, 2, "Mercenary post", 0, 10, 0, 0, 200),
-    ENGINEERGUILD(2, 2, "Engineer guid", 0, 10, 0, 0, 100),
-    INN(2, 2, "Inn", 0, 20, 1, 0, 100),
-    KILLINGPIT(2, 2, "Killing pit", 0, 6, 0, 0, 0),
-    MARKET(2, 2, "Market", 0, 5, 1, 0, 0),
-    OXTETHER(2, 2, "Ox tether", 0, 5, 1, 0, 0),
-    MILL(2, 2, "Mill", 0, 20, 3, 0, 0),
-    QUARRY(2, 2, "Quarry", 0, 20, 3, 0, 0, Textures.QUARRY),
-    PITCHDITCH(2, 2, "Pitch ditch", 0, 20, 1, 0, 0),
-    IRONMINE(2, 2, "Iron mine", 0, 20, 2, 0, 0, Textures.IRON),
+    SMALL_STONE_GATEHOUSE(2, 1, "small stone gatehouse", BuildingCategories.CASTLE, 0, 0, 0, 0, 2000),
+    BIG_STONE_GATEHOUSE(2, 3, "big stone gatehouse", BuildingCategories.CASTLE, 20, 0, 0, 0, 2000),
+    DRAWBRIDGE(1, 2, "drawbridge", BuildingCategories.CASTLE, 0, 10, 0, 0, 1000),
+    LOOKOUT_TOWER(2, 2, "lookout tower", BuildingCategories.CASTLE, 10, 0, 0, 0, 1200),
+    PERIMETER_TOWER(2, 2, "perimeter tower", BuildingCategories.CASTLE, 10, 0, 0, 0, 1000),
+    DEFENCE_TURRET(2, 2, "defence turret", BuildingCategories.CASTLE, 15, 0, 0, 0, 1200),
+    SQUARE_TOWER(2, 2, "square tower", BuildingCategories.CASTLE, 35, 0, 0, 0, 2500),
+    ROUND_TOWER(2, 2, "round tower", BuildingCategories.CASTLE, 40, 0, 0, 0, 3000),
+    ARMOURY(2, 2, "armoury", BuildingCategories.CASTLE, 0, 5, 0, 0, 200),
+    BARRACKS(2, 2, "barracks", BuildingCategories.CASTLE, 15, 0, 0, 0, 200),
+    MERCENARY_POST(2, 2, "mercenary post", BuildingCategories.CASTLE, 0, 10, 0, 0, 200),
+    ENGINEER_GUID(2, 2, "engineer guid", BuildingCategories.CASTLE, 0, 10, 0, 0, 100),
+    INN(2, 2, "inn", BuildingCategories.FOOD_PROCESSOR, 0, 20, 1, 0, 100),
+    KILLING_PIT(2, 2, "killing pit", BuildingCategories.CASTLE, 0, 6, 0, 0, 0),
+    MARKET(2, 2, "market", BuildingCategories.INDUSTRY, 0, 5, 1, 0, 0),
+    OX_TETHER(2, 2, "ox tether", BuildingCategories.INDUSTRY, 0, 5, 1, 0, 0),
+    MILL(2, 2, "mill", BuildingCategories.FOOD_PROCESSOR, 0, 20, 3, 0, 0),
+    QUARRY(2, 2, "quarry", BuildingCategories.INDUSTRY, 0, 20, 3, 0, 0, Textures.QUARRY),
+    PITCH_DITCH(2, 2, "pitch ditch", BuildingCategories.CASTLE, 0, 20, 1, 0, 0),
+    IRON_MINE(2, 2, "iron mine", BuildingCategories.INDUSTRY, 0, 20, 2, 0, 0, Textures.IRON),
     //SIEGETENT("Siege tent",),//nadarim
-    STOCKPILE(2, 2, "Stockpile", 0, 0, 0, 0, 0),
+    STOCKPILE(2, 2, "stockpile", BuildingCategories.INDUSTRY, 0, 0, 0, 0, 0),
     //WATERPOT("Water pot",),//nadarim
-    CATHEDRAL(2, 2, "Cathedral", 0, 0, 0, 0, 1000),
-    CHURCH(3, 3, "Church", 0, 0, 0, 0, 250),
-    HOVEL(2, 2, "Hovel", 0, 6, 0, 0, 0),
+    CATHEDRAL(2, 2, "cathedral", BuildingCategories.TOWN, 0, 0, 0, 0, 1000),
+    CHURCH(3, 3, "church", BuildingCategories.TOWN, 0, 0, 0, 0, 250),
+    HOVEL(2, 2, "hovel", BuildingCategories.TOWN, 0, 6, 0, 0, 0),
     //PITCHRIG("Pitch rig",),//need to define pitch as object
-    FOODSTOCKPILE(2, 2, "Food stockpile", 0, 5, 0, 0, 0),
-    WOODCUTTER(2, 2, "Wood cutter", 0, 3, 1, 0, 0),
-    ARMOURER(2, 2, "Armourer", 0, 20, 1, 0, 100),
-    LEATHER_ARMOURER(2, 2, "Leather armourer", 0, 20, 1, 0, 100),
-    MACE_MAKER(2, 2, "Mace maker", 0, 20, 1, 0, 100),
-    PIKE_MAKER(2, 2, "Pike maker", 0, 20, 1, 0, 100),
-    CROSSBOW_MAKER(2, 2, "Crossbow maker", 0, 20, 1, 0, 100),
-    FLETCHER(2, 2, "Fletcher", 0, 20, 1, 0, 100),
-    POLETURNER(2, 2, "Poleturner", 0, 10, 1, 0, 100),
-    BLACKSMITH(2, 2, "Black smith", 0, 20, 1, 0, 100),
-    OILSMELTER(2, 2, "Oil smelter", 10, 0, 1, 0, 100),
-    CAGEWARDOGS(2, 2, "Cage war dogs", 0, 10, 0, 0, 100),
-    STABLE(2, 2, "Stable", 0, 20, 0, 0, 400),
-    APPLEGARDEN(3, 3, "Apple garden", 0, 5, 1, 0, 0, Textures.GROSS),
-    DIARYPRODUCTS(2, 2, "Diary products", 0, 10, 1, 0, 0),
-    GRAINFARM(3, 3, "Grain farm", 0, 15, 1, 0, 0, Textures.GROSS),
-    HUNTINGPOST(2, 2, "Hunting post", 0, 5, 1, 0, 0),
-    WHEATFARM(3, 3, "Wheat farm", 0, 15, 1, 0, 0, Textures.GROSS),
-    BAKERY(2, 2, "Bakery", 0, 10, 1, 0, 0),
-    BREWERY(2, 2, "Brewery", 0, 10, 0, 0, 0),
-    WALL(1, 1,"wall", 5, 0, 0, 0 , 0);
+    GRANARY(2, 2, "granary", BuildingCategories.FOOD_PROCESSOR, 0, 5, 0, 0, 0),
+    WOODCUTTER(2, 2, "woodcutter", BuildingCategories.INDUSTRY, 0, 3, 1, 0, 0),
+    ARMOURER(2, 2, "armourer", BuildingCategories.WEAPON, 0, 20, 1, 0, 100),
+    //to get removed
+    LEATHER_ARMOURER(2, 2, "leather armourer", BuildingCategories.WEAPON, 0, 20, 1, 0, 100),
+    //blacksmith
+    MACE_MAKER(2, 2, "mace maker", BuildingCategories.WEAPON, 0, 20, 1, 0, 100),
+    //pole turner
+    PIKE_MAKER(2, 2, "pike maker", BuildingCategories.WEAPON, 0, 20, 1, 0, 100),
+    //fletcher
+    CROSSBOW_MAKER(2, 2, "crossbow maker", BuildingCategories.WEAPON, 0, 20, 1, 0, 100),
+    FLETCHER(2, 2, "fletcher", BuildingCategories.WEAPON, 0, 20, 1, 0, 100),
+    POLE_TURNER(2, 2, "pole_turner", BuildingCategories.WEAPON, 0, 10, 1, 0, 100),
+    BLACKSMITH(2, 2, "black smith", BuildingCategories.WEAPON, 0, 20, 1, 0, 100),
+    OIL_SMELTER(2, 2, "oil smelter", BuildingCategories.CASTLE, 10, 0, 1, 0, 100),
+    CAGED_WAR_DOGS(2, 2, "caged war dogs", BuildingCategories.CASTLE, 0, 10, 0, 0, 100),
+    STABLE(2, 2, "stable", BuildingCategories.CASTLE, 0, 20, 0, 0, 400),
+    APPLE_ORCHARD(3, 3, "apple orchard", BuildingCategories.FARM, 0, 5, 1, 0, 0, Textures.GROSS),
+    DIARY_FARMER(2, 2, "diary farmer", BuildingCategories.FARM, 0, 10, 1, 0, 0),
+    HOPS_FARMER(3, 3, "hops farmer", BuildingCategories.FARM, 0, 15, 1, 0, 0, Textures.GROSS),
+    HUNTER_POST(2, 2, "hunter post", BuildingCategories.FARM, 0, 5, 1, 0, 0),
+    WHEAT_FARMER(3, 3, "wheat farmer", BuildingCategories.FARM, 0, 15, 1, 0, 0, Textures.GROSS),
+    BAKERY(2, 2, "bakery", BuildingCategories.FOOD_PROCESSOR, 0, 10, 1, 0, 0),
+    BREWER(2, 2, "brewer", BuildingCategories.FOOD_PROCESSOR, 0, 10, 0, 0, 0),
+    WALL(1, 1,"wall", BuildingCategories.CASTLE, 5, 0, 0, 0 , 0);
     private String name;
     private double rockNeeded;
     private double woodNeeded;
     private double workerNeeded;
     private double ironNeeded;
+    private BuildingCategories category;
 
     private double goldNeeded;
 
@@ -68,7 +71,7 @@ public enum Buildings {
 
     private final Textures possibleTexture;
 
-    Buildings(int length, int width, String name, double rockNeeded, double woodNeeded, double workerNeeded, double ironNeeded, double goldNeeded, Textures possibleTexture) {
+    Buildings(int length, int width, String name, BuildingCategories category, double rockNeeded, double woodNeeded, double workerNeeded, double ironNeeded, double goldNeeded, Textures possibleTexture) {
         this.rockNeeded = rockNeeded;
         this.woodNeeded = woodNeeded;
         this.workerNeeded = workerNeeded;
@@ -78,9 +81,10 @@ public enum Buildings {
         this.width = width;
         this.name = name;
         this.goldNeeded = goldNeeded;
+        this.category = category;
     }
 
-    Buildings(int length, int width, String name, double rockNeeded, double woodNeeded, double workerNeeded, double ironNeeded, double goldNeeded) {
+    Buildings(int length, int width, String name, BuildingCategories category, double rockNeeded, double woodNeeded, double workerNeeded, double ironNeeded, double goldNeeded) {
         this.rockNeeded = rockNeeded;
         this.woodNeeded = woodNeeded;
         this.workerNeeded = workerNeeded;
@@ -90,6 +94,7 @@ public enum Buildings {
         this.width = width;
         this.name = name;
         this.goldNeeded = goldNeeded;
+        this.category = category;
     }
 
     public void setRockNeeded(double rockNeeded) {
@@ -142,6 +147,10 @@ public enum Buildings {
 
     public Textures getPossibleTexture() {
         return possibleTexture;
+    }
+
+    public BuildingCategories getCategory() {
+        return category;
     }
 
     public static Buildings getBuildingByName(String name) {

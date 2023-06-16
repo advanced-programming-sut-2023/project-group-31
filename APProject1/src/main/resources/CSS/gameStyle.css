@@ -31,7 +31,6 @@ Button:hover{
     -fx-font-weight: bold;
     -fx-font-family: "Viner Hand ITC";
     -fx-text-fill: #d3bb16;
-    -fx-pref-width: 120;
     -fx-pref-height: 35;
     -fx-border-radius: 5;
     -fx-background-color: rgba(0, 0, 0, 0.733);
@@ -95,6 +94,11 @@ Label{
 #start-game{
     -fx-background-image: url("../Media/MenuBackground/startgame.jpg");
     -fx-background-size: 1200 650;
+}
+
+#gameBottomBar{
+    -fx-background-image: url("../Media/MenuBackground/bottommenu.png");
+    -fx-background-size: 90 150;
 }
 /*.menu-bar{*/
 /*    -fx-background-color:transparent;*/

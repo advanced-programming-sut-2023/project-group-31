@@ -5,17 +5,19 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import model.DataBase;
 import view.enums.Menus;
 import view.user_system.StrongHoldCrusaderGame;
-
 import java.io.IOException;
 import java.net.URL;
 
 public class GameSwitcher extends Application {
     public static void main(String[] args) {
+        DataBase.loadApp();
         launch(args);
     }
     public static Stage stage;
+    public static Stage stage2;
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -47,5 +49,16 @@ public class GameSwitcher extends Application {
 
 
         stage.setScene(scene);
+    }
+
+    public static Stage startMenu(Menus menuName){
+        Stage stage = new Stage();
+        Parent root = loadFXML(menuName);
+        assert root != null;
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+        stage2= stage;
+        return stage;
     }
 }

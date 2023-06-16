@@ -65,7 +65,7 @@ public class TurnController extends ControllerUtils {
             return new MenuBuilding(currentPlayer, BuildingMenus.getEnumByName(type));
         }
         if (FactorRiserTypes.getEnumByName(type) != null) {
-            if (!type.equals("wall") && currentPlayer.getReligionRate() == 0) {
+            if (currentPlayer.getReligionRate() == 0) {
                 currentPlayer.setReligionRate(2);
             }
             return new FactorRiser(currentPlayer, FactorRiserTypes.getEnumByName(type));

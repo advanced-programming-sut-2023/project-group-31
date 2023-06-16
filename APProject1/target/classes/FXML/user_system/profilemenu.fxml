@@ -20,10 +20,17 @@
                 <Button fx:id="back" mnemonicParsing="false" onMouseClicked="#backToMain" prefHeight="10.0" text="back" />
                 <Button fx:id="showInformation" mnemonicParsing="false" onMouseClicked="#show" prefHeight="10.0" text="show my Profile"/>
             </HBox>
+     <HBox alignment="CENTER" spacing="20">
+            <Button fx:id="back" mnemonicParsing="false" onMouseClicked="#backToMain" prefHeight="10.0" text="back" />
+            <Button fx:id="showInformation" mnemonicParsing="false" onMouseClicked="#show" prefHeight="10.0" text="show my Profile"/>
+     </HBox>
             <ImageView fx:id="avatarPic" fitHeight="97.0" fitWidth="122.0" pickOnBounds="true" preserveRatio="true" />
             <Button mnemonicParsing="false" onMouseClicked="#selectImage" prefHeight="10.0" text="Select Image" />
             <Button onMouseClicked="#changeAvatarPic" prefHeight="10.0" text="Next Picture" />
             <HBox alignment="CENTER" spacing="20">
+            <Label prefHeight="10.0" text="Change Nickname" textAlignment="LEFT" alignment="CENTER_LEFT"/>
+            <Label prefHeight="10.0" text="Change Username" alignment="CENTER"/>
+            <Label prefHeight="10.0" text="Change email" textAlignment="RIGHT" alignment="CENTER_RIGHT"/>
                 <Label prefHeight="10.0" text="Change Nickname" textAlignment="LEFT" alignment="CENTER_LEFT"/>
                 <Label prefHeight="10.0" text="Change Username" alignment="CENTER"/>
                 <Label prefHeight="10.0" text="Change email" textAlignment="RIGHT" alignment="CENTER_RIGHT"/>
@@ -37,6 +44,9 @@
                 <Button onMouseClicked="#changeNickname" prefHeight="10.0" text="Change Nickname" />
                 <Button onMouseClicked="#changeUsername" prefHeight="10.0" text="Change Username" />
                 <Button onMouseClicked="#changeEmail" prefHeight="10.0" text="Change Email"/>
+            <Button onMouseClicked="#changeNickname" prefHeight="10.0" text="Change Nickname" />
+            <Button onMouseClicked="#changeUsername" prefHeight="10.0" text="Change Username" />
+            <Button onMouseClicked="#changeEmail" prefHeight="10.0" text="Change Email"/>
             </HBox>
             <Label fx:id="error" text="" />
             <Label fx:id="passwordError" text="" />

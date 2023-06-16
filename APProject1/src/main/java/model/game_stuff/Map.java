@@ -11,9 +11,11 @@ import java.util.List;
 
 public class Map {
     private static ArrayList<Map> maps;
+
     {
-        maps=new ArrayList<Map>();
+        maps = new ArrayList<Map>();
     }
+
     private String name;
     private int size;
     private ArrayList<Tree> trees;
@@ -36,6 +38,7 @@ public class Map {
                 blocks.get(i).add(new Block(Textures.GROUND, j, i));
             }
         }
+        this.trees = new ArrayList<>();
     }
 
     public ArrayList<Block> getLordHouses() {
@@ -61,6 +64,7 @@ public class Map {
     public Block getBlock(int x, int y) {
         return blocks.get(y).get(x);
     }
+
     public void setBlock(int x, int y, Block block) {
         blocks.get(y).set(x, block);
     }
@@ -109,7 +113,7 @@ public class Map {
         return blocks;
     }
 
-    public static void addMap(Map map){
+    public static void addMap(Map map) {
         maps.add(map);
 
     }
@@ -165,7 +169,6 @@ public class Map {
     }
 
 
-
     public static Map getDefaultMap() {
         Map newMap = new Map("Default map", 200);
         for (int i = 1; i < 20; i++) {
@@ -182,9 +185,9 @@ public class Map {
                 Tree tree = new Tree(newMap.getBlock(i, j), TreeTypes.DATE);
             }
         }
-        setTextures(newMap,100, 135, 50, 15,Textures.WATER);
-        setTextures(newMap,70, 10, 30, 10, Textures.CLIFF);
-        setTextures(newMap,130,120,10,10,Textures.IRON);
+        setTextures(newMap, 100, 135, 50, 15, Textures.WATER);
+        setTextures(newMap, 70, 10, 30, 10, Textures.CLIFF);
+        setTextures(newMap, 130, 120, 10, 10, Textures.IRON);
         newMap.setDescription("default default");
         ArrayList<Block> lordHouses = new ArrayList<>();
         lordHouses.add(newMap.getBlock(20, 20));
@@ -204,27 +207,28 @@ public class Map {
     }
 
     private static void setTextures(Map newMap, int x, int y, int length, int width, Textures texture) {
-        for (int i = x-(length/2); i < x+(length/2); i++) {
-            for (int j = y-(width/2); j < y+(width/2); j++) {
+        for (int i = x - (length / 2); i < x + (length / 2); i++) {
+            for (int j = y - (width / 2); j < y + (width / 2); j++) {
                 newMap.getBlock(i, j).setType(texture);
             }
         }
     }
+
     @Override
-    public Map clone(){
-        Map map=new Map(this.name,this.size);
-        map.size=this.size;
-        map.trees=new ArrayList<Tree>(this.trees);
-        map.lordHouses=new ArrayList<>(this.lordHouses);
-        map.saved=false;
-        map.blocks=new ArrayList<ArrayList<Block>>();
+    public Map clone() {
+        Map map = new Map(this.name, this.size);
+        map.size = this.size;
+        //map.trees = new ArrayList<Tree>(this.trees);
+        map.lordHouses = new ArrayList<>(this.lordHouses);
+        map.saved = false;
+        map.blocks = new ArrayList<ArrayList<Block>>();
         for (int i = 0; i < this.size; i++) {
             map.blocks.add(new ArrayList<>());
             for (int j = 0; j < this.size; j++) {
                 map.blocks.get(i).add(this.blocks.get(i).get(j).clone());
             }
         }
-        map.description=this.description;
+        map.description = this.description;
         return map;
     }
 

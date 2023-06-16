@@ -1,21 +1,31 @@
 package model.game_stuff.buildings.enums;
 
+import model.game_stuff.ImagePackage;
 import model.game_stuff.enums.ItemTypes;
 import model.game_stuff.enums.Items;
+import model.game_stuff.types.Buildings;
 
 public enum StorageTypes {
-     STOCKPILE("Stockpile",4000,ItemTypes.RAW_MATERIAL),
-     Granary("granary",4000,ItemTypes.FOOD),
-     ARMOURY("Armoury",4000,ItemTypes.WEAPON),
+     STOCKPILE(Buildings.STOCKPILE,4000,ItemTypes.RAW_MATERIAL),
+     Granary(Buildings.GRANARY,4000,ItemTypes.FOOD),
+     ARMOURY(Buildings.ARMOURY,4000,ItemTypes.WEAPON),
     ;
     private String name;
     private int capacity;
+    private ImagePackage imagePackage;
+    private Buildings buildingCosts;
     private ItemTypes productType;
 
-    StorageTypes(String name, int capacity, ItemTypes productType) {
-        this.name = name;
+    StorageTypes(Buildings building, int capacity, ItemTypes productType) {
+        this.name = building.getName();
+        buildingCosts = building;
+        imagePackage = new ImagePackage("Media/Buildings/" + building.getCategory() + "/" + name + "/" + name);
         this.capacity = capacity;
         this.productType = productType;
+    }
+
+    public ImagePackage getImagePackage() {
+        return imagePackage;
     }
 
     public String getName() {

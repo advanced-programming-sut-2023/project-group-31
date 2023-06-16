@@ -23,7 +23,6 @@ public enum Textures {
         this.permeability = permeability;
         this.name = name;
         this.color = color;
-
     }
 
     public boolean isPermeable() {

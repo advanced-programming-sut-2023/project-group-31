@@ -1,6 +1,7 @@
 package controller.game_system;
 
 import controller.ControllerUtils;
+import model.DataBase;
 import model.User;
 import model.game_stuff.*;
 import model.game_stuff.buildings.MenuBuilding;
@@ -53,7 +54,22 @@ public class StartGameController extends ControllerUtils {
         if ((treeType = TreeTypes.getTreeType(tree)) == null) {
             return StartGameMessages.INVALID_COMMAND;
         }
+        if(Tree.getNotPossibleTextures().contains(currentMap.getBlock(x,y).getType())){
+            return StartGameMessages.NOT_SUITABLE_TEXTURE;
+        }
         currentMap.getBlocks().get(x).get(y).addTree(new Tree(currentMap.getBlocks().get(x).get(y), treeType));
+        return StartGameMessages.SUCCESS;
+    }
+
+    public static StartGameMessages dropTrees(int x1,int y1,int x2,int y2,String tree){
+        StartGameMessages message;
+        for (int i = x1 - 1; i < x2; i++) {
+            for (int j = y1 - 1; j < y2; j++) {
+                if (!(message= dropTree(i,j,tree)).equals(StartGameMessages.SUCCESS)){
+                    return message;
+                }
+            }
+        }
         return StartGameMessages.SUCCESS;
     }
 
@@ -77,10 +93,12 @@ public class StartGameController extends ControllerUtils {
     }
 
     public static StartGameMessages chooseMap(String name) {
-        for (Map map : Map.getMaps()) {
+
+        for (Map map : DataBase.getMaps()) {
             if (map.getName().equals(name)) {
                 currentMap = map.clone();
                 baseMap = map;
+                StartGameMessages.SUCCESS.setTxt("success");
                 return StartGameMessages.SUCCESS;
             }
         }
@@ -90,7 +108,9 @@ public class StartGameController extends ControllerUtils {
     //TODO: DO SOMETHING WITH THE DUPLICATIONS
 
     public static StartGameMessages setABlockTexture() {
-        if (!inputs.containsKey("x") || !inputs.containsKey("y") || !inputs.containsKey("type")) {
+
+        if (!inputs.containsKey("x") || !inputs.containsKey("y") || !inputs.containsKey("type")
+        ||!inputs.get("x").matches("[\\d]+")||!(inputs.get("y").matches("[\\d]+"))) {
             return StartGameMessages.INVALID_COMMAND;
         }
         int x = Integer.parseInt(inputs.get("x").trim()), y = Integer.parseInt(inputs.get("y").trim());
@@ -111,7 +131,9 @@ public class StartGameController extends ControllerUtils {
     }
 
     public static StartGameMessages setARectanglesTexture() {
-        if (!inputs.containsKey("x1") || !inputs.containsKey("y1") || !inputs.containsKey("x2") || !inputs.containsKey("y2") || !inputs.containsKey("type")) {
+        if (!inputs.containsKey("x1") || !inputs.containsKey("y1") || !inputs.containsKey("x2") || !inputs.containsKey("y2") || !inputs.containsKey("type")
+                ||!inputs.get("x1").matches("[\\d]+")||!(inputs.get("y1").matches("[\\d]+"))
+                ||!inputs.get("x2").matches("[\\d]+")||!(inputs.get("y2").matches("[\\d]+"))) {
             return StartGameMessages.INVALID_COMMAND;
         }
         int x1 = Integer.parseInt(inputs.get("x1").trim());
@@ -313,6 +335,18 @@ public class StartGameController extends ControllerUtils {
         currentMap.setBlock(x, y, baseMap.getBlock(x, y).clone());
         return StartGameMessages.SUCCESS;
 
+    }
+
+    public static StartGameMessages clearBlocks(int x1,int y1,int x2,int y2){
+        StartGameMessages message;
+        for (int i = x1 - 1; i < x2; i++) {
+            for (int j = y1 - 1; j < y2; j++) {
+                if(!(message=clearBlock(i,j)).equals(StartGameMessages.SUCCESS)){
+                    return message;
+                }
+            }
+        }
+        return StartGameMessages.SUCCESS;
     }
 
 

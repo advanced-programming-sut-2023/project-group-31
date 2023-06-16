@@ -96,6 +96,11 @@ Label{
     -fx-background-image: url("../Media/MenuBackground/startgame.jpg");
     -fx-background-size: 1200 650;
 }
+
+#gameBottomBar{
+    -fx-background-image: url("../Media/MenuBackground/bottommenu.png");
+    -fx-background-size: 90 150;
+}
 /*.menu-bar{*/
 /*    -fx-background-color:transparent;*/
 /*    -fx-background-image: url("../pictures/menu_background/menuBarBackground.png");*/

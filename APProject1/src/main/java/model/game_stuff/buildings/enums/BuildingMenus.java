@@ -1,20 +1,36 @@
 package model.game_stuff.buildings.enums;
 
-import model.game_stuff.enums.ItemTypes;
+import model.game_stuff.ImagePackage;
+import model.game_stuff.types.Buildings;
 
 public enum BuildingMenus {
-    MERCENARY_POST("Mercenary post", "MercenaryPostMenu"),
-    BARRACK("Barrack", "BarracksMenu"),
-    LORD_HOUSE("lord house", "lord menu" ),
-    MARKET("Market","MarketMenu"),
-    ENGINEER_GUID("Engineer guid","EngineerGuildMenu");
+    MERCENARY_POST(Buildings.MERCENARY_POST, "MercenaryPostMenu"),
+    BARRACKS(Buildings.BARRACKS, "BarracksMenu"),
+    LORD_HOUSE("lord house", "lord menu"),
+    MARKET(Buildings.MARKET,"MarketMenu"),
+    ENGINEER_GUID(Buildings.ENGINEER_GUID,"EngineerGuildMenu");
 
     private String name;
     private String menu;
+    private ImagePackage imagePackage;
+    private Buildings buildingCost;
+
+    BuildingMenus(Buildings building, String menu) {
+        this.name = building.getName();
+        buildingCost = building;
+        imagePackage = new ImagePackage("Media/Buildings/" + building.getCategory() + "/" + name + "/" + name);
+        this.menu = menu;
+    }
 
     BuildingMenus(String name, String menu) {
         this.name = name;
         this.menu = menu;
+        buildingCost = null;
+        imagePackage = new ImagePackage("Media/Buildings/" + name + "/" + name);
+    }
+
+    public ImagePackage getImagePackage() {
+        return imagePackage;
     }
 
     public String getName() {

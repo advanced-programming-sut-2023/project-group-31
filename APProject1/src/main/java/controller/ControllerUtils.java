@@ -1,5 +1,6 @@
 package controller;
 
+import model.DataBase;
 import model.User;
 import model.game_stuff.Game;
 import model.game_stuff.Government;
@@ -18,6 +19,7 @@ public abstract class ControllerUtils {
 
     static {
         currentMap = Map.getDefaultMap();
+        DataBase.getMaps().set(0,currentMap);
         inputs=new HashMap<>();
     }
 
