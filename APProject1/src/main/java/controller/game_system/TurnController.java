@@ -132,7 +132,7 @@ public class TurnController extends ControllerUtils {
         if (!(building instanceof MenuBuilding)) {
             return TurnMessages.MESSAGE.setAndGetTxt(building.toString());
         }
-        if (((MenuBuilding) building).getType().equals(BuildingMenus.BARRACK)) {
+        if (((MenuBuilding) building).getType().equals(BuildingMenus.BARRACKS)) {
             BarrackController.setMenuBuilding((MenuBuilding) building);
             return TurnMessages.BARRACK.setAndGetTxt(building.toString());
         }
