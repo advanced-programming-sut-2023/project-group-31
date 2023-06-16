@@ -4,9 +4,11 @@ import model.user_stuff.Score;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 
 public class User {
+    private static ArrayList<User>userArrayList=new ArrayList<>();
     private static HashMap<String, User> users = new HashMap<String, User>();
     private String username;
     private String password;
@@ -191,5 +193,9 @@ public class User {
                 "rank=" + getRank() + "\n" +
                 "slogan: " + slogan;
     }
-
+    public static class Sort implements Comparator<User> {
+        public int compare(User a, User b) {
+            return b.getHighScore() - a.getHighScore();
+        }
+    }
 }

@@ -104,9 +104,11 @@ public class LoginPage {
         String regex=".+(?<number>\\d\\d\\d\\d)\\.png";
         Pattern pattern=Pattern.compile(regex);
         Matcher matcher2= pattern.matcher(captcha.getImage().getUrl());
-        String Url=matcher2.group("number");
-        System.out.println(Url);
-//        String Url=captcha.getImage().getUrl().substring(93,97);
+        String Url=null;
+        if (matcher2.matches()) {
+
+            Url= matcher2.group("number");
+        }
         if (!Url.equals(captchaText.getText())){
             error.setText("Fill captcha correctly!");
             resetCaptchaFailLogin();
@@ -169,19 +171,19 @@ public class LoginPage {
     }
 
     public void forgotPassword(MouseEvent mouseEvent) {
-            User user=User.getUserByUsername(username.getText());
-            if (!username.getText().equals("") && user != null) {
-                Fpassword.setOnAction(e -> {
-                    try {
-                        Popup1.display(user);
-                    } catch (IOException ex) {
-                        throw new RuntimeException(ex);
-                    }
-                });
-            }
-            else
-                return;
+        User user=User.getUserByUsername(username.getText());
+        if (!username.getText().equals("") && user != null) {
+            Fpassword.setOnAction(e -> {
+                try {
+                    Popup1.display(user);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+            });
         }
+        else
+            return;
+    }
 
 
     public static ArrayList<Integer> getCaptchaImage() {
