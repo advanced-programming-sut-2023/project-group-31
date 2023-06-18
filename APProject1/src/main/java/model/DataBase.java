@@ -126,8 +126,10 @@ public class DataBase {
         }
     }
 
-    public static void sortUsersByHighScore() {
-        Collections.sort(DataBase.dataBase.users, new CompareByHighScore());
+    public static ArrayList<User> sortUsersByHighScore() {
+        ArrayList<User>copy=new ArrayList<>(DataBase.dataBase.users);
+        Collections.sort(copy, new CompareByHighScore());
+        return copy;
     }
 
     public static int getUsersRank(User user) {

@@ -100,11 +100,11 @@ public class ProfileMenuPage {
                 error.setStyle("-fx-text-fill: #ff0066;");
                 return;
             }
-                ControllerUtils.getCurrentUser().setNickname(nickname.getText());
-                Alert alert = new Alert(Alert.AlertType.INFORMATION, "nickname changed successfully");
-                nickname.setText("");
-                alert.showAndWait();
-                return;
+            ControllerUtils.getCurrentUser().setNickname(nickname.getText());
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "nickname changed successfully");
+            nickname.setText("");
+            alert.showAndWait();
+            return;
 
 
 
@@ -160,7 +160,9 @@ public class ProfileMenuPage {
         alert.setTitle("my Profile");
         alert.setHeaderText("Your registered information");
         alert.setContentText("username: "+ControllerUtils.getCurrentUser().getUsername()+"\npassword: "+ControllerUtils.getCurrentUser().getPassword()
-        +"\nslogan: "+ControllerUtils.getCurrentUser().getSlogan()+"\nemail: "+ControllerUtils.getCurrentUser().getEmail());
+                +"\nslogan: "+ControllerUtils.getCurrentUser().getSlogan()+"\nemail: "+ControllerUtils.getCurrentUser().getEmail());
         alert.showAndWait();
     }
+
+
 }
