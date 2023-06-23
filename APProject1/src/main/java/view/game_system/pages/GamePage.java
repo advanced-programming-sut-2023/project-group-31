@@ -47,7 +47,7 @@ public class GamePage {
             buildingTypeList.getChildren().add((Node) button);
             for(Buildings buildings:Buildings.values()){
                 if(buildings.getCategory().equals(buildingCategories)){
-                    buildings.get
+
                 }
             }
         }
