@@ -1,5 +1,6 @@
 package model.game_stuff;
 
+import javafx.scene.Group;
 import javafx.scene.image.ImageView;
 import model.game_stuff.buildings.GateHouse;
 import model.game_stuff.buildings.Tower;
@@ -8,11 +9,12 @@ import model.game_stuff.enums.Direction;
 
 import java.util.LinkedList;
 
-public abstract class Person extends ImageView implements HasHp{
+public abstract class Person implements HasHp{
     //TODO : FILL PEOPLE WITH IMAGES
     protected Government owner;
     protected String name;
     protected int hp;
+    protected Group node;
     protected int speed;
     protected Block position;
     protected ImagePackage imagePackage;
@@ -37,6 +39,14 @@ public abstract class Person extends ImageView implements HasHp{
 
     public int getSpeed() {
         return speed;
+    }
+
+    public Group getNode() {
+        return node;
+    }
+
+    public void setNode(Group node) {
+        this.node = node;
     }
 
     public ImagePackage getImagePackage() {

@@ -3,7 +3,6 @@ package model.game_stuff;
 
 import model.game_stuff.buildings.Trap;
 import model.game_stuff.enums.Textures;
-import model.game_stuff.people.Fighter;
 import model.game_stuff.people.Troop;
 
 import java.util.ArrayList;
