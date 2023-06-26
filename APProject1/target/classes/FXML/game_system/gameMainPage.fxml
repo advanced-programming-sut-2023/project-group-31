@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 
 <Pane prefHeight="900" prefWidth="1500.0" stylesheets="@../../CSS/gameStyle.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.game_system.pages.GamePage">
    <HBox id="gameBottomBar" layoutY="752.0" prefHeight="150" prefWidth="1500" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
@@ -12,11 +14,25 @@
    <Pane fx:id="minimap" layoutX="812.0" layoutY="719.0" prefHeight="163.0" prefWidth="173.0">
 
    </Pane>
-   <ImageView fitHeight="180.0" fitWidth="408.0" layoutX="452.0" layoutY="724.0">
+   <ImageView fitHeight="182.0" fitWidth="408.0" layoutX="452.0" layoutY="722.0">
       <Image url="@../../Media/game/menus/bottomMenu/scroll.png">
 
       </Image>
    </ImageView>
    <Pane layoutX="954.0" layoutY="714.0" prefHeight="194.0" prefWidth="129.0" />
    <Pane fx:id="wholeMapPane" layoutY="2.0" prefHeight="766.0" prefWidth="1338.0" />
+   <VBox layoutX="501.0" layoutY="755.0" prefHeight="143.0" prefWidth="304.0">
+      <children>
+         <ScrollPane prefHeight="51.0" prefWidth="304">
+            <HBox fx:id="buildingTypeList" prefHeight="50">
+
+            </HBox>
+         </ScrollPane>
+         <VBox fx:id="buildingList">
+            <HBox prefHeight="105.0" prefWidth="304.0">
+
+            </HBox>
+         </VBox>
+      </children>
+   </VBox>
 </Pane>
