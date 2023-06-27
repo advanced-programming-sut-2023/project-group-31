@@ -3,6 +3,8 @@ package model.game_stuff.types;
 import model.game_stuff.enums.BuildingCategories;
 import model.game_stuff.enums.Textures;
 
+import java.net.URL;
+
 public enum Buildings {
     SMALL_STONE_GATEHOUSE(2, 1, "small stone gatehouse", BuildingCategories.CASTLE, 0, 0, 0, 0, 2000),
     BIG_STONE_GATEHOUSE(2, 3, "big stone gatehouse", BuildingCategories.CASTLE, 20, 0, 0, 0, 2000),
@@ -43,7 +45,7 @@ public enum Buildings {
     //fletcher
     CROSSBOW_MAKER(2, 2, "crossbow maker", BuildingCategories.WEAPON, 0, 20, 1, 0, 100),
     FLETCHER(2, 2, "fletcher", BuildingCategories.WEAPON, 0, 20, 1, 0, 100),
-    POLE_TURNER(2, 2, "pole_turner", BuildingCategories.WEAPON, 0, 10, 1, 0, 100),
+    POLE_TURNER(2, 2, "pole turner", BuildingCategories.WEAPON, 0, 10, 1, 0, 100),
     BLACKSMITH(2, 2, "black smith", BuildingCategories.WEAPON, 0, 20, 1, 0, 100),
     OIL_SMELTER(2, 2, "oil smelter", BuildingCategories.CASTLE, 10, 0, 1, 0, 100),
     CAGED_WAR_DOGS(2, 2, "caged war dogs", BuildingCategories.CASTLE, 0, 10, 0, 0, 100),
@@ -170,5 +172,10 @@ public enum Buildings {
         return false;
     }
 
-
+    public String getUrl() {
+        if(this == SMALL_STONE_GATEHOUSE || this == DRAWBRIDGE || this == BIG_STONE_GATEHOUSE) {
+            return Buildings.class.getResource("/Media/Buildings/" + category.getStr() + "/" + name + "/" + name + "0.png").toString();
+        }
+        return Buildings.class.getResource("/Media/Buildings/" + category.getStr() + "/" + name + "/" + name + ".png").toString();
+    }
 }

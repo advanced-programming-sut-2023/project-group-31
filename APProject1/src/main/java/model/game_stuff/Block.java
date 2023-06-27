@@ -1,6 +1,7 @@
 package model.game_stuff;
 
 
+import javafx.scene.shape.Rectangle;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
@@ -54,6 +55,7 @@ public class Block {
         }
     }
     private Textures type;
+    private Rectangle rectangle;
     private ArrayList<Person> people;
     private ArrayList<Tree> trees;
     private Trap trap;
@@ -76,6 +78,14 @@ public class Block {
         this.type = type;
         this.x = x;
         this.y = y;
+    }
+
+    public Rectangle getRectangle() {
+        return rectangle;
+    }
+
+    public void setRectangle(Rectangle rectangle) {
+        this.rectangle = rectangle;
     }
 
     public boolean isTunneled() {

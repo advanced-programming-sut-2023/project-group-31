@@ -94,7 +94,7 @@ public class StartGameController extends ControllerUtils {
 
     public static StartGameMessages chooseMap(String name) {
 
-        for (Map map : DataBase.getMaps()) {
+        for (Map map : Map.getMaps()) {
             if (map.getName().equals(name)) {
                 currentMap = map.clone();
                 baseMap = map;

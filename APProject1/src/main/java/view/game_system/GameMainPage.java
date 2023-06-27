@@ -7,6 +7,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Tooltip;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
@@ -23,6 +24,7 @@ import java.net.URL;
 
 public class GameMainPage extends Application {
     private static Pane root;
+    private static Rectangle minimapRectangle;
 
     private static Pane mapPane;
     @Override
@@ -48,21 +50,35 @@ public class GameMainPage extends Application {
             public void handle(MouseEvent mouseEvent) {
                 if(mouseEvent.getSceneX() > scene.getWidth() - 25 && mapPane.getLayoutX() > -1 * mapPane.getPrefWidth() * mapPane.getScaleX() / 2) {
                     mapPane.setLayoutX(mapPane.getLayoutX() - 25);
+                    if(minimapRectangle != null) {
+                        minimapRectangle.setLayoutX((double) ControllerUtils.getCurrentMap().getSize()/2+
+                                (-GameMainPage.getMapPane().getLayoutX()/GameMainPage.getMapPane().getScaleX()));
+                    }
                 }
                 if(mouseEvent.getSceneX() < 25 && mapPane.getLayoutX() < mapPane.getPrefWidth() * mapPane.getScaleX() / 2) {
                     mapPane.setLayoutX(mapPane.getLayoutX() + 25);
+                    if(minimapRectangle != null) {
+                        minimapRectangle.setLayoutX((double) ControllerUtils.getCurrentMap().getSize()/2+
+                                (-GameMainPage.getMapPane().getLayoutX()/GameMainPage.getMapPane().getScaleX()));
+                    }
                 }
                 if(mouseEvent.getSceneY() > scene.getHeight() - 25 - 130 && mouseEvent.getSceneY() < scene.getHeight() - 130
                         && mapPane.getLayoutY() > -1 * mapPane.getPrefHeight() * mapPane.getScaleY() / 2) {
                     mapPane.setLayoutY(mapPane.getLayoutY() - 25);
+                    if(minimapRectangle != null) {
+                        minimapRectangle.setLayoutY((double) ControllerUtils.getCurrentMap().getSize()/2+
+                                (-GameMainPage.getMapPane().getLayoutY()/GameMainPage.getMapPane().getScaleY()));
+                    }
                 }
                 if(mouseEvent.getSceneY() < 25 && mapPane.getLayoutY() < mapPane.getPrefHeight() * mapPane.getScaleX() / 2) {
                     mapPane.setLayoutY(mapPane.getLayoutY() + 25);
+                    if(minimapRectangle != null) {
+                        minimapRectangle.setLayoutY((double) ControllerUtils.getCurrentMap().getSize()/2+
+                                (-GameMainPage.getMapPane().getLayoutY()/GameMainPage.getMapPane().getScaleY()));
+                    }
                 }
             }
         });
-
-
     }
 
     public static void main(String[] args) {
@@ -77,5 +93,7 @@ public class GameMainPage extends Application {
         return mapPane;
     }
 
-
+    public static void setMinimapRectangle(Rectangle minimapRectangle) {
+        GameMainPage.minimapRectangle = minimapRectangle;
+    }
 }

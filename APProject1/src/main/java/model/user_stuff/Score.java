@@ -6,12 +6,12 @@ import model.User;
 public class Score {
     private int amount;
     private User owner;
-    private Game game;
+    //private Game game;
 
-    public Score(int amount, User owner, Game game) {
+    public Score(int amount, User owner/*, Game game*/) {
         this.amount = amount;
         this.owner = owner;
-        this.game = game;
+        //this.game = game;
     }
 
     public int getAmount() {
@@ -30,11 +30,11 @@ public class Score {
         this.owner = owner;
     }
 
-    public Game getGame() {
+    /*public Game getGame() {
         return game;
     }
 
     public void setGame(Game game) {
         this.game = game;
-    }
+    }*/
 }

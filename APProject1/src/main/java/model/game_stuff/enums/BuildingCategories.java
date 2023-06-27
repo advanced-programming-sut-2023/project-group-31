@@ -1,12 +1,12 @@
 package model.game_stuff.enums;
 
 public enum BuildingCategories {
-    CASTLE("castle"),
-    FARM("farm"),
-    INDUSTRY("industry"),
-    WEAPON("weapon"),
-    TOWN("town"),
-    FOOD_PROCESSOR("food processor"),
+    CASTLE("Castle"),
+    FARM("Farm"),
+    INDUSTRY("Industry"),
+    WEAPON("Weapon"),
+    TOWN("Town"),
+    FOOD_PROCESSOR("Food processor"),
     ;
     private String str;
 
