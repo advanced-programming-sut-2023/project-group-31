@@ -38,9 +38,13 @@ public class LoginPage {
     private TextField username;
     @FXML
     private Label error;
+
+    @FXML
+    private CheckBox stayLoggedIn;
     @FXML
     private Button loginButton;
     private static ArrayList<Integer>captchaImage;
+
     static {
         captchaImage=new ArrayList<>();
         captchaImage.add(1181);
@@ -124,6 +128,9 @@ public class LoginPage {
             return;
         }
         ControllerUtils.setCurrentUser(User.getUserByUsername(username.getText()));
+        if((boolean)stayLoggedIn.isSelected()){
+            DataBase.getDataBase().setLoggedInUser(User.getUserByUsername(username.getText()));
+        }
         StrongHoldCrusaderGame.changeMenu(Menus.MAIN);
     }
 

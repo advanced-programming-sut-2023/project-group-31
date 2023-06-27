@@ -2,6 +2,7 @@ package view.user_system;
 
 
 import com.google.gson.Gson;
+import controller.ControllerUtils;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -22,7 +23,13 @@ public class StrongHoldCrusaderGame extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = loadFXML(Menus.LOGIN);
+        Parent root;
+        if(ControllerUtils.isUserLoggedIn()){
+            root = loadFXML(Menus.MAIN);
+        } else {
+            root =loadFXML(Menus.LOGIN);
+        }
+
         StrongHoldCrusaderGame.stage = stage;
         assert root != null;
         Scene scene = new Scene(root);

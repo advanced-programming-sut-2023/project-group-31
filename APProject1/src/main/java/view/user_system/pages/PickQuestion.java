@@ -44,12 +44,12 @@ public class PickQuestion {
             resetCaptchaFailRegister();
             return;
         }
-        String Url=captcha.getImage().getUrl().substring(93,97);
-        if (!Url.equals(captchaText.getText())){
-            result.setText("enter captcha correctly");
-            resetCaptchaFailRegister();
-            return;
-        }
+//        String Url=captcha.getImage().getUrl().substring(93,97);
+//        if (!Url.equals(captchaText.getText())){
+//            result.setText("enter captcha correctly");
+//            resetCaptchaFailRegister();
+//            return;
+//        }
         if (!textField1.getText().equals(textField2.getText())){
             result.setText("enter similar answer for question");
             resetCaptchaFailRegister();

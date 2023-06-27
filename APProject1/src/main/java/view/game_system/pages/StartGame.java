@@ -23,9 +23,12 @@ import model.game_stuff.Colors;
 import model.game_stuff.Map;
 import view.ViewUtils;
 import view.enums.Menus;
+import view.game_system.GameMainPage;
 import view.game_system.GameSwitcher;
 import view.game_system.messages.StartGameMessages;
+import view.user_system.MainMenu;
 import view.user_system.MenuSwitcher;
+import view.user_system.StrongHoldCrusaderGame;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -43,9 +46,6 @@ public class StartGame {
         usersStart = 0;
         usersCount = 8;
         players = new ArrayList<>();
-        if (ControllerUtils.getCurrentUser() != null) {
-            players.add(ControllerUtils.getCurrentUser().getUsername());
-        }
     }
 
     @FXML
@@ -81,13 +81,7 @@ public class StartGame {
 
     public void setFirstPlayer() {
         HBox hBox = (HBox) createPlayerRow(ControllerUtils.getCurrentUser());
-        ChoiceBox choiceBox = new ChoiceBox();
-        for (Colors color : Colors.values()) {
-            choiceBox.getItems().add(color.getName());
-        }
-        choiceBox.setValue("choose color");
-        hBox.getChildren().add(choiceBox);
-        playersList.getChildren().add(hBox);
+        addAnyPlayer(hBox,ControllerUtils.getCurrentUser().getUsername());
     }
 
     private void setPlayersList() {
@@ -144,7 +138,11 @@ public class StartGame {
 
     private void addNewPlayer(MouseEvent mouseEvent) {
         HBox hBox = (HBox) ((Button) (mouseEvent.getSource())).getParent();
-        players.add(((Button) (mouseEvent.getSource())).getId());
+        String buttonId=((Button) (mouseEvent.getSource())).getId();
+        addAnyPlayer(hBox,buttonId);
+    }
+    private void addAnyPlayer(HBox hBox,String buttonId){
+        players.add(buttonId);
         hBox.getChildren().remove(3);
         ChoiceBox choiceBox = new ChoiceBox();
         for (Colors color : Colors.values()) {
@@ -157,7 +155,7 @@ public class StartGame {
         Button button = new Button();
         button.setStyle("-fx-background-color: red;");
         button.setText("remove");
-        button.setId(((Button) (mouseEvent.getSource())).getId());
+        button.setId(buttonId);
         button.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -194,7 +192,7 @@ public class StartGame {
 
     }
 
-    public void startGame(MouseEvent mouseEvent) {
+    public void startGame(MouseEvent mouseEvent) throws Exception {
         ArrayList<String> colors = new ArrayList<>();
         for (Object hBox : playersList.getChildren()) {
             hBox = (HBox) hBox;
@@ -204,6 +202,7 @@ public class StartGame {
             }
             colors.add((String) (((ChoiceBox) (((HBox) hBox).getChildren().get(3))).getValue()));
         }
+        System.out.println(players);
         for (int i = 0; i < players.size(); i++) {
             StartGameController.addPlayer(players.get(i));
             StartGameController.setPlayersLordHouse(players.get(i), i);
@@ -213,6 +212,7 @@ public class StartGame {
         if (!(message = StartGameController.start()).equals(StartGameMessages.SUCCESS)) {
             StartGameMessages.showAlert(message);
         }
+        new GameMainPage().start(StrongHoldCrusaderGame.stage);
     }
 
     public void showNextMap(MouseEvent mouseEvent) {

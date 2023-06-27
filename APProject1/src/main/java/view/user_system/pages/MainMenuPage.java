@@ -7,10 +7,12 @@ import javafx.scene.input.MouseEvent;
 import model.DataBase;
 import model.User;
 import view.enums.Menus;
+import view.game_system.GameSwitcher;
 import view.user_system.StrongHoldCrusaderGame;
 
 public class MainMenuPage {
-    public void startGame(MouseEvent mouseEvent) {
+    public void startGame(MouseEvent mouseEvent) throws Exception {
+        new GameSwitcher().start(StrongHoldCrusaderGame.stage);
     }
 
     public void profile(MouseEvent mouseEvent) {
