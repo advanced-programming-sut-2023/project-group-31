@@ -5,7 +5,7 @@ import model.game_stuff.people.enums.TroopTypes;
 
 public class Assassin extends Troop{
     public Assassin (Government owner) {
-        super(owner, TroopTypes.ASSASSINS);
+        super(owner, TroopTypes.ASSASSIN);
     }
     public void work() {
         switch (state) {

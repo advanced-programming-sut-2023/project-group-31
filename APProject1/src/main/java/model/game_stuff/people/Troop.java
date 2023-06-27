@@ -29,6 +29,7 @@ public class Troop extends Person {
         name = type.getName();
         owner.getTroops().add(this);
         speed = type.getSpeed();
+        imagePackage = type.getImagePackage();
     }
 
     public void setAttackPurpose(Block attackPurpose) {

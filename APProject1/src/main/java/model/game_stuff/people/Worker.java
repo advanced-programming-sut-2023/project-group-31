@@ -28,6 +28,7 @@ public class Worker extends Person {
         state = WorkerStates.PRODUCING;
         name = type.getName();
         speed = type.getSpeed();
+        imagePackage = type.getImagePackage();
     }
     public boolean isInWorkHouse() {
         return position.equals(workHouse.getPosition());

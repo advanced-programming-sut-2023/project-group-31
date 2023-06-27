@@ -52,12 +52,12 @@ public class MoveAnimation extends Transition {
     @Override
     protected void interpolate(double v) {
         try {
-            person.setX(person.getX() + direction.getX());
-            person.setY(person.getY() + direction.getY());
+            person.getNode().setX(person.getNode().getX() + direction.getX());
+            person.getNode().setY(person.getNode().getY() + direction.getY());
             if (v > limit) {
                 counter = (counter + 1) % imageItem.getCount();
                 image = imageItem.getImage(imageItem.getFrom() + imageItem.getModule() * counter);
-                person.setImage(image);
+                person.getNode().setImage(image);
                 limit += measure;
             }
         } catch (Exception e) {
