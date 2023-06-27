@@ -1,14 +1,19 @@
 package controller.game_system;
 
+import controller.ControllerUtils;
 import javafx.event.EventHandler;
+import javafx.scene.control.Button;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 import model.game_stuff.Block;
 import model.game_stuff.Colors;
 import model.game_stuff.Map;
@@ -21,6 +26,8 @@ public class GameViewUtils {
 
     private static HashMap<Textures, Paint> texturesPaints;
     private static int blockSize;
+
+    private static Pane mapPane;
     
     static  {
         blockSize = 40;
@@ -44,7 +51,7 @@ public class GameViewUtils {
     
     
     public static Pane createMapPane(Map map) {
-        Pane mapPane = new Pane();
+        mapPane = new Pane();
         mapPane.setScaleX(blockSize);
         mapPane.setScaleY(blockSize);
         int size = map.getSize();
@@ -58,6 +65,9 @@ public class GameViewUtils {
                 rectangle.setX(block.getX());
                 rectangle.setY(block.getY());
                 mapPane.getChildren().add(rectangle);
+                Tooltip tooltip = new Tooltip(block.toString());
+                Tooltip.install(rectangle,tooltip);
+                block.setRectangle(rectangle);
             }
         }
 
@@ -76,6 +86,24 @@ public class GameViewUtils {
             }
         });
 
+        mapPane.setOnScroll(new EventHandler<ScrollEvent>() {
+            @Override
+            public void handle(ScrollEvent scrollEvent) {
+                System.out.println(scrollEvent.getDeltaY());
+                mapPane.setScaleX(mapPane.getScaleX()*(1+(scrollEvent.getDeltaY()/100)));
+                mapPane.setScaleY(mapPane.getScaleY()*(1+(scrollEvent.getDeltaY()/100)));
+
+            }
+        });
+
         return mapPane;
+    }
+
+    public static Pane getMapPane() {
+        return mapPane;
+    }
+
+    public static void setMapPane(Pane mapPane) {
+        GameViewUtils.mapPane = mapPane;
     }
 }

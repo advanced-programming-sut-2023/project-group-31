@@ -19,7 +19,7 @@ public abstract class ControllerUtils {
 
     static {
         currentMap = Map.getDefaultMap();
-        DataBase.getMaps().set(0,currentMap);
+        Map.getMaps().add(currentMap);
         inputs=new HashMap<>();
     }
 
@@ -31,7 +31,7 @@ public abstract class ControllerUtils {
         return currentPlayer;
     }
 
-    public Game getCurrentGame() {
+    public static Game getCurrentGame() {
         return currentGame;
     }
 
@@ -140,6 +140,8 @@ public abstract class ControllerUtils {
         }
         return null;
     }
+
+
 
 
 }

@@ -1,6 +1,7 @@
 package model.game_stuff;
 
 
+import javafx.scene.shape.Rectangle;
 import model.game_stuff.buildings.Trap;
 import model.game_stuff.enums.Textures;
 import model.game_stuff.people.Fighter;
@@ -11,6 +12,7 @@ import java.util.HashMap;
 
 public class Block {
     private Textures type;
+    private Rectangle rectangle;
     private ArrayList<Person> people;
     private ArrayList<Tree> trees;
     private Trap trap;
@@ -33,6 +35,14 @@ public class Block {
         this.type = type;
         this.x = x;
         this.y = y;
+    }
+
+    public Rectangle getRectangle() {
+        return rectangle;
+    }
+
+    public void setRectangle(Rectangle rectangle) {
+        this.rectangle = rectangle;
     }
 
     public boolean isTunneled() {

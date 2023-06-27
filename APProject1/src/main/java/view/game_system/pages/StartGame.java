@@ -217,16 +217,16 @@ public class StartGame {
 
     public void showNextMap(MouseEvent mouseEvent) {
         mapPane.getChildren().remove(0);
-        mapIndex =((mapIndex+1)%DataBase.getMaps().size());
-        setMapPain(DataBase.getMaps().get(mapIndex));
-        StartGameMessages message = StartGameController.chooseMap(DataBase.getMaps().get(mapIndex).getName());
+        mapIndex =((mapIndex+1)%Map.getMaps().size());
+        setMapPain(Map.getMaps().get(mapIndex));
+        StartGameMessages message = StartGameController.chooseMap(Map.getMaps().get(mapIndex).getName());
     }
 
     public void showPreviousMap(MouseEvent mouseEvent) {
         mapPane.getChildren().remove(0);
-        mapIndex = ((mapIndex-1)%DataBase.getMaps().size());
-        setMapPain(DataBase.getMaps().get(mapIndex));
-        StartGameMessages message = StartGameController.chooseMap(DataBase.getMaps().get(mapIndex).getName());
+        mapIndex = ((mapIndex-1)%Map.getMaps().size());
+        setMapPain(Map.getMaps().get(mapIndex));
+        StartGameMessages message = StartGameController.chooseMap(Map.getMaps().get(mapIndex).getName());
     }
 
     public void editMap(MouseEvent mouseEvent) {
