@@ -2,20 +2,64 @@ package model.game_stuff;
 
 
 import javafx.scene.shape.Rectangle;
+import javafx.scene.Group;
+import javafx.scene.Node;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.text.Text;
 import model.game_stuff.buildings.Trap;
 import model.game_stuff.enums.Textures;
 import model.game_stuff.people.Troop;
+import model.game_stuff.types.PersonType;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Block {
+
+    class ImagePathNumberNode {
+        private String imagePath;
+        private Integer number;
+        private Node node;
+
+        public ImagePathNumberNode(String imagePath, Integer number, Node node) {
+            this.imagePath = imagePath;
+            this.number = number;
+            this.node = node;
+        }
+
+        public String getImagePath() {
+            return imagePath;
+        }
+
+        public void setImagePath(String imagePath) {
+            this.imagePath = imagePath;
+        }
+
+        public Integer getNumber() {
+            return number;
+        }
+
+        public void changeNumber(Integer delta) {
+            this.number += delta;
+        }
+
+        public Node getNode() {
+            return node;
+        }
+
+        public void setNode(Node node) {
+            this.node = node;
+        }
+    }
     private Textures type;
     private Rectangle rectangle;
     private ArrayList<Person> people;
     private ArrayList<Tree> trees;
     private Trap trap;
-    private HashMap<String, Integer> numberOfEachPeople;
+    private HashMap<PersonType, ImagePathNumberNode> numberOfEachPeople;
     private Building building;
     private boolean tunneled;
     private int x;
@@ -66,19 +110,26 @@ public class Block {
 
     public void addPerson(Person person) {
         people.add(person);
-        if(numberOfEachPeople.containsKey(person.getName())) {
-            numberOfEachPeople.replace(person.getName() , numberOfEachPeople.get(person.getName()) + 1);
+        if(numberOfEachPeople.containsKey(person.getPersonType())) {
+            numberOfEachPeople.get(person.getPersonType()).changeNumber(1);
             return;
         }
-        numberOfEachPeople.put(person.getName(), 1);
+        ImageView imageView = new ImageView(new Image(Block.class.getResource("/" + person.getImagePath()).toString(), 1d/5, 1d/5,false,false));
+        Text text = new Text("1");
+        numberOfEachPeople.put(person.getPersonType(), new ImagePathNumberNode(person.getImagePath(), 1,
+            new Group(imageView, text)));
     }
 
     public void removePerson(Person person) {
         people.remove(person);
-        numberOfEachPeople.replace(person.getName(), numberOfEachPeople.get(person.getName()) -1);
-        if(numberOfEachPeople.get(person.getName()) == 0) {
-            numberOfEachPeople.remove(person.getName());
+        numberOfEachPeople.get(person.getPersonType()).changeNumber(-1);
+        if(numberOfEachPeople.get(person.getPersonType()).getNumber() == 0) {
+            numberOfEachPeople.remove(person.getPersonType());
+            //TODO shayad lazem bashe node ro az map hazf konim
         }
+    }
+    public String getImagePathOfAPersonType(PersonType personType) {
+        return numberOfEachPeople.get(personType).getImagePath();
     }
     public void addTree(Tree tree) {
         trees.add(tree);
@@ -103,7 +154,7 @@ public class Block {
         this.type = type;
     }
 
-    public HashMap<String, Integer> getNumberOfEachPeople() {
+    public HashMap<PersonType, ImagePathNumberNode> getNumberOfEachPeople() {
         return numberOfEachPeople;
     }
     public int getNumberOfPeople() {
@@ -151,12 +202,8 @@ public class Block {
         if(building == null) output += "empty";
         else output += building.getName();
         output += "\t people:";
-        for (String personName : numberOfEachPeople.keySet()) {
-            output += "\t" + personName + ":" + numberOfEachPeople.get(personName);
-        }
-        for(Person person : people){
-            output+=person.toString();
-            output+="\t";
+        for (PersonType personType : numberOfEachPeople.keySet()) {
+            output += "\t" + personType + ":" + numberOfEachPeople.get(personType).getNumber();
         }
         return output;
     }
@@ -168,8 +215,8 @@ public class Block {
         if(building == null) output += "empty";
         else output += building.getName();
         output += "\n people:";
-        for (String personName : numberOfEachPeople.keySet()) {
-            output += "\t" + personName + ":" + numberOfEachPeople.get(personName);
+        for (PersonType personType : numberOfEachPeople.keySet()) {
+            output += "\t" + personType + ":" + numberOfEachPeople.get(personType).getNumber();
         }
         output += "\n trees:";
         for (Tree tree : trees) {

@@ -5,38 +5,39 @@ import model.game_stuff.enums.Items;
 import java.util.ArrayList;
 
 public enum Troops{//assassins - fire towers - horseArchers,ladder man, ordinary - slinger , spear man
-    NULL("Null",null,10,null,null),
-    ARCHER("Archer",Nationality.EUROPEAN,10,"thrower",Items.BOW),
-    CROSSBOWMEN("Crossbowmen",Nationality.EUROPEAN,10,"thrower",Items.CROSSBOW),
-    SPEARMEN("Spearmen",Nationality.EUROPEAN,10,"thrower",Items.SPEAR),
-    PIKEMEN("Pikemen",Nationality.EUROPEAN,10,"kicker",Items.PIKE),
-    MACEMEN("Macemen",Nationality.EUROPEAN,10,"kicker",Items.MACE),
-    SWORDSMEN("Swordsmen",Nationality.EUROPEAN,10,"kicker",Items.SWORDS),
-    KNIGHT("Knight",Nationality.EUROPEAN,10,"kicker",Items.SWORDS),
-    TUNNELER("Tunneler",Nationality.NULL,10,"kicker",null),
-    LADDERMEN("Laddermen",Nationality.NULL,10,"kicker",null),
-    ENGINEER("Engineer",Nationality.NULL,10,"kicker",null),
-    BLACKMONK("Black Monk",Nationality.EUROPEAN,10,"kicker",Items.SWORDS),
-    ARCHERBOW("Archer Bow",Nationality.ARAB,10,"thrower",Items.BOW),
-    SLAVES("Slaves",Nationality.ARAB,10,"kicker",Items.FIRE),
-    SLINGERS("Slingers",Nationality.ARAB,10,"thrower",Items.BOW),
-    ASSASSINS("Assassins",Nationality.ARAB,10,"assassins",Items.SWORDS),
-    HORSEARCHERS("Horse Archers",Nationality.ARAB,10,"thrower",Items.BOW),
-    ARABIANSWORDSMEN("Arabian Swordsmen",Nationality.ARAB,10,"kicker",Items.SWORDS),
-    FIRETHROWERS("Fire Throwers",Nationality.ARAB,10,"thrower",Items.BOW),
-    CATAPULT("Catapult",Nationality.NULL,10,null,null);
+    ARCHER(PersonType.ARCHER,Nationality.EUROPEAN,10,"thrower",Items.BOW),
+    CROSSBOW_MAN(PersonType.CROSSBOW_MAN,Nationality.EUROPEAN,10,"thrower",Items.CROSSBOW),
+    SPEAR_MAN(PersonType.SPEAR_MAN,Nationality.EUROPEAN,10,"thrower",Items.SPEAR),
+    PIKE_MAN(PersonType.PIKE_MAN,Nationality.EUROPEAN,10,"kicker",Items.PIKE),
+    MACE_MAN(PersonType.MACE_MAN,Nationality.EUROPEAN,10,"kicker",Items.MACE),
+    SWORDS_MAN(PersonType.SWORDSMAN,Nationality.EUROPEAN,10,"kicker",Items.SWORDS),
+    KNIGHT(PersonType.KNIGHT,Nationality.EUROPEAN,10,"kicker",Items.SWORDS),
+    TUNNELER(PersonType.TUNNELER,Nationality.NULL,10,"kicker",null),
+    LADDER_MAN(PersonType.LADDER_MAN,Nationality.NULL,10,"kicker",null),
+    ENGINEER(PersonType.ENGINEER,Nationality.NULL,10,"kicker",null),
+    BLACK_MONK(PersonType.BLACK_MONK,Nationality.EUROPEAN,10,"kicker",Items.SWORDS),
+    ARCHER_BOW(PersonType.ARABIAN_BOW,Nationality.ARAB,10,"thrower",Items.BOW),
+    SLAVE(PersonType.SLAVE,Nationality.ARAB,10,"kicker",Items.FIRE),
+    SLINGER(PersonType.SLINGER,Nationality.ARAB,10,"thrower",Items.BOW),
+    ASSASSIN(PersonType.ASSASSIN,Nationality.ARAB,10,"assassins",Items.SWORDS),
+    HORSE_ARCHER(PersonType.HORSE_ARCHER,Nationality.ARAB,10,"thrower",Items.BOW),
+    ARABIAN_SWORDSMAN(PersonType.ARABIAN_SWORDSMAN,Nationality.ARAB,10,"kicker",Items.SWORDS),
+    FIRE_THROWER(PersonType.FIRE_THROWER,Nationality.ARAB,10,"thrower",Items.BOW),
+    CATAPULT(PersonType.CATAPULT,Nationality.NULL,10,null,null);
     // hes mikonam ke sarbazaye arab bayad barashoon tedad moshakhas beshe vali nemidoonam
 
 //    private double damage;// very high 6 high 5 average 4 low 3 very low 2 no damage 1
 //    private double defence;//very high 6 high 5 average 4 low 3 very low 2 very, very low 1
 //    private double speed;//very high 5 high 4 average 3 slow 2 very slow 1
-    private  String name;
+    private String name;
+    private PersonType personType;
     private Nationality nationality;
     private Items weapon;
     private String type;
     private int cost;
-    Troops(String name,Nationality nationality,int cost,String type,Items items) {
-        this.name=name;
+    Troops(PersonType personType,Nationality nationality,int cost,String type,Items items) {
+        this.personType = personType;
+        this.name = personType.getName();
         this.nationality=nationality;
         this.cost=cost;
         weapon=items;
