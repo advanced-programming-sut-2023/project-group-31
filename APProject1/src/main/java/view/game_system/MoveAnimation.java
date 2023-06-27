@@ -1,67 +1,34 @@
 package view.game_system;
 
 import javafx.animation.Transition;
+import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
-import model.game_stuff.Person;
+import model.game_stuff.Block;
 import model.game_stuff.enums.Direction;
-import model.game_stuff.enums.ImageItem;
-import model.game_stuff.enums.ImageSubjects;
+import model.game_stuff.types.PersonType;
 
 public class MoveAnimation extends Transition {
-    private Person person;
+    private static int maxTime = 15000;
+    private Node node;
     private Direction direction;
-    private ImageItem imageItem;
-
-    private static int maxTime = 20;
-    private static int repeat = 3;
-    private double limit;
-    private double measure;
-
-    private int counter = -1;
-    private Image image;
-
-    public MoveAnimation(Person person, Direction direction) {
-        this.person = person;
+    public MoveAnimation(Block block, PersonType personType, Integer number, Direction direction) {
         this.direction = direction;
-        this.setCycleDuration(Duration.millis(((double) maxTime) / person.getSpeed()));
-
-        switch (direction) {
-            case RIGHT:
-                imageItem = person.getImagePackage().getSubject(ImageSubjects.MOVE_RIGHT);
-                break;
-            case UP:
-                imageItem = person.getImagePackage().getSubject(ImageSubjects.MOVE_UP);
-                break;
-            case LEFT:
-                imageItem = person.getImagePackage().getSubject(ImageSubjects.MOVE_LEFT);
-                break;
-            default:
-                imageItem = person.getImagePackage().getSubject(ImageSubjects.MOVE_DOWN);
-                break;
-        }
-        measure = 1d / (imageItem.getCount() * repeat);
-        limit = 0;
-        try {
-            image = imageItem.getImage(imageItem.getFrom());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        ImageView imageView = new ImageView(new Image(Block.class.getResource("/" + block.getImagePathOfAPersonType(personType)).toString(), 1d/5, 1d/5,false,false));
+        Text text = new Text(number.toString());
+        node = new Group(imageView, text);
+        node.setLayoutX(block.getX());
+        node.setLayoutY(block.getY());
+        GameMainPage.getMapPane().getChildren().add(node);
+        setCycleDuration(Duration.millis(maxTime));
+        //TODO EZAFE KARDAN FACTOR E SORAT
     }
-    //TODO tahesh aksesh ro adi konim;
     @Override
     protected void interpolate(double v) {
-        try {
-            person.getNode().setX(person.getNode().getX() + direction.getX());
-            person.getNode().setY(person.getNode().getY() + direction.getY());
-            if (v > limit) {
-                counter = (counter + 1) % imageItem.getCount();
-                image = imageItem.getImage(imageItem.getFrom() + imageItem.getModule() * counter);
-                person.getNode().setImage(image);
-                limit += measure;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        node.setLayoutX(direction.getX());
+        node.setLayoutY(direction.getY());
     }
 }

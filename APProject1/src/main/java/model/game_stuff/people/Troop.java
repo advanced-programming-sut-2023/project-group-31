@@ -26,10 +26,12 @@ public class Troop extends Person {
         super(owner);
         this.type = type;
         damage = type.getDamage();
-        name = type.getName();
+        personType = type.getPersonType();
+        name = type.getPersonType().getName();
         owner.getTroops().add(this);
         speed = type.getSpeed();
         imagePackage = type.getImagePackage();
+
     }
 
     public void setAttackPurpose(Block attackPurpose) {
@@ -141,7 +143,7 @@ public class Troop extends Person {
 
     @Override
     public String toString() {
-        return type.getName() + ":" + (100 * hp / type.getHp());
+        return personType.getName() + ":" + (100 * hp / type.getHp());
     }
 
     public void die() {

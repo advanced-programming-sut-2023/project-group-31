@@ -117,7 +117,7 @@ public class MapController extends ControllerUtils {
         String result="";
         for(int i=x-2;i<=x+2;i++){
             for(int j=y-2;j<=y+2;j++){
-                result+= currentMap.getBlock(i,j).getMoreDetails();
+                result+= currentMap.getBlock(i,j).getDetails();
                 result+="\t";
             }
             result+="\n";

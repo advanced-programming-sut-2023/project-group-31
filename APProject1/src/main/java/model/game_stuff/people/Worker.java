@@ -26,7 +26,8 @@ public class Worker extends Person {
         this.type = type;
         producingWaiter = new Waiter(type.getTurnsToWait());
         state = WorkerStates.PRODUCING;
-        name = type.getName();
+        name = type.getPersonType().getName();
+        personType = type.getPersonType();
         speed = type.getSpeed();
         imagePackage = type.getImagePackage();
     }
@@ -131,7 +132,7 @@ public class Worker extends Person {
     }
     @Override
     public String toString() {
-        return type.getName() + ":" + (100 * hp / type.getHp());
+        return type.getPersonType().getName() + ":" + (100 * hp / type.getHp());
     }
 
     public void die() {

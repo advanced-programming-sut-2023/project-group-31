@@ -1,8 +1,6 @@
 package model.game_stuff.buildings.enums;
 
 import model.game_stuff.ImagePackage;
-import model.game_stuff.enums.ImageItem;
-import model.game_stuff.enums.Items;
 import model.game_stuff.people.enums.WorkerTypes;
 import model.game_stuff.types.Buildings;
 
@@ -17,7 +15,7 @@ public enum ProducerTypes {
     WOODCUTTER(100,1,Buildings.WOODCUTTER,WorkerTypes.WOOD_CUTTER),
     IRON_MINE(300,3,Buildings.IRON_MINE,WorkerTypes.IRON_MINER),
     QUARRY(500,3, Buildings.QUARRY,WorkerTypes.QUARRY_WORKER),
-    BLACKSMITH(200,2, Buildings.BLACKSMITH,WorkerTypes.BLACKSMITH),
+    BLACKSMITH(200,2, Buildings.BLACKSMITH,WorkerTypes.BLACK_SMITH),
     FLETCHER(200,2,Buildings.FLETCHER,WorkerTypes.FLETCHER),
     CROSSBOW_MAKER(200,2, Buildings.CROSSBOW_MAKER,WorkerTypes.CROSSBOW_MAKER),
     POLE_TURNER(200,2, Buildings.CROSSBOW_MAKER,WorkerTypes.POLE_TURNER),

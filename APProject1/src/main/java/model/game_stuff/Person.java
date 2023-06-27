@@ -1,18 +1,18 @@
 package model.game_stuff;
 
 import javafx.scene.Group;
-import javafx.scene.image.ImageView;
 import model.game_stuff.buildings.GateHouse;
 import model.game_stuff.buildings.Tower;
 import model.game_stuff.enums.Direction;
+import model.game_stuff.types.PersonType;
 
 
 import java.util.LinkedList;
 
 public abstract class Person implements HasHp{
-    //TODO : FILL PEOPLE WITH IMAGES
     protected Government owner;
     protected String name;
+    protected PersonType personType;
     protected int hp;
     protected Group node;
     protected int speed;
@@ -37,6 +37,10 @@ public abstract class Person implements HasHp{
         return moveOrder;
     }
 
+    public PersonType getPersonType() {
+        return personType;
+    }
+
     public int getSpeed() {
         return speed;
     }
@@ -51,6 +55,9 @@ public abstract class Person implements HasHp{
 
     public ImagePackage getImagePackage() {
         return imagePackage;
+    }
+    public String getImagePath() {
+        return imagePackage.getMainImagePath();
     }
 
     public boolean move() {
