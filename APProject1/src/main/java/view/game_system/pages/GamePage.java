@@ -1,7 +1,10 @@
 package view.game_system.pages;
 
 import controller.ControllerUtils;
-import controller.game_system.GameViewUtils;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.TransferMode;
+import view.game_system.GameViewUtils;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -14,9 +17,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
-import model.game_stuff.Government;
 import model.game_stuff.enums.BuildingCategories;
 import model.game_stuff.types.Buildings;
 import view.game_system.GameMainPage;
@@ -52,6 +53,7 @@ public class GamePage {
     }
 
     public void setGovernmentFactors(){
+        if(ControllerUtils.getCurrentPlayer() ==null) return;
         popularity.setText(""+ControllerUtils.getCurrentPlayer().getPopularity());
     }
 
@@ -90,6 +92,18 @@ public class GamePage {
                     imageView.setFitWidth(100);
                     imageView.setFitHeight(100);
                     buildingsOfOneTypeHBox.getChildren().add(imageView);
+                    imageView.setOnDragDetected(new EventHandler<MouseEvent>() {
+                        @Override
+                        public void handle(MouseEvent mouseEvent) {
+                            System.out.println("on drag detected");
+                            Dragboard db = imageView.startDragAndDrop(TransferMode.ANY);
+                            ClipboardContent content = new ClipboardContent();
+                            content.putString("building " + buildings.getName());
+                            db.setContent(content);
+
+                            mouseEvent.consume();
+                        }
+                    });
                 }
             }
             buildingList.getChildren().add(buildingsOfOneTypeHBox);

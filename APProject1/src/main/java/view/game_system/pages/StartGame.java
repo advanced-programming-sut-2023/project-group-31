@@ -1,7 +1,7 @@
 package view.game_system.pages;
 
 import controller.ControllerUtils;
-import controller.game_system.GameViewUtils;
+import view.game_system.GameViewUtils;
 import controller.game_system.StartGameController;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -11,7 +11,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -21,16 +20,12 @@ import model.DataBase;
 import model.User;
 import model.game_stuff.Colors;
 import model.game_stuff.Map;
-import view.ViewUtils;
 import view.enums.Menus;
 import view.game_system.GameMainPage;
 import view.game_system.GameSwitcher;
 import view.game_system.messages.StartGameMessages;
-import view.user_system.MainMenu;
-import view.user_system.MenuSwitcher;
 import view.user_system.StrongHoldCrusaderGame;
 
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 

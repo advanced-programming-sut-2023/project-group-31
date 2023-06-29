@@ -52,11 +52,11 @@ public class Block {
         this.tunneled = tunneled;
     }
 
-    public int getX() {
+    public Integer getX() {
         return x;
     }
 
-    public int getY() {
+    public Integer getY() {
         return y;
     }
 

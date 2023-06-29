@@ -1,6 +1,9 @@
 package controller.game_system;
 
 import controller.ControllerUtils;
+import javafx.scene.image.Image;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Rectangle;
 import model.game_stuff.*;
 import model.game_stuff.buildings.*;
 import model.game_stuff.buildings.enums.*;
@@ -8,6 +11,7 @@ import model.game_stuff.enums.Items;
 import model.game_stuff.people.Lord;
 import model.game_stuff.people.Troop;
 import model.game_stuff.types.Buildings;
+import view.game_system.GameMainPage;
 import view.game_system.messages.TurnMessages;
 
 import java.util.ArrayList;
@@ -38,7 +42,7 @@ public class TurnController extends ControllerUtils {
 
         currentPlayer.addBuilding(building);
         decreaseRequirement(buildingType, 1);
-
+        building.setRectangle();
 
         return TurnMessages.SUCCESS;
     }

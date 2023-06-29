@@ -1,6 +1,12 @@
 package model.game_stuff;
 
+import javafx.event.EventHandler;
+import javafx.scene.control.Alert;
+import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
+import view.game_system.GameMainPage;
 
 import java.util.ArrayList;
 
@@ -12,11 +18,6 @@ public abstract class Building implements HasHp{
     protected String name;
     private boolean isUnderAttack;
     protected String imagePath;
-
-    public String getImagePath() {
-        return imagePath;
-    }
-
     protected ArrayList<Block> blocks;
 
     {
@@ -27,6 +28,32 @@ public abstract class Building implements HasHp{
     }
     public void getRepaired() {
         hp = maxHp;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setRectangle() {
+        rectangle = new Rectangle();
+        rectangle.setHeight(1);
+        rectangle.setWidth(1);
+        rectangle.setX(this.getPosition().getX());
+        rectangle.setY(this.getPosition().getY());
+        rectangle.setFill(new ImagePattern(new Image(this.getImagePath())));
+        GameMainPage.getRoot().getChildren().add(rectangle);
+
+        rectangle.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setContentText(toString());
+                alert.setHeaderText(name);
+                //TODO ADD REPAIR BOTTOM
+                //todo set special onMouseClick for menuBuildings
+                alert.show();
+            }
+        });
     }
 
     public Rectangle getRectangle() {

@@ -1,24 +1,15 @@
 package view.game_system;
 
 import controller.ControllerUtils;
-import controller.game_system.GameViewUtils;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Tooltip;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import model.DataBase;
-import view.game_system.pages.GamePage;
-import view.user_system.StrongHoldCrusaderGame;
 
 import java.net.URL;
 
