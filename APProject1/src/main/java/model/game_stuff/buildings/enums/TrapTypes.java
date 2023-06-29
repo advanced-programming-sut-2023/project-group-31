@@ -11,13 +11,11 @@ public enum TrapTypes {
     KILLING_PIT(150,Buildings.KILLING_PIT);
     private int damage;
     private String name;
-    private ImagePackage imagePackage;
-    private Buildings buildingCosts;
+    private String imagePath;
     TrapTypes (int damage, Buildings building) {
         this.damage = damage;
-        this.buildingCosts = building;
         this.name = building.getName();
-        imagePackage = new ImagePackage("Media/Buildings/" + buildingCosts.getCategory() + "/" + name + "/" + name);
+        imagePath = "Media/Buildings/" + building.getCategory() + "/" + name + "/" + name;
     }
 
     public String getName() {
@@ -37,7 +35,7 @@ public enum TrapTypes {
         return damage;
     }
 
-    public ImagePackage getImagePackage() {
-        return imagePackage;
+    public String getImagePath() {
+        return imagePath;
     }
 }

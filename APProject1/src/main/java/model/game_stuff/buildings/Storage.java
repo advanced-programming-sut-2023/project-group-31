@@ -31,6 +31,7 @@ public class Storage extends Building {
                 break;
         }
         name = type.getName();
+        imagePath = type.getImagePath();
     }
 
     public HashMap<Items, Integer> getProperties() {

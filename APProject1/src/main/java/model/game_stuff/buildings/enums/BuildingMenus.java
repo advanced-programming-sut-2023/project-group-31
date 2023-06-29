@@ -12,13 +12,13 @@ public enum BuildingMenus {
 
     private String name;
     private String menu;
-    private ImagePackage imagePackage;
+    private String imagePath;
     private Buildings buildingCost;
 
     BuildingMenus(Buildings building, String menu) {
         this.name = building.getName();
         buildingCost = building;
-        imagePackage = new ImagePackage("Media/Buildings/" + building.getCategory() + "/" + name + "/" + name);
+        imagePath = "Media/Buildings/" + building.getCategory() + "/" + name + "/" + name;
         this.menu = menu;
     }
 
@@ -26,11 +26,11 @@ public enum BuildingMenus {
         this.name = name;
         this.menu = menu;
         buildingCost = null;
-        imagePackage = new ImagePackage("Media/Buildings/" + name + "/" + name);
+        imagePath = "Media/Buildings/" + name + "/" + name;
     }
 
-    public ImagePackage getImagePackage() {
-        return imagePackage;
+    public String getImagePath() {
+        return imagePath;
     }
 
     public String getName() {

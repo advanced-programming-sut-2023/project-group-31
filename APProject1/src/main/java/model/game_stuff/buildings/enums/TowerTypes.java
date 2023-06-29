@@ -12,8 +12,7 @@ public enum TowerTypes {
     ROUND_TOWER(Buildings.ROUND_TOWER,2000,180,200,15),
     WALL(Buildings.WALL, 1000,100, 100, 1);
     private String name;
-    private Buildings buildingCost;
-    private ImagePackage imagePackage;
+    private String imagePath;
     private int hp;
     private int fireRange;
     private int defendRange;
@@ -21,16 +20,15 @@ public enum TowerTypes {
 
     TowerTypes(Buildings building, int hp, int fireRange, int defendRange, int capacity) {
         this.name = building.getName();
-        buildingCost = building;
-        imagePackage = new ImagePackage("Media/Buildings/" + building.getCategory() + "/" + name + "/" + name);
+        imagePath = "Media/Buildings/" + building.getCategory() + "/" + name + "/" + name;
         this.hp = hp;
         this.fireRange = fireRange;
         this.defendRange = defendRange;
         this.capacity = capacity;
     }
 
-    public ImagePackage getImagePackage() {
-        return imagePackage;
+    public String getImagePath() {
+        return imagePath;
     }
 
     public int getHp() {

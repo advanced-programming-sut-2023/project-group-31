@@ -10,18 +10,16 @@ public enum GateHouseTypes {
     ;
     private int hp;
     private String name;
-    private Buildings buildingCost;
-    private ImagePackage imagePackage;
+    private String imagePath;
 
     GateHouseTypes(int hp, Buildings building) {
         this.hp = hp;
         this.name = building.getName();
-        buildingCost = building;
-        imagePackage = new ImagePackage("Media/Buildings/" + building.getCategory() + "/" + name + "/" + name, 0);
+        imagePath = "Media/Buildings/" + building.getCategory() + "/" + name + "/" + name + "0";
     }
 
-    public ImagePackage getImagePackage() {
-        return imagePackage;
+    public String getImagePath() {
+        return imagePath;
     }
 
     public String getName() {

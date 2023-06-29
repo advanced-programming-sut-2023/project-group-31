@@ -1,14 +1,22 @@
 package model.game_stuff;
 
+import javafx.scene.shape.Rectangle;
+
 import java.util.ArrayList;
 
 public abstract class Building implements HasHp{
+    protected Rectangle rectangle;
     protected int hp;
     protected int maxHp;
     protected Government owner;
     protected String name;
     private boolean isUnderAttack;
-    protected ImagePackage imagePackage;
+    protected String imagePath;
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
     protected ArrayList<Block> blocks;
 
     {
@@ -20,12 +28,17 @@ public abstract class Building implements HasHp{
     public void getRepaired() {
         hp = maxHp;
     }
-    public double getHpLost() {
-        return (double)(maxHp - hp) / ((double) maxHp);
+
+    public Rectangle getRectangle() {
+        return rectangle;
     }
 
-    public ImagePackage getImagePackage() {
-        return imagePackage;
+    public void setRectangle(Rectangle rectangle) {
+        this.rectangle = rectangle;
+    }
+
+    public double getHpLost() {
+        return (double)(maxHp - hp) / ((double) maxHp);
     }
 
     public void setBlocks(ArrayList<Block> blocks) {
@@ -37,10 +50,6 @@ public abstract class Building implements HasHp{
         if(hp < 0) {
             terminate();
         }
-    }
-
-    public String getMainImagePath() {
-        return imagePackage.getMainImagePath();
     }
 
     public abstract String toString();

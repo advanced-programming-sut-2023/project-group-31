@@ -22,6 +22,7 @@ public class GateHouse extends Building implements Working {
         hp = type.getHp();
         owner.addBuilding(this);
         name = type.getName();
+        imagePath = type.getImagePath();
     }
     public void work() {
         if (isOpen && closerWaiter.isTheTurn()) {

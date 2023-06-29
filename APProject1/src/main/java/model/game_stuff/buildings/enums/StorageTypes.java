@@ -12,20 +12,18 @@ public enum StorageTypes {
     ;
     private String name;
     private int capacity;
-    private ImagePackage imagePackage;
-    private Buildings buildingCosts;
+    private String imagePath;
     private ItemTypes productType;
 
     StorageTypes(Buildings building, int capacity, ItemTypes productType) {
         this.name = building.getName();
-        buildingCosts = building;
-        imagePackage = new ImagePackage("Media/Buildings/" + building.getCategory() + "/" + name + "/" + name);
+        imagePath = "Media/Buildings/" + building.getCategory() + "/" + name + "/" + name;
         this.capacity = capacity;
         this.productType = productType;
     }
 
-    public ImagePackage getImagePackage() {
-        return imagePackage;
+    public String getImagePath() {
+        return imagePath;
     }
 
     public String getName() {

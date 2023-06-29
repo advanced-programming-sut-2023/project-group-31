@@ -25,16 +25,14 @@ public enum ProducerTypes {
     PIKE_MAKER(200,2,Buildings.PIKE_MAKER,WorkerTypes.PIKE_MAKER),
     MACE_MAKER(200,2,Buildings.MACE_MAKER,WorkerTypes.MACE_MAKER);
     private String name;
-    private Buildings buildingCost;
-    private ImagePackage imagePackage;
+    private String imagePath;
     private int hp;
     private int capacity;
     private WorkerTypes workerType;
 
     ProducerTypes(int hp, int capacity, Buildings building, WorkerTypes workerType) {
         this.name = building.getName();
-        buildingCost = building;
-        imagePackage = new ImagePackage("Media/Buildings/" + building.getCategory() + "/" + name + "/" + name);
+        imagePath = "Media/Buildings/" + building.getCategory() + "/" + name + "/" + name;
         this.hp = hp;
         this.capacity = capacity;
         this.workerType = workerType;
@@ -64,7 +62,7 @@ public enum ProducerTypes {
         return null;
     }
 
-    public ImagePackage getImagePackage() {
-        return imagePackage;
+    public String getImagePath() {
+        return imagePath;
     }
 }
