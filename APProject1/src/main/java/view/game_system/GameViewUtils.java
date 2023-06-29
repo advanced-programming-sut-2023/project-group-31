@@ -4,10 +4,7 @@ import controller.game_system.TurnController;
 import javafx.event.EventHandler;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
-import javafx.scene.input.DragEvent;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.ScrollEvent;
-import javafx.scene.input.TransferMode;
+import javafx.scene.input.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
@@ -68,6 +65,21 @@ public class GameViewUtils {
                 Tooltip tooltip = new Tooltip(block.toString());
                 Tooltip.install(rectangle,tooltip);
                 block.setRectangle(rectangle);
+
+                // gir e graphic i
+                Rectangle finalRectangle = rectangle;
+                rectangle.setOnDragDetected(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent mouseEvent) {
+                        System.out.println("on drag detected");
+                        Dragboard db = finalRectangle.startDragAndDrop(TransferMode.ANY);
+                        ClipboardContent content = new ClipboardContent();
+                        content.putString("troop " + block.getX() + " " + block.getY());
+                        db.setContent(content);
+
+                        mouseEvent.consume();
+                    }
+                });
                 rectangle.setOnDragOver(new EventHandler<DragEvent>() {
                     @Override
                     public void handle(DragEvent dragEvent) {
@@ -75,13 +87,13 @@ public class GameViewUtils {
                         System.out.println(dragEvent.getDragboard().getString());
                         if (dragEvent.getDragboard().getString().split("\\s")[0].equals("building")) {
                             dragEvent.acceptTransferModes(TransferMode.ANY);
+                        } else if (dragEvent.getDragboard().getString().split("\\s")[0].equals("troop")) {
+                            dragEvent.acceptTransferModes(TransferMode.ANY);
                         }
 
                         dragEvent.consume();
                     }
                 });
-                // gir e graphic i
-                Rectangle finalRectangle = rectangle;
                 rectangle.setOnDragEntered(new EventHandler<DragEvent>() {
                     @Override
                     public void handle(DragEvent dragEvent) {
@@ -121,6 +133,40 @@ public class GameViewUtils {
                             inputs.put("type", buildingType);
                             TurnController.setInputs(inputs);
                             TurnController.dropBuilding();
+                        } else if (dragEvent.getDragboard().getString().split("\\s")[0].equals("troop")) {
+                            // payeen ye tabe beshe:
+                            Integer minX = Integer.parseInt(dragEvent.getDragboard().getString().split("\\s")[1]);
+                            Integer minY = Integer.parseInt(dragEvent.getDragboard().getString().split("\\s")[2]);
+                            Integer maxX, maxY;
+                            if(minX > block.getX()) {
+                                maxX = minX;
+                                minX = block.getX();
+                            } else {
+                                maxX = block.getX();
+                            }
+                            if(minY > block.getY()) {
+                                maxY = minY;
+                                minY = block.getY();
+                            } else {
+                                maxY = block.getY();
+                            }
+                            HashMap<String, String> inputs = new HashMap<>();
+                            inputs.put("x1", minX.toString());
+                            inputs.put("x2", maxX.toString());
+                            inputs.put("y1", minY.toString());
+                            inputs.put("y2", maxY.toString());
+                            TurnController.setInputs(inputs);
+                            if(TurnController.selectMultipleUnits().equals(TurnMessages.SUCCESS) ||
+                                TurnController.selectMultipleUnits().equals(TurnMessages.NO_UNIT_FOUND)) {
+                                System.out.println("salam");
+                                Rectangle cover = new Rectangle(maxX - minX + 1, maxY - minY + 1);
+                                cover.setX(minX);
+                                cover.setY(minY);
+                                cover.setFill(Color.ROYALBLUE);
+                                cover.setOpacity(0.5);
+                                mapPane.getChildren().add(cover);
+                                //TODO : menu e unit baaz she va baad az ye modati cover naa padid she
+                            }
                         }
                     }
                 });
@@ -141,7 +187,6 @@ public class GameViewUtils {
                     mapPane.setLayoutY(mapPane.getLayoutY()-25);
             }
         });
-
         mapPane.setOnScroll(new EventHandler<ScrollEvent>() {
             @Override
             public void handle(ScrollEvent scrollEvent) {

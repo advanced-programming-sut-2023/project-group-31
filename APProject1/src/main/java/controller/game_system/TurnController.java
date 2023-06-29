@@ -280,7 +280,7 @@ public class TurnController extends ControllerUtils {
     }
 
     public static TurnMessages selectMultipleUnits() {
-        if (!inputs.containsKey("x1") || !inputs.containsKey("y1") || !inputs.containsKey("x2") || !inputs.containsKey("y2") || !inputs.containsKey("type")) {
+        if (!inputs.containsKey("x1") || !inputs.containsKey("y1") || !inputs.containsKey("x2") || !inputs.containsKey("y2")) {
             return TurnMessages.INVALID_COMMAND;
         }
         int x1 = Integer.parseInt(inputs.get("x1").trim()) - 1;
