@@ -1,0 +1,146 @@
+Button {
+    -fx-font-size: 18;
+    -fx-font-weight: bold;
+    -fx-text-fill: #d3bb16;
+    -fx-border-radius: 5;
+    -fx-background-color: rgba(0, 0, 0, 0.39);
+}
+CheckBox{
+    -fx-text-fill: #FF1493;
+}
+.check-box .box {
+    -fx-background-color: tomato;
+    -fx-border-color:black;
+    -fx-border-radius:3px;
+
+}
+
+.check-box:selected .mark {
+
+    -fx-background-color: black;
+
+}
+
+.check-box:selected .box {
+
+    -fx-background-color: #28a3f4;
+}
+Button:hover{
+    -fx-font-size: 18;
+    -fx-font-weight: bold;
+    -fx-font-family: "Viner Hand ITC";
+    -fx-text-fill: #d3bb16;
+    -fx-pref-height: 35;
+    -fx-border-radius: 5;
+    -fx-background-color: rgba(0, 0, 0, 0.733);
+
+}
+
+TextField{
+    -fx-max-width: 230;
+    -fx-pref-height: 35;
+}
+PasswordField{
+    -fx-max-height: 35;
+    -fx-max-width: 230;
+}
+
+Label{
+
+
+    -fx-border-radius: 100;
+    -fx-font-weight: bold;
+
+}
+#pane{
+    -fx-background-size: 1200 650;
+    -fx-background-position: center center;
+}
+.primary-btn{
+    -fx-background-color: #4164E2;
+    -fx-text-fill: white;
+}
+
+.second-btn{
+    -fx-border-width: 1;
+    -fx-border-color: #4164E2;
+    -fx-text-fill: #4164E2;
+}
+
+.third-btn {
+    -fx-background-color: #b8eac6;
+    -fx-border-width: 1;
+    -fx-border-color: #242825;
+    -fx-text-fill: #0f1010;
+}
+
+#main-menu{
+    -fx-background-image: url("../Media/MenuBackground/mainbackground.jpg");
+    -fx-background-size: 1200 650;
+}
+#register-menu{
+    -fx-background-image: url("../Media/MenuBackground/background.jpg");
+    -fx-background-size: 1200 650;
+}
+#register-menu{
+    -fx-background-image: url("../Media/MenuBackground/background.jpg");
+    -fx-background-size: 1200 650;
+}
+#pick-question{
+    -fx-background-image: url("../Media/MenuBackground/background3.jpg");
+    -fx-background-size: 1200 650;
+}
+#start-game{
+    -fx-background-image: url("../Media/MenuBackground/startgame.jpg");
+    -fx-background-size: 1200 650;
+}
+
+#gameBottomBar{
+    -fx-background-image: url("../Media/MenuBackground/bottommenu.png");
+    -fx-background-size: 90 150;
+}
+/*.menu-bar{*/
+/*    -fx-background-color:transparent;*/
+/*    -fx-background-image: url("../pictures/menu_background/menuBarBackground.png");*/
+/*    -fx-background-position: center center;*/
+/*}*/
+#title{
+    -fx-font-size: 50;
+    -fx-font-weight: bold;
+}
+#vbox_style {
+    -fx-border-color: black;
+    -fx-border-insets: 5;
+    -fx-border-width: 3;
+}
+/*#menu{*/
+/*    -fx-background-image: url("../pictures/menu_background/gameMenu.jpg");*/
+/*    -fx-background-size: 1200 650;*/
+/*}*/
+
+#error{
+    text-align: center;
+    -fx-font-size: 15;
+    -fx-font-weight: bold;
+    -fx-text-fill: #fa0202;
+}
+
+Text{
+    -fx-font-size: 50;
+    -fx-font-weight: bold;
+    -fx-text-fill: #97fa02;
+}
+
+.choiceBox {
+    -fx-pref-width: 10;
+    -fx-pref-height: 10;
+    -fx-font-size: 10;
+    -fx-font-weight: bold;
+    -fx-font-family: "Viner Hand ITC";
+    -fx-text-fill: #d3bb16;
+    -fx-background-color: #2f342f;
+}
+/*.chart-plot-background{*/
+/*    -fx-background-image: url("../Media/background4.jpg");*/
+/*    -fx-padding: 10px;*/
+/*}*/

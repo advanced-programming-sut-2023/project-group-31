@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<Pane prefHeight="900" prefWidth="1500.0" stylesheets="@../../CSS/gameStyle.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.game_system.pages.GamePage">
+   <HBox id="gameBottomBar" layoutY="752.0" prefHeight="150" prefWidth="1500" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
+
+   </HBox>
+   <Pane fx:id="minimap" layoutX="812.0" layoutY="719.0" prefHeight="163.0" prefWidth="173.0">
+
+   </Pane>
+   <ImageView fitHeight="194.0" fitWidth="496.0" layoutX="364.0" layoutY="710.0">
+      <Image url="@../../Media/game/menus/bottomMenu/scroll.png">
+
+      </Image>
+   </ImageView>
+   <Pane layoutX="954.0" layoutY="694.0" prefHeight="214.0" prefWidth="159.0">
+      <children>
+         <ImageView fitHeight="214.0" fitWidth="197.0" layoutX="-19.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@../../Media/game/menus/bottomMenu/narrator/happy.png" />
+            </image>
+         </ImageView>
+         <Label layoutX="15.0" layoutY="110.0" rotate="10.3" text="Label" fx:id="popularity" />
+         <Label layoutX="8.0" layoutY="134.0" rotate="12.1" text="Label" fx:id="gold" />
+         <Label layoutX="3.0" layoutY="149.0" prefHeight="24.0" prefWidth="36.0" rotate="13.2" text="Label" fx:id="population" />
+      </children>
+   </Pane>
+
+   <VBox layoutX="425.0" layoutY="741.0" prefHeight="163.0" prefWidth="380.0">
+      <children>
+         <ScrollPane prefHeight="51.0" prefWidth="304">
+            <HBox fx:id="buildingTypeList" prefHeight="50">
+
+            </HBox>
+         </ScrollPane>
+         <ScrollPane prefWidth="350">
+            <VBox fx:id="buildingList" prefHeight="105">
+            </VBox>
+         </ScrollPane>
+      </children>
+   </VBox>
+</Pane>
