@@ -88,6 +88,7 @@ public abstract class Person implements HasHp{
                 return false;
             }
             if (!target.isPermeable()) {
+                //here
                 moveOrder.clear();
                 return false;
             }
@@ -95,10 +96,11 @@ public abstract class Person implements HasHp{
                 return false;
             }
             if (target.getBuilding() != null)
-                if (target.getBuilding().getOwner().equals(owner)) {
+                if (target.getBuilding().getOwner().equals(owner) && target.getBuilding() != position.getBuilding()) {
                     if (target.getBuilding() instanceof Tower) {
                         Tower tower = (Tower) target.getBuilding();
                         if (moveOrder.size() != 1 || !tower.canEnter(moveOrder.getFirst()) || !tower.isFull()) {
+                            //here
                             moveOrder.clear();
                             return false;
                         }
@@ -108,6 +110,7 @@ public abstract class Person implements HasHp{
                             return false;
                         }
                     }
+                    //here
                     moveOrder.clear();
                     return false;
                 }
@@ -147,8 +150,8 @@ public abstract class Person implements HasHp{
         this.position = position;
     }
     public void move(Block destination) {
-        position.removePerson(this);
-        destination.addPerson(this);
+        position.setPerson(null);
+        destination.setPerson(this);
         position = destination;
     }
     public abstract void work();

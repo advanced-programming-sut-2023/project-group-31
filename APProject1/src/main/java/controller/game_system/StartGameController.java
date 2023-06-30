@@ -288,7 +288,7 @@ public class StartGameController extends ControllerUtils {
             block = currentMap.getLordHouses().get(primitivePlayer.getLordHouseNumber());
             Lord lord = new Lord(player);
             lord.setPosition(block);
-            block.addPerson(lord);
+            block.setPerson(lord);
             player.setLord(lord);
             lord.setRectangle();
 

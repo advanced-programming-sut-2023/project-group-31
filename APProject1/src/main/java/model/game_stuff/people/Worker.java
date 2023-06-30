@@ -136,7 +136,7 @@ public class Worker extends Person {
     }
 
     public void die() {
-        position.removePerson(this);
+        position.setPerson(null);
         workHouse.setWorker(null);
     }
 }

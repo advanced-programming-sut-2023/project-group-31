@@ -34,21 +34,21 @@ public class EngineerGuildController extends ControllerUtils {
                 currentPlayer.getPossession().setPeasant(currentPlayer.getPossession().getPeasant() - 1);
                 Tunneler tunneler = new Tunneler(currentPlayer, troopTypes);
                 tunneler.setPosition(menuBuilding.getPosition());
-                menuBuilding.getPosition().addPerson(tunneler);
+                menuBuilding.getPosition().setPerson(tunneler);
                 break;
             case "Engineer":
                 TroopTypes types = TroopTypes.getTroopByName("Engineer");
                 currentPlayer.getPossession().setPeasant(currentPlayer.getPossession().getPeasant() - 1);
                 Engineer engineer = new Engineer(currentPlayer, types);
                 engineer.setPosition(menuBuilding.getPosition());
-                menuBuilding.getPosition().addPerson(engineer);
+                menuBuilding.getPosition().setPerson(engineer);
                 break;
             case "Laddermen":
                 TroopTypes types1 = TroopTypes.getTroopByName("Laddermen");
                 currentPlayer.getPossession().setPeasant(currentPlayer.getPossession().getPeasant() - 1);
                 LadderMan ladderMan = new LadderMan(currentPlayer);
                 ladderMan.setPosition(menuBuilding.getPosition());
-                menuBuilding.getPosition().addPerson(ladderMan);
+                menuBuilding.getPosition().setPerson(ladderMan);
                 break;
             default:
                 break;

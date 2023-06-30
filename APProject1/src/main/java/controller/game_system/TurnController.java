@@ -266,10 +266,9 @@ public class TurnController extends ControllerUtils {
     private static ArrayList<Troop> getMyTroopsIn(ArrayList<Block> blocks) {
         ArrayList<Troop> troops = new ArrayList<>();
         for (Block block : blocks) {
-            for (Person person : block.getPeople()) {
-                if ((person instanceof Troop) && person.getOwner().equals(currentPlayer)) {
-                    troops.add((Troop) person);
-                }
+            Person person = block.getPerson();
+            if ((person instanceof Troop) && person.getOwner().equals(currentPlayer)) {
+                troops.add((Troop) person);
             }
         }
         return troops;

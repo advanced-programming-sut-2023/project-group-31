@@ -163,11 +163,7 @@ public class UnitController extends ControllerUtils {
                     continue;
                 }
                 LinkedList<Direction> moveOrder = new LinkedList<>(moveOrderArrayList);
-                for (Person person : troop.getPosition().getPeople()) {
-                    if((person instanceof Troop) ) {
-                        ((Troop) person).setMoveOrder(moveOrder);
-                    }
-                }
+                troop.setMoveOrder(moveOrder);
             }
         }
     }
@@ -191,10 +187,9 @@ public class UnitController extends ControllerUtils {
 
     public static UnitMessages selectUnit(int x, int y) {
         troops = new ArrayList<Troop>();
-        for (Person person : currentGame.getMap().getBlock(x, y).getPeople()) {
-            if (person instanceof Troop) {
-                troops.add((Troop) person);
-            }
+        Person person = currentGame.getMap().getBlock(x, y).getPerson();
+        if (person instanceof Troop) {
+            troops.add((Troop) person);
         }
         if (troops.size() == 0) {
             return UnitMessages.EMPTY_BLOCK;

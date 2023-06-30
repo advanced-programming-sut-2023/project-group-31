@@ -1,8 +1,6 @@
 package model.game_stuff.buildings.enums;
 
-import model.game_stuff.ImagePackage;
 import model.game_stuff.enums.ItemTypes;
-import model.game_stuff.enums.Items;
 import model.game_stuff.types.Buildings;
 
 public enum StorageTypes {

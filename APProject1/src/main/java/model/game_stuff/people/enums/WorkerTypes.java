@@ -1,7 +1,5 @@
 package model.game_stuff.people.enums;
 
-import model.game_stuff.ImagePackage;
-import model.game_stuff.Person;
 import model.game_stuff.enums.Items;
 import model.game_stuff.types.PersonType;
 

@@ -17,9 +17,7 @@ public class Trap extends Building implements Working {
     public void work() {
         if(getPosition().containsEnemyPerson(owner.getColor())) {
             for (Block block : blocks) {
-                for (Person person : block.getPeople()) {
-                    person.getDamaged(type.getDamage());
-                }
+                block.getPerson().getDamaged(type.getDamage());
             }
             terminate();
         }

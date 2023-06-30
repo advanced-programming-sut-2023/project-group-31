@@ -78,15 +78,9 @@ public class Troop extends Person {
             }
         }
         if(attackTarget.containsEnemyTroop(owner.getColor())) {
-            ArrayList<Person> enemyTroops = new ArrayList<>();
-            for (Person person : attackTarget.getPeople()) {
-                if(person instanceof Troop) {
-                    enemyTroops.add(person);
-                }
-            }
-            hit(enemyTroops.get(random.nextInt(enemyTroops.size())));
+            hit(attackTarget.getPerson());
         } else if(attackTarget.containsEnemyPerson(owner.getColor())) {
-            hit(attackTarget.getPeople().get(random.nextInt(attackTarget.getPeople().size())));
+            hit(attackTarget.getPerson());
         } else if(attackTarget.containsEnemyBuilding(owner.getColor())){
             hit(attackTarget.getBuilding());
         }
@@ -147,7 +141,7 @@ public class Troop extends Person {
     }
 
     public void die() {
-        position.removePerson(this);
+        position.setPerson(null);
         owner.getTroops().remove(this);
     }
 }

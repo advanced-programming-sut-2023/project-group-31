@@ -1,5 +1,6 @@
 package model.game_stuff.buildings;
 
+import model.game_stuff.Block;
 import model.game_stuff.Building;
 import model.game_stuff.Government;
 import model.game_stuff.buildings.enums.TowerTypes;
@@ -27,7 +28,13 @@ public class Tower extends Building {
     }
 
     public boolean isFull() {
-		return getPosition().getNumberOfPeople() >= type.getCapacity();
+        int numberOfPeople = 0;
+        for (Block block : blocks) {
+            if(block.getPerson() != null) {
+                numberOfPeople++;
+            }
+        }
+        return numberOfPeople >= type.getCapacity();
     }
 
     public boolean canExit(Direction direction) {

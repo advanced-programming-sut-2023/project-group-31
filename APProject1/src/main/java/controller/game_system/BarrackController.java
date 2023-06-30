@@ -63,7 +63,7 @@ public class BarrackController extends ControllerUtils {
         currentPlayer.getPossession().setPeasant(currentPlayer.getPossession().getPeasant() - 1);
         //System.out.println(currentPlayer.getPossession().getPeasant());
         troop.setPosition(menuBuilding.getPosition());
-        menuBuilding.getPosition().addPerson(troop);
+        menuBuilding.getPosition().setPerson(troop);
         //currentplayer.barrack.getblock(0).add(thrower)
     }
 
@@ -72,7 +72,7 @@ public class BarrackController extends ControllerUtils {
         currentPlayer.getPossession().setPeasant(currentPlayer.getPossession().getPeasant() - 1);
         //System.out.println(currentPlayer.getPossession().getPeasant());
         troop.setPosition(menuBuilding.getPosition());
-        menuBuilding.getPosition().addPerson(troop);
+        menuBuilding.getPosition().setPerson(troop);
         //currentplayer.barrack.getblock(0).add(kicker)
     }
 }

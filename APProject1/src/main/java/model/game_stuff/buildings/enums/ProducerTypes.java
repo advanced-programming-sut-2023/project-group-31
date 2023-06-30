@@ -1,6 +1,5 @@
 package model.game_stuff.buildings.enums;
 
-import model.game_stuff.ImagePackage;
 import model.game_stuff.people.enums.WorkerTypes;
 import model.game_stuff.types.Buildings;
 

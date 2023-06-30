@@ -73,14 +73,14 @@ public class MercenaryController extends ControllerUtils {
         Assassin assassin=new Assassin(currentPlayer);
         currentPlayer.getPossession().setPeasant(currentPlayer.getPossession().getPeasant()-1);
         assassin.setPosition(menuBuildings.getPosition());
-        menuBuildings.getPosition().addPerson(assassin);
+        menuBuildings.getPosition().setPerson(assassin);
     }
 
     private static void createKicker(TroopTypes kickerTypes) {
         Troop kicker =new Troop(currentPlayer,kickerTypes);
         currentPlayer.getPossession().setPeasant(currentPlayer.getPossession().getPeasant()-1);
         kicker.setPosition(menuBuildings.getPosition());
-        menuBuildings.getPosition().addPerson(kicker);
+        menuBuildings.getPosition().setPerson(kicker);
         //Mercenary post location
         //currentplayer.mercenaryPost.getBlock(0).add(thrower)
     }
@@ -93,7 +93,7 @@ public class MercenaryController extends ControllerUtils {
         Troop thrower=new Troop(currentPlayer,throwerTypes);
         currentPlayer.getPossession().setPeasant(currentPlayer.getPossession().getPeasant()-1);
         thrower.setPosition(menuBuildings.getPosition());
-        menuBuildings.getPosition().addPerson(thrower);
+        menuBuildings.getPosition().setPerson(thrower);
         //Mercenary post location
         //currentplayer.mercanaryPost.getBlock(0).add(thrower)
     }
