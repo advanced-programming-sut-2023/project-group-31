@@ -40,7 +40,7 @@ public abstract class Building implements HasHp{
         rectangle.setWidth(1);
         rectangle.setX(this.getPosition().getX());
         rectangle.setY(this.getPosition().getY());
-        rectangle.setFill(new ImagePattern(new Image(this.getImagePath())));
+        rectangle.setFill(new ImagePattern(new Image(this.getImagePath() + ".png")));
         GameMainPage.getRoot().getChildren().add(rectangle);
 
         rectangle.setOnMouseClicked(new EventHandler<MouseEvent>() {

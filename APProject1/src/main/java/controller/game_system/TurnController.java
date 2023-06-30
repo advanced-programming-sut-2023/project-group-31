@@ -47,7 +47,7 @@ public class TurnController extends ControllerUtils {
         return TurnMessages.SUCCESS;
     }
 
-    private static TurnMessages isThereAPlaceForBuilding(int x, int y, Buildings buildingType) {
+    public static TurnMessages isThereAPlaceForBuilding(int x, int y, Buildings buildingType) {
         for (int i = x; i < x + buildingType.getLength(); i++) {
             for (int j = y; j < y + buildingType.getWidth(); j++) {
                 if (i >= currentGame.getMap().getSize() || j >= currentGame.getMap().getSize()) {
@@ -92,7 +92,7 @@ public class TurnController extends ControllerUtils {
         return null;
     }
 
-    private static boolean isRequirementEnough(Buildings buildings, double percent) {
+    public static boolean isRequirementEnough(Buildings buildings, double percent) {
         if (Math.ceil(buildings.getGoldNeeded() * percent) > currentPlayer.getPossession().getGold()) {
             return false;
         }
