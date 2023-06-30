@@ -11,6 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import model.DataBase;
 import model.Popups.Popup1;
+import model.Session;
 import model.User;
 import view.enums.Menus;
 import view.user_system.StrongHoldCrusaderGame;
@@ -129,7 +130,8 @@ public class LoginPage {
         }
         ControllerUtils.setCurrentUser(User.getUserByUsername(username.getText()));
         if((boolean)stayLoggedIn.isSelected()){
-            DataBase.getDataBase().setLoggedInUser(User.getUserByUsername(username.getText()));
+            Session.getSession().setLoggedInUserUsername(username.getText());
+            Session.getSession().setLoggedInUserPassword(password.getText());
         }
         StrongHoldCrusaderGame.changeMenu(Menus.MAIN);
     }

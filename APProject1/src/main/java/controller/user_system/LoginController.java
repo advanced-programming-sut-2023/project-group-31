@@ -2,6 +2,7 @@ package controller.user_system;
 
 import controller.ControllerUtils;
 import model.DataBase;
+import model.Session;
 import model.User;
 import view.user_system.messages.UserMessages;
 
@@ -25,7 +26,8 @@ public class LoginController extends ControllerUtils {
         }
 
         if (inputs.get("stayLoggedIn") != null) {
-            DataBase.getDataBase().setLoggedInUser(User.getUserByUsername(inputs.get("username")));
+            Session.getSession().setLoggedInUserUsername(inputs.get("username"));
+            Session.getSession().setLoggedInUserPassword(User.getUserByUsername(inputs.get("username")).getPassword());
         }
 
 
@@ -78,7 +80,8 @@ public class LoginController extends ControllerUtils {
 
     public static void userLogout() {
         currentUser = null;
-        DataBase.getDataBase().setLoggedInUser(null);
+        Session.getSession().setLoggedInUserUsername(null);
+        Session.getSession().setLoggedInUserPassword(null);
         DataBase.saveDataBase();
     }
 

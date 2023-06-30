@@ -4,11 +4,7 @@ import java.io.*;
 import java.util.*;
 
 import com.google.gson.Gson;
-import controller.ControllerUtils;
-import model.game_stuff.Map;
-import model.game_stuff.Tree;
-import model.game_stuff.enums.Textures;
-import model.game_stuff.enums.TreeTypes;
+import model.game_stuff.MapTexture;
 
 
 public class DataBase {
@@ -18,10 +14,12 @@ public class DataBase {
     private ArrayList<String> recoveryQuestions;
     private ArrayList<User> users;
 
+    //private ArrayList<MapTexture> mapTextures;
+
     private final static String path = new File("").getAbsolutePath() + "\\src\\main\\resources\\";
     ;
 
-
+    private User loggedInUser;
 
     public DataBase() {
         this.slogans = new ArrayList<String>(List.of(
@@ -35,6 +33,8 @@ public class DataBase {
                 "What do you prefer between Messi and Haj Qasem?",
                 "Chips mikhori?"));
         this.users = new ArrayList<User>();
+        this.loggedInUser = null;
+        //mapTextures = new ArrayList<>();
 
     }
 
@@ -97,13 +97,6 @@ public class DataBase {
 
     public static void loadApp() {
         connectToDatabase();
-//        if(dataBase.loggedInUser!=null){
-//            ControllerUtils.setCurrentUser(dataBase.loggedInUser);
-//        }
-//
-//        if (dataBase.isUserLoggedInBefore()) {
-//            ControllerUtils.setCurrentUser(dataBase.loggedInUser);
-//        }
         HashMap<String,User> hashUsers= new HashMap<>();
         for(User user:dataBase.users){
             hashUsers.put(user.getUsername(),user);
@@ -152,19 +145,19 @@ public class DataBase {
         return DataBase.dataBase.slogans.get(random.nextInt(DataBase.dataBase.slogans.size()));
     }
 
-//    public User getLoggedInUser() {
-//        getDataBase();
-//        return loggedInUser;
-//    }
-//
-//    public void setLoggedInUser(User loggedInUser) {
-//        this.loggedInUser = loggedInUser;
-//        saveDataBase();
-//    }
+    public User getLoggedInUser() {
+        getDataBase();
+        return loggedInUser;
+    }
 
-//    public boolean isUserLoggedInBefore() {
-//        return loggedInUser != null;
-//    }
+    public void setLoggedInUser(User loggedInUser) {
+        this.loggedInUser = loggedInUser;
+        saveDataBase();
+    }
+
+    public boolean isUserLoggedInBefore() {
+        return loggedInUser != null;
+    }
 
     public ArrayList<User> getUsers() {
         return users;
@@ -200,4 +193,16 @@ public class DataBase {
         return dataBase.recoveryQuestions;
     }
 
+//    public void addMapTexture(MapTexture newMapTexture){
+//        for(MapTexture mapTexture:mapTextures){
+//            if(mapTexture.equals(newMapTexture)){
+//                return;
+//            }
+//        }
+//        mapTextures.add(newMapTexture);
+//    }
+//
+//    public ArrayList<MapTexture> getMapTextures() {
+//        return mapTextures;
+//    }
 }
