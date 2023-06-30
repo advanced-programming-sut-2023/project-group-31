@@ -33,7 +33,7 @@ public enum WorkerTypes {
     private Items product;
     private int speed;
     private int numberOfProductsToCarry;
-    private ImagePackage imagePackage;
+    private String imagePath;
 
     WorkerTypes(int hp, int turnsToWait, int amountOfProductToProduce, Items product, PersonType personType, int speed, int numberOfProductsToCarry, String path) {
         this.personType = personType;
@@ -43,11 +43,11 @@ public enum WorkerTypes {
         this.product = product;
         this.speed = speed;
         this.numberOfProductsToCarry = numberOfProductsToCarry;
-        imagePackage = new ImagePackage("Media/People/Workers/" + path);
+        imagePath = "Media/People/Workers/" + path;
     }
 
-    public ImagePackage getImagePackage() {
-        return imagePackage;
+    public String getImagePath() {
+        return imagePath;
     }
 
     public int getHp() {

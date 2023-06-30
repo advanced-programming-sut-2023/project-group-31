@@ -11,11 +11,17 @@ public enum TrapTypes {
     KILLING_PIT(150,Buildings.KILLING_PIT);
     private int damage;
     private String name;
+    private Buildings baseBuildingType;
     private String imagePath;
     TrapTypes (int damage, Buildings building) {
         this.damage = damage;
         this.name = building.getName();
         imagePath = "Media/Buildings/" + building.getCategory() + "/" + name + "/" + name;
+        baseBuildingType = building;
+    }
+
+    public Buildings getBaseBuildingType() {
+        return baseBuildingType;
     }
 
     public String getName() {

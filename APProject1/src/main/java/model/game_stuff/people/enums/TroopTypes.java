@@ -32,7 +32,7 @@ public enum TroopTypes {
     private int fightingRange;
     private int visionRange;
     private int speed;
-    private ImagePackage imagePackage;
+    private String imagePath;
 
     TroopTypes(PersonType personType, int hp, int damage, int speed, int fightingRange, int visionRange) {
         this.hp = hp;
@@ -41,7 +41,7 @@ public enum TroopTypes {
         this.damage = damage;
         this.fightingRange = fightingRange;
         this.visionRange = visionRange;
-        imagePackage = new ImagePackage("Media/People/Troops/" + personType.getName());
+        imagePath = "Media/People/Troops/" + personType.getName();
     }
 
     public int getHp() {
@@ -64,8 +64,8 @@ public enum TroopTypes {
         return visionRange;
     }
 
-    public ImagePackage getImagePackage() {
-        return imagePackage;
+    public String getImagePath() {
+        return imagePath;
     }
 
     public int getSpeed() {

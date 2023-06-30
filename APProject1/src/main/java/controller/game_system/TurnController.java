@@ -1,9 +1,6 @@
 package controller.game_system;
 
 import controller.ControllerUtils;
-import javafx.scene.image.Image;
-import javafx.scene.paint.ImagePattern;
-import javafx.scene.shape.Rectangle;
 import model.game_stuff.*;
 import model.game_stuff.buildings.*;
 import model.game_stuff.buildings.enums.*;
@@ -11,7 +8,6 @@ import model.game_stuff.enums.Items;
 import model.game_stuff.people.Lord;
 import model.game_stuff.people.Troop;
 import model.game_stuff.types.Buildings;
-import view.game_system.GameMainPage;
 import view.game_system.messages.TurnMessages;
 
 import java.util.ArrayList;
@@ -33,7 +29,7 @@ public class TurnController extends ControllerUtils {
         }
         Building building = createNewBuilding(inputs.get("type"));
 
-        for (int i = x; i < x + buildingType.getLength(); i++) {
+        for (int i = x; i < x + buildingType.getHeight(); i++) {
             for (int j = y; j < y + buildingType.getWidth(); j++) {
                 currentMap.getBlock(i, j).setBuilding(building);
                 building.addBlock(currentMap.getBlock(i, j));
@@ -48,7 +44,7 @@ public class TurnController extends ControllerUtils {
     }
 
     public static TurnMessages isThereAPlaceForBuilding(int x, int y, Buildings buildingType) {
-        for (int i = x; i < x + buildingType.getLength(); i++) {
+        for (int i = x; i < x + buildingType.getHeight(); i++) {
             for (int j = y; j < y + buildingType.getWidth(); j++) {
                 if (i >= currentGame.getMap().getSize() || j >= currentGame.getMap().getSize()) {
                     return TurnMessages.OUT_OF_MAP;

@@ -29,6 +29,7 @@ public enum ProducerTypes {
     private int hp;
     private int capacity;
     private WorkerTypes workerType;
+    private Buildings baseBuildingType;
 
     ProducerTypes(int hp, int capacity, Buildings building, WorkerTypes workerType) {
         this.name = building.getName();
@@ -36,9 +37,14 @@ public enum ProducerTypes {
         this.hp = hp;
         this.capacity = capacity;
         this.workerType = workerType;
+        baseBuildingType = building;
     }
     public int getHp() {
         return hp;
+    }
+
+    public Buildings getBaseBuildingType() {
+        return baseBuildingType;
     }
 
     public String getName() {

@@ -21,6 +21,7 @@ public class Producer extends Building implements Working {
         owner.getWorkingsBuildings().add(this);
         name = type.getName();
         imagePath = type.getImagePath();
+        baseBuildingType = type.getBaseBuildingType();
     }
 
     public int getNumberOfProductsAvailable() {

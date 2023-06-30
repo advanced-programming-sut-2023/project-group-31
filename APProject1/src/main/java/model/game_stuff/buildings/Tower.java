@@ -23,6 +23,7 @@ public class Tower extends Building {
         owner.addBuilding(this);
         name = type.getName();
         imagePath = type.getImagePath();
+        baseBuildingType = type.getBaseBuildingType();
     }
 
     public boolean isFull() {

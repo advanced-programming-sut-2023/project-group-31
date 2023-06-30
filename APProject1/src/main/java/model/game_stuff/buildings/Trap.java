@@ -12,6 +12,7 @@ public class Trap extends Building implements Working {
         owner.getWorkingsBuildings().add(this);
         name = type.getName();
         imagePath = type.getImagePath();
+        baseBuildingType = type.getBaseBuildingType();
     }
     public void work() {
         if(getPosition().containsEnemyPerson(owner.getColor())) {

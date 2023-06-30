@@ -19,8 +19,8 @@ public class MoveAnimation extends Transition {
     @Override
     protected void interpolate(double v) {
         try {
-            person.getNode().setLayoutX(person.getNode().getLayoutX() + direction.getX());
-            person.getNode().setLayoutY(person.getNode().getLayoutY() + direction.getY());
+            person.getRectangle().setLayoutX(person.getRectangle().getLayoutX() + direction.getX());
+            person.getRectangle().setLayoutY(person.getRectangle().getLayoutY() + direction.getY());
         } catch (Exception e) {
             e.printStackTrace();
         }

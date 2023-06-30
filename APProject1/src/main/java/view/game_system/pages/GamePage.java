@@ -99,12 +99,12 @@ public class GamePage {
                         public void handle(MouseEvent mouseEvent) {
                             System.out.println("on drag detected");
                             //todo az comment dareshoon biar
-                            /*if(!TurnController.isRequirementEnough(buildings, 1)) {
+                            if(!TurnController.isRequirementEnough(buildings, 1)) {
                                 Alert alert = new Alert(Alert.AlertType.ERROR);
                                 alert.setHeaderText("you don't have enough resources my lord :|");
                                 alert.setTitle("impossible");
                                 return;
-                            }*/
+                            }
                             Dragboard db = imageView.startDragAndDrop(TransferMode.ANY);
                             ClipboardContent content = new ClipboardContent();
                             content.putString("building " + buildings.getName());

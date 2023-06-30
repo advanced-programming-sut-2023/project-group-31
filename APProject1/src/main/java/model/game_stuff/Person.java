@@ -1,10 +1,17 @@
 package model.game_stuff;
 
-import javafx.scene.Group;
+import javafx.event.EventHandler;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Tooltip;
+import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Rectangle;
 import model.game_stuff.buildings.GateHouse;
 import model.game_stuff.buildings.Tower;
 import model.game_stuff.enums.Direction;
 import model.game_stuff.types.PersonType;
+import view.game_system.GameMainPage;
 
 
 import java.util.LinkedList;
@@ -14,10 +21,10 @@ public abstract class Person implements HasHp{
     protected String name;
     protected PersonType personType;
     protected int hp;
-    protected Group node;
+    protected Rectangle rectangle;
     protected int speed;
     protected Block position;
-    protected ImagePackage imagePackage;
+    protected String imagePath;
     //TODO: set image packages for people
     protected LinkedList<Direction> moveOrder;
 
@@ -33,6 +40,19 @@ public abstract class Person implements HasHp{
         this.moveOrder = new LinkedList<>(moveOrder);
     }
 
+    public void setRectangle() {
+        rectangle = new Rectangle();
+        rectangle.setHeight(1);
+        rectangle.setWidth(1);
+        rectangle.setX(this.getPosition().getX());
+        rectangle.setY(this.getPosition().getY());
+        rectangle.setFill(new ImagePattern(new Image(this.getImagePath() + ".png")));
+        GameMainPage.getMapPane().getChildren().add(rectangle);
+
+        Tooltip tooltip = new Tooltip(toString());
+        Tooltip.install(rectangle, tooltip);
+    }
+
     public LinkedList<Direction> getMoveOrder() {
         return moveOrder;
     }
@@ -45,19 +65,16 @@ public abstract class Person implements HasHp{
         return speed;
     }
 
-    public Group getNode() {
-        return node;
+    public Rectangle getRectangle() {
+        return rectangle;
     }
 
-    public void setNode(Group node) {
-        this.node = node;
+    public void setRectangle(Rectangle rectangle) {
+        this.rectangle = rectangle;
     }
 
-    public ImagePackage getImagePackage() {
-        return imagePackage;
-    }
     public String getImagePath() {
-        return imagePackage.getMainImagePath();
+        return imagePath;
     }
 
     public boolean move() {

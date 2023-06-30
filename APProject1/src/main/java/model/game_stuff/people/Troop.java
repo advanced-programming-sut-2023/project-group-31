@@ -30,7 +30,7 @@ public class Troop extends Person {
         name = type.getPersonType().getName();
         owner.getTroops().add(this);
         speed = type.getSpeed();
-        imagePackage = type.getImagePackage();
+        imagePath = type.getImagePath();
 
     }
 

@@ -13,20 +13,24 @@ public enum BuildingMenus {
     private String name;
     private String menu;
     private String imagePath;
-    private Buildings buildingCost;
+    private Buildings baseBuildingType;
 
     BuildingMenus(Buildings building, String menu) {
         this.name = building.getName();
-        buildingCost = building;
         imagePath = "Media/Buildings/" + building.getCategory() + "/" + name + "/" + name;
         this.menu = menu;
+        baseBuildingType = building;
     }
 
     BuildingMenus(String name, String menu) {
         this.name = name;
         this.menu = menu;
-        buildingCost = null;
         imagePath = "Media/Buildings/" + name + "/" + name;
+        baseBuildingType = null;
+    }
+
+    public Buildings getBaseBuildingType() {
+        return baseBuildingType;
     }
 
     public String getImagePath() {

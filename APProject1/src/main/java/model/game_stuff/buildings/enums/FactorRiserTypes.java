@@ -12,6 +12,7 @@ public enum FactorRiserTypes {
     private int amountToRise;
     private String imagePath;
     private int hp;
+    private Buildings baseBuildingType;
 
     FactorRiserTypes(Buildings building, int turnsToWait, int amountToRise, int hp) {
         this.turnsToWait = turnsToWait;
@@ -19,6 +20,11 @@ public enum FactorRiserTypes {
         this.hp = hp;
         this.name = building.getName();
         imagePath = "Media/Buildings/" + building.getCategory() + "/" + name + "/" + name;
+        baseBuildingType = building;
+    }
+
+    public Buildings getBaseBuildingType() {
+        return baseBuildingType;
     }
 
     public String getImagePath() {

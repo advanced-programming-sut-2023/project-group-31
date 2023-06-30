@@ -6,6 +6,7 @@ import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
+import model.game_stuff.types.Buildings;
 import view.game_system.GameMainPage;
 
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 public abstract class Building implements HasHp{
     protected Rectangle rectangle;
     protected int hp;
+    protected Buildings baseBuildingType;
     protected int maxHp;
     protected Government owner;
     protected String name;
@@ -36,12 +38,12 @@ public abstract class Building implements HasHp{
 
     public void setRectangle() {
         rectangle = new Rectangle();
-        rectangle.setHeight(1);
-        rectangle.setWidth(1);
+        rectangle.setHeight(baseBuildingType.getHeight());
+        rectangle.setWidth(baseBuildingType.getWidth());
         rectangle.setX(this.getPosition().getX());
         rectangle.setY(this.getPosition().getY());
         rectangle.setFill(new ImagePattern(new Image(this.getImagePath() + ".png")));
-        GameMainPage.getRoot().getChildren().add(rectangle);
+        GameMainPage.getMapPane().getChildren().add(rectangle);
 
         rectangle.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override

@@ -29,7 +29,7 @@ public class Worker extends Person {
         name = type.getPersonType().getName();
         personType = type.getPersonType();
         speed = type.getSpeed();
-        imagePackage = type.getImagePackage();
+        imagePath = type.getImagePath();
     }
     public boolean isInWorkHouse() {
         return position.equals(workHouse.getPosition());

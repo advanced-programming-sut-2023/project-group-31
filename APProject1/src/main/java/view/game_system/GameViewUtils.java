@@ -107,11 +107,11 @@ public class GameViewUtils {
                         System.out.println("on drag entered");
                         mapPane.getChildren().remove(cover[0]);
                         Buildings buildingType = Buildings.getBuildingByName(dragEvent.getDragboard().getString().replace("building ", ""));
-                        cover[0] = new Rectangle(buildingType.getWidth(), buildingType.getLength());
+                        cover[0] = new Rectangle(buildingType.getWidth(), buildingType.getHeight());
                         if (dragEvent.getDragboard().getString().split("\\s")[0].equals("building")) {
-                            /*if(TurnController.isThereAPlaceForBuilding(block.getX(), block.getY(),buildingType)!=null) {
+                            if(TurnController.isThereAPlaceForBuilding(block.getX(), block.getY(),buildingType)!=null) {
                                 cover[0].setFill(Color.INDIANRED);
-                            } else */{
+                            } else {
                                 cover[0].setFill(new ImagePattern(new Image(buildingType.getUrl())));
                             }
                             cover[0].setOpacity(0.5);

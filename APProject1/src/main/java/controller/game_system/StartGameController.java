@@ -284,22 +284,30 @@ public class StartGameController extends ControllerUtils {
             player = new Government(primitivePlayer.getUser(), primitivePlayer.getColor());
             players.add(player);
             player.setGame(currentGame);
+
             block = currentMap.getLordHouses().get(primitivePlayer.getLordHouseNumber());
-            MenuBuilding lordHouse = new MenuBuilding(player, BuildingMenus.LORD_HOUSE);
             Lord lord = new Lord(player);
             lord.setPosition(block);
             block.addPerson(lord);
             player.setLord(lord);
+            lord.setRectangle();
+
+            MenuBuilding lordHouse = new MenuBuilding(player, BuildingMenus.LORD_HOUSE);
             setBlockForBuilding(block, lordHouse, 2, 2);
+            lordHouse.setRectangle();
+
             Storage storage = new Storage(player, StorageTypes.STOCKPILE);
             setBlockForBuilding(currentMap.getBlock(block.getX() + 2, block.getY()), storage, 2, 2);
             player.addStockpile(storage);
             storage.addProduct(Items.WOOD, 100);
             storage.addProduct(Items.STONE, 100);
+            storage.setRectangle();
+
             storage = new Storage(player, StorageTypes.Granary);
             setBlockForBuilding(currentMap.getBlock(block.getX(), block.getY() + 2), storage, 2, 2);
             player.addGranary(storage);
             storage.addProduct(Items.BREAD, 100);
+            storage.setRectangle();
         }
         currentGame.setPlayers(players);
         currentPlayer = players.get(0);
