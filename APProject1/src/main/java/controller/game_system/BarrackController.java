@@ -2,11 +2,15 @@ package controller.game_system;
 
 import controller.ControllerUtils;
 import model.game_stuff.buildings.MenuBuilding;
+import model.game_stuff.enums.Direction;
 import model.game_stuff.people.Troop;
 import model.game_stuff.people.enums.TroopTypes;
 import model.game_stuff.types.Nationality;
 import model.game_stuff.types.Troops;
 import view.game_system.messages.BarracksMessages;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class BarrackController extends ControllerUtils {
     private static MenuBuilding menuBuilding;
@@ -61,18 +65,30 @@ public class BarrackController extends ControllerUtils {
     private static void createThrower(TroopTypes target) {
         Troop troop = new Troop(currentPlayer, target);
         currentPlayer.getPossession().setPeasant(currentPlayer.getPossession().getPeasant() - 1);
+        initializeTroop(troop);
         //System.out.println(currentPlayer.getPossession().getPeasant());
-        troop.setPosition(menuBuilding.getPosition());
-        menuBuilding.getPosition().setPerson(troop);
+        //troop.setPosition(menuBuilding.getPosition());
+        //menuBuilding.getPosition().setPerson(troop);
         //currentplayer.barrack.getblock(0).add(thrower)
     }
 
     private static void createKicker(TroopTypes target) {
         Troop troop = new Troop(currentPlayer, target);
         currentPlayer.getPossession().setPeasant(currentPlayer.getPossession().getPeasant() - 1);
+        initializeTroop(troop);
         //System.out.println(currentPlayer.getPossession().getPeasant());
-        troop.setPosition(menuBuilding.getPosition());
-        menuBuilding.getPosition().setPerson(troop);
+        //troop.setPosition(menuBuilding.getPosition());
+        //menuBuilding.getPosition().setPerson(troop);
         //currentplayer.barrack.getblock(0).add(kicker)
+    }
+
+    private static void initializeTroop(Troop troop) {
+        ArrayList<Direction> moveOrderArrayList = new ArrayList<>();
+        moveOrderArrayList = UnitController.routUnit(troop.getPosition().getX(), troop.getPosition().getY(),moveOrderArrayList,
+            menuBuilding.getPosition().getX() - troop.getPosition().getX(),
+            menuBuilding.getPosition().getY() - troop.getPosition().getY());
+        LinkedList<Direction> moveOrder = new LinkedList<>(moveOrderArrayList);
+        troop.setMoveOrder(moveOrder);
+        currentPlayer.addTroopToWaitingList(troop);
     }
 }

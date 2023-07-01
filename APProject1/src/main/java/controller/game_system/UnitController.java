@@ -197,7 +197,7 @@ public class UnitController extends ControllerUtils {
         return UnitMessages.SUCCESS;
     }
 
-    private static ArrayList<Direction> routUnit(int thisX, int thisY, ArrayList<Direction> directions, int xDistanceTo, int yDistance) {
+    public static ArrayList<Direction> routUnit(int thisX, int thisY, ArrayList<Direction> directions, int xDistanceTo, int yDistance) {
         if(xDistanceTo==0&&yDistance==0){
             return directions;
         }
@@ -234,8 +234,7 @@ public class UnitController extends ControllerUtils {
             directions.add(Direction.getDirectionByXY(0,-dirY));
             return routUnit( thisX,  thisY+dirY, directions, xDistanceTo, yDistance+dirY);
         }
-        return null;
-
+        return directions;
     }
 
     private static boolean isPossibleToGo(Block block) {

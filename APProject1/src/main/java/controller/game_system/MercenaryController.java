@@ -2,6 +2,7 @@ package controller.game_system;
 
 import controller.ControllerUtils;
 import model.game_stuff.buildings.MenuBuilding;
+import model.game_stuff.enums.Direction;
 import model.game_stuff.people.Assassin;
 import view.game_system.messages.BarracksMessages;
 //import model.game_stuff.people.Kicker;
@@ -12,10 +13,12 @@ import model.game_stuff.people.Troop;
 import model.game_stuff.people.enums.TroopTypes;
 import model.game_stuff.types.Nationality;
 import model.game_stuff.types.Troops;
-import view.game_system.messages.BarracksMessages;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class MercenaryController extends ControllerUtils {
-    private static MenuBuilding menuBuildings;
+    private static MenuBuilding menuBuilding;
     public static BarracksMessages createUnit(){
         if(inputs.get("type")==null||Integer.parseInt(inputs.get("amount"))<=0) {
             return BarracksMessages.INVALID_COMMAND;
@@ -72,29 +75,47 @@ public class MercenaryController extends ControllerUtils {
     private static void createAssassins(TroopTypes types) {
         Assassin assassin=new Assassin(currentPlayer);
         currentPlayer.getPossession().setPeasant(currentPlayer.getPossession().getPeasant()-1);
-        assassin.setPosition(menuBuildings.getPosition());
-        menuBuildings.getPosition().setPerson(assassin);
+        //assassin.setPosition(menuBuildings.getPosition());
+        //menuBuildings.getPosition().setPerson(assassin);
+
+        initializeTroop(assassin);
     }
 
     private static void createKicker(TroopTypes kickerTypes) {
         Troop kicker =new Troop(currentPlayer,kickerTypes);
         currentPlayer.getPossession().setPeasant(currentPlayer.getPossession().getPeasant()-1);
-        kicker.setPosition(menuBuildings.getPosition());
-        menuBuildings.getPosition().setPerson(kicker);
+        //kicker.setPosition(menuBuildings.getPosition());
+        //menuBuildings.getPosition().setPerson(kicker);
+
+        initializeTroop(kicker);
+
         //Mercenary post location
         //currentplayer.mercenaryPost.getBlock(0).add(thrower)
     }
 
-    public static void setMenuBuildings(MenuBuilding menuBuildings) {
-        MercenaryController.menuBuildings = menuBuildings;
+    public static void setMenuBuilding(MenuBuilding menuBuilding) {
+        MercenaryController.menuBuilding = menuBuilding;
     }
 
     private static void createThrower(TroopTypes throwerTypes) {
         Troop thrower=new Troop(currentPlayer,throwerTypes);
         currentPlayer.getPossession().setPeasant(currentPlayer.getPossession().getPeasant()-1);
-        thrower.setPosition(menuBuildings.getPosition());
-        menuBuildings.getPosition().setPerson(thrower);
+        //thrower.setPosition(menuBuildings.getPosition());
+        //menuBuildings.getPosition().setPerson(thrower);
+
+        initializeTroop(thrower);
+
         //Mercenary post location
         //currentplayer.mercanaryPost.getBlock(0).add(thrower)
+    }
+
+    private static void initializeTroop(Troop troop) {
+        ArrayList<Direction> moveOrderArrayList = new ArrayList<>();
+        moveOrderArrayList = UnitController.routUnit(troop.getPosition().getX(), troop.getPosition().getY(),moveOrderArrayList,
+            menuBuilding.getPosition().getX() - troop.getPosition().getX(),
+            menuBuilding.getPosition().getY() - troop.getPosition().getY());
+        LinkedList<Direction> moveOrder = new LinkedList<>(moveOrderArrayList);
+        troop.setMoveOrder(moveOrder);
+        currentPlayer.addTroopToWaitingList(troop);
     }
 }

@@ -3,7 +3,6 @@ package model.game_stuff;
 import model.User;
 import model.game_stuff.buildings.Producer;
 import model.game_stuff.buildings.Storage;
-import model.game_stuff.buildings.enums.StorageTypes;
 import model.game_stuff.enums.ItemTypes;
 import model.game_stuff.enums.Items;
 import model.game_stuff.people.Troop;
@@ -11,6 +10,7 @@ import model.game_stuff.people.Worker;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.concurrent.LinkedBlockingQueue;
 
 public class Government {
     private Game game;
@@ -21,6 +21,7 @@ public class Government {
     private final ArrayList<Storage> stockpiles;
     private final ArrayList<Storage > granaries;
     private final ArrayList<Storage> weaponries;
+    private final LinkedBlockingQueue<Troop> troopsWaitingForEntrance;
     private ArrayList<Building> buildings;
     private ArrayList<Working> workingsBuildings;
     private ArrayList<Troop> troops;
@@ -69,6 +70,7 @@ public class Government {
         workingsBuildings = new ArrayList<>();
         populationWaiter = new Waiter(2);
         popularityFactors = new HashMap<>();
+        troopsWaitingForEntrance = new LinkedBlockingQueue<>();
 
         popularityFactors.put(Items.FEAR_POPULARITY, 0);
     }
@@ -78,7 +80,13 @@ public class Government {
         this.name = owner.getUsername();
         this.color = color;
     }
+    public void addTroopToWaitingList(Troop troop) {
+        troopsWaitingForEntrance.add(troop);
+    }
 
+    public LinkedBlockingQueue<Troop> getTroopsWaitingForEntrance() {
+        return troopsWaitingForEntrance;
+    }
 
     public ArrayList<Working> getWorkingsBuildings() {
         return workingsBuildings;

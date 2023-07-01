@@ -137,11 +137,11 @@ public class TurnController extends ControllerUtils {
             return TurnMessages.BARRACK.setAndGetTxt(building.toString());
         }
         if (((MenuBuilding) building).getType().equals(BuildingMenus.MERCENARY_POST)) {
-            MercenaryController.setMenuBuildings((MenuBuilding) building);
+            MercenaryController.setMenuBuilding((MenuBuilding) building);
             return TurnMessages.MERCENARY_POST.setAndGetTxt(building.toString());
         }
         if (((MenuBuilding) building).getType().equals(BuildingMenus.ENGINEER_GUID)) {
-            MercenaryController.setMenuBuildings((MenuBuilding) building);
+            MercenaryController.setMenuBuilding((MenuBuilding) building);
             return TurnMessages.ENGINEER_GUID.setAndGetTxt(building.toString());
         }
         if (((MenuBuilding) building).getType().equals(BuildingMenus.LORD_HOUSE)) {
@@ -185,6 +185,13 @@ public class TurnController extends ControllerUtils {
             for (Troop troop : playerToRun.getTroops()) {
                 troop.work();
             }
+            while(!playerToRun.getTroopsWaitingForEntrance().isEmpty()) {
+                Troop troop = playerToRun.getTroopsWaitingForEntrance().poll();
+                if(!playerToRun.getLordsHouse().setPerson(troop)) break;
+                troop.setPosition(playerToRun.getLordsHouse());
+                troop.work();
+                troop.getOwner().getTroops().add(troop);
+            }
             nextTurnForGovernment(playerToRun); //TODO: islah
             if (isTheGameOver()) {
                 TurnMessages.GAME_FINISHED.setTxt(announceTheWinners());
@@ -192,6 +199,7 @@ public class TurnController extends ControllerUtils {
                 calculateScores();
                 return TurnMessages.GAME_FINISHED;
             }
+
             counter++;
             playerToRun = getNextPlayer(playerToRun);
         }
