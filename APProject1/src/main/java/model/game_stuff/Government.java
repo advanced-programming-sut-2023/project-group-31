@@ -23,7 +23,6 @@ public class Government {
     private final ArrayList<Storage> weaponries;
     private final LinkedBlockingQueue<Troop> troopsWaitingForEntrance;
     private ArrayList<Building> buildings;
-    private ArrayList<Working> workingsBuildings;
     private ArrayList<Troop> troops;
     private HashMap<Items, Integer> popularityFactors;
     private Block LordsHouse;
@@ -67,7 +66,7 @@ public class Government {
         tradeHistory = new ArrayList<>();
         buildings = new ArrayList<>();
         troops = new ArrayList<>();
-        workingsBuildings = new ArrayList<>();
+        buildings = new ArrayList<>();
         populationWaiter = new Waiter(2);
         popularityFactors = new HashMap<>();
         troopsWaitingForEntrance = new LinkedBlockingQueue<>();
@@ -86,10 +85,6 @@ public class Government {
 
     public LinkedBlockingQueue<Troop> getTroopsWaitingForEntrance() {
         return troopsWaitingForEntrance;
-    }
-
-    public ArrayList<Working> getWorkingsBuildings() {
-        return workingsBuildings;
     }
 
     public void setLord(Troop lord) {

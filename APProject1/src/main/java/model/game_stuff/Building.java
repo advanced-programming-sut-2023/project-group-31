@@ -15,6 +15,7 @@ public abstract class Building implements HasHp{
     protected Rectangle rectangle;
     protected int hp;
     protected Buildings baseBuildingType;
+    protected Waiter fireWaiter;
     protected int maxHp;
     protected Government owner;
     protected String name;
@@ -56,6 +57,20 @@ public abstract class Building implements HasHp{
                 alert.show();
             }
         });
+    }
+
+    public void getFired() {
+        fireWaiter = new Waiter(3);
+    }
+
+    public void work() {
+        if(fireWaiter != null) {
+            if(fireWaiter.isTheTurn()) {
+                fireWaiter = null;
+            }else {
+                getDamaged(500);
+            }
+        }
     }
 
     public Rectangle getRectangle() {

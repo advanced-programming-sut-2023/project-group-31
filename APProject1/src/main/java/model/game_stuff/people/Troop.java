@@ -1,9 +1,7 @@
 package model.game_stuff.people;
 
-import model.game_stuff.Block;
-import model.game_stuff.Government;
-import model.game_stuff.HasHp;
-import model.game_stuff.Person;
+import model.game_stuff.*;
+import model.game_stuff.buildings.Tower;
 import model.game_stuff.people.enums.TroopState;
 import model.game_stuff.people.enums.TroopTypes;
 
@@ -51,6 +49,11 @@ public class Troop extends Person {
     }
 
     public void hit(HasHp livingBeing) {
+        if((livingBeing instanceof Building) &&
+            (type.canFire() ||
+                (position.getBuilding()!= null && (position.getBuilding() instanceof Tower) && ((Tower) position.getBuilding()).hasBrazer()))) {
+            ((Building) livingBeing).getFired();
+        }
         livingBeing.getDamaged(damage);
     }
     public void work() {

@@ -11,10 +11,15 @@ import java.util.HashMap;
 
 public class Tower extends Building {
     private final TowerTypes type;
+    private boolean hasBrazer;
     private HashMap<Direction, Boolean> hasStairs;
 
     {
         hasStairs = new HashMap<>();
+        for (Direction direction : Direction.values()) {
+            hasStairs.put(direction, true);
+        }
+        hasBrazer = false;
     }
 
     public Tower(TowerTypes type, Government government) {
@@ -35,6 +40,14 @@ public class Tower extends Building {
             }
         }
         return numberOfPeople >= type.getCapacity();
+    }
+
+    public boolean hasBrazer() {
+        return hasBrazer;
+    }
+
+    public void setBrazer() {
+        this.hasBrazer = true;
     }
 
     public boolean canExit(Direction direction) {

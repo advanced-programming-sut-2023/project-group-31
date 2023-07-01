@@ -179,7 +179,7 @@ public class TurnController extends ControllerUtils {
         int counter = 0;
         Government playerToRun = currentPlayer;
         while (counter < currentGame.getPlayers().size()) {
-            for (Working workingsBuilding : playerToRun.getWorkingsBuildings()) {
+            for (Building workingsBuilding : playerToRun.getBuildings()) {
                 workingsBuilding.work();
             }
             for (Troop troop : playerToRun.getTroops()) {
