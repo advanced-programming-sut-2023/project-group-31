@@ -99,7 +99,7 @@ public class LoginPage {
         captchaImage.add(9582);
         captchaImage.add(9633);
     }
-    public void login(MouseEvent mouseEvent) {
+    public void login(MouseEvent mouseEvent) throws IOException {
         if (username.getText().equals("") || password.getText().equals("")||captchaText.getText().equals("")) {
             error.setText("Fill all fields");
             resetCaptchaFailLogin();

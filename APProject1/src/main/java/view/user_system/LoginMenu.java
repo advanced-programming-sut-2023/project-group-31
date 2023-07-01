@@ -8,13 +8,14 @@ import view.user_system.messages.MenuSwitcherMessages;
 import view.user_system.messages.UserMessages;
 import view.viewStyle.Colors;
 
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 
 public class LoginMenu extends ViewUtils {
 
 
-    public static MenuSwitcherMessages run(Scanner scanner) {
+    public static MenuSwitcherMessages run(Scanner scanner) throws IOException {
         if (ControllerUtils.isUserLoggedIn()) {
             return MenuSwitcherMessages.MAIN;
         }
@@ -40,7 +41,7 @@ public class LoginMenu extends ViewUtils {
 
     }
 
-    private static void userLogin() {
+    private static void userLogin() throws IOException {
         if (!CaptchaMenu.getObject().run()) {
             System.out.println("login failed: wrong captcha");
             return;
@@ -57,7 +58,7 @@ public class LoginMenu extends ViewUtils {
 
     }
 
-    private static void wrongPasswordMenu() {
+    private static void wrongPasswordMenu() throws IOException {
         System.out.println("Enter your password again or enter \"forgot my password\".");
 
         String input;
@@ -81,7 +82,7 @@ public class LoginMenu extends ViewUtils {
     }
 
 
-    private static void forgotPasswordMenu() {
+    private static void forgotPasswordMenu() throws IOException {
 
         System.out.println("Answer this question!");
         System.out.println(UserMessages.MESSAGE);
@@ -108,7 +109,7 @@ public class LoginMenu extends ViewUtils {
 
     }
 
-    private static void changePasswordMenu() {
+    private static void changePasswordMenu() throws IOException {
         System.out.println("Enter new password.");
         String input;
         Matcher matcher;
@@ -128,7 +129,7 @@ public class LoginMenu extends ViewUtils {
         }
     }
 
-    private static void changePassword() {
+    private static void changePassword() throws IOException {
         userResult = LoginController.changePassword();
         if (userResult.equals(UserMessages.SUCCESS)) {
             System.out.println("change password: " + userResult.getTxt());

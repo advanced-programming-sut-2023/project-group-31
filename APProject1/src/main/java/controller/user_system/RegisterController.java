@@ -1,14 +1,17 @@
 package controller.user_system;
 
+import client.Client;
 import controller.ControllerUtils;
 import model.DataBase;
 
 import model.User;
 import view.user_system.messages.UserMessages;
 
+import java.io.IOException;
+
 public class RegisterController extends ControllerUtils {
 
-    public static UserMessages userCreate() {
+    public static UserMessages userCreate() throws IOException {
         UserMessages message;
 
         if(checkEmptyError(inputs)!=null){
@@ -53,6 +56,7 @@ public class RegisterController extends ControllerUtils {
 
         User.addUser(user);
         DataBase.saveDataBase();
+        Client.getClient().updateDataBase("addUser",user);
         return UserMessages.SUCCESS;
     }
 

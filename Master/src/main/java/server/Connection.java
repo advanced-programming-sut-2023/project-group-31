@@ -25,24 +25,7 @@ public class Connection extends Thread{
     @Override
     public synchronized void run(){
         try {
-            String username=dataInputStream.readUTF();
-            for(User user:DataBase.getDataBase().getUsers()){
-                User.addUser(user);
-            }
-            User user;
-            if((user = User.getUserByUsername(username))==null){
-                System.out.println("Invalid username");
-                return;
-            } else {
-                for(int i=0;i<Master.getConnections().size();i++){
-                    Connection connection = Master.getConnections().get(i);
-                    if(connection.user !=null &&connection.user.equals(user)){
-                        Master.getConnections().remove(i);
-                        i--;
-                    }
-                }
-                this.user = user;
-            }
+
 
 
             receivePacket();
@@ -56,11 +39,25 @@ public class Connection extends Thread{
     private void receivePacket() throws IOException, NoSuchMethodException {
         String stringPacket;
         Packet packet;
-        while(true){
+        while(true) {
             stringPacket = dataInputStream.readUTF();
             packet = Packet.getFromGson(stringPacket);
             FunctionalOrder functionalOrder;
-            if(packet.packetType.equals(PacketType.UPDATE_DATABASE)){
+            if(packet.packetType.equals(PacketType.USER_LOGIN)){
+                if((user = User.getUserByUsername(packet.value))==null){
+                    System.out.println("Invalid username");
+                    return;
+                }
+                user = User.getUserByUsername(packet.value);
+                for(int i=0;i<Master.getConnections().size();i++){
+                    Connection connection = Master.getConnections().get(i);
+                    if(connection.user !=null &&connection.user.equals(user)){
+                        Master.getConnections().remove(i);
+                        i--;
+                    }
+                }
+                System.out.println("user "+user.getUsername() + " connected.");
+            }else if(packet.packetType.equals(PacketType.UPDATE_DATABASE)){
                 DataBaseUpdater dataBaseUpdater = DataBaseUpdater.getFromGson(packet.value);
                 updateDataBase(dataBaseUpdater);
                 DataBase.saveDataBase();

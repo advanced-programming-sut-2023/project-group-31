@@ -1,16 +1,19 @@
 package controller.user_system;
 
+import client.Client;
 import controller.ControllerUtils;
 import model.DataBase;
 import model.Session;
 import model.User;
 import view.user_system.messages.UserMessages;
 
+import java.io.IOException;
+
 public class LoginController extends ControllerUtils {
 
 
     //username password
-    public static UserMessages loginUser() {
+    public static UserMessages loginUser() throws IOException {
         UserMessages message;
         if ((message = checkEmptyError(inputs)) != null) {
             return UserMessages.NOT_ENOUGH_MESSAGES;
@@ -33,7 +36,7 @@ public class LoginController extends ControllerUtils {
 
         setCurrentUser(User.getUserByUsername(inputs.get("username")));
 
-
+        Client.getClient().loginInServer(inputs.get("username"));
         return UserMessages.SUCCESS;
     }
 
@@ -58,7 +61,7 @@ public class LoginController extends ControllerUtils {
         }
     }
 
-    public static UserMessages changePassword() {
+    public static UserMessages changePassword() throws IOException {
         if (!inputs.get("password").equals(inputs.get("passwordConfirmation"))) {
             return UserMessages.PASSWORD_NOT_MATCH;
         }
@@ -71,6 +74,7 @@ public class LoginController extends ControllerUtils {
         User.getUserByUsername(inputs.get("username")).setPassword(inputs.get("password"));
         currentUser = User.getUserByUsername(inputs.get("username"));
         setCurrentUser(User.getUserByUsername(inputs.get("username")));
+        Client.getClient().loginInServer(inputs.get("username"));
         return UserMessages.SUCCESS;
     }
 

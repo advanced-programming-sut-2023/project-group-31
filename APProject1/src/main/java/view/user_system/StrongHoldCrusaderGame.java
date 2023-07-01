@@ -1,6 +1,7 @@
 package view.user_system;
 
 
+import client.Client;
 import com.google.gson.Gson;
 import controller.ControllerUtils;
 import javafx.application.Application;
@@ -9,14 +10,16 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import model.DataBase;
+import model.Session;
 import view.enums.Menus;
 
 import java.io.IOException;
 import java.net.URL;
 
 public class StrongHoldCrusaderGame extends Application {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         DataBase.loadApp();
+        Client.setClient(new Client("localhost",8080));
         launch(args);
     }
     public static Stage stage;
@@ -24,7 +27,7 @@ public class StrongHoldCrusaderGame extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         Parent root;
-        if(ControllerUtils.isUserLoggedIn()){
+        if(Session.getSession().authentication()){
             root = loadFXML(Menus.MAIN);
         } else {
             root =loadFXML(Menus.LOGIN);

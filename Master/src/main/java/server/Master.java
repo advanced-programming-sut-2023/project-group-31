@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class Master {
 
-    private static ArrayList<Connection> connections;
+    private static ArrayList<Connection> connections = new ArrayList<>();
 
     public Master (int port){
         System.out.println("Starting Master service...");

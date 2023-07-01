@@ -10,6 +10,7 @@ import view.enums.Menus;
 import view.user_system.StrongHoldCrusaderGame;
 import view.user_system.messages.UserMessages;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -170,7 +171,7 @@ public class RegisterPage {
         }
     }
 
-    public void register(MouseEvent mouseEvent) {
+    public void register(MouseEvent mouseEvent) throws IOException {
         if (nickname.getText().equals("")||passwordOfPassword1.getText().equals("")||usernameField.getText().equals("")){
            error.setText("Fill all fields");
            return;

@@ -1,5 +1,6 @@
 package model;
 
+import client.Client;
 import com.google.gson.Gson;
 import controller.ControllerUtils;
 
@@ -11,7 +12,7 @@ public class Session {
 
     private String loggedInUserUsername;
     private String loggedInUserPassword;
-
+    private final static String path = new File("").getAbsolutePath() + "\\src\\main\\resources\\";
     public Session() {
         this.loggedInUserUsername = null;
         this.loggedInUserPassword = null;
@@ -19,7 +20,8 @@ public class Session {
 
     public static void saveResource(String filename, String str) {
         try {
-            FileWriter myWriter = new FileWriter(Session.class.getResource("/"+filename).toString());
+
+            FileWriter myWriter = new FileWriter(path+filename);
             myWriter.write(str);
             myWriter.close();
         } catch (IOException e) {
@@ -36,7 +38,7 @@ public class Session {
     }
 
     public static void connectToSession() {
-        File sessionFile = new File(Session.class.getResource("/session.txt").toExternalForm());
+        File sessionFile = new File(path + "session.txt");
         if(session!=null){
             return;
         }
@@ -46,7 +48,7 @@ public class Session {
         } else {
             Gson gson = new Gson();
 
-            try (Reader reader = new FileReader(Session.class.getResource("/session.txt").toString())) {
+            try (Reader reader = new FileReader(path + "session.txt")) {
 
                 session = gson.fromJson(reader, Session.class);
             } catch (IOException e) {
@@ -80,5 +82,18 @@ public class Session {
 
     public void setLoggedInUserPassword(String loggedInUserPassword) {
         this.loggedInUserPassword = loggedInUserPassword;
+        saveSession();
+    }
+
+    public boolean authentication() throws IOException {
+        if(session.loggedInUserUsername==null){
+            return false;
+        }
+        if(User.getUserByUsername(session.loggedInUserUsername).isPasswordCurrent(session.loggedInUserPassword)){
+            ControllerUtils.setCurrentUser(User.getUserByUsername(session.loggedInUserUsername));
+            Client.getClient().loginInServer(session.loggedInUserUsername);
+            return true;
+        }
+        return false;
     }
 }

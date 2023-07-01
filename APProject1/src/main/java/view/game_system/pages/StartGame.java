@@ -211,15 +211,23 @@ public class StartGame {
     }
 
     public void showNextMap(MouseEvent mouseEvent) {
+        System.out.println(Map.getMaps().size());
+        if(Map.getMaps().size()<1){
+            return;
+        }
         mapPane.getChildren().remove(0);
+
         mapIndex =((mapIndex+1)%Map.getMaps().size());
         setMapPain(Map.getMaps().get(mapIndex));
         StartGameMessages message = StartGameController.chooseMap(Map.getMaps().get(mapIndex).getName());
     }
 
     public void showPreviousMap(MouseEvent mouseEvent) {
+        if(Map.getMaps().size()<1){
+            return;
+        }
         mapPane.getChildren().remove(0);
-        mapIndex = ((mapIndex-1)%Map.getMaps().size());
+        mapIndex = ((Map.getMaps().size()+mapIndex-1)%Map.getMaps().size());
         setMapPain(Map.getMaps().get(mapIndex));
         StartGameMessages message = StartGameController.chooseMap(Map.getMaps().get(mapIndex).getName());
     }

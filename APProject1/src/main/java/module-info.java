@@ -33,4 +33,5 @@ module APProject {
     opens view.game_system.pages to javafx.fxml;
     opens model.game_stuff.enums to com.google.gson;
     opens model.Popups to javafx.fxml;
+    opens client to com.google.gson;
 }
