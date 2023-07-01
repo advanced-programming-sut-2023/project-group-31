@@ -293,7 +293,7 @@ public class StartGameController extends ControllerUtils {
             lord.setPosition(block);
             block.setPerson(lord);
             player.setLord(lord);
-            //lord.setRectangle();
+            lord.setRectangle();
 
             MenuBuilding lordHouse = new MenuBuilding(player, BuildingMenus.LORD_HOUSE);
             setBlockForBuilding(block, lordHouse, 2, 2);
