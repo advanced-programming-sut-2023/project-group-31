@@ -86,7 +86,8 @@ public class Session {
     }
 
     public boolean authentication() throws IOException {
-        if(session.loggedInUserUsername==null){
+        if(session.loggedInUserUsername==null ||User.getUserByUsername(session.loggedInUserUsername)==null){
+            session.loggedInUserUsername = null;
             return false;
         }
         if(User.getUserByUsername(session.loggedInUserUsername).isPasswordCurrent(session.loggedInUserPassword)){
@@ -94,6 +95,7 @@ public class Session {
             Client.getClient().loginInServer(session.loggedInUserUsername);
             return true;
         }
+        session.loggedInUserUsername = null;
         return false;
     }
 }

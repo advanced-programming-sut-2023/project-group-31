@@ -36,4 +36,5 @@ module APProject {
     opens model.Popups to javafx.fxml;
     opens client to com.google.gson;
     opens controller.game_system to javafx.fxml;
+    opens model.chat to com.google.gson;
 }

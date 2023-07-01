@@ -12,8 +12,8 @@ import java.util.Scanner;
 
 public class Client{
     private static Client client;
-    DataInputStream dataInputStream =null;
-    DataOutputStream dataOutputStream =null;
+    DataInputStream dataInputStream;
+    DataOutputStream dataOutputStream;
 
     public Client(String host, int port) throws IOException {
         System.out.println("Starting Client service...");
@@ -37,8 +37,8 @@ public class Client{
         dataOutputStream.writeUTF(packet.toJson());
     }
 
-    public void updateDataBase(String methodName , Object object) throws IOException {
-        DataBaseUpdater dataBaseUpdater = new DataBaseUpdater(methodName,object);
+    public void updateDataBase(String methodName , String input) throws IOException {
+        DataBaseUpdater dataBaseUpdater = new DataBaseUpdater(methodName,input);
         Packet packet = new Packet("",PacketType.UPDATE_DATABASE,dataBaseUpdater.toJson());
         dataOutputStream.writeUTF(packet.toJson());
     }
@@ -52,7 +52,7 @@ public class Client{
     public void getDataBase() throws IOException {
         Packet packet = new Packet("",PacketType.GET_DATABASE,"");
         dataOutputStream.writeUTF(packet.toJson());
-    }
+     }
 
     public static Client getClient() {
         return client;

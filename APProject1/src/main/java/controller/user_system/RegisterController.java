@@ -1,6 +1,7 @@
 package controller.user_system;
 
 import client.Client;
+import com.google.gson.Gson;
 import controller.ControllerUtils;
 import model.DataBase;
 
@@ -56,7 +57,7 @@ public class RegisterController extends ControllerUtils {
 
         User.addUser(user);
         DataBase.saveDataBase();
-        Client.getClient().updateDataBase("addUser",user);
+        Client.getClient().updateDataBase("addUser",new Gson().toJson(user));
         return UserMessages.SUCCESS;
     }
 

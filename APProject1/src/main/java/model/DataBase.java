@@ -6,6 +6,7 @@ import java.util.*;
 import client.Client;
 import com.google.gson.Gson;
 import controller.ControllerUtils;
+import model.chat.Messenger;
 import model.game_stuff.Map;
 import model.game_stuff.Tree;
 import model.game_stuff.enums.Textures;
@@ -18,6 +19,8 @@ public class DataBase {
     private ArrayList<String> slogans;
     private ArrayList<String> recoveryQuestions;
     private ArrayList<User> users;
+
+    private Messenger messenger;
 
     private final static String path = new File("").getAbsolutePath() + "\\src\\main\\resources\\";
     ;
@@ -202,4 +205,15 @@ public class DataBase {
         return dataBase.recoveryQuestions;
     }
 
+    public Messenger getMessenger() {
+        return messenger;
+    }
+
+    public static DataBase getUnloadDataBase(){
+        return dataBase;
+    }
+
+    public void setMessenger(Messenger messenger) {
+        this.messenger = messenger;
+    }
 }

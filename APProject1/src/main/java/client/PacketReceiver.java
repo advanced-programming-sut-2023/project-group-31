@@ -1,6 +1,7 @@
 package client;
 
 import com.google.gson.Gson;
+import controller.ControllerUtils;
 import model.DataBase;
 
 import java.io.IOException;
@@ -16,10 +17,12 @@ public class PacketReceiver extends Thread{
                     System.out.println("dataBase Updated");
                     DataBase.setDataBase(new Gson().fromJson(packet.value,DataBase.class));
                     DataBase.saveDataBase();
+                    DataBase.loadApp();
                 } else if(packet.packetType.equals(PacketType.ORDER_FUNCTION)){
                     FunctionalOrder functionalOrder;
                     functionalOrder = FunctionalOrder.getFromGson(packet.value);
                     Object output = new Object();
+                    ControllerUtils.setInputs(functionalOrder.inputs);
                     Class.forName(functionalOrder.className).getDeclaredMethod(functionalOrder.methodName).invoke(output);
                 }
             } catch (IOException e) {

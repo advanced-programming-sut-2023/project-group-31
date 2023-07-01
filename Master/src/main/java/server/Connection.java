@@ -3,6 +3,7 @@ package server;
 import com.google.gson.Gson;
 import model.DataBase;
 import model.User;
+import model.chat.Messenger;
 import model.game_stuff.MapTexture;
 
 import java.io.DataInputStream;
@@ -74,13 +75,26 @@ public class Connection extends Thread{
         }
     }
 
-    private void updateDataBase(DataBaseUpdater dataBaseUpdater) {
+    private void updateDataBase(DataBaseUpdater dataBaseUpdater) throws IOException {
         if(dataBaseUpdater.methodName.equals("addUser")){
-            DataBase.getDataBase().addUser((User)dataBaseUpdater.input);
-            User.addUser((User)dataBaseUpdater.input);
+            User user = new Gson().fromJson((String)( dataBaseUpdater.input),User.class);
+            DataBase.getUnloadDataBase().addUser(user);
             DataBase.saveDataBase();
+            User.addUser(user);
+            DataBase.getUnloadDataBase().getMessenger().addUserToMessenger(user);
+            System.out.println(DataBase.getUnloadDataBase().getMessenger().getChats().get(0).getMembers());
+            DataBase.saveDataBase();
+            System.out.println("user "+user.getUsername() + " added");
+            System.out.println(DataBase.getUnloadDataBase().getMessenger().getChats().get(0).getMembers());
+
         } else if(dataBaseUpdater.methodName.equals("addMapTexture")){
 
+        } else if(dataBaseUpdater.methodName.equals("sendMessenger")){
+            System.out.println("goto to add message");
+            Messenger messenger = new Gson().fromJson((String)( dataBaseUpdater.input), Messenger.class);
+            DataBase.getUnloadDataBase().setMessenger(messenger);
+            System.out.println("messenger updated");
+            DataBase.saveDataBase();
         }
     }
 

@@ -9,9 +9,9 @@ import java.util.HashMap;
 public class DataBaseUpdater {
     String methodName;
 
-    Object input;
+    String input;
 
-    public DataBaseUpdater( String methodName, Object input) {
+    public DataBaseUpdater( String methodName, String input) {
 
         this.methodName = methodName;
         this.input = input;
@@ -26,4 +26,3 @@ public class DataBaseUpdater {
     }
 
 }
-

@@ -5,10 +5,11 @@ import model.User;
 import java.util.ArrayList;
 
 public class Room extends Chat{
-    private ArrayList<User> members;
 
-    public Room(ArrayList<User> members) {
+
+    public Room(String name,ArrayList<User> members) {
         super(ChatType.ROOM);
-        this.members = members;
+        super.members = members;
+        super.name = name;
     }
 }
