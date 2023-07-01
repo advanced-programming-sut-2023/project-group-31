@@ -12,6 +12,8 @@ import model.game_stuff.enums.Items;
 import model.game_stuff.enums.Textures;
 import model.game_stuff.enums.TreeTypes;
 import model.game_stuff.people.Lord;
+import view.game_system.GameMainPage;
+import view.game_system.GameViewUtils;
 import view.game_system.messages.StartGameMessages;
 
 import java.util.ArrayList;
@@ -273,6 +275,7 @@ public class StartGameController extends ControllerUtils {
     }
 
     public static StartGameMessages start() {
+        GameMainPage.setMapPane(GameViewUtils.createMapPane(ControllerUtils.getCurrentMap()));
         if (primitivePlayers.size() < 2) {
             return StartGameMessages.TOO_FEW_PLAYERS;
         }
@@ -290,7 +293,7 @@ public class StartGameController extends ControllerUtils {
             lord.setPosition(block);
             block.setPerson(lord);
             player.setLord(lord);
-            lord.setRectangle();
+            //lord.setRectangle();
 
             MenuBuilding lordHouse = new MenuBuilding(player, BuildingMenus.LORD_HOUSE);
             setBlockForBuilding(block, lordHouse, 2, 2);

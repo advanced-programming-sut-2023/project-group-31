@@ -13,6 +13,8 @@ import view.game_system.GameMainPage;
 import view.game_system.MoveAnimation;
 
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
@@ -59,10 +61,12 @@ public abstract class Person implements HasHp{
         rectangle.setHeight(1);
         rectangle.setWidth(1);
         rectangle.setX(this.getPosition().getX());
-        rectangle.setY(this.getPosition().getY());
+        rectangle.setY(this.getPosition().getY());;
+        System.out.println(Person.class.getResource("/" + this.getImagePath() + ".png"));
+        rectangle.setFill(new ImagePattern(new Image(Person.class.getResource("/" + this.getImagePath() + ".png").toString(),1,1, false,false )));
+        System.out.println(this.getImagePath() + ".png");
         rectangle.setFill(new ImagePattern(new Image(this.getImagePath() + ".png")));
         GameMainPage.getMapPane().getChildren().add(rectangle);
-
         Tooltip tooltip = new Tooltip(toString());
         Tooltip.install(rectangle, tooltip);
     }

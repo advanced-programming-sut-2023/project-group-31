@@ -30,7 +30,7 @@ public class GameMainPage extends Application {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-        mapPane =GameViewUtils.createMapPane(ControllerUtils.getCurrentMap());
+        //mapPane =GameViewUtils.createMapPane(ControllerUtils.getCurrentMap());
         root.getChildren().add(0,mapPane);
         mapPane.requestFocus();
 
@@ -82,6 +82,10 @@ public class GameMainPage extends Application {
 
     public static Pane getMapPane() {
         return mapPane;
+    }
+
+    public static void setMapPane(Pane mapPane) {
+        GameMainPage.mapPane = mapPane;
     }
 
     public static void setMinimapRectangle(Rectangle minimapRectangle) {

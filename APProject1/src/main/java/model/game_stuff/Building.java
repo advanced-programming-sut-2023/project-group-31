@@ -9,6 +9,7 @@ import javafx.scene.shape.Rectangle;
 import model.game_stuff.types.Buildings;
 import view.game_system.GameMainPage;
 
+import java.net.URL;
 import java.util.ArrayList;
 
 public abstract class Building implements HasHp{
@@ -34,6 +35,19 @@ public abstract class Building implements HasHp{
     public void getRepaired() {
         hp = maxHp;
     }
+    public int getHeight() {
+        if(baseBuildingType == null) {
+            return 2;
+        }
+        return baseBuildingType.getHeight();
+    }
+
+    public int getWidth() {
+        if(baseBuildingType == null) {
+            return 2;
+        }
+        return baseBuildingType.getWidth();
+    }
 
     public String getImagePath() {
         return imagePath;
@@ -41,11 +55,12 @@ public abstract class Building implements HasHp{
 
     public void setRectangle() {
         rectangle = new Rectangle();
-        rectangle.setHeight(baseBuildingType.getHeight());
-        rectangle.setWidth(baseBuildingType.getWidth());
+        rectangle.setHeight(getHeight());
+        rectangle.setWidth(getWidth());
         rectangle.setX(this.getPosition().getX());
         rectangle.setY(this.getPosition().getY());
-        rectangle.setFill(new ImagePattern(new Image(this.getImagePath() + ".png")));
+        System.out.println(Building.class.getResource("/" + this.getImagePath() + ".png"));
+        rectangle.setFill(new ImagePattern(new Image(Building.class.getResource("/" + this.getImagePath() + ".png").toString(),1,1, false,false )));
         GameMainPage.getMapPane().getChildren().add(rectangle);
 
         rectangle.setOnMouseClicked(new EventHandler<MouseEvent>() {
