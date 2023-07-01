@@ -79,7 +79,7 @@ public class StartGame {
         addAnyPlayer(hBox,ControllerUtils.getCurrentUser().getUsername());
     }
 
-    private void setPlayersList() {
+    private void setPlayersList() throws IOException {
         System.out.println(DataBase.getDataBase().getUsers().size());
         for (int i = usersStart; i < usersStart + usersCount; i++) {
             if (i >= DataBase.getDataBase().getUsers().size()) {

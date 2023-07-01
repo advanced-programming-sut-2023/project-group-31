@@ -43,8 +43,15 @@ public class Client{
         dataOutputStream.writeUTF(packet.toJson());
     }
 
-    public void ForceUsersToDo(String className, String methodName, HashMap<String,String> inputs, ArrayList<User> user){
+    public void ForceUsersToDo(String className, String methodName, HashMap<String,String> inputs, ArrayList<User> users) throws IOException {
+        FunctionalOrder functionalOrder = new FunctionalOrder(users,className,methodName,inputs);
+        Packet packet = new Packet("",PacketType.ORDER_FUNCTION,functionalOrder.toJson());
+        dataOutputStream.writeUTF(packet.toJson());
+    }
 
+    public void getDataBase() throws IOException {
+        Packet packet = new Packet("",PacketType.GET_DATABASE,"");
+        dataOutputStream.writeUTF(packet.toJson());
     }
 
     public static Client getClient() {

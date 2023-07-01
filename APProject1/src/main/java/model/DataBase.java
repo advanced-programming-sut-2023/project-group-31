@@ -3,6 +3,7 @@ package model;
 import java.io.*;
 import java.util.*;
 
+import client.Client;
 import com.google.gson.Gson;
 import controller.ControllerUtils;
 import model.game_stuff.Map;
@@ -65,7 +66,7 @@ public class DataBase {
         }
     }
 
-    public static void connectToDatabase() {
+    public static void connectToDatabase() throws IOException {
         File databaseFile = new File(path + "dataBase.txt");
         if(dataBase!=null){
             return;
@@ -84,6 +85,7 @@ public class DataBase {
             }
 
         }
+        Client.getClient().getDataBase();
 
     }
 
@@ -95,7 +97,7 @@ public class DataBase {
 
     }
 
-    public static void loadApp() {
+    public static void loadApp() throws IOException {
         connectToDatabase();
 //        if(dataBase.loggedInUser!=null){
 //            ControllerUtils.setCurrentUser(dataBase.loggedInUser);
@@ -137,7 +139,7 @@ public class DataBase {
     }
 
 
-    public static DataBase getDataBase() {
+    public static DataBase getDataBase() throws IOException {
         connectToDatabase();
 
         return dataBase;

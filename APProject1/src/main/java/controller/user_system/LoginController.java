@@ -86,7 +86,7 @@ public class LoginController extends ControllerUtils {
         currentUser = null;
         Session.getSession().setLoggedInUserUsername(null);
         Session.getSession().setLoggedInUserPassword(null);
-        DataBase.saveDataBase();
+        Session.saveSession();
     }
 
 }

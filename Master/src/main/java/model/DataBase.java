@@ -72,7 +72,7 @@ public class DataBase {
         }
         if ( databaseFile.length() == 0) {
             dataBase = new DataBase();
-
+            saveDataBase();
         } else {
             Gson gson = new Gson();
 

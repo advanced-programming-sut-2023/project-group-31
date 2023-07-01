@@ -94,7 +94,7 @@ public class RegisterMenu extends ViewUtils {
         }
     }
 
-    private static void pickQuestionMenu() {
+    private static void pickQuestionMenu() throws IOException {
         String input;
         Matcher matcher;
         System.out.println("pick one of these questions.");
@@ -113,7 +113,7 @@ public class RegisterMenu extends ViewUtils {
         }
     }
 
-    private static void pickQuestion(String username) {
+    private static void pickQuestion(String username) throws IOException {
 
         userResult = RegisterController.pickQuestion(username);
         if (userResult.equals(UserMessages.SUCCESS)) {

@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.net.URL;
 
 public class GameSwitcher extends Application {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         DataBase.loadApp();
         launch(args);
     }

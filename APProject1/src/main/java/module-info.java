@@ -20,6 +20,7 @@ module APProject {
     exports model.game_stuff.buildings;
     exports model.game_stuff.buildings.enums;
     exports model.Popups;
+    exports controller.game_system;
 
     opens view to javafx.fxml, javafx.base;
     opens view.game_system to javafx.fxml, javafx.base;
@@ -34,4 +35,5 @@ module APProject {
     opens model.game_stuff.enums to com.google.gson;
     opens model.Popups to javafx.fxml;
     opens client to com.google.gson;
+    opens controller.game_system to javafx.fxml;
 }

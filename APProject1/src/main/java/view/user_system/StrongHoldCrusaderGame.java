@@ -18,8 +18,9 @@ import java.net.URL;
 
 public class StrongHoldCrusaderGame extends Application {
     public static void main(String[] args) throws IOException {
-        DataBase.loadApp();
         Client.setClient(new Client("localhost",8080));
+        DataBase.loadApp();
+
         launch(args);
     }
     public static Stage stage;

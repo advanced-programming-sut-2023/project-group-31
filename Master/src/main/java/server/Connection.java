@@ -62,7 +62,7 @@ public class Connection extends Thread{
                 updateDataBase(dataBaseUpdater);
                 DataBase.saveDataBase();
             } else if(packet.packetType.equals(PacketType.GET_DATABASE)){
-                dataOutputStream.writeUTF(new Gson().toJson(DataBase.getDataBase()));
+                dataOutputStream.writeUTF(new Packet("",PacketType.GET_DATABASE,new Gson().toJson(DataBase.getDataBase())).toJson());
             } else if(packet.packetType.equals(PacketType.ORDER_FUNCTION)){
                 functionalOrder =FunctionalOrder.getFromGson(packet.value);
                 for(Connection connection:Master.getConnections()){

@@ -90,7 +90,7 @@ public class RegisterController extends ControllerUtils {
 
 
 
-    public static UserMessages pickQuestion(String username) {
+    public static UserMessages pickQuestion(String username) throws IOException {
         if (checkFormatErrors(inputs) != null) {
             return checkFormatErrors(inputs);
         }

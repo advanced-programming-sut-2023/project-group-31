@@ -9,11 +9,12 @@ import view.user_system.commands.LoginCommands;
 import view.user_system.commands.RegisterCommands;
 import view.user_system.messages.UserMessages;
 
+import java.io.IOException;
 import java.util.regex.Matcher;
 
 public class JavaUserTest {
     @Test
-    public void RegisterControllerTest(){
+    public void RegisterControllerTest() throws IOException {
         DataBase.setDataBase(Mockito.mock(DataBase.class));
         DataBase.getDataBase().setSlogans();
         DataBase.getDataBase().setRecoveryQuestions();
@@ -58,7 +59,7 @@ public class JavaUserTest {
 
     }
 
-    public void loginControllerTest(){
+    public void loginControllerTest() throws IOException {
 
         Matcher matcher;
         matcher = RegisterCommands.getMatcher("user login -u mamad -p 123456Aa$", RegisterCommands.REGISTER);
