@@ -26,11 +26,13 @@ public abstract class Person implements HasHp{
     protected Block position;
     protected String imagePath;
     protected Block moveDestination;
+    protected boolean isMoving;
     //TODO: set image packages for people
     protected LinkedList<Direction> moveOrder;
 
     {
         moveOrder = new LinkedList<>();
+        isMoving = false;
     }
 
     public Person(Government owner) {
@@ -47,6 +49,9 @@ public abstract class Person implements HasHp{
 
     public void setMoveOrder(LinkedList<Direction> moveOrder) {
         this.moveOrder = new LinkedList<>(moveOrder);
+        if(!moveOrder.isEmpty()) {
+            isMoving = true;
+        }
     }
 
     public void setRectangle() {
@@ -90,16 +95,28 @@ public abstract class Person implements HasHp{
         for(int i = 0; i < speed; i++) {
             if (moveOrder.isEmpty()) {
                 moveDestination = null;
+                isMoving = false;
                 return false;
             }
             Block target;
             if ((target = owner.getGame().getMap().getNeighbour(moveOrder.getFirst(), position)) == null) {
                 moveOrder.clear();
+                moveDestination = null;
+                isMoving = false;
+                return false;
+            }
+            if(target.getPerson() != null) {
+                if ((target.getPerson().getOwner().getColor().equals(this.getOwner().getColor())) && !target.getPerson().isMoving) {
+                    moveOrder.clear();
+                    moveDestination = null;
+                    isMoving = false;
+                }
                 return false;
             }
             if (!target.isPermeable()) {
                 moveDestination = null;
                 moveOrder.clear();
+                isMoving = false;
                 return false;
             }
             if (target.containsEnemyBuilding(owner.getColor()) || target.containsEnemyPerson(owner.getColor())) {
@@ -111,7 +128,8 @@ public abstract class Person implements HasHp{
                         Tower tower = (Tower) target.getBuilding();
                         if (!tower.canEnter(moveOrder.getFirst()) || !tower.isFull()) {
                             moveOrder.clear();
-                            changeRout();
+                            isMoving = false;
+                            moveDestination = null;
                             return false;
                         }
                     }
@@ -120,13 +138,18 @@ public abstract class Person implements HasHp{
                             return false;
                         }
                     }
-                    changeRout();
                     moveOrder.clear();
+                    isMoving = false;
+                    moveDestination = null;
                     return false;
                 }
             }
             move(target);
             moveOrder.removeFirst();
+            if(moveOrder.isEmpty()) {
+                isMoving = false;
+                moveDestination = null;
+            }
             new MoveAnimation(this, moveOrder.getFirst()).play();
             synchronized (this){
                 try {

@@ -3,6 +3,7 @@ package controller.game_system;
 import controller.ControllerUtils;
 import model.game_stuff.Block;
 import model.game_stuff.Person;
+import model.game_stuff.buildings.GateHouse;
 import model.game_stuff.people.Troop;
 import model.game_stuff.enums.Direction;
 import model.game_stuff.people.Tunneler;
@@ -240,7 +241,7 @@ public class UnitController extends ControllerUtils {
 
     private static boolean isPossibleToGo(Block block) {
         return block.isPermeable() &&
-            block.getBuilding() == null &&
+            (block.getBuilding() == null || ((block.getBuilding() instanceof GateHouse) && ((GateHouse) block.getBuilding()).isOpen())) &&
             !block.containsEnemyPerson(currentPlayer.getColor());
     }
 
