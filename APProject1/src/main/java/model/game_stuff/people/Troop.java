@@ -67,7 +67,6 @@ public class Troop extends Person {
         }
     }
     public boolean attack() {
-        Random random = new Random();
         if(attackPurpose != null && attackPurpose.getDistanceTo(position) <= type.getFightingRange()) {
             attackTarget = attackPurpose;
             attackPurpose = null;
@@ -87,18 +86,18 @@ public class Troop extends Person {
         return true;
     }
 
+    //todo add random again
     private boolean findEnemyBlockToAttack() {
-        Random random = new Random();
         for(int i = 1; i <= type.getFightingRange(); i++) {
             ArrayList<Block> blocks = findEnemyTroopsPosition(i);
             if (!blocks.isEmpty()) {
-                attackTarget = blocks.get(random.nextInt(blocks.size()));
+                attackTarget = blocks.get(0);
                 return true;
             } else if (!(blocks = findEnemyPeoplePositions(i)).isEmpty()) {
-                attackTarget = blocks.get(random.nextInt(blocks.size()));
+                attackTarget = blocks.get(0);
                 return true;
             } else if (!(blocks = findEnemyBuildingsPosition(i)).isEmpty()) {
-                attackTarget = blocks.get(random.nextInt(blocks.size()));
+                attackTarget = blocks.get(0);
                 return true;
             }
         }

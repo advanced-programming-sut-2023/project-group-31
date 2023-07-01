@@ -163,6 +163,7 @@ public class UnitController extends ControllerUtils {
                     continue;
                 }
                 LinkedList<Direction> moveOrder = new LinkedList<>(moveOrderArrayList);
+                troop.setMoveDestination(currentMap.getBlock(destinationX,destinationY));
                 troop.setMoveOrder(moveOrder);
             }
         }

@@ -1,10 +1,8 @@
 package model.game_stuff;
 
-import javafx.event.EventHandler;
-import javafx.scene.control.Alert;
+import controller.game_system.UnitController;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import model.game_stuff.buildings.GateHouse;
@@ -12,8 +10,10 @@ import model.game_stuff.buildings.Tower;
 import model.game_stuff.enums.Direction;
 import model.game_stuff.types.PersonType;
 import view.game_system.GameMainPage;
+import view.game_system.MoveAnimation;
 
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public abstract class Person implements HasHp{
@@ -25,6 +25,7 @@ public abstract class Person implements HasHp{
     protected int speed;
     protected Block position;
     protected String imagePath;
+    protected Block moveDestination;
     //TODO: set image packages for people
     protected LinkedList<Direction> moveOrder;
 
@@ -34,6 +35,14 @@ public abstract class Person implements HasHp{
 
     public Person(Government owner) {
         this.owner = owner;
+    }
+
+    public Block getMoveDestination() {
+        return moveDestination;
+    }
+
+    public void setMoveDestination(Block moveDestination) {
+        this.moveDestination = moveDestination;
     }
 
     public void setMoveOrder(LinkedList<Direction> moveOrder) {
@@ -80,6 +89,7 @@ public abstract class Person implements HasHp{
     public boolean move() {
         for(int i = 0; i < speed; i++) {
             if (moveOrder.isEmpty()) {
+                moveDestination = null;
                 return false;
             }
             Block target;
@@ -88,20 +98,20 @@ public abstract class Person implements HasHp{
                 return false;
             }
             if (!target.isPermeable()) {
-                //here
+                moveDestination = null;
                 moveOrder.clear();
                 return false;
             }
             if (target.containsEnemyBuilding(owner.getColor()) || target.containsEnemyPerson(owner.getColor())) {
                 return false;
             }
-            if (target.getBuilding() != null)
+            if (target.getBuilding() != null) {
                 if (target.getBuilding().getOwner().equals(owner) && target.getBuilding() != position.getBuilding()) {
                     if (target.getBuilding() instanceof Tower) {
                         Tower tower = (Tower) target.getBuilding();
-                        if (moveOrder.size() != 1 || !tower.canEnter(moveOrder.getFirst()) || !tower.isFull()) {
-                            //here
+                        if (!tower.canEnter(moveOrder.getFirst()) || !tower.isFull()) {
                             moveOrder.clear();
+                            changeRout();
                             return false;
                         }
                     }
@@ -110,14 +120,30 @@ public abstract class Person implements HasHp{
                             return false;
                         }
                     }
-                    //here
+                    changeRout();
                     moveOrder.clear();
                     return false;
                 }
+            }
             move(target);
             moveOrder.removeFirst();
+            new MoveAnimation(this, moveOrder.getFirst()).play();
+            synchronized (this){
+                try {
+                    wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
         }
         return true;
+    }
+
+    private void changeRout() {
+        ArrayList<Direction> moveOrderArrayList = new ArrayList<>();
+        UnitController.routUnit(position.getX(), position.getY(), moveOrderArrayList, moveDestination.getX() - position.getX(),
+            moveDestination.getY() - position.getY());
+        moveOrder = new LinkedList<>(moveOrderArrayList);
     }
 
     public void setHp(int hp) {
