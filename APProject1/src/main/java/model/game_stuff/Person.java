@@ -162,7 +162,7 @@ public abstract class Person implements HasHp{
         return true;
     }
 
-    private void changeRout() {
+    protected void changeRout() {
         ArrayList<Direction> moveOrderArrayList = new ArrayList<>();
         UnitController.routUnit(position.getX(), position.getY(), moveOrderArrayList, moveDestination.getX() - position.getX(),
             moveDestination.getY() - position.getY());

@@ -43,7 +43,8 @@ public class Worker extends Person {
             numberOfProductsCarrying = 0;
             state = WorkerStates.HEADING_BACK;
             destination = workHouse.getPosition();
-            transportingWaiter = new Waiter(destination.getDistanceTo(position) / type.getSpeed());
+            moveDestination = workHouse.getPosition();
+            changeRout();
         } else {
             numberOfProductsCarrying -= storage.getCapacityLeft();
             storage.addProduct(type.getProduct(), storage.getCapacityLeft());
@@ -62,19 +63,28 @@ public class Worker extends Person {
     public void work() {
         switch (state) {
             case HEADING_BACK:
-                if(transportingWaiter.isTheTurn()) {
-                    state = WorkerStates.PRODUCING;
-                    move(workHouse.getPosition());
+                if(!move()) {
+                    if(position.equals(workHouse.getPosition())) {
+                        state = WorkerStates.PRODUCING;
+                    } else {
+                        changeRout();
+                        move();
+                    }
                 }
                 break;
             case HEADING_STORAGE:
                 if(destination == null) {
                     setAppropriateStorage();
                     return;
-                } else if(transportingWaiter.isTheTurn()) {
-
-                    move(destination);
-                    deliver();
+                } else {
+                    if(!move()) {
+                        if(position.equals(moveDestination)) {
+                            deliver();
+                        } else {
+                            changeRout();
+                            move();
+                        }
+                    }
                 }
                 break;
             case PRODUCING:
@@ -103,12 +113,13 @@ public class Worker extends Person {
                 break;
         }
         destination = findBestStorage(storages);
+        moveDestination = destination;
         if(destination == null) {
             //notify the government
             return;
         }
         int distance = destination.getDistanceTo(position);
-        transportingWaiter = new Waiter(distance / type.getSpeed());
+        changeRout();
     }
 
     public WorkerStates getState() {
