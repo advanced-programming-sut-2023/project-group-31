@@ -4,10 +4,11 @@ import view.ViewUtils;
 import view.game_system.StartGameMenu;
 import view.user_system.messages.MenuSwitcherMessages;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class MenuSwitcher extends ViewUtils {
-    public static void run() {
+    public static void run() throws IOException {
         scanner = new Scanner(System.in);
         MenuSwitcherMessages command = MenuSwitcherMessages.LOGIN;
         while (true) {

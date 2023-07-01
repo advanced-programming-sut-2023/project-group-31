@@ -1,6 +1,7 @@
 package view.user_system.pages;
 
 import controller.ControllerUtils;
+import controller.user_system.LoginController;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.input.MouseEvent;
@@ -29,6 +30,7 @@ public class MainMenuPage {
             ControllerUtils.setCurrentUser(null);
             Alert alertFinish=new Alert(Alert.AlertType.INFORMATION, "Logout successfull\nProceeding to login menu");
             alertFinish.showAndWait();
+            LoginController.userLogout();
             StrongHoldCrusaderGame.changeMenu(Menus.LOGIN);
         }
     }

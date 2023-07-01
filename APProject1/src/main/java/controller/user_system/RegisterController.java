@@ -1,14 +1,18 @@
 package controller.user_system;
 
+import client.Client;
+import com.google.gson.Gson;
 import controller.ControllerUtils;
 import model.DataBase;
 
 import model.User;
 import view.user_system.messages.UserMessages;
 
+import java.io.IOException;
+
 public class RegisterController extends ControllerUtils {
 
-    public static UserMessages userCreate() {
+    public static UserMessages userCreate() throws IOException {
         UserMessages message;
 
         if(checkEmptyError(inputs)!=null){
@@ -53,6 +57,7 @@ public class RegisterController extends ControllerUtils {
 
         User.addUser(user);
         DataBase.saveDataBase();
+        Client.getClient().updateDataBase("addUser",new Gson().toJson(user));
         return UserMessages.SUCCESS;
     }
 
@@ -86,7 +91,7 @@ public class RegisterController extends ControllerUtils {
 
 
 
-    public static UserMessages pickQuestion(String username) {
+    public static UserMessages pickQuestion(String username) throws IOException {
         if (checkFormatErrors(inputs) != null) {
             return checkFormatErrors(inputs);
         }

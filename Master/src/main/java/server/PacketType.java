@@ -4,5 +4,7 @@ public enum PacketType {
     UPDATE_DATABASE,
     ORDER_FUNCTION,
     GET_DATABASE,
-    DEFAULT;
+    DEFAULT,
+    SEND_DATABASE,
+    USER_LOGIN;
 }

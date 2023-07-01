@@ -9,7 +9,8 @@ public enum Menus {
 
   START_GAME("startgame"),
 
-  CHANGE_MAP("changeMapMenu");
+  CHANGE_MAP("changeMapMenu"),
+    CHAT_PAGE("chatPage");
       private final String name;
      Menus(String name){
          this.name=name;

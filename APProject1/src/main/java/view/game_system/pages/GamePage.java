@@ -6,6 +6,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
+import view.enums.Menus;
+import view.game_system.GameSwitcher;
 import view.game_system.GameViewUtils;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -139,5 +141,9 @@ public class GamePage {
 
     public static Rectangle getRectangle() {
         return rectangle;
+    }
+
+    public void openChat(MouseEvent mouseEvent) {
+        GameSwitcher.startMenu(Menus.CHAT_PAGE);
     }
 }

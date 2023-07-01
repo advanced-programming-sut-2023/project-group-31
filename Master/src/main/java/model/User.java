@@ -2,6 +2,7 @@ package model;
 
 import model.user_stuff.Score;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -129,9 +130,10 @@ public class User {
     }
 
     //static methods
-    public static void addUser(User user) {
+    public static void addUser(User user) throws IOException {
         users.put(user.username, user);
-        DataBase.getDataBase().addUser(user);
+        if(!DataBase.getDataBase().getUsers().contains(user))
+            DataBase.getDataBase().addUser(user);
     }
 
     public static void removeUser(User user) {

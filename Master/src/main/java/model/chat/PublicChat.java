@@ -1,15 +1,14 @@
 package model.chat;
 
 import model.DataBase;
-import model.User;
 
-import java.util.ArrayList;
+import java.io.IOException;
 
 public class PublicChat extends Chat{
-    ArrayList<User> members;
 
-    public PublicChat() {
+    public PublicChat() throws IOException {
         super(ChatType.PUBLIC);
-        members = DataBase.getDataBase().getUsers();
+        name = "Public chat";
+        members = DataBase.getUnloadDataBase().getUsers();
     }
 }

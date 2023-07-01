@@ -20,6 +20,7 @@ public abstract class ControllerUtils {
     static {
         currentMap = Map.getDefaultMap();
         Map.getMaps().add(currentMap);
+        Map.getMaps().add(Map.getSecondMap());
         inputs=new HashMap<>();
     }
 

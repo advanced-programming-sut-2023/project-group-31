@@ -13,7 +13,9 @@ public class Map {
     private static ArrayList<Map> maps;
 
     {
-        maps = new ArrayList<Map>();
+        if(maps==null) {
+            maps = new ArrayList<Map>();
+        }
     }
 
     private String name;
@@ -164,9 +166,7 @@ public class Map {
         return x >= 0 && y >= 0 && x < size && y < size;
     }
 
-    public static void setMaps(ArrayList<Map> maps) {
-        Map.maps = maps;
-    }
+
 
 
     public static Map getDefaultMap() {
@@ -186,6 +186,39 @@ public class Map {
             }
         }
         setTextures(newMap, 100, 135, 50, 15, Textures.WATER);
+        setTextures(newMap, 70, 10, 15, 10, Textures.CLIFF);
+        setTextures(newMap, 130, 120, 10, 10, Textures.IRON);
+        newMap.setDescription("default default");
+        ArrayList<Block> lordHouses = new ArrayList<>();
+        lordHouses.add(newMap.getBlock(20, 20));
+        lordHouses.add(newMap.getBlock(94, 25));
+        lordHouses.add(newMap.getBlock(170, 15));
+        lordHouses.add(newMap.getBlock(190, 80));
+        lordHouses.add(newMap.getBlock(180, 180));
+        lordHouses.add(newMap.getBlock(110, 190));
+        lordHouses.add(newMap.getBlock(25, 185));
+        lordHouses.add(newMap.getBlock(15, 100));
+        newMap.setLordHouses(lordHouses);
+        return newMap;
+    }
+
+    public static Map getSecondMap() {
+        Map newMap = new Map("Default map", 200);
+        for (int i = 25; i < 50; i++) {
+            for (int j = 30; j < 50; j++) {
+                newMap.getBlock(i, j).setType(Textures.IRON);
+                Tree tree = new Tree(newMap.getBlock(i, j), TreeTypes.OLIVE);
+            }
+
+        }
+
+        for (int i = 120; i < 180; i++) {
+            for (int j = 20; j < 100; j++) {
+                newMap.getBlock(i, j).setType(Textures.GROSS);
+                Tree tree = new Tree(newMap.getBlock(i, j), TreeTypes.DATE);
+            }
+        }
+        setTextures(newMap, 100, 195, 50, 4, Textures.WATER);
         setTextures(newMap, 70, 10, 30, 10, Textures.CLIFF);
         setTextures(newMap, 130, 120, 10, 10, Textures.IRON);
         newMap.setDescription("default default");

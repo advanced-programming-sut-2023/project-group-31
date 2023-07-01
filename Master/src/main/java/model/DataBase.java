@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.*;
 
 import com.google.gson.Gson;
+import model.chat.Messenger;
 import model.game_stuff.MapTexture;
 
 
@@ -14,14 +15,15 @@ public class DataBase {
     private ArrayList<String> recoveryQuestions;
     private ArrayList<User> users;
 
+    private Messenger messenger;
+
     //private ArrayList<MapTexture> mapTextures;
 
     private final static String path = new File("").getAbsolutePath() + "\\src\\main\\resources\\";
     ;
 
-    private User loggedInUser;
 
-    public DataBase() {
+    public DataBase() throws IOException {
         this.slogans = new ArrayList<String>(List.of(
                 "We are will do it!",
                 "make America great again!",
@@ -33,7 +35,7 @@ public class DataBase {
                 "What do you prefer between Messi and Haj Qasem?",
                 "Chips mikhori?"));
         this.users = new ArrayList<User>();
-        this.loggedInUser = null;
+        messenger = new Messenger();
         //mapTextures = new ArrayList<>();
 
     }
@@ -65,14 +67,11 @@ public class DataBase {
         }
     }
 
-    public static void connectToDatabase() {
+    public static void connectToDatabase() throws IOException {
         File databaseFile = new File(path + "dataBase.txt");
-        if(dataBase!=null){
-            return;
-        }
-        if ( databaseFile.length() == 0) {
+        if ( databaseFile.length() <1) {
             dataBase = new DataBase();
-
+            saveDataBase();
         } else {
             Gson gson = new Gson();
 
@@ -84,6 +83,7 @@ public class DataBase {
             }
 
         }
+        saveDataBase();
 
     }
 
@@ -95,7 +95,7 @@ public class DataBase {
 
     }
 
-    public static void loadApp() {
+    public static void loadApp() throws IOException {
         connectToDatabase();
         HashMap<String,User> hashUsers= new HashMap<>();
         for(User user:dataBase.users){
@@ -130,7 +130,7 @@ public class DataBase {
     }
 
 
-    public static DataBase getDataBase() {
+    public static DataBase getDataBase() throws IOException {
         connectToDatabase();
 
         return dataBase;
@@ -145,26 +145,13 @@ public class DataBase {
         return DataBase.dataBase.slogans.get(random.nextInt(DataBase.dataBase.slogans.size()));
     }
 
-    public User getLoggedInUser() {
-        getDataBase();
-        return loggedInUser;
-    }
-
-    public void setLoggedInUser(User loggedInUser) {
-        this.loggedInUser = loggedInUser;
-        saveDataBase();
-    }
-
-    public boolean isUserLoggedInBefore() {
-        return loggedInUser != null;
-    }
 
     public ArrayList<User> getUsers() {
         return users;
     }
 
     public void addUser(User user) {
-        users.add(user);
+        dataBase.users.add(user);
     }
 
     public static void setDataBase(DataBase dataBase) {
@@ -179,6 +166,9 @@ public class DataBase {
                 "Woman life freedom!"));;
     }
 
+    public static DataBase getUnloadDataBase(){
+        return dataBase;
+    }
 
     public void setRecoveryQuestions() {
         this.recoveryQuestions = new ArrayList<String>(List.of(
@@ -188,6 +178,13 @@ public class DataBase {
                 "Chips mikhori?"));
     }
 
+    public Messenger getMessenger() {
+        return dataBase.messenger;
+    }
+
+    public void setMessenger(Messenger messenger) {
+        dataBase.messenger = messenger;
+    }
 
     public static ArrayList<String> getRecoveryQuestions() {
         return dataBase.recoveryQuestions;

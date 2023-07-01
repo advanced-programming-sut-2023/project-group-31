@@ -8,12 +8,13 @@ import view.user_system.messages.MenuSwitcherMessages;
 import view.user_system.messages.UserMessages;
 import view.viewStyle.Colors;
 
+import java.io.IOException;
 import java.util.regex.Matcher;
 
 public class RegisterMenu extends ViewUtils {
 
 
-    public static MenuSwitcherMessages run() {
+    public static MenuSwitcherMessages run() throws IOException {
         if (ControllerUtils.isUserLoggedIn()) {
             return MenuSwitcherMessages.MAIN;
         }
@@ -36,7 +37,7 @@ public class RegisterMenu extends ViewUtils {
 
     }
 
-    private static void userCreate() {
+    private static void userCreate() throws IOException {
         if (!CaptchaMenu.getObject().run()) {
             System.out.println("register failed: wrong captcha.");
             return;
@@ -57,7 +58,7 @@ public class RegisterMenu extends ViewUtils {
         }
     }
 
-    private static void confirmUsernameOrPasswordMenu(boolean isUsername) {
+    private static void confirmUsernameOrPasswordMenu(boolean isUsername) throws IOException {
         System.out.println("Do you like this?");
         if (isUsername)
             System.out.println(ControllerUtils.getInputs().get("username"));
@@ -93,7 +94,7 @@ public class RegisterMenu extends ViewUtils {
         }
     }
 
-    private static void pickQuestionMenu() {
+    private static void pickQuestionMenu() throws IOException {
         String input;
         Matcher matcher;
         System.out.println("pick one of these questions.");
@@ -112,7 +113,7 @@ public class RegisterMenu extends ViewUtils {
         }
     }
 
-    private static void pickQuestion(String username) {
+    private static void pickQuestion(String username) throws IOException {
 
         userResult = RegisterController.pickQuestion(username);
         if (userResult.equals(UserMessages.SUCCESS)) {
