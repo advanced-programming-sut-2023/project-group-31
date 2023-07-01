@@ -21,10 +21,12 @@ public abstract class Building implements HasHp{
     protected String name;
     private boolean isUnderAttack;
     protected String imagePath;
+    protected ArrayList<Rectangle> fireRectangles;
     protected ArrayList<Block> blocks;
 
     {
         blocks = new ArrayList<>();
+        fireRectangles = new ArrayList<>();
     }
     public Building(Government government) {
         this.owner = government;
@@ -61,12 +63,24 @@ public abstract class Building implements HasHp{
 
     public void getFired() {
         fireWaiter = new Waiter(3);
+        if(fireRectangles.isEmpty()) {
+            for (Block block : blocks) {
+                Rectangle fireRectangle = new Rectangle(1, 1);
+                fireRectangle.setFill(new ImagePattern(new Image("/Media/game/fire.png")));
+                fireRectangle.setX(block.getX());
+                fireRectangle.setY(block.getY());
+                GameMainPage.getMapPane().getChildren().add(fireRectangle);
+                fireRectangles.add(fireRectangle);
+            }
+        }
     }
 
     public void work() {
         if(fireWaiter != null) {
             if(fireWaiter.isTheTurn()) {
                 fireWaiter = null;
+                GameMainPage.getMapPane().getChildren().removeAll(fireRectangles);
+                fireRectangles.clear();
             }else {
                 getDamaged(500);
             }

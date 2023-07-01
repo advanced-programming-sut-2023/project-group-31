@@ -1,11 +1,16 @@
 package model.game_stuff.buildings;
 
+import javafx.scene.image.Image;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Rectangle;
 import model.game_stuff.Block;
 import model.game_stuff.Building;
 import model.game_stuff.Government;
 import model.game_stuff.buildings.enums.TowerTypes;
 import model.game_stuff.enums.Direction;
+import view.game_system.GameMainPage;
 
+import java.net.URL;
 import java.util.HashMap;
 
 
@@ -46,8 +51,15 @@ public class Tower extends Building {
         return hasBrazer;
     }
 
+    //todo add option to add brazer
     public void setBrazer() {
         this.hasBrazer = true;
+
+        Rectangle brazer = new Rectangle(0.25, 0.25);
+        brazer.setX(getPosition().getX());
+        brazer.setY(getPosition().getY());
+        brazer.setFill(new ImagePattern(new Image("/Media/Buildings/Castle/brazer/brazer.png")));
+        GameMainPage.getMapPane().getChildren().add(brazer);
     }
 
     public boolean canExit(Direction direction) {
