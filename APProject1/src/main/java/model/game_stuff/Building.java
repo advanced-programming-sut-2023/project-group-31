@@ -52,28 +52,32 @@ public abstract class Building implements HasHp{
     public String getImagePath() {
         return imagePath;
     }
-
     public void setRectangle() {
-        rectangle = new Rectangle();
-        rectangle.setHeight(getHeight());
-        rectangle.setWidth(getWidth());
-        rectangle.setX(this.getPosition().getX());
-        rectangle.setY(this.getPosition().getY());
-        System.out.println(Building.class.getResource("/" + this.getImagePath() + ".png"));
-        rectangle.setFill(new ImagePattern(new Image(Building.class.getResource("/" + this.getImagePath() + ".png").toString(),1,1, false,false )));
+        rectangle = makeRectangle(this);
+    }
+    public static Rectangle makeRectangle(Building building) {
+        Rectangle rectangle = new Rectangle();
+        rectangle.setHeight(building.getHeight());
+        rectangle.setWidth(building.getWidth());
+        rectangle.setX(building.getPosition().getX());
+        rectangle.setY(building.getPosition().getY());
+        System.out.println(Building.class.getResource("/" + building.getImagePath() + ".png"));
+        rectangle.setFill(new ImagePattern(new Image(Building.class.getResource("/" + building.getImagePath() + ".png").toString())));
         GameMainPage.getMapPane().getChildren().add(rectangle);
 
         rectangle.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setContentText(toString());
-                alert.setHeaderText(name);
+                alert.setContentText(building.toString());
+                alert.setHeaderText(building.name);
                 //TODO ADD REPAIR BOTTOM
                 //todo set special onMouseClick for menuBuildings
                 alert.show();
             }
         });
+
+        return rectangle;
     }
 
     public void getFired() {

@@ -105,6 +105,7 @@ public class GamePage {
                                 Alert alert = new Alert(Alert.AlertType.ERROR);
                                 alert.setHeaderText("you don't have enough resources my lord :|");
                                 alert.setTitle("impossible");
+                                alert.show();
                                 return;
                             }
                             Dragboard db = imageView.startDragAndDrop(TransferMode.ANY);

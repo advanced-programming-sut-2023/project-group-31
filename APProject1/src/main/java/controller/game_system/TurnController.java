@@ -46,10 +46,10 @@ public class TurnController extends ControllerUtils {
     public static TurnMessages isThereAPlaceForBuilding(int x, int y, Buildings buildingType) {
         for (int i = x; i < x + buildingType.getHeight(); i++) {
             for (int j = y; j < y + buildingType.getWidth(); j++) {
-                if (i >= currentGame.getMap().getSize() || j >= currentGame.getMap().getSize()) {
+                if (i >= currentMap.getSize() || j >= currentMap.getSize()) {
                     return TurnMessages.OUT_OF_MAP;
                 }
-                if (!buildingType.isAreaPossible(currentGame.getMap().getBlock(i, j).getType())) {
+                if (!buildingType.isAreaPossible(currentMap.getBlock(i, j).getType())) {
                     return TurnMessages.BANNED_AREA;
                 }
                 if (!currentMap.getBlock(i, j).isEmpty()) {
@@ -123,7 +123,7 @@ public class TurnController extends ControllerUtils {
         int x = Integer.parseInt(inputs.get("x"));
         int y = Integer.parseInt(inputs.get("y"));
         Building building;
-        if ((building = currentGame.getMap().getBlock(x, y).getBuilding()) == null) {
+        if ((building = currentMap.getBlock(x, y).getBuilding()) == null) {
             return TurnMessages.EMPTY_PLACE;
         }
         if (!building.getOwner().equals(currentPlayer)) {
@@ -159,10 +159,10 @@ public class TurnController extends ControllerUtils {
         int x = Integer.parseInt(inputs.get("x"));
         int y = Integer.parseInt(inputs.get("y"));
         Building building;
-        if ((building = currentGame.getMap().getBlock(x, y).getBuilding()) == null) {
+        if ((building = currentMap.getBlock(x, y).getBuilding()) == null) {
             return TurnMessages.EMPTY_PLACE;
         }
-        for (Block block : currentGame.getMap().getNeighboursWithDistance(currentGame.getMap().getBlock(x, y), 3)) {
+        for (Block block : currentMap.getNeighboursWithDistance(currentMap.getBlock(x, y), 3)) {
             if (block.containsEnemyPerson(building.getOwner().getColor())) {
                 return TurnMessages.ENEMY_IS_CLOSE;
             }

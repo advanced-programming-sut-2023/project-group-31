@@ -1,6 +1,7 @@
 package view.game_system;
 
 import controller.game_system.TurnController;
+import controller.game_system.UnitController;
 import javafx.event.EventHandler;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
@@ -75,6 +76,10 @@ public class GameViewUtils {
                     @Override
                     public void handle(MouseEvent mouseEvent) {
                         System.out.println("on drag detected");
+                        if(cover[0] != null) {
+                            mapPane.getChildren().remove(cover[0]);
+                            UnitController.reset();
+                        }
                         Dragboard db = finalRectangle.startDragAndDrop(TransferMode.ANY);
                         ClipboardContent content = new ClipboardContent();
                         content.putString("troop " + block.getX() + " " + block.getY());
@@ -106,9 +111,9 @@ public class GameViewUtils {
                     public void handle(DragEvent dragEvent) {
                         System.out.println("on drag entered");
                         mapPane.getChildren().remove(cover[0]);
-                        Buildings buildingType = Buildings.getBuildingByName(dragEvent.getDragboard().getString().replace("building ", ""));
-                        cover[0] = new Rectangle(buildingType.getWidth(), buildingType.getHeight());
                         if (dragEvent.getDragboard().getString().split("\\s")[0].equals("building")) {
+                            Buildings buildingType = Buildings.getBuildingByName(dragEvent.getDragboard().getString().replace("building ", ""));
+                            cover[0] = new Rectangle(buildingType.getWidth(), buildingType.getHeight());
                             if(TurnController.isThereAPlaceForBuilding(block.getX(), block.getY(),buildingType)!=null) {
                                 cover[0].setFill(Color.INDIANRED);
                             } else {
@@ -155,40 +160,6 @@ public class GameViewUtils {
                                         inputs.put("type", buildingType);
                                         TurnController.setInputs(inputs);
                                         TurnController.dropBuilding();
-                                    } else if (dragEvent.getDragboard().getString().split("\\s")[0].equals("troop")) {
-                                        // payeen ye tabe beshe:
-                                        Integer minX = Integer.parseInt(dragEvent.getDragboard().getString().split("\\s")[1]);
-                                        Integer minY = Integer.parseInt(dragEvent.getDragboard().getString().split("\\s")[2]);
-                                        Integer maxX, maxY;
-                                        if(minX > block.getX()) {
-                                            maxX = minX;
-                                            minX = block.getX();
-                                        } else {
-                                            maxX = block.getX();
-                                        }
-                                        if(minY > block.getY()) {
-                                            maxY = minY;
-                                            minY = block.getY();
-                                        } else {
-                                            maxY = block.getY();
-                                        }
-                                        HashMap<String, String> inputs = new HashMap<>();
-                                        inputs.put("x1", minX.toString());
-                                        inputs.put("x2", maxX.toString());
-                                        inputs.put("y1", minY.toString());
-                                        inputs.put("y2", maxY.toString());
-                                        TurnController.setInputs(inputs);
-                                        if(TurnController.selectMultipleUnits().equals(TurnMessages.SUCCESS) ||
-                                            TurnController.selectMultipleUnits().equals(TurnMessages.NO_UNIT_FOUND)) {
-                                            System.out.println("salam");
-                                            Rectangle cover = new Rectangle(maxX - minX + 1, maxY - minY + 1);
-                                            cover.setX(minX);
-                                            cover.setY(minY);
-                                            cover.setFill(Color.ROYALBLUE);
-                                            cover.setOpacity(0.5);
-                                            mapPane.getChildren().add(cover);
-                                            //TODO : menu e unit baaz she va baad az ye modati cover naa padid she
-                                        }
                                     }
                                 }
                             });
@@ -196,7 +167,59 @@ public class GameViewUtils {
                         dragEvent.consume();
                     }
                 });
-
+                rectangle.setOnDragDropped(new EventHandler<DragEvent>() {
+                    @Override
+                    public void handle(DragEvent dragEvent) {
+                        System.out.println("on drag dropped troop");
+                         if (dragEvent.getDragboard().getString().split("\\s")[0].equals("troop")) {
+                            // payeen ye tabe beshe:
+                            Integer minX = Integer.parseInt(dragEvent.getDragboard().getString().split("\\s")[1]);
+                            Integer minY = Integer.parseInt(dragEvent.getDragboard().getString().split("\\s")[2]);
+                            Integer maxX, maxY;
+                            if(minX > block.getX()) {
+                                maxX = minX;
+                                minX = block.getX();
+                            } else {
+                                maxX = block.getX();
+                            }
+                            if(minY > block.getY()) {
+                                maxY = minY;
+                                minY = block.getY();
+                            } else {
+                                maxY = block.getY();
+                            }
+                            HashMap<String, String> inputs = new HashMap<>();
+                            inputs.put("x1", minX.toString());
+                            inputs.put("x2", maxX.toString());
+                            inputs.put("y1", minY.toString());
+                            inputs.put("y2", maxY.toString());
+                            TurnController.setInputs(inputs);
+                            if(TurnController.selectMultipleUnits().equals(TurnMessages.SUCCESS)) {
+                                System.out.println("salam");
+                                cover[0] = new Rectangle(maxX - minX + 1, maxY - minY + 1);
+                                cover[0].setX(minX);
+                                cover[0].setY(minY);
+                                cover[0].setFill(Color.ROYALBLUE);
+                                cover[0].setOpacity(0.5);
+                                mapPane.getChildren().add(cover[0]);
+                                //TODO : menu e unit baaz she va baad az ye modati cover naa padid she
+                            }
+                        }
+                    }
+                });
+                rectangle.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent mouseEvent) {
+                        System.out.println("on mouse clicked");
+                        if(!UnitController.getTroops().isEmpty()) {
+                            System.out.println("hoy");
+                            mapPane.getChildren().remove(cover[0]);
+                            System.out.println(UnitController.setDestination(block.getX(), block.getY()).getTxt());
+                            System.out.println(TurnController.nextTurn());
+                            TurnController.nextTurn();
+                        }
+                    }
+                });
             }
         }
 

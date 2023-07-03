@@ -151,6 +151,7 @@ public class UnitController extends ControllerUtils {
     private static void move(int destinationX, int destinationY) {
         ArrayList<Direction> moveOrderArrayList = new ArrayList<>();
         ArrayList<Block> blocksContainingUnit = new ArrayList<>();
+        System.out.println("troops: " + troops.size());
         for (Troop troop : troops) {
             if(!blocksContainingUnit.contains(troop.getPosition())) {
                 blocksContainingUnit.add(troop.getPosition());
@@ -160,6 +161,7 @@ public class UnitController extends ControllerUtils {
                 moveOrderArrayList = routUnit(troop.getPosition().getX(), troop.getPosition().getY(),moveOrderArrayList,
                     destinationX - troop.getPosition().getX(),
                     destinationY - troop.getPosition().getY());
+                System.out.println(moveOrderArrayList);
                 if(moveOrderArrayList == null) {
                     continue;
                 }
@@ -170,7 +172,7 @@ public class UnitController extends ControllerUtils {
         }
     }
 
-    public void addTroop(Troop troop) {
+    public static void addTroop(Troop troop) {
         troops.add(troop);
         if(numberOfEachTroop.containsKey(troop.getName())) {
             numberOfEachTroop.replace(troop.getName() , numberOfEachTroop.get(troop.getName()) + 1);
@@ -179,7 +181,7 @@ public class UnitController extends ControllerUtils {
         numberOfEachTroop.put(troop.getName(), 1);
     }
 
-    public void removeTroop(Troop troop) {
+    public static void removeTroop(Troop troop) {
         troops.remove(troop);
         numberOfEachTroop.replace(troop.getName() , numberOfEachTroop.get(troop.getName()) -1);
         if(numberOfEachTroop.get(troop.getName()) == 0) {
@@ -269,8 +271,16 @@ public class UnitController extends ControllerUtils {
     }
 
     public static void setTroops(ArrayList<Troop> troops) {
-        UnitController.troops = troops;
+        for (Troop troop : troops) {
+            addTroop(troop);
+        }
+    }
+    public static void reset() {
+        troops.clear();
+        numberOfEachTroop.clear();
     }
 
-
+    public static ArrayList<Troop> getTroops() {
+        return troops;
+    }
 }

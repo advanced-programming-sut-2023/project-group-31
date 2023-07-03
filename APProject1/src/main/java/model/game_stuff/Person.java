@@ -15,6 +15,7 @@ import view.game_system.MoveAnimation;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
@@ -63,9 +64,7 @@ public abstract class Person implements HasHp{
         rectangle.setX(this.getPosition().getX());
         rectangle.setY(this.getPosition().getY());;
         System.out.println(Person.class.getResource("/" + this.getImagePath() + ".png"));
-        rectangle.setFill(new ImagePattern(new Image(Person.class.getResource("/" + this.getImagePath() + ".png").toString(),1,1, false,false )));
-        System.out.println(this.getImagePath() + ".png");
-        rectangle.setFill(new ImagePattern(new Image(this.getImagePath() + ".png")));
+        rectangle.setFill(new ImagePattern(new Image(Person.class.getResource("/" + this.getImagePath() + ".png").toString())));
         GameMainPage.getMapPane().getChildren().add(rectangle);
         Tooltip tooltip = new Tooltip(toString());
         Tooltip.install(rectangle, tooltip);
@@ -96,6 +95,8 @@ public abstract class Person implements HasHp{
     }
 
     public boolean move() {
+        System.out.println("man daaram move mikonam");
+        System.out.println(moveOrder);
         for(int i = 0; i < speed; i++) {
             if (moveOrder.isEmpty()) {
                 moveDestination = null;
@@ -154,10 +155,9 @@ public abstract class Person implements HasHp{
                 isMoving = false;
                 moveDestination = null;
             }
-            new MoveAnimation(this, moveOrder.getFirst()).play();
             synchronized (this){
                 try {
-                    wait();
+                    Thread.sleep(500);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -206,6 +206,9 @@ public abstract class Person implements HasHp{
         position.setPerson(null);
         destination.setPerson(this);
         position = destination;
+
+        rectangle.setX(position.getX());
+        rectangle.setY(position.getY());
     }
     public abstract void work();
     abstract public String toString();

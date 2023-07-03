@@ -2,6 +2,8 @@ package view.game_system;
 
 import client.Client;
 import controller.ControllerUtils;
+import controller.game_system.StartGameController;
+import controller.game_system.TurnController;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -33,6 +35,9 @@ public class GameMainPage extends Application {
         stage.setScene(scene);
         stage.show();
         //todo bayad khat payeen hazf she
+        if(TurnController.getCurrentPlayer() == null) {
+            StartGameController.start();
+        }
         if(mapPane == null) mapPane =GameViewUtils.createMapPane(ControllerUtils.getCurrentMap());
         root.getChildren().add(0,mapPane);
         mapPane.requestFocus();

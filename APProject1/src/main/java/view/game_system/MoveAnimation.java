@@ -18,23 +18,15 @@ public class MoveAnimation extends Transition {
             this.person = person;
             this.direction = direction;
             this.setCycleDuration(Duration.millis(((double) maxTime) / person.getSpeed()));
-            setOnFinished(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent actionEvent) {
-                    person.notify();
-                }
-            });
         }
     }
     @Override
     protected void interpolate(double v) {
-        synchronized (person) {
-            try {
-                person.getRectangle().setLayoutX(person.getRectangle().getLayoutX() + direction.getX());
-                person.getRectangle().setLayoutY(person.getRectangle().getLayoutY() + direction.getY());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        try {
+            person.getRectangle().setX(person.getRectangle().getX() + direction.getX());
+            person.getRectangle().setY(person.getRectangle().getY() + direction.getY());
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

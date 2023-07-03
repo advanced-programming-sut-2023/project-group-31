@@ -275,6 +275,12 @@ public class StartGameController extends ControllerUtils {
     }
 
     public static StartGameMessages start() {
+        if(primitivePlayers.size() == 0) {
+            addPlayer("mamad");
+            addPlayer("ahmad");
+            System.out.println("shamsi");
+        }
+        System.out.println(primitivePlayers.size());
         GameMainPage.setMapPane(GameViewUtils.createMapPane(ControllerUtils.getCurrentMap()));
         if (primitivePlayers.size() < 2) {
             return StartGameMessages.TOO_FEW_PLAYERS;
@@ -289,15 +295,15 @@ public class StartGameController extends ControllerUtils {
             player.setGame(currentGame);
 
             block = currentMap.getLordHouses().get(primitivePlayer.getLordHouseNumber());
+            MenuBuilding lordHouse = new MenuBuilding(player, BuildingMenus.LORD_HOUSE);
+            setBlockForBuilding(block, lordHouse, 2, 2);
+            lordHouse.setRectangle();
+
             Lord lord = new Lord(player);
             lord.setPosition(block);
             block.setPerson(lord);
             player.setLord(lord);
             lord.setRectangle();
-
-            MenuBuilding lordHouse = new MenuBuilding(player, BuildingMenus.LORD_HOUSE);
-            setBlockForBuilding(block, lordHouse, 2, 2);
-            lordHouse.setRectangle();
 
             Storage storage = new Storage(player, StorageTypes.STOCKPILE);
             setBlockForBuilding(currentMap.getBlock(block.getX() + 2, block.getY()), storage, 2, 2);
