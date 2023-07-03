@@ -34,30 +34,41 @@ public class WoodCutter extends Worker{
         chosenTree = findBestTree(owner.getGame().getMap().getTrees());
         if(chosenTree == null) {
             destination = null;
+            moveDestination = null;
             return;
         }
         destination = chosenTree.getPosition();
-        transportingWaiter = new Waiter(chosenTree.getPosition().getDistanceTo(position) / type.getSpeed());
+        moveDestination = destination;
+        changeRout();
     }
 
     @Override
     public void work() {
         switch (state) {
             case HEADING_BACK:
-                if(transportingWaiter.isTheTurn()) {
-                    state = WorkerStates.SEARCHING_WOOD;
-                    move(workHouse.getPosition());
-                    setBestTree();
+                if(!move()) {
+                    if(position.equals(workHouse.getPosition())) {
+                        setBestTree();
+                        state = WorkerStates.SEARCHING_WOOD;
+                    } else {
+                        changeRout();
+                        move();
+                    }
                 }
                 break;
             case HEADING_STORAGE:
-                if(destination != null && transportingWaiter.isTheTurn()) {
-                    if(destination == null) {
-                        setAppropriateStorage();
-                        return;
+                if(destination == null) {
+                    setAppropriateStorage();
+                    return;
+                } else {
+                    if(!move()) {
+                        if(position.equals(moveDestination)) {
+                            deliver();
+                        } else {
+                            changeRout();
+                            move();
+                        }
                     }
-                    move(destination);
-                    deliver();
                 }
                 break;
             case PRODUCING:
@@ -74,15 +85,32 @@ public class WoodCutter extends Worker{
                         destination = workHouse.getPosition();
                         transportingWaiter = new Waiter(destination.getDistanceTo(position) / type.getSpeed());
                     }
+                    if(!move()) {
+                        if(position.equals(moveDestination)) {
+                            chosenTree.terminate();
+                            state = WorkerStates.HEADING_BACK_WITH_WOOD;
+                            destination = workHouse.getPosition();
+                            moveDestination = destination;
+                            changeRout();
+                        } else {
+                            changeRout();
+                            move();
+                        }
+                    }
                 } else {
                     setBestTree();
                     return;
                 }
                 break;
             case HEADING_BACK_WITH_WOOD:
-                if(transportingWaiter.isTheTurn()) {
-                    move(destination);
-                    state = WorkerStates.PRODUCING;
+                if(!move()) {
+                    if(position.equals(workHouse.getPosition())) {
+                        setBestTree();
+                        state = WorkerStates.PRODUCING;
+                    } else {
+                        changeRout();
+                        move();
+                    }
                 }
         }
     }

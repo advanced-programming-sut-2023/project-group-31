@@ -3,6 +3,7 @@ package controller.game_system;
 import controller.ControllerUtils;
 import model.game_stuff.Block;
 import model.game_stuff.Person;
+import model.game_stuff.buildings.GateHouse;
 import model.game_stuff.people.Troop;
 import model.game_stuff.enums.Direction;
 import model.game_stuff.people.Tunneler;
@@ -163,11 +164,8 @@ public class UnitController extends ControllerUtils {
                     continue;
                 }
                 LinkedList<Direction> moveOrder = new LinkedList<>(moveOrderArrayList);
-                for (Person person : troop.getPosition().getPeople()) {
-                    if((person instanceof Troop) ) {
-                        ((Troop) person).setMoveOrder(moveOrder);
-                    }
-                }
+                troop.setMoveDestination(currentMap.getBlock(destinationX,destinationY));
+                troop.setMoveOrder(moveOrder);
             }
         }
     }
@@ -191,10 +189,9 @@ public class UnitController extends ControllerUtils {
 
     public static UnitMessages selectUnit(int x, int y) {
         troops = new ArrayList<Troop>();
-        for (Person person : currentGame.getMap().getBlock(x, y).getPeople()) {
-            if (person instanceof Troop) {
-                troops.add((Troop) person);
-            }
+        Person person = currentGame.getMap().getBlock(x, y).getPerson();
+        if (person instanceof Troop) {
+            troops.add((Troop) person);
         }
         if (troops.size() == 0) {
             return UnitMessages.EMPTY_BLOCK;
@@ -202,7 +199,7 @@ public class UnitController extends ControllerUtils {
         return UnitMessages.SUCCESS;
     }
 
-    private static ArrayList<Direction> routUnit(int thisX, int thisY, ArrayList<Direction> directions, int xDistanceTo, int yDistance) {
+    public static ArrayList<Direction> routUnit(int thisX, int thisY, ArrayList<Direction> directions, int xDistanceTo, int yDistance) {
         if(xDistanceTo==0&&yDistance==0){
             return directions;
         }
@@ -239,13 +236,12 @@ public class UnitController extends ControllerUtils {
             directions.add(Direction.getDirectionByXY(0,-dirY));
             return routUnit( thisX,  thisY+dirY, directions, xDistanceTo, yDistance+dirY);
         }
-        return null;
-
+        return directions;
     }
 
     private static boolean isPossibleToGo(Block block) {
         return block.isPermeable() &&
-            block.getBuilding() == null &&
+            (block.getBuilding() == null || ((block.getBuilding() instanceof GateHouse) && ((GateHouse) block.getBuilding()).isOpen())) &&
             !block.containsEnemyPerson(currentPlayer.getColor());
     }
 

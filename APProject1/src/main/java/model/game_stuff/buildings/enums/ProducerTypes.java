@@ -1,6 +1,5 @@
 package model.game_stuff.buildings.enums;
 
-import model.game_stuff.ImagePackage;
 import model.game_stuff.people.enums.WorkerTypes;
 import model.game_stuff.types.Buildings;
 
@@ -29,6 +28,7 @@ public enum ProducerTypes {
     private int hp;
     private int capacity;
     private WorkerTypes workerType;
+    private Buildings baseBuildingType;
 
     ProducerTypes(int hp, int capacity, Buildings building, WorkerTypes workerType) {
         this.name = building.getName();
@@ -36,9 +36,14 @@ public enum ProducerTypes {
         this.hp = hp;
         this.capacity = capacity;
         this.workerType = workerType;
+        baseBuildingType = building;
     }
     public int getHp() {
         return hp;
+    }
+
+    public Buildings getBaseBuildingType() {
+        return baseBuildingType;
     }
 
     public String getName() {

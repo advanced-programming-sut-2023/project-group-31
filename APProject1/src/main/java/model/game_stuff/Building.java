@@ -6,28 +6,47 @@ import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
+import model.game_stuff.types.Buildings;
 import view.game_system.GameMainPage;
 
+import java.net.URL;
 import java.util.ArrayList;
 
 public abstract class Building implements HasHp{
     protected Rectangle rectangle;
     protected int hp;
+    protected Buildings baseBuildingType;
+    protected Waiter fireWaiter;
     protected int maxHp;
     protected Government owner;
     protected String name;
     private boolean isUnderAttack;
     protected String imagePath;
+    protected ArrayList<Rectangle> fireRectangles;
     protected ArrayList<Block> blocks;
 
     {
         blocks = new ArrayList<>();
+        fireRectangles = new ArrayList<>();
     }
     public Building(Government government) {
         this.owner = government;
     }
     public void getRepaired() {
         hp = maxHp;
+    }
+    public int getHeight() {
+        if(baseBuildingType == null) {
+            return 2;
+        }
+        return baseBuildingType.getHeight();
+    }
+
+    public int getWidth() {
+        if(baseBuildingType == null) {
+            return 2;
+        }
+        return baseBuildingType.getWidth();
     }
 
     public String getImagePath() {
@@ -36,12 +55,13 @@ public abstract class Building implements HasHp{
 
     public void setRectangle() {
         rectangle = new Rectangle();
-        rectangle.setHeight(1);
-        rectangle.setWidth(1);
+        rectangle.setHeight(getHeight());
+        rectangle.setWidth(getWidth());
         rectangle.setX(this.getPosition().getX());
         rectangle.setY(this.getPosition().getY());
-        rectangle.setFill(new ImagePattern(new Image(this.getImagePath() + ".png")));
-        GameMainPage.getRoot().getChildren().add(rectangle);
+        System.out.println(Building.class.getResource("/" + this.getImagePath() + ".png"));
+        rectangle.setFill(new ImagePattern(new Image(Building.class.getResource("/" + this.getImagePath() + ".png").toString(),1,1, false,false )));
+        GameMainPage.getMapPane().getChildren().add(rectangle);
 
         rectangle.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
@@ -54,6 +74,32 @@ public abstract class Building implements HasHp{
                 alert.show();
             }
         });
+    }
+
+    public void getFired() {
+        fireWaiter = new Waiter(3);
+        if(fireRectangles.isEmpty()) {
+            for (Block block : blocks) {
+                Rectangle fireRectangle = new Rectangle(1, 1);
+                fireRectangle.setFill(new ImagePattern(new Image("/Media/game/fire.png")));
+                fireRectangle.setX(block.getX());
+                fireRectangle.setY(block.getY());
+                GameMainPage.getMapPane().getChildren().add(fireRectangle);
+                fireRectangles.add(fireRectangle);
+            }
+        }
+    }
+
+    public void work() {
+        if(fireWaiter != null) {
+            if(fireWaiter.isTheTurn()) {
+                fireWaiter = null;
+                GameMainPage.getMapPane().getChildren().removeAll(fireRectangles);
+                fireRectangles.clear();
+            }else {
+                getDamaged(500);
+            }
+        }
     }
 
     public Rectangle getRectangle() {

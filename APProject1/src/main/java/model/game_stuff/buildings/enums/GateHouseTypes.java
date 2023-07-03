@@ -1,6 +1,5 @@
 package model.game_stuff.buildings.enums;
 
-import model.game_stuff.ImagePackage;
 import model.game_stuff.types.Buildings;
 
 public enum GateHouseTypes {
@@ -11,11 +10,17 @@ public enum GateHouseTypes {
     private int hp;
     private String name;
     private String imagePath;
+    private Buildings baseBuildingType;
 
     GateHouseTypes(int hp, Buildings building) {
         this.hp = hp;
         this.name = building.getName();
         imagePath = "Media/Buildings/" + building.getCategory() + "/" + name + "/" + name + "0";
+        baseBuildingType = building;
+    }
+
+    public Buildings getBaseBuildingType() {
+        return baseBuildingType;
     }
 
     public String getImagePath() {

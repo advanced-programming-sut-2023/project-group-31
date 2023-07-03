@@ -1,9 +1,7 @@
 package model.game_stuff.people;
 
-import model.game_stuff.Block;
-import model.game_stuff.Government;
-import model.game_stuff.HasHp;
-import model.game_stuff.Person;
+import model.game_stuff.*;
+import model.game_stuff.buildings.Tower;
 import model.game_stuff.people.enums.TroopState;
 import model.game_stuff.people.enums.TroopTypes;
 
@@ -28,9 +26,9 @@ public class Troop extends Person {
         damage = type.getDamage();
         personType = type.getPersonType();
         name = type.getPersonType().getName();
-        owner.getTroops().add(this);
+        //owner.getTroops().add(this);
         speed = type.getSpeed();
-        imagePackage = type.getImagePackage();
+        imagePath = type.getImagePath();
 
     }
 
@@ -51,6 +49,11 @@ public class Troop extends Person {
     }
 
     public void hit(HasHp livingBeing) {
+        if((livingBeing instanceof Building) &&
+            (type.canFire() ||
+                (position.getBuilding()!= null && (position.getBuilding() instanceof Tower) && ((Tower) position.getBuilding()).hasBrazer()))) {
+            ((Building) livingBeing).getFired();
+        }
         livingBeing.getDamaged(damage);
     }
     public void work() {
@@ -67,7 +70,6 @@ public class Troop extends Person {
         }
     }
     public boolean attack() {
-        Random random = new Random();
         if(attackPurpose != null && attackPurpose.getDistanceTo(position) <= type.getFightingRange()) {
             attackTarget = attackPurpose;
             attackPurpose = null;
@@ -78,33 +80,27 @@ public class Troop extends Person {
             }
         }
         if(attackTarget.containsEnemyTroop(owner.getColor())) {
-            ArrayList<Person> enemyTroops = new ArrayList<>();
-            for (Person person : attackTarget.getPeople()) {
-                if(person instanceof Troop) {
-                    enemyTroops.add(person);
-                }
-            }
-            hit(enemyTroops.get(random.nextInt(enemyTroops.size())));
+            hit(attackTarget.getPerson());
         } else if(attackTarget.containsEnemyPerson(owner.getColor())) {
-            hit(attackTarget.getPeople().get(random.nextInt(attackTarget.getPeople().size())));
+            hit(attackTarget.getPerson());
         } else if(attackTarget.containsEnemyBuilding(owner.getColor())){
             hit(attackTarget.getBuilding());
         }
         return true;
     }
 
+    //todo add random again
     private boolean findEnemyBlockToAttack() {
-        Random random = new Random();
         for(int i = 1; i <= type.getFightingRange(); i++) {
             ArrayList<Block> blocks = findEnemyTroopsPosition(i);
             if (!blocks.isEmpty()) {
-                attackTarget = blocks.get(random.nextInt(blocks.size()));
+                attackTarget = blocks.get(0);
                 return true;
             } else if (!(blocks = findEnemyPeoplePositions(i)).isEmpty()) {
-                attackTarget = blocks.get(random.nextInt(blocks.size()));
+                attackTarget = blocks.get(0);
                 return true;
             } else if (!(blocks = findEnemyBuildingsPosition(i)).isEmpty()) {
-                attackTarget = blocks.get(random.nextInt(blocks.size()));
+                attackTarget = blocks.get(0);
                 return true;
             }
         }
@@ -147,7 +143,7 @@ public class Troop extends Person {
     }
 
     public void die() {
-        position.removePerson(this);
+        position.setPerson(null);
         owner.getTroops().remove(this);
     }
 }

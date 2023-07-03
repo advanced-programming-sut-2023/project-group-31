@@ -1,7 +1,5 @@
 package model.game_stuff.buildings.enums;
 
-import model.game_stuff.ImagePackage;
-import model.game_stuff.enums.BuildingCategories;
 import model.game_stuff.types.Buildings;
 
 public enum TowerTypes {
@@ -17,6 +15,7 @@ public enum TowerTypes {
     private int fireRange;
     private int defendRange;
     private int capacity;
+    private Buildings baseBuildingType;
 
     TowerTypes(Buildings building, int hp, int fireRange, int defendRange, int capacity) {
         this.name = building.getName();
@@ -25,6 +24,11 @@ public enum TowerTypes {
         this.fireRange = fireRange;
         this.defendRange = defendRange;
         this.capacity = capacity;
+        baseBuildingType = building;
+    }
+
+    public Buildings getBaseBuildingType() {
+        return baseBuildingType;
     }
 
     public String getImagePath() {

@@ -18,9 +18,10 @@ public class Producer extends Building implements Working {
         super(government);
         this.type = type;
         owner.addBuilding(this);
-        owner.getWorkingsBuildings().add(this);
+        owner.getBuildings().add(this);
         name = type.getName();
         imagePath = type.getImagePath();
+        baseBuildingType = type.getBaseBuildingType();
     }
 
     public int getNumberOfProductsAvailable() {
@@ -40,6 +41,7 @@ public class Producer extends Building implements Working {
     }
 
     public void work() {
+        super.work();
         if (worker == null) {
             owner.giveWorker(this);
             if(worker == null) {

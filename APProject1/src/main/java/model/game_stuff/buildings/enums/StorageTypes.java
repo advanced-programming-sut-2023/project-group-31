@@ -1,8 +1,6 @@
 package model.game_stuff.buildings.enums;
 
-import model.game_stuff.ImagePackage;
 import model.game_stuff.enums.ItemTypes;
-import model.game_stuff.enums.Items;
 import model.game_stuff.types.Buildings;
 
 public enum StorageTypes {
@@ -14,12 +12,18 @@ public enum StorageTypes {
     private int capacity;
     private String imagePath;
     private ItemTypes productType;
+    private Buildings baseBuildingType;
 
     StorageTypes(Buildings building, int capacity, ItemTypes productType) {
         this.name = building.getName();
         imagePath = "Media/Buildings/" + building.getCategory() + "/" + name + "/" + name;
         this.capacity = capacity;
         this.productType = productType;
+        baseBuildingType = building;
+    }
+
+    public Buildings getBaseBuildingType() {
+        return baseBuildingType;
     }
 
     public String getImagePath() {

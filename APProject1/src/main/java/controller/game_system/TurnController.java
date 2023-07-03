@@ -1,9 +1,6 @@
 package controller.game_system;
 
 import controller.ControllerUtils;
-import javafx.scene.image.Image;
-import javafx.scene.paint.ImagePattern;
-import javafx.scene.shape.Rectangle;
 import model.game_stuff.*;
 import model.game_stuff.buildings.*;
 import model.game_stuff.buildings.enums.*;
@@ -11,7 +8,6 @@ import model.game_stuff.enums.Items;
 import model.game_stuff.people.Lord;
 import model.game_stuff.people.Troop;
 import model.game_stuff.types.Buildings;
-import view.game_system.GameMainPage;
 import view.game_system.messages.TurnMessages;
 
 import java.util.ArrayList;
@@ -33,7 +29,7 @@ public class TurnController extends ControllerUtils {
         }
         Building building = createNewBuilding(inputs.get("type"));
 
-        for (int i = x; i < x + buildingType.getLength(); i++) {
+        for (int i = x; i < x + buildingType.getHeight(); i++) {
             for (int j = y; j < y + buildingType.getWidth(); j++) {
                 currentMap.getBlock(i, j).setBuilding(building);
                 building.addBlock(currentMap.getBlock(i, j));
@@ -48,7 +44,7 @@ public class TurnController extends ControllerUtils {
     }
 
     public static TurnMessages isThereAPlaceForBuilding(int x, int y, Buildings buildingType) {
-        for (int i = x; i < x + buildingType.getLength(); i++) {
+        for (int i = x; i < x + buildingType.getHeight(); i++) {
             for (int j = y; j < y + buildingType.getWidth(); j++) {
                 if (i >= currentGame.getMap().getSize() || j >= currentGame.getMap().getSize()) {
                     return TurnMessages.OUT_OF_MAP;
@@ -141,11 +137,11 @@ public class TurnController extends ControllerUtils {
             return TurnMessages.BARRACK.setAndGetTxt(building.toString());
         }
         if (((MenuBuilding) building).getType().equals(BuildingMenus.MERCENARY_POST)) {
-            MercenaryController.setMenuBuildings((MenuBuilding) building);
+            MercenaryController.setMenuBuilding((MenuBuilding) building);
             return TurnMessages.MERCENARY_POST.setAndGetTxt(building.toString());
         }
         if (((MenuBuilding) building).getType().equals(BuildingMenus.ENGINEER_GUID)) {
-            MercenaryController.setMenuBuildings((MenuBuilding) building);
+            MercenaryController.setMenuBuilding((MenuBuilding) building);
             return TurnMessages.ENGINEER_GUID.setAndGetTxt(building.toString());
         }
         if (((MenuBuilding) building).getType().equals(BuildingMenus.LORD_HOUSE)) {
@@ -183,11 +179,18 @@ public class TurnController extends ControllerUtils {
         int counter = 0;
         Government playerToRun = currentPlayer;
         while (counter < currentGame.getPlayers().size()) {
-            for (Working workingsBuilding : playerToRun.getWorkingsBuildings()) {
+            for (Building workingsBuilding : playerToRun.getBuildings()) {
                 workingsBuilding.work();
             }
             for (Troop troop : playerToRun.getTroops()) {
                 troop.work();
+            }
+            while(!playerToRun.getTroopsWaitingForEntrance().isEmpty()) {
+                Troop troop = playerToRun.getTroopsWaitingForEntrance().poll();
+                if(!playerToRun.getLordsHouse().setPerson(troop)) break;
+                troop.setPosition(playerToRun.getLordsHouse());
+                troop.work();
+                troop.getOwner().getTroops().add(troop);
             }
             nextTurnForGovernment(playerToRun); //TODO: islah
             if (isTheGameOver()) {
@@ -196,6 +199,7 @@ public class TurnController extends ControllerUtils {
                 calculateScores();
                 return TurnMessages.GAME_FINISHED;
             }
+
             counter++;
             playerToRun = getNextPlayer(playerToRun);
         }
@@ -270,10 +274,9 @@ public class TurnController extends ControllerUtils {
     private static ArrayList<Troop> getMyTroopsIn(ArrayList<Block> blocks) {
         ArrayList<Troop> troops = new ArrayList<>();
         for (Block block : blocks) {
-            for (Person person : block.getPeople()) {
-                if ((person instanceof Troop) && person.getOwner().equals(currentPlayer)) {
-                    troops.add((Troop) person);
-                }
+            Person person = block.getPerson();
+            if ((person instanceof Troop) && person.getOwner().equals(currentPlayer)) {
+                troops.add((Troop) person);
             }
         }
         return troops;

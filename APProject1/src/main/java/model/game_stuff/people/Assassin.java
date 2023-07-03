@@ -23,7 +23,7 @@ public class Assassin extends Troop{
     public boolean move() {
         boolean result = super.move();
         if(result) {
-            position.removePerson(this);
+            position.setPerson(null);
         }
         return result;
     }
@@ -31,7 +31,7 @@ public class Assassin extends Troop{
     public boolean attack() {
         boolean result = super.attack();
         if(result) {
-            position.addPerson(this);
+            position.setPerson(this);
         }
         return result;
     }

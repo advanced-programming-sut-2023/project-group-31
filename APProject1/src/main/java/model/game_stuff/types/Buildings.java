@@ -3,8 +3,6 @@ package model.game_stuff.types;
 import model.game_stuff.enums.BuildingCategories;
 import model.game_stuff.enums.Textures;
 
-import java.net.URL;
-
 public enum Buildings {
     SMALL_STONE_GATEHOUSE(2, 1, "small stone gatehouse", BuildingCategories.CASTLE, 0, 0, 0, 0, 2000),
     BIG_STONE_GATEHOUSE(2, 3, "big stone gatehouse", BuildingCategories.CASTLE, 20, 0, 0, 0, 2000),
@@ -67,32 +65,32 @@ public enum Buildings {
 
     private double goldNeeded;
 
-    private int length;
+    private int height;
 
     private int width;
 
     private final Textures possibleTexture;
 
-    Buildings(int length, int width, String name, BuildingCategories category, double rockNeeded, double woodNeeded, double workerNeeded, double ironNeeded, double goldNeeded, Textures possibleTexture) {
+    Buildings(int height, int width, String name, BuildingCategories category, double rockNeeded, double woodNeeded, double workerNeeded, double ironNeeded, double goldNeeded, Textures possibleTexture) {
         this.rockNeeded = rockNeeded;
         this.woodNeeded = woodNeeded;
         this.workerNeeded = workerNeeded;
         this.ironNeeded = ironNeeded;
         this.possibleTexture = possibleTexture;
-        this.length = length;
+        this.height = height;
         this.width = width;
         this.name = name;
         this.goldNeeded = goldNeeded;
         this.category = category;
     }
 
-    Buildings(int length, int width, String name, BuildingCategories category, double rockNeeded, double woodNeeded, double workerNeeded, double ironNeeded, double goldNeeded) {
+    Buildings(int height, int width, String name, BuildingCategories category, double rockNeeded, double woodNeeded, double workerNeeded, double ironNeeded, double goldNeeded) {
         this.rockNeeded = rockNeeded;
         this.woodNeeded = woodNeeded;
         this.workerNeeded = workerNeeded;
         this.ironNeeded = ironNeeded;
         this.possibleTexture = null;
-        this.length = length;
+        this.height = height;
         this.width = width;
         this.name = name;
         this.goldNeeded = goldNeeded;
@@ -123,8 +121,8 @@ public enum Buildings {
         return rockNeeded;
     }
 
-    public int getLength() {
-        return length;
+    public int getHeight() {
+        return height;
     }
 
     public int getWidth() {

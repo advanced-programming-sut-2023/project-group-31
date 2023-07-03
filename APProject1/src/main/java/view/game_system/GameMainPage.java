@@ -1,5 +1,6 @@
 package view.game_system;
 
+import client.Client;
 import controller.ControllerUtils;
 import javafx.application.Application;
 import javafx.event.EventHandler;
@@ -20,6 +21,7 @@ public class GameMainPage extends Application {
     private static Pane mapPane;
     @Override
     public void start(Stage stage) throws Exception {
+        Client.setClient(new Client("localhost",8080));
         DataBase.loadApp();
         URL address = new URL(GameMainPage.class.getResource("/FXML/game_system/gameMain" +
                 "Page.fxml").toExternalForm());
@@ -30,7 +32,8 @@ public class GameMainPage extends Application {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-        mapPane =GameViewUtils.createMapPane(ControllerUtils.getCurrentMap());
+        //todo bayad khat payeen hazf she
+        if(mapPane == null) mapPane =GameViewUtils.createMapPane(ControllerUtils.getCurrentMap());
         root.getChildren().add(0,mapPane);
         mapPane.requestFocus();
 
@@ -82,6 +85,10 @@ public class GameMainPage extends Application {
 
     public static Pane getMapPane() {
         return mapPane;
+    }
+
+    public static void setMapPane(Pane mapPane) {
+        GameMainPage.mapPane = mapPane;
     }
 
     public static void setMinimapRectangle(Rectangle minimapRectangle) {
